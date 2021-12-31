@@ -1,0 +1,37 @@
+.transition-default() {
+  &-enter-active {
+    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
+  }
+  &-leave-active {
+    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
+  }
+
+  &-move {
+    transition: transform 0.4s;
+  }
+}
+
+.transition-primary(@property: all, @enterDuration: 0.38s, @leaveDuration:0.2s ) {
+  &-enter-active {
+    each(@property, {
+      transition-property+:@value;
+      transition-duration+:@enterDuration;
+      transition-timing-function+: @sine-out;
+    });
+  }
+  &-leave-active {
+    transition: opacity @leaveDuration @sine-in;
+  }
+
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
+.expand-transition {
+  .transition-default();
+}
+
+.expand-x-transition {
+  .transition-default();
+}

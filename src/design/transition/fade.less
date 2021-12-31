@@ -1,0 +1,56 @@
+/* fade */
+.fade {
+  .transition-primary(opacity,0.25s,0.25s);
+  &-enter-from {
+    opacity: 0;
+  }
+}
+
+/* fade-slide */
+.fade-slide-right {
+  @property: opacity, transform;
+  .transition-primary(@property);
+  &-enter-from {
+    opacity: 0;
+    transform: translateX(-2.5%);
+  }
+}
+
+.fade-slide-left {
+  @property: opacity, transform;
+  .transition-primary(@property);
+  &-enter-from {
+    opacity: 0;
+    transform: translateX(2.5%);
+  }
+}
+
+/* fade-top */
+.fade-top {
+  @property: opacity, transform;
+  .transition-primary(@property);
+  &-enter-from {
+    opacity: 0;
+    transform: translateY(1.5%);
+  }
+}
+
+/* fade-bottom */
+.fade-bottom {
+  @property: opacity, transform;
+  .transition-primary(@property);
+  &-enter-from {
+    opacity: 0;
+    transform: translateY(-1.5%);
+  }
+}
+
+/* fade-bottom */
+.fade-scale {
+  @property: opacity, transform;
+  .transition-primary(@property);
+  &-enter-from {
+    opacity: 0;
+    transform: scale(1.01);
+  }
+}
