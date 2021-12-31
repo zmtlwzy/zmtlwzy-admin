@@ -21,7 +21,7 @@ Zmtlwzy Admin 是一个基于 Vue3、Vite、Naive UI、TypeScript 的免费中�
 
 ## 预览
 
-- [zmtlwzy-admin](https://zmtlwzy-admin.cn/)
+- [zmtlwzy-admin](https://zmtlwzy-admin.vercel.app/)
 
 ## 文档
 
