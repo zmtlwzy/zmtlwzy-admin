@@ -8,6 +8,7 @@
     <i-my-svg-logo :style="getLogoStyle" />
     <div
       ref="titleEl"
+      v-if="showTitle"
       class="text-$app-primary-color dark:text-white font-segoe transition-colors *n-ease-in-out ml-3 font-semibold"
       :class="[`${prefixCls}__title`]"
       :style="getTitleStyle"
@@ -18,8 +19,9 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, CSSProperties, ref, onMounted } from 'vue';
+  import { computed, CSSProperties, ref, watch } from 'vue';
   import { useRafFn, useEventListener, unrefElement, Pausable } from '@vueuse/core';
+  import { clamp } from 'lodash-es';
   import { layoutSiderCollapsedWidth } from '/@/settings/designSetting';
   import { formatLength } from 'naive-ui/lib/_utils';
   import { useDesign } from '/@/composables/web/useDesign';
@@ -33,6 +35,7 @@
 
   const props = defineProps({
     logoSize: propTypes.stringNumber.def(32),
+    showTitle: propTypes.bool.def(true),
     titleSize: propTypes.stringNumber.def(18),
     titleColor: propTypes.string,
     collapsed: propTypes.bool,
@@ -44,16 +47,21 @@
   const { prefixCls } = useDesign('app-logo');
   const userStore = useUserStore();
   const { title } = useGlobSetting();
-  const { getMenuWidth, getCollapsed } = useMenuSetting();
+  const { getMenuWidth, getMenuRootIndent, getCollapsed } = useMenuSetting();
   const { getIsMobile } = useAppInject();
 
   const wrapperEl = ref<HTMLDivElement>();
   const titleEl = ref<HTMLDivElement>();
   const clip = ref(`inset(0px ${props.collapsed ? 100 : 0}% 0px 0px)`);
 
-  onMounted(() => {
+  watch([wrapperEl, titleEl, () => props.showTitle], () => {
+    handleListener();
+  });
+
+  function handleListener() {
     const wEl = unrefElement(wrapperEl) as HTMLDivElement;
     const tEl = unrefElement(titleEl) as HTMLDivElement;
+    if (!wEl || !tEl || !props.showTitle) return;
     const fn = clacClipPath(wEl, tEl);
     fn();
     let control: Pausable;
@@ -68,7 +76,7 @@
       if (!control) return;
       control.pause();
     });
-  });
+  }
 
   function clacClipPath(...els: HTMLDivElement[]) {
     return () => {
@@ -89,11 +97,15 @@
     return {
       ...(!isStatic
         ? {
-            paddingLeft: collapsed ? '0.48rem' : '1.75rem',
+            paddingLeft: collapsed ? '7px' : `${getMenuRootIndent.value - 4}px`,
             width:
               (collapsed ?? getCollapsed.value) && !collapsedShowTitle
                 ? formatLength(layoutSiderCollapsedWidth)
-                : formatLength(width ?? getIsMobile.value ? '240px' : getMenuWidth.value),
+                : formatLength(
+                    width ?? getIsMobile.value
+                      ? `${clamp(100, getMenuWidth.value, 240)}px`
+                      : getMenuWidth.value
+                  ),
           }
         : {}),
     };
@@ -102,6 +114,7 @@
   const getLogoStyle = computed((): CSSProperties => {
     return {
       fontSize: formatLength(props.logoSize),
+      transition: 'font-size var(--app-transition-duration) var(--app-bezier)',
       minWidth: formatLength(props.logoSize),
       zIndex: 10,
     };

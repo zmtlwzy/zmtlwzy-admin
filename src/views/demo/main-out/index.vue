@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex flex-col justify-center space-y-4 max-w-800px mx-auto">
+  <div class="h-screen *center-layout">
     <span>{{ text }}</span>
   </div>
 </template>

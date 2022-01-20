@@ -16,7 +16,6 @@
 
   import { propTypes } from '/@/utils/propTypes';
   import { useDesign } from '/@/composables/web/useDesign';
-  // import { on, off, emit } from '/@/logics/mitt/layoutContentResize';
   import { useLayoutContentResize } from '/@/logics/mitt/layoutContentResize';
   import { useContentSizeInject } from '/@/composables/web/useAppInject';
 
