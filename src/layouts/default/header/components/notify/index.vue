@@ -3,10 +3,7 @@
     <n-popover trigger="click" class="!p-0" placement="bottom">
       <template #trigger>
         <span class="app-layout-header-anction-icon mr-1 relative">
-          <i-ant-design-bell-outlined
-            class="text-$app-text-color-2"
-            :class="{ 'mt-1': count > 0 }"
-          />
+          <i-ant-design-bell-outlined class="text-$n-text-color" :class="{ 'mt-1': count > 0 }" />
           <n-badge
             :value="count"
             :show="count > 0"
@@ -31,7 +28,7 @@
                 <n-space :size="3">
                   <div class="mt-1px">{{ item.name }}</div>
                   <n-badge
-                    :value="item.list.length"
+                    :value="item.list.filter((i) => !i.read).length"
                     :type="item.badgeType"
                     :max="99"
                     :show="item.list.length !== 0"
