@@ -41,6 +41,9 @@
           case MenuTypeEnum.SIDEBAR:
             layout = LayoutClsEnum.SIDEBAR;
             break;
+          case MenuTypeEnum.MIX_SIDEBAR:
+            layout = LayoutClsEnum.MIX_SIDEBAR;
+            break;
           case MenuTypeEnum.MIX:
             layout = LayoutClsEnum.MIX;
             break;
@@ -65,7 +68,8 @@
   .@{prefix-cls} {
     display: grid;
     height: 100vh;
-    &.sider-layout {
+    &.sider-layout,
+    &.mix-sider-layout {
       grid-template-areas:
         'sider header'
         'sider multipletab'

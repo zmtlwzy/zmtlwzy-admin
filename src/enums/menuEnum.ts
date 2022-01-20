@@ -14,9 +14,8 @@ export enum MenuTypeEnum {
 
 export enum LayoutClsEnum {
   SIDEBAR = 'sider-layout',
-  // mixin menu
+  MIX_SIDEBAR = 'mix-sider-layout',
   MIX = 'mix-layout',
-  // top menu
   TOP_MENU = 'top-menu-layout',
 }
 
@@ -40,10 +39,10 @@ export enum MenuModeEnum {
   // INLINE = 'inline',
 }
 
-export enum MenuSplitTyeEnum {
+export enum MenuSplitTypeEnum {
   NONE,
-  TOP,
-  LEFT,
+  ROOT,
+  SECONDARY,
 }
 
 export enum TopMenuAlignEnum {

@@ -20,6 +20,8 @@ export interface MenuSetting {
   hidden: boolean;
   split: boolean;
   menuWidth: number;
+  menuIndent: number;
+  menuRootIndent: number;
   menuCollapsedWidth: number;
   mode: MenuModeEnum;
   type: MenuTypeEnum;

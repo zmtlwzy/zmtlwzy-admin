@@ -72,6 +72,10 @@ const setting: ProjectConfig = {
     hidden: false,
     // Menu width
     menuWidth: 230,
+    // Root Menu Indent
+    menuRootIndent: 32,
+    // Menu Indent
+    menuIndent: 32,
     // Menu collapsed width
     menuCollapsedWidth: 48,
     // Menu mode

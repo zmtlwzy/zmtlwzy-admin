@@ -21,6 +21,8 @@ export enum HandlerEnum {
   MENU_COLLAPSED,
   MENU_COLLAPSED_SHOW_TITLE,
   MENU_WIDTH,
+  MENU_ROOT_INDENT,
+  MENU_INDENT,
   MENU_SHOW_SIDEBAR,
   MENU_THEME,
   MENU_SPLIT,
@@ -137,11 +139,11 @@ export const menuTypeList = [
     mode: MenuModeEnum.HORIZONTAL,
     type: MenuTypeEnum.TOP_MENU,
   },
-  // {
-  //   title: t('layout.setting.menuTypeMixSidebar'),
-  //   mode: MenuModeEnum.INLINE,
-  //   type: MenuTypeEnum.MIX_SIDEBAR,
-  // },
+  {
+    title: t('layout.setting.menuTypeMixSidebar'),
+    mode: MenuModeEnum.VERTICAL,
+    type: MenuTypeEnum.MIX_SIDEBAR,
+  },
 ];
 
 export const themeModeList = [

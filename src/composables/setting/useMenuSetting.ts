@@ -9,6 +9,7 @@ import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
 import { useFullContent } from '/@/composables/web/useFullContent';
 
 const tabsAnima = ref(true);
+const mixSideHasChildrenRef = ref(false);
 
 export function useMenuSetting() {
   const { getFullContent: fullContent } = useFullContent();
@@ -41,6 +42,10 @@ export function useMenuSetting() {
 
   const getMenuWidth = computed(() => appStore.getMenuSetting.menuWidth);
 
+  const getMenuRootIndent = computed(() => appStore.getMenuSetting.menuRootIndent);
+
+  const getMenuIndent = computed(() => appStore.getMenuSetting.menuIndent);
+
   const getTrigger = computed(() => appStore.getMenuSetting.trigger);
 
   const getMenuTheme = computed(() => appStore.getMenuSetting.theme);
@@ -49,9 +54,15 @@ export function useMenuSetting() {
 
   const getSplit = computed(() => appStore.getMenuSetting.split);
 
-  const getAccordion = computed(() => appStore.getMenuSetting.accordion);
+  const getMixSideTrigger = computed(() => appStore.getMenuSetting.mixSideTrigger);
 
   const getMixSideFixed = computed(() => appStore.getMenuSetting.mixSideFixed);
+
+  const getCloseMixSidebarOnChange = computed(
+    () => appStore.getMenuSetting.closeMixSidebarOnChange
+  );
+
+  const getAccordion = computed(() => appStore.getMenuSetting.accordion);
 
   const getIsSidebarType = computed(() => unref(getMenuType) === MenuTypeEnum.SIDEBAR);
 
@@ -121,8 +132,13 @@ export function useMenuSetting() {
     getCollapsed,
     getMiniWidthNumber,
     getMenuWidth,
+    getMenuRootIndent,
+    getMenuIndent,
     getTrigger,
     getSplit,
+    getMixSideFixed,
+    getMixSideTrigger,
+    getCloseMixSidebarOnChange,
     getMenuTheme,
     getMenuInverted,
     getCollapsedShowTitle,
@@ -136,5 +152,6 @@ export function useMenuSetting() {
     getShowSidebar,
     getIsMixMode,
     getIsMixSidebar,
+    mixSideHasChildrenRef,
   };
 }

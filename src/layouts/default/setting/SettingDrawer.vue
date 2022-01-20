@@ -9,7 +9,7 @@
     SliderItem,
     SwitchItem,
     SelectItem,
-    // InputNumberItem,
+    InputNumberItem,
   } from './components';
 
   import { useRootSetting } from '/@/composables/setting/useRootSetting';
@@ -34,18 +34,16 @@
 
   const {
     getIsHorizontal,
-    getIsMixSidebar,
     getShowMenu,
     getMenuType,
     getSplit,
     getMenuWidth,
+    getMenuRootIndent,
+    getMenuIndent,
     getTrigger,
   } = useMenuSetting();
 
-  const {
-    getShowHeader,
-    // getFixed: getHeaderFixed,
-  } = useHeaderSetting();
+  const { getShowHeader } = useHeaderSetting();
 
   const { getShowMultipleTab } = useMultipleTabSetting();
 
@@ -90,15 +88,35 @@
         :disabled="!getShowMenuRef || getMenuType !== MenuTypeEnum.MIX"
       />
 
-      <SliderItem
+      <InputNumberItem
         :title="t('layout.setting.expandedMenuWidth')"
         :max="600"
         :min="100"
-        :step="1"
-        :format-tooltip="(val) => `${val}px`"
         :event="HandlerEnum.MENU_WIDTH"
         :disabled="false"
         :val="getMenuWidth"
+      />
+
+      <SliderItem
+        :title="`一级菜单缩进`"
+        :max="64"
+        :min="16"
+        :step="1"
+        :format-tooltip="(val) => `${val}px`"
+        :event="HandlerEnum.MENU_ROOT_INDENT"
+        :disabled="false"
+        :val="getMenuRootIndent"
+      />
+
+      <SliderItem
+        :title="`菜单缩进`"
+        :max="64"
+        :min="16"
+        :step="1"
+        :format-tooltip="(val) => `${val}px`"
+        :event="HandlerEnum.MENU_INDENT"
+        :disabled="false"
+        :val="getMenuIndent"
       />
 
       <SelectItem
@@ -107,7 +125,7 @@
         :val="getTrigger"
         :default-value="getDeftrigger"
         :options="triggerOptions"
-        :disabled="!getShowMenuRef || getIsMixSidebar"
+        :disabled="!getShowMenuRef"
       />
       <NDivider>{{ t('layout.setting.interfaceDisplay') }}</NDivider>
       <SwitchItem
