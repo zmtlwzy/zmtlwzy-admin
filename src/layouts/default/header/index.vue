@@ -7,18 +7,28 @@
   >
     <div class="*hb-layout h-full text-1.2em">
       <div class="*hb-layout h-full">
-        <div v-if="!getIsSidebarType" class="*vs-layout h-full">
+        <div v-if="getShowLogo" class="*vs-layout h-full">
           <AppLogo
             :collapsed="getCollapsed"
             collapsed-show-title
             :title-color="getInverted ? 'white' : undefined"
           />
         </div>
-        <Trigger v-if="getShowTrigger || getIsMobile" :type="TriggerEnum.HEADER" />
+        <Trigger
+          v-if="getShowTrigger || getIsMobile"
+          :type="TriggerEnum.HEADER"
+          :collapsed="getCollapsed"
+        />
         <LayoutBreadcrumb v-if="getShowContent && getShowBread && !getIsMobile" class="ml-3" />
       </div>
-      <div v-if="getShowTopMenu && !getIsMobile" class="flex-1 px-2">
-        <LayoutMenu :menu-mode="getMenuMode" :split-type="getSplitType" :inverted="getInverted" />
+      <div
+        v-if="getShowTopMenu && !getIsMobile"
+        class="*hb-layout flex-1 min-w-0 px-2 relative h-full"
+        ref="scrollEl"
+      >
+        <ScrollContainer x-scrollable :inverted="getInverted" class="absolute left-0 top-2px">
+          <LayoutMenu :menu-mode="getMenuMode" :split-type="getSplitType" :inverted="getInverted" />
+        </ScrollContainer>
       </div>
       <div class="*vs-layout h-full">
         <Notify v-if="!getIs2xs" />
@@ -31,7 +41,7 @@
   </n-layout-header>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
+  import { defineComponent, unref, computed } from 'vue';
 
   import { propTypes } from '/@/utils/propTypes';
   import { LayoutBreadcrumb, FullScreen, Notify, UserDropDown } from './components';
@@ -47,7 +57,7 @@
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
   import { useLocale } from '/@/locales/useLocale';
 
-  import { MenuModeEnum, MenuSplitTyeEnum, TriggerEnum } from '/@/enums/menuEnum';
+  import { MenuModeEnum, MenuSplitTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
 
   export default defineComponent({
     name: 'LayoutHeader',
@@ -78,6 +88,7 @@
         getMenuInverted,
         getShowTopMenu,
         getIsSidebarType,
+        getIsMixSidebar,
         getIsTopMenu,
         getTrigger,
       } = useMenuSetting();
@@ -94,8 +105,10 @@
 
       const { getShowLocalePicker } = useLocale();
 
+      const getShowLogo = computed(() => !(unref(getIsSidebarType) || unref(getIsMixSidebar)));
+
       const getSplitType = computed(() => {
-        return getSplit.value ? MenuSplitTyeEnum.TOP : MenuSplitTyeEnum.NONE;
+        return getSplit.value ? MenuSplitTypeEnum.ROOT : MenuSplitTypeEnum.NONE;
       });
 
       const getMenuMode = computed(() => {
@@ -113,9 +126,9 @@
         prefixCls,
         getShowBread,
         getShowContent,
+        getShowLogo,
         getCollapsed,
         getShowTopMenu,
-        getIsSidebarType,
         getShowTrigger,
         TriggerEnum,
         getSplitType,
