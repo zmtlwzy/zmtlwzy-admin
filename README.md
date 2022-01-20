@@ -1,7 +1,11 @@
 <div align="center">
 <img src="https://s4.ax1x.com/2021/12/30/TW2pVg.png" style="width:160px;margin-bottom:16px;" />
 
-[![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![use Vue](https://img.shields.io/badge/use-Vue3-41b883?style=flat-square)](./package.json)
+[![use Naive-ui](https://img.shields.io/badge/use-NaiveUI-5fbc21?style=flat-square)](./package.json)
+[![windiCss Support](https://img.shields.io/badge/support-WindiCss-46acef?style=flat-square)](./package.json)
+<br />
+[![license](https://img.shields.io/github/license/zmtlwzy/zmtlwzy-admin?style=flat-square)](./LICENSE)
 
 </div>
 
@@ -23,6 +27,15 @@ Zmtlwzy Admin 是一个基于 Vue3、Vite、Naive UI、TypeScript 的免费中�
 
 - [zmtlwzy-admin](https://zmtlwzy-admin.vercel.app/)
 
+<details>
+   <summary> 📎 <b>预览图</b>: </summary>
+   <br />
+   <img src="https://s4.ax1x.com/2021/12/30/TWEE8g.png" />
+   <img src="https://s4.ax1x.com/2021/12/30/TWEV2Q.png" />
+   <img src="https://s4.ax1x.com/2021/12/30/TWEZvj.png" />
+   <img src="https://s4.ax1x.com/2021/12/30/TWEAPS.png" />
+</details>
+
 ## 文档
 
 - [项目文档(未构建)](https://)
@@ -32,16 +45,6 @@ Zmtlwzy Admin 是一个基于 Vue3、Vite、Naive UI、TypeScript 的免费中�
 - [github](https://github.com/zmtlwzy/zmtlwzy-admin)
 
 - [gitee](https://gitee.com/zmtlwzy/zmtlwzy-admin)
-
-## 项目示例图
-
-![](https://s4.ax1x.com/2021/12/30/TWEE8g.png)
-
-![](https://s4.ax1x.com/2021/12/30/TWEV2Q.png)
-
-![](https://s4.ax1x.com/2021/12/30/TWEZvj.png)
-
-![](https://s4.ax1x.com/2021/12/30/TWEAPS.png)
 
 ## 安装使用
 
