@@ -2,16 +2,19 @@ import type { Menu } from '/@/router/types';
 import type { Ref } from 'vue';
 import { watch, unref, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { MenuSplitTyeEnum } from '/@/enums/menuEnum';
+import { isBoolean } from 'lodash-es';
+import { MenuSplitTypeEnum } from '/@/enums/menuEnum';
 import { useThrottleFn } from '@vueuse/core';
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
 import { getChildrenMenus, getCurrentParentPath, getMenus, getShallowMenus } from '/@/router/menus';
 import { usePermissionStore } from '/@/store/modules/permission';
 import { useAppInject } from '/@/composables/web/useAppInject';
-import { useI18n } from '/@/composables/web/useI18n';
-import Icon from '/@/components/Icon/Icon.vue';
 
-export function useSplitMenu(splitType?: Ref<MenuSplitTyeEnum>) {
+export function useSplitMenu(
+  splitType?: Ref<MenuSplitTypeEnum>,
+  parentPath?: Ref<string | undefined>,
+  globalSplit?: Ref<boolean | undefined>
+) {
   // Menu array
   const menusRef = ref<Menu[]>();
   const { currentRoute } = useRouter();
@@ -19,33 +22,41 @@ export function useSplitMenu(splitType?: Ref<MenuSplitTyeEnum>) {
   const permissionStore = usePermissionStore();
   const { setMenuSetting, getIsHorizontal, getSplit } = useMenuSetting();
 
-  const throttleHandleSplitLeftMenu = useThrottleFn(handleSplitLeftMenu, 50);
+  const throttleHandleSplitSecMenu = useThrottleFn(handleSplitSecMenu, 50);
 
-  const splitNotLeft = computed(
-    () => unref(splitType) !== MenuSplitTyeEnum.LEFT && !unref(getIsHorizontal)
+  const splitNotSec = computed(
+    () => unref(splitType) !== MenuSplitTypeEnum.SECONDARY && !unref(getIsHorizontal)
   );
 
-  const getSplitLeft = computed(
-    () => !unref(getSplit) || unref(splitType) !== MenuSplitTyeEnum.LEFT
-  );
+  const getSplitSec = computed(() => {
+    let isSplit = unref(getSplit);
+    const gSplit = unref(globalSplit);
+    if (isBoolean(gSplit)) isSplit = gSplit;
+    return !isSplit || unref(splitType) !== MenuSplitTypeEnum.SECONDARY;
+  });
 
-  const getSpiltTop = computed(() => unref(splitType) === MenuSplitTyeEnum.TOP);
+  const getSpiltRoot = computed(() => unref(splitType) === MenuSplitTypeEnum.ROOT);
 
   const normalType = computed(() => {
-    return unref(splitType) === MenuSplitTyeEnum.NONE || !unref(getSplit);
+    return unref(splitType) === MenuSplitTypeEnum.NONE || !unref(getSplit);
   });
 
   watch(
-    [() => unref(currentRoute).path, () => unref(splitType)],
-    async ([path]: [string, MenuSplitTyeEnum]) => {
-      if (unref(splitNotLeft) || unref(getIsMobile)) return;
+    [() => unref(currentRoute).path, () => unref(parentPath), () => unref(splitType)],
+    async ([path, _parentPath]) => {
+      if (unref(splitNotSec) || unref(getIsMobile)) return;
       const { meta } = unref(currentRoute);
       const currentActiveMenu = meta.currentActiveMenu as string;
-      let parentPath = await getCurrentParentPath(path);
-      if (!parentPath) {
-        parentPath = await getCurrentParentPath(currentActiveMenu);
+      let parentPath: string;
+      if (_parentPath) {
+        parentPath = _parentPath;
+      } else {
+        parentPath = await getCurrentParentPath(path);
+        if (!parentPath) {
+          parentPath = await getCurrentParentPath(currentActiveMenu);
+        }
       }
-      parentPath && throttleHandleSplitLeftMenu(parentPath);
+      parentPath && throttleHandleSplitSecMenu(parentPath);
     },
     {
       immediate: true,
@@ -67,16 +78,15 @@ export function useSplitMenu(splitType?: Ref<MenuSplitTyeEnum>) {
   watch(
     () => getSplit.value,
     () => {
-      if (unref(splitNotLeft)) return;
+      if (unref(splitNotSec)) return;
       genMenus();
     }
   );
 
-  // Handle left menu split
-  async function handleSplitLeftMenu(parentPath: string) {
-    if (unref(getSplitLeft) || unref(getIsMobile)) return;
+  // Handle secondary menu split
+  async function handleSplitSecMenu(parentPath: string) {
+    if (unref(getSplitSec) || unref(getIsMobile)) return;
 
-    // spilt mode left
     const children = await getChildrenMenus(parentPath);
 
     if (!children || !children.length) {
@@ -98,7 +108,7 @@ export function useSplitMenu(splitType?: Ref<MenuSplitTyeEnum>) {
     }
 
     // split-top
-    if (unref(getSpiltTop)) {
+    if (unref(getSpiltRoot)) {
       const shallowMenus = await getShallowMenus();
 
       menusRef.value = shallowMenus;
@@ -106,22 +116,4 @@ export function useSplitMenu(splitType?: Ref<MenuSplitTyeEnum>) {
   }
 
   return { menusRef };
-}
-
-export function useRender() {
-  const { t } = useI18n();
-
-  const renderIcon = ({ meta }: Menu) => {
-    const icon = meta?.icon;
-    if (icon) {
-      return <Icon icon={icon} />;
-    }
-    return null;
-  };
-
-  const renderLabel = (node: Menu) => {
-    return t(node.label ?? '');
-  };
-
-  return { renderIcon, renderLabel };
 }

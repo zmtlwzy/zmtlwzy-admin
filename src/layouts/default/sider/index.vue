@@ -4,7 +4,7 @@
       v-if="getIsMobile"
       placement="left"
       :class="prefixCls"
-      width="240"
+      :width="getWidth"
       :show="!getCollapsed"
       @update:show="handleChange"
     >
@@ -12,14 +12,16 @@
         <Sider />
       </NDrawerContent>
     </NDrawer>
-    <!-- <MixSider v-else-if="getIsMixSidebar" /> -->
+    <MixSider v-else-if="getIsMixSidebar" />
     <Sider v-else />
   </template>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, computed } from 'vue';
+  import { clamp } from 'lodash-es';
   import Sider from './LayoutSider.vue';
+  import MixSider from './MixSider.vue';
 
   import { useAppInject } from '/@/composables/web/useAppInject';
   import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
@@ -28,12 +30,16 @@
 
   export default defineComponent({
     name: 'SiderWrapper',
-    components: { Sider },
+    components: {
+      Sider,
+      MixSider,
+    },
 
     setup() {
       const { prefixCls } = useDesign('layout-sider-wrapper');
       const { getIsMobile } = useAppInject();
-      const { setMenuSetting, getShowSidebar, getCollapsed } = useMenuSetting();
+      const { setMenuSetting, getShowSidebar, getIsMixSidebar, getMenuWidth, getCollapsed } =
+        useMenuSetting();
 
       function handleChange(show: boolean) {
         setMenuSetting({
@@ -41,10 +47,16 @@
         });
       }
 
+      const getWidth = computed(() => {
+        return clamp(100, getMenuWidth.value, 240);
+      });
+
       return {
         prefixCls,
+        getWidth,
         getShowSidebar,
         getIsMobile,
+        getIsMixSidebar,
         getCollapsed,
         handleChange,
       };

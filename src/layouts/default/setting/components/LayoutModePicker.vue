@@ -119,6 +119,23 @@
         }
       }
 
+      &--mix-sidebar {
+        &::after {
+          z-index: 1;
+          width: 15%;
+          height: 100%;
+          background-color: #273352;
+          border-radius: 4px 0 0 4px;
+          box-shadow: 1px 0 0 #787e91, 6px 0 0 #354368, 12px 0 0 #354368;
+        }
+
+        &::before {
+          width: 100%;
+          height: 25%;
+          background-color: #fff;
+        }
+      }
+
       &--active {
         padding: 12px;
 
