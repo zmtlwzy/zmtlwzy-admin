@@ -40,6 +40,17 @@ const isRoleMode = () => {
   return getPermissionMode() === PermissionModeEnum.ROLE;
 };
 
+const getVisibleMenus = (items: Menu[], backMode?: boolean) => {
+  return items
+    .filter((item: Menu) => (!backMode || !item.meta?.hideMenu) && !item.hideMenu)
+    .map((item: Menu) => {
+      if (item.children) {
+        item.children = getVisibleMenus(item.children, backMode);
+      }
+      return item;
+    });
+};
+
 const staticMenus: Menu[] = [];
 (() => {
   menuModules.sort((a, b) => {
@@ -54,10 +65,10 @@ const staticMenus: Menu[] = [];
 async function getAsyncMenus() {
   const permissionStore = usePermissionStore();
   if (isBackMode()) {
-    return permissionStore.getBackMenuList.filter((item) => !item.meta?.hideMenu && !item.hideMenu);
+    return getVisibleMenus(permissionStore.getBackMenuList, true);
   }
   if (isRouteMappingMode()) {
-    return permissionStore.getFrontMenuList.filter((item) => !item.hideMenu);
+    return getVisibleMenus(permissionStore.getFrontMenuList);
   }
   return staticMenus;
 }
