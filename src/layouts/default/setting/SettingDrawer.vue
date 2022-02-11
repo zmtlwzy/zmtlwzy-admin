@@ -98,7 +98,7 @@
       />
 
       <SliderItem
-        :title="`一级菜单缩进`"
+        :title="t('layout.setting.menuRootIndent')"
         :max="64"
         :min="16"
         :step="1"
@@ -109,7 +109,7 @@
       />
 
       <SliderItem
-        :title="`菜单缩进`"
+        :title="t('layout.setting.menuIndent')"
         :max="64"
         :min="16"
         :step="1"

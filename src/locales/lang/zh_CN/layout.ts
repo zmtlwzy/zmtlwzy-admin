@@ -51,6 +51,9 @@ export default {
     menuTypeMixSidebar: '左侧菜单混合模式',
     menuTypeMix: '顶部菜单混合模式',
     menuTypeTopMenu: '顶部菜单模式',
+    // menu indent
+    menuRootIndent: '一级菜单缩进',
+    menuIndent: '菜单缩进',
     // color
     primaryColor: '强调色',
 

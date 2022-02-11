@@ -50,6 +50,9 @@ export default {
     menuTypeMixSidebar: 'Left menu mixed mode',
     menuTypeMix: 'Top Menu Mix mode',
     menuTypeTopMenu: 'Top menu mode',
+    // menu indent
+    menuRootIndent: 'Root indent',
+    menuIndent: 'Indent',
     // color
     primaryColor: 'Primary Color',
 
