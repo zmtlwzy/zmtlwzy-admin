@@ -25,28 +25,28 @@
         splitNumber: 8,
         indicator: [
           {
-            text: '一月',
-            max: 150,
+            name: '一月',
+            max: 160,
           },
           {
-            text: '二月',
-            max: 150,
+            name: '二月',
+            max: 160,
           },
           {
-            text: '三月',
-            max: 150,
+            name: '三月',
+            max: 160,
           },
           {
-            text: '四月',
-            max: 150,
+            name: '四月',
+            max: 160,
           },
           {
-            text: '五月',
-            max: 150,
+            name: '五月',
+            max: 160,
           },
           {
-            text: '六月',
-            max: 150,
+            name: '六月',
+            max: 160,
           },
         ],
       },

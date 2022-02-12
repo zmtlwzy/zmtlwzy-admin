@@ -1,6 +1,5 @@
 import { getCurrentInstance, computed } from 'vue';
-import { darkTheme, GlobalTheme } from 'naive-ui';
-import { lightTheme } from 'naive-ui/es/themes/light';
+import { darkTheme, lightTheme, GlobalTheme } from 'naive-ui';
 import { useRootSetting } from '../setting/useRootSetting';
 
 export function getNaiveCssVars(keyName: keyof GlobalTheme, isDark = false) {
