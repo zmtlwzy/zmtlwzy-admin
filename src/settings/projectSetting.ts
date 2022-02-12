@@ -71,11 +71,11 @@ const setting: ProjectConfig = {
     // Whether to show dom
     hidden: false,
     // Menu width
-    menuWidth: 230,
+    menuWidth: 210,
     // Root Menu Indent
-    menuRootIndent: 32,
+    menuRootIndent: 24,
     // Menu Indent
-    menuIndent: 32,
+    menuIndent: 24,
     // Menu collapsed width
     menuCollapsedWidth: 48,
     // Menu mode
