@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.1 (2022-02-12)
+
+
+### Features
+
+* support for hiding child-items in menus ([feedf26](https://github.com/zmtlwzy/zmtlwzy-admin/commit/feedf2662e53c5e75ad24a2527043d2bbcb5ec11))
+
+
+### Bug Fixes
+
+* **i18n:** add i18n translate data ([93cf3d4](https://github.com/zmtlwzy/zmtlwzy-admin/commit/93cf3d45b95672db3daa4b078f8d768454f17d56))
+
 ## 0.1.0 (2022-01-20)
 
 
@@ -24,6 +36,3 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 * first commit ([7ee982c](https://github.com/zmtlwzy/zmtlwzy-admin/commit/7ee982c24f6ae70ebc9b1867d6f2e69568ca26d0))
-
-
-
