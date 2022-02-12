@@ -44,6 +44,9 @@
     () => props.isPlay,
     (val) => {
       val && start();
+    },
+    {
+      immediate: true,
     }
   );
 

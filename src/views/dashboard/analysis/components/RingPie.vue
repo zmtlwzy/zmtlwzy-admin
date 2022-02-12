@@ -15,7 +15,7 @@
 
   const chartRef = ref<HTMLDivElement>();
 
-  const [isLoading] = useLoading();
+  const isLoading = useLoading();
 
   useECharts(
     { chartRef },

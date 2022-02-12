@@ -17,7 +17,7 @@
   import VisitAnalysisBar from './VisitAnalysisBar.vue';
   import { useLoading } from './useLoading';
 
-  const [isLoading] = useLoading();
+  const isLoading = useLoading();
   const getContentStyle = computed(
     (): CSSProperties => ({
       ...(isLoading.value

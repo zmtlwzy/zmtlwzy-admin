@@ -39,5 +39,5 @@
   import { growCardList } from './data';
   import { useLoading } from './useLoading';
 
-  const [isLoading] = useLoading();
+  const isLoading = useLoading();
 </script>

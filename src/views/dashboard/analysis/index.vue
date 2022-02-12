@@ -24,8 +24,6 @@
   import Gauge from './components/Gauge.vue';
   import RingPie from './components/RingPie.vue';
 
-  const [, setState] = useLoading(true);
-  setTimeout(() => {
-    setState(false);
-  }, 1200);
+  const loadingRef = useLoading();
+  loadingRef.value = true;
 </script>
