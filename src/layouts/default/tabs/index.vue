@@ -1,6 +1,6 @@
 <template>
   <div v-if="getShowMultipleTab" :style="getWrapperStyle" :class="prefixCls">
-    <NTabs
+    <n-tabs
       ref="tabsElRef"
       v-model:value="activeKeyRef"
       type="card"
@@ -13,15 +13,15 @@
       <template #prefix>
         <div class="placeholder" />
       </template>
-      <NTab
+      <n-tab
         v-for="panel in panels"
         :key="panel.path || panel.fullPath"
         :name="panel.path || panel.fullPath"
-        :class="{ affix: panel?.meta?.affix }"
-        :closable="panel?.meta?.affix"
+        :class="{ '!pr-2': panel?.meta?.affix }"
+        :closable="!panel?.meta?.affix"
       >
         <TabContent :tab-item="panel" />
-      </NTab>
+      </n-tab>
 
       <template #suffix>
         <div class="flex h-full w-18">
@@ -29,7 +29,7 @@
           <TabRedo />
         </div>
       </template>
-    </NTabs>
+    </n-tabs>
   </div>
 </template>
 <script lang="ts">
@@ -178,15 +178,7 @@
           padding-left: 0px;
           margin-left: -1px;
         }
-
         .n-tabs-tab-wrapper {
-          &.affix > [data-name^='/'] {
-            padding-right: 8px !important;
-          }
-          &.affix [aria-label='close'] {
-            display: none;
-          }
-
           .n-tabs-tab {
             .n-tabs-tab__close {
               &::before {
