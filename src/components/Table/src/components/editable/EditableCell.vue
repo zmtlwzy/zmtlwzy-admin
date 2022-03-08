@@ -23,7 +23,7 @@
       </div>
       <div v-if="!getRowEditable" class="editable-cell-action">
         <n-icon class="mx-2 cursor-pointer">
-          <i-ant-design-check-outlined @click="handleSubmit" />
+          <i-ant-design-check-outlined @click="(handleSubmit as Fn)" />
         </n-icon>
         <n-icon class="mx-2 cursor-pointer">
           <i-ant-design-close-outlined @click="handleCancel" />
@@ -209,10 +209,10 @@
       async function handleSubmit(needEmit = true, valid = true) {
         if (valid) {
           const isPass = await handleSubmiRule();
-          if (!isPass) return false;
+          if (!isPass) return;
         }
         const { column, index, record } = props;
-        if (!record) return false;
+        if (!record) return;
         const { key } = column;
         const value = unref(currentValueRef);
         if (!key) return;

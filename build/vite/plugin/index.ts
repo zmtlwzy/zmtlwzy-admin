@@ -1,4 +1,4 @@
-import type { Plugin } from 'vite';
+import type { PluginOption } from 'vite';
 
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -11,11 +11,11 @@ import { configIconComponentPlugin } from './iconComponent';
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const { VITE_USE_MOCK } = viteEnv;
 
-  const vitePlugins: (Plugin | Plugin[])[] = [
+  const vitePlugins: (PluginOption | PluginOption[])[] = [
     vue({
       reactivityTransform: ['src/views/sys/**/*.vue'],
     }),
-    vueJsx() as Plugin,
+    vueJsx(),
   ];
 
   vitePlugins.push(configWindiCSSPlugin());

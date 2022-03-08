@@ -133,7 +133,8 @@
       whenever(
         () => unrefElement(tabsElRef),
         (el) => {
-          el.querySelector('.n-tabs-nav').style.minHeight = `${multipleTabsHeight}px`;
+          const elRef = el.querySelector('.n-tabs-nav') as HTMLElement;
+          elRef.style.minHeight = `${multipleTabsHeight}px`;
         }
       );
 

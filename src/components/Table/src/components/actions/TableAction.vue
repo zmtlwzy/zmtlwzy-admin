@@ -16,7 +16,7 @@
         v-if="dropDownActions && getDropdownList.length"
         trigger="hover"
         :options="getDropdownList"
-        @select="select"
+        @select="(select as Fn)"
       >
         <slot name="more">
           <i-akar-icons-more-horizontal class="!ml-4" v-bind="getMoreProps" />

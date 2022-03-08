@@ -44,15 +44,18 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       proxy: createProxy(VITE_PROXY),
     },
     build: {
-      target: 'es6',
+      target: 'es2015',
+      cssTarget: 'chrome80',
       outDir: OUTPUT_DIR,
+
+      minify: 'terser',
       terserOptions: {
         compress: {
           keep_infinity: true,
-          // Used to delete console in production environment
           drop_console: VITE_DROP_CONSOLE,
         },
       },
+
       // Turning off brotliSize display can slightly reduce packaging time
       brotliSize: false,
       sourcemap: false,
@@ -72,6 +75,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           javascriptEnabled: true,
         },
       },
+    },
+    optimizeDeps: {
+      include: ['@vue/runtime-core', '@vue/shared', '@iconify/iconify'],
     },
   };
 };

@@ -5,7 +5,7 @@
     :class="{ absolute }"
     :style="[background ? `background-color: ${background}` : '']"
   >
-    <NSpin v-bind="{ ...$attrs, ...$props }">
+    <NSpin v-bind="loadingProps">
       <template v-for="item in Object.keys($slots)" #[item]="data">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
@@ -18,25 +18,31 @@
     name: 'Loading',
     inheritAttrs: false,
   };
-
-  interface LoadingProps {
-    show?: boolean;
-    absolute?: boolean;
-    background?: string;
-    description?: string;
-    stroke?: string;
-    size?: number | 'small' | 'medium' | 'large';
-    strokeWidth?: number;
-    rotate?: boolean;
-  }
 </script>
 
 <script setup lang="ts">
-  withDefaults(defineProps<LoadingProps>(), {
-    absolute: true,
-    show: false,
-    rotate: true,
-  });
+  import { useAttrs } from 'vue';
+
+  const props = withDefaults(
+    defineProps<{
+      show?: boolean;
+      absolute?: boolean;
+      background?: string;
+      description?: string;
+      stroke?: string;
+      size?: number | 'small' | 'medium' | 'large';
+      strokeWidth?: number;
+      rotate?: boolean;
+    }>(),
+    {
+      absolute: true,
+      show: false,
+      rotate: true,
+    }
+  );
+
+  const attrs = useAttrs();
+  const loadingProps = { ...attrs, ...props };
 </script>
 
 <style lang="less" scoped>

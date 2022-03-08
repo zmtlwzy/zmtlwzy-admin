@@ -20,7 +20,7 @@ export interface FormSchema {
   defaultValue?: any;
   defaultSlot?: any;
   component?: ComponentType;
-  componentProps?: object;
+  componentProps?: Recordable;
   formItemProps?: FormItemProps;
   slot?: string;
   rules?: FormItemRule | FormItemRule[];

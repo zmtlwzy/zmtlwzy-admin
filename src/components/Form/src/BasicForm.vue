@@ -32,16 +32,16 @@
                 :name="schema.slot"
                 :model="formModel"
                 :field="schema.field"
-                :value="formModel[schema.field]"
+                :value="get(formModel, schema.field)"
               ></slot>
             </template>
 
             <!--NCheckbox-->
             <template v-else-if="schema.component === 'NCheckbox'">
-              <n-checkbox-group v-model:value="formModel[schema.field]">
+              <n-checkbox-group v-model:value="formModel[schema.field as string]">
                 <n-space>
                   <n-checkbox
-                    v-for="item in schema.componentProps.options"
+                    v-for="item in schema?.componentProps?.options"
                     :key="item.value"
                     :value="item.value"
                     :label="item.label"
@@ -52,10 +52,10 @@
 
             <!--NRadioGroup-->
             <template v-else-if="schema.component === 'NRadioGroup'">
-              <n-radio-group v-model:value="formModel[schema.field]">
-                <n-space v-bind="schema.componentProps.spaceProps">
+              <n-radio-group v-model:value="formModel[schema.field as string]">
+                <n-space v-bind="schema?.componentProps?.spaceProps">
                   <n-radio
-                    v-for="item in schema.componentProps.options"
+                    v-for="item in schema?.componentProps?.options"
                     :key="item.value"
                     :value="item.value"
                     >{{ item.label }}</n-radio
@@ -66,9 +66,9 @@
 
             <!--NRadioButtonGroup-->
             <template v-else-if="schema.component === 'NRadioButtonGroup'">
-              <n-radio-group v-model:value="formModel[schema.field]">
+              <n-radio-group v-model:value="formModel[schema.field as string]">
                 <n-radio-button
-                  v-for="item in schema.componentProps.options"
+                  v-for="item in schema?.componentProps?.options"
                   :key="item.value"
                   :value="item.value"
                   >{{ item.label }}</n-radio-button
@@ -111,7 +111,7 @@
                 :name="schema.suffix"
                 :model="formModel"
                 :field="schema.field"
-                :value="formModel[schema.field]"
+                :value="get(formModel, schema.field)"
               ></slot>
             </template>
           </n-form-item>
@@ -205,7 +205,7 @@
       const isUpdateDefaultRef = ref(false);
       const labelPlacementRef = asyncComputed(() => (smaller(sizeEnum.MD).value ? 'top' : 'left'));
       const getProps = computed((): FormProps => {
-        const formProps = { ...props, ...unref(propsRef) } as FormProps;
+        const formProps = Object.assign({}, props, unref(propsRef));
         const rulesObj: any = {
           rules: {},
         };
@@ -226,13 +226,11 @@
       });
 
       function getFormItemPath(field: FormSchema['field']) {
-        let res: string | null = null;
         if (isArray(field)) {
-          res = field.join('.');
+          return field.join('.');
         } else if (isString(field)) {
-          res = field;
+          return field;
         }
-        return res;
       }
 
       function getPlaceholderMessage(schema: FormSchema) {
@@ -296,6 +294,7 @@
             };
             break;
         }
+
         const compProps = componentProps ?? {};
         return {
           clearable: true,
@@ -325,22 +324,29 @@
       }
 
       const getResetBtnOptions = computed(() => {
-        return {
-          size: props.size,
-          type: 'default',
-          ...propsRef.value.resetButtonOptions,
-        };
+        return Object.assign(
+          {
+            size: props.size,
+            type: 'default',
+          },
+          propsRef.value.resetButtonOptions
+        );
       });
+
       const getSubmitBtnOptions = computed(() => {
-        return {
-          size: props.size,
-          type: 'primary',
-          ...propsRef.value.submitButtonOptions,
-        };
+        return Object.assign(
+          {
+            size: props.size,
+            type: 'primary',
+          },
+          propsRef.value.submitButtonOptions
+        );
       });
+
       const isInline = computed(() => {
         return unref(getProps).inline;
       });
+
       const getGrid = computed((): GridProps => {
         const { gridProps } = unref(getProps);
         return {
@@ -350,6 +356,7 @@
           ...gridProps,
         };
       });
+
       function getGridItem(schema: FormSchema): GridItemProps {
         const { giProps } = schema;
         const { giProps: globalGiProps } = unref(getProps);
@@ -359,6 +366,7 @@
           ...giProps,
         };
       }
+
       const getBindValue = computed(() => {
         const { labelPlacement, ...Props } = unref(getProps);
         return {
@@ -368,6 +376,7 @@
           labelPlacement: labelPlacement ?? labelPlacementRef.value,
         } as Recordable;
       });
+
       const getSchema = computed((): FormSchema[] => {
         const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);
         for (const schema of schemas) {
@@ -380,11 +389,13 @@
         }
         return schemas as FormSchema[];
       });
+
       const { handleFormValues, initDefault } = useFormValues({
         defaultFormModel,
         getSchema,
         formModel,
       });
+
       const { handleSubmit, validate, resetFields, getFieldsValue, clearValidate, setFieldsValue } =
         useFormEvents({
           emit,
@@ -395,9 +406,11 @@
           defaultFormModel,
           handleFormValues,
         });
+
       function unfoldToggle() {
         gridCollapsed.value = !gridCollapsed.value;
       }
+
       async function setProps(formProps: Partial<FormProps>): Promise<void> {
         propsRef.value = deepMerge(unref(propsRef) || {}, formProps);
       }
