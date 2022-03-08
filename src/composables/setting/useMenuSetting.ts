@@ -4,8 +4,7 @@ import { computed, unref, ref, nextTick } from 'vue';
 
 import { useAppStore } from '/@/store/modules/app';
 
-import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from '/@/enums/appEnum';
-import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
+import { MenuModeEnum, MenuTypeEnum, TriggerEnum, MixSidebarEnum } from '/@/enums/menuEnum';
 import { useFullContent } from '/@/composables/web/useFullContent';
 
 const tabsAnima = ref(true);
@@ -108,7 +107,7 @@ export function useMenuSetting() {
 
   const getMiniWidthNumber = computed(() => {
     const { collapsedShowTitle } = appStore.getMenuSetting;
-    return collapsedShowTitle ? SIDE_BAR_SHOW_TIT_MINI_WIDTH : SIDE_BAR_MINI_WIDTH;
+    return collapsedShowTitle ? MixSidebarEnum.WIDTH : MixSidebarEnum.COLLAPSED_WIDTH;
   });
 
   // Set menu configuration

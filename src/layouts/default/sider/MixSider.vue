@@ -11,7 +11,7 @@
     v-bind="getMenuEvents"
   >
     <template #header>
-      <AppLogo :class="`${prefixCls}-logo`" :show-title="false" isStatic />
+      <AppLogo :class="`${prefixCls}-logo`" :logo-size="getLogoSize" :show-title="false" isStatic />
     </template>
 
     <template #default>
@@ -75,8 +75,7 @@
   import { useI18n } from '/@/composables/web/useI18n';
   import { useGo } from '/@/composables/web/usePage';
 
-  import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from '/@/enums/appEnum';
-  import { MenuSplitTypeEnum } from '/@/enums/menuEnum';
+  import { MenuSplitTypeEnum, MixSidebarEnum } from '/@/enums/menuEnum';
   import clickOutside from '/@/directives/clickOutside';
   import { getChildrenMenus, getCurrentParentPath, getShallowMenus } from '/@/router/menus';
   import { listenerRouteChange } from '/@/logics/mitt/routeChange';
@@ -179,7 +178,17 @@
   });
 
   const getMixSideWidth = computed(() => {
-    return unref(getCollapsed) ? SIDE_BAR_MINI_WIDTH : SIDE_BAR_SHOW_TIT_MINI_WIDTH;
+    return unref(getCollapsed) ? MixSidebarEnum.COLLAPSED_WIDTH : MixSidebarEnum.WIDTH;
+  });
+
+  const getLogoHeight = computed(() => {
+    return unref(getCollapsed)
+      ? MixSidebarEnum.LOGO_COLLAPSED_WRAPPER_HEIGHT
+      : MixSidebarEnum.LOGO_WRAPPER_HEIGHT;
+  });
+
+  const getLogoSize = computed(() => {
+    return unref(getCollapsed) ? MixSidebarEnum.LOGO_COLLAPSED_SIZE : MixSidebarEnum.LOGO_SIZE;
   });
 
   const getMenuEvents = computed(() => {
@@ -329,12 +338,11 @@
   @prefix-cls: ~'@{namespace}-layout-mix-sider';
 
   .@{prefix-cls} {
-    @header-height: 60px;
     &-logo {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: @header-height;
+      height: v-bind(getLogoHeight);
     }
     &-secondary-menu_wrapper {
       z-index: 2;
@@ -345,7 +353,8 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 12px;
-        height: @header-height;
+        height: v-bind(getLogoHeight);
+        transition: height var(--app-transition-duration) var(--app-bezier);
         .title {
           color: v-bind(getTitleColor);
           font-size: 18px;

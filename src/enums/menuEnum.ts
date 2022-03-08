@@ -55,3 +55,14 @@ export enum MixSidebarTriggerEnum {
   HOVER = 'hover',
   CLICK = 'click',
 }
+
+export enum MixSidebarEnum {
+  WIDTH = 80,
+  COLLAPSED_WIDTH = 48,
+
+  LOGO_SIZE = 38,
+  LOGO_COLLAPSED_SIZE = 32,
+
+  LOGO_WRAPPER_HEIGHT = '60px',
+  LOGO_COLLAPSED_WRAPPER_HEIGHT = '48px',
+}
