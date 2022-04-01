@@ -18,7 +18,6 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
   import { clamp } from 'lodash-es';
   import Sider from './LayoutSider.vue';
   import MixSider from './MixSider.vue';

@@ -29,7 +29,6 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue';
   import { useUserStore } from '/@/store/modules/user';
   import headerImg from '/@/assets/images/header.jpg';
 
@@ -39,21 +38,9 @@
 
 <style>
   .workbench-header-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: right;
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
-    position: relative;
+    @apply flex-ja-col text-right px-7 relative;
   }
   .workbench-header-right-divider::after {
-    content: '';
-    position: absolute;
-    top: 20%;
-    right: 0;
-    height: 60%;
-    border-style: dashed;
-    border-right-width: 1px;
+    @apply content-empty absolute top-[20%] right-0 h-[60%] border-dashed border-r-1px text-gray-500/50;
   }
 </style>

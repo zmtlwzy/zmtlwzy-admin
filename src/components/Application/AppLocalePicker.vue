@@ -13,7 +13,6 @@
   </NPopselect>
 </template>
 <script lang="ts" setup>
-  import { ref, watchEffect, unref, computed, h } from 'vue';
   import { SelectOption, SelectGroupOption } from 'naive-ui';
   import type { LocaleType } from '/#/config';
   import { useLocale } from '/@/locales/useLocale';
@@ -51,7 +50,7 @@
     const suffix = value as string;
     return h(
       'div',
-      { class: `min-w-120px d-flex *hb-layout` },
+      { class: `min-w-120px d-flex flex-jb-ac` },
       {
         default: () => [
           h('span', undefined, {

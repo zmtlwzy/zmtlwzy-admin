@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
   import DemoList from '/@/views/demo/page/list/components/DemoList.vue';
   import DemoCard from '/@/views/demo/page/list/components/DemoCard.vue';
 

@@ -12,7 +12,6 @@
 </template>
 <script lang="ts">
   import type { CSSProperties } from 'vue';
-  import { defineComponent, ref, unref, computed } from 'vue';
 
   import { propTypes } from '/@/utils/propTypes';
   import { useDesign } from '/@/composables/web/useDesign';

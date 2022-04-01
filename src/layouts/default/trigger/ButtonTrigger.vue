@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-  import { PropType, useCssVars, computed } from 'vue';
+  import type { PropType } from 'vue';
   import { useRootSetting } from '/@/composables/setting/useRootSetting';
   import { useDesign } from '/@/composables/web/useDesign';
   import { propTypes } from '/@/utils/propTypes';

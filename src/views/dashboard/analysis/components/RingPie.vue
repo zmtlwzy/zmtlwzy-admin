@@ -4,7 +4,6 @@
   </LoadingCard>
 </template>
 <script lang="ts" setup>
-  import { ref } from 'vue';
   import { useECharts } from '/@/composables/web/useECharts';
   import { basicProps } from './chartProps';
   import { useLoading } from './useLoading';

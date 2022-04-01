@@ -33,7 +33,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, nextTick, unref, computed, watch, CSSProperties } from 'vue';
+  import type { CSSProperties } from 'vue';
   import { unrefElement, MaybeElementRef, whenever } from '@vueuse/core';
 
   import type { RouteLocationNormalized, RouteMeta } from 'vue-router';
@@ -49,7 +49,6 @@
   import { initAffixTabs } from './useMultipleTabs';
   import { getNaiveCssVarsRef } from '/@/composables/core/useNaiveInternal';
 
-  import { useRouter } from 'vue-router';
   import { REDIRECT_NAME } from '/@/router/constant';
   import { useMultipleTabStore } from '/@/store/modules/multipleTab';
   import { listenerRouteChange } from '/@/logics/mitt/routeChange';

@@ -1,4 +1,4 @@
-import { ref, ComputedRef, unref, computed, onMounted, watchEffect, watch } from 'vue';
+import { ComputedRef } from 'vue';
 import type { BasicTableProps } from '../types/table';
 import type { PaginationProps } from '../types/pagination';
 import { isBoolean } from '/@/utils/is';
@@ -75,7 +75,6 @@ export function useDataSource(
 
       const resultTotal = res[totalField] || 0;
       const currentPage = res[pageField];
-      console.log(resultTotal, currentPage, 'currentPage');
 
       // 如果数据异常，需获取正确的页码再次执行
       if (resultTotal) {

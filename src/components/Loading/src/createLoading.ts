@@ -1,4 +1,4 @@
-import { VNode, defineComponent, createVNode, render, ref, h } from 'vue';
+import { VNode, createVNode, render } from 'vue';
 import type { LoadingProps } from './type';
 
 import Loading from './Loading.vue';

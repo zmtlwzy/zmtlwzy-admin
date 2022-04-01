@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, CSSProperties } from 'vue';
+  import type { CSSProperties } from 'vue';
   import { omit } from 'lodash-es';
   import { getNaiveCssVarsRef } from '/@/composables/core/useNaiveInternal';
   import { useDesign } from '/@/composables/web/useDesign';

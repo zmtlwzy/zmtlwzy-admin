@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot name="title" />
-    <div class="grid grid-cols-1 grid-flow-row-dense md:grid-cols-[300px,1fr] gap-4">
+    <div class="grid grid-cols-1 grid-flow-row-dense md:grid-cols-[300px_1fr] gap-4">
       <BasicForm @register="register" @submit="handleSubmit" />
 
       <div class="mt-12 ml-12 <md:row-start-1">
@@ -23,7 +23,6 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted } from 'vue';
   import { useMessage } from 'naive-ui';
   import { set } from 'lodash-es';
   import { useUserStore } from '/@/store/modules/user';

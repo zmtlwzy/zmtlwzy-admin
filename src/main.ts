@@ -1,8 +1,4 @@
-// Register windi
-import 'virtual:windi-base.css';
-import 'virtual:windi-components.css';
-import 'virtual:windi-utilities.css';
-
+import 'uno.css';
 import '/@/design/index.less';
 
 import { createApp } from 'vue';
@@ -14,8 +10,11 @@ import { setupRouterGuard } from '/@/router/guard';
 import { setupStore } from '/@/store';
 import { setupGlobDirectives } from '/@/directives';
 import { setupI18n } from '/@/locales/setupI18n';
+import { createWorker } from 'root/mock/_createMswWorker';
 
 async function bootstrap() {
+  createWorker();
+
   const app = createApp(App);
 
   // Configure store

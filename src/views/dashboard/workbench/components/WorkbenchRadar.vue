@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
   import { MaybeElementRef } from '@vueuse/core';
   import { propTypes } from '/@/utils/propTypes';
   import { useECharts } from '/@/composables/web/useECharts';

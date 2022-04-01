@@ -10,7 +10,7 @@
     </div>
 
     <div :class="`${prefixCls}-bg`" />
-    <div class="*hs-layout h-full pt-150px pb-200px">
+    <div class="flex-jc h-full pt-150px pb-200px">
       <div :class="`${prefixCls}-form`" class="w-460px min-w-320px">
         <AppLogo class="justify-center pl-0 mb-6" is-static logo-size="38" title-size="24" />
         <LoginForm />

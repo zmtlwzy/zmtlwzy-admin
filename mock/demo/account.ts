@@ -1,6 +1,6 @@
-import { MockMethod } from 'vite-plugin-mock';
-import { resultSuccess, resultError } from '../_util';
 import { ResultEnum } from '../../src/enums/httpEnum';
+import { rest } from 'msw';
+import { resultError, resultSuccess } from '../_util';
 
 const userInfo = {
   name: 'zmtlwzy',
@@ -17,28 +17,16 @@ const userInfo = {
 };
 
 export default [
-  {
-    url: '/basic-api/account/getAccountInfo',
-    timeout: 1000,
-    method: 'get',
-    response: () => {
-      return resultSuccess(userInfo);
-    },
-  },
-  {
-    url: '/basic-api/user/sessionTimeout',
-    method: 'post',
-    statusCode: 401,
-    response: () => {
-      return resultError();
-    },
-  },
-  {
-    url: '/basic-api/user/tokenExpired',
-    method: 'post',
-    statusCode: 200,
-    response: () => {
-      return resultError('Token Expired!', { code: ResultEnum.TIMEOUT as number });
-    },
-  },
-] as MockMethod[];
+  rest.get('/basic-api/account/getAccountInfo', (_, res, ctx) => {
+    return res(ctx.delay(1000), ctx.json(resultSuccess(userInfo)));
+  }),
+  rest.post('/basic-api/user/sessionTimeout', (_, res, ctx) => {
+    return res(ctx.status(401), ctx.json(resultError()));
+  }),
+  rest.post('/basic-api/user/tokenExpired', (_, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json(resultError('Token Expired!', { code: ResultEnum.TIMEOUT as number }))
+    );
+  }),
+];

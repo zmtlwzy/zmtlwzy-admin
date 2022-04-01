@@ -7,7 +7,6 @@
 <script lang="ts">
   import { Icon as Iconify } from '@iconify/vue';
   import type { Depth } from 'naive-ui/lib/icon/src/Icon';
-  import { defineComponent, computed } from 'vue';
   import { propTypes } from '/@/utils/propTypes';
 
   export default defineComponent({
@@ -27,7 +26,7 @@
       const getClass = computed(() => {
         return {
           'animate-spin animate-duration-2000': props.spin,
-          'transition-all n-ease-in-out': props.useTranstion,
+          'transition-all ease-in-out-300': props.useTranstion,
         };
       });
       return {

@@ -5,9 +5,9 @@
     :class="[prefixCls, { inverted: getInverted }]"
     :inverted="getInverted"
   >
-    <div class="*hb-layout h-full text-1.2em">
-      <div class="*hb-layout h-full">
-        <div v-if="getShowLogo" class="*vs-layout h-full">
+    <div class="flex-jb-ac h-full text-1.2em">
+      <div class="flex-jb-ac h-full">
+        <div v-if="getShowLogo" class="flex-ac h-full">
           <AppLogo
             :collapsed="getCollapsed"
             collapsed-show-title
@@ -23,14 +23,14 @@
       </div>
       <div
         v-if="getShowTopMenu && !getIsMobile"
-        class="*hb-layout flex-1 min-w-0 px-2 relative h-full"
+        class="flex-jb-ac flex-1 min-w-0 px-2 relative h-full"
         ref="scrollEl"
       >
         <ScrollContainer x-scrollable :inverted="getInverted" class="absolute left-0 top-2px">
           <LayoutMenu :menu-mode="getMenuMode" :split-type="getSplitType" :inverted="getInverted" />
         </ScrollContainer>
       </div>
-      <div class="*vs-layout h-full">
+      <div class="flex-ac h-full">
         <Notify v-if="!getIs2xs" />
         <AppLocalePicker v-if="getShowLocalePicker" trigger-cls="app-layout-header-anction-icon" />
         <FullScreen v-if="!getIs2xs" />
@@ -41,8 +41,6 @@
   </n-layout-header>
 </template>
 <script lang="ts">
-  import { defineComponent, unref, computed } from 'vue';
-
   import { propTypes } from '/@/utils/propTypes';
   import { LayoutBreadcrumb, FullScreen, Notify, UserDropDown } from './components';
   import Trigger from '../trigger/index.vue';

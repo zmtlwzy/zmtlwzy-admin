@@ -1,4 +1,3 @@
-import { h } from 'vue';
 import { NAvatar } from 'naive-ui';
 
 export const columns = [

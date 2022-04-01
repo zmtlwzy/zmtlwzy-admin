@@ -34,7 +34,6 @@
 </template>
 <script lang="ts">
   import type { CSSProperties, PropType } from 'vue';
-  import { defineComponent, ref, unref, nextTick, computed, watchEffect, toRaw } from 'vue';
   import { set, omit } from 'lodash-es';
   import { milliseconds } from 'date-fns';
   import type { BasicColumn } from '../../types/table';

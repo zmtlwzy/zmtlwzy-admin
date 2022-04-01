@@ -1,5 +1,3 @@
-import { computed, watchEffect, unref } from 'vue';
-import { useRoute } from 'vue-router';
 import type { Ref } from 'vue';
 
 import { useRootSetting } from '/@/composables/setting/useRootSetting';

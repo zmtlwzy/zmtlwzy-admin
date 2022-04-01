@@ -4,7 +4,7 @@
       <WorkbenchHeader />
     </template>
 
-    <div class="grid lg:grid-cols-[7fr,3fr] gap-4">
+    <div class="grid lg:grid-cols-[7fr_3fr] gap-4">
       <div class="flex flex-col space-y-4">
         <ProjectCard />
         <Dynamicinfo />

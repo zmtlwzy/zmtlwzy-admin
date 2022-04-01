@@ -2,7 +2,6 @@ import type { HTMLAttributes } from 'vue';
 import type { RouteRecordRaw, RouteMeta } from 'vue-router';
 import type { MenuOption } from 'naive-ui';
 import { RoleEnum } from '/@/enums/roleEnum';
-import { defineComponent } from 'vue';
 
 export type Component<T = any> =
   | ReturnType<typeof defineComponent>

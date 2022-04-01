@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import { computed, unref } from 'vue';
-
   import {
     ThemeModePicker,
     LayoutModePicker,

@@ -30,7 +30,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
   import { promiseTimeout } from '@vueuse/core';
   import { useLoading } from '/@/components/Loading';
 

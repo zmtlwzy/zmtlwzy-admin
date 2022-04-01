@@ -34,7 +34,6 @@
 </script>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
   import type { StepsProps } from 'naive-ui';
   import { useBreakpoint } from '/@/composables/event/useBreakpoint';
   import Step1 from './Step1.vue';

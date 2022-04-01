@@ -1,7 +1,5 @@
 <script lang="ts">
   import type { PropType, VNodeChild } from 'vue';
-  import { defineComponent, h, ref, unref, watch, toRef, toRefs, computed } from 'vue';
-  import { useRouter } from 'vue-router';
 
   import { useSplitMenu } from './useLayoutMenu';
 

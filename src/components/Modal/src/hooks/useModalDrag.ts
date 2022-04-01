@@ -1,4 +1,4 @@
-import { Ref, unref, watchEffect } from 'vue';
+import type { Ref } from 'vue';
 import { useTimeoutFn } from '@vueuse/core';
 
 export interface UseModalDragMoveContext {

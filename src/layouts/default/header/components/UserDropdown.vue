@@ -1,5 +1,4 @@
 <script lang="tsx">
-  import { defineComponent, computed } from 'vue';
   import { NDropdown, DropdownOption, NAvatar } from 'naive-ui';
 
   import { useUserStore } from '/@/store/modules/user';

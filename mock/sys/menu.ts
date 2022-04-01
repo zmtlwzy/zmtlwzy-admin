@@ -1,5 +1,6 @@
-import { resultSuccess, resultError, getRequestToken, requestParams } from '../_util';
-import { MockMethod } from 'vite-plugin-mock';
+import { rest } from 'msw';
+import type { requestParams } from '../_util';
+import { getRequestToken, resultError, resultSuccess } from '../_util';
 import { createFakeUserList } from './user';
 
 // single
@@ -207,64 +208,32 @@ const sysRoute = {
   ],
 };
 
-const linkRoute = {
-  path: '/link',
-  name: 'Link',
-  component: 'LAYOUT',
-  meta: {
-    icon: 'ion:tv-outline',
-    title: 'routes.demo.iframe.frame',
-  },
-  children: [
-    {
-      path: 'doc',
-      name: 'Doc',
-      meta: {
-        title: 'routes.demo.iframe.doc',
-        frameSrc: 'https://vvbin.cn/doc-next/',
-      },
-    },
-    {
-      path: 'https://vvbin.cn/doc-next/',
-      name: 'DocExternal',
-      component: 'LAYOUT',
-      meta: {
-        title: 'routes.demo.iframe.docExternal',
-      },
-    },
-  ],
-};
-
 export default [
-  {
-    url: '/basic-api/getMenuList',
-    timeout: 1000,
-    method: 'get',
-    response: (request: requestParams) => {
-      const token = getRequestToken(request);
-      if (!token) {
-        return resultError('Invalid token!');
-      }
+  rest.get('/basic-api/getMenuList', (req, res, ctx) => {
+    const token = getRequestToken(req as unknown as requestParams);
+    let json: any = resultError('Invalid token');
+    if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);
-      if (!checkUser) {
-        return resultError('Invalid user token!');
+      if (checkUser) {
+        const id = checkUser.userId;
+        let menu: Object[];
+        switch (id) {
+          case '1':
+            dashboardRoute.redirect = `${dashboardRoute.path}/${dashboardRoute.children[0].path}`;
+            menu = [dashboardRoute, authRoute, levelRoute, sysRoute];
+            break;
+          case '2':
+            dashboardRoute.redirect = `${dashboardRoute.path}/${dashboardRoute.children[1].path}`;
+            menu = [dashboardRoute, authRoute, levelRoute];
+            break;
+          default:
+            menu = [];
+        }
+        json = resultSuccess(menu);
+      } else {
+        json = resultError('Invalid user token!');
       }
-      const id = checkUser.userId;
-      let menu: Object[];
-      switch (id) {
-        case '1':
-          dashboardRoute.redirect = dashboardRoute.path + '/' + dashboardRoute.children[0].path;
-          menu = [dashboardRoute, authRoute, levelRoute, sysRoute, linkRoute];
-          break;
-        case '2':
-          dashboardRoute.redirect = dashboardRoute.path + '/' + dashboardRoute.children[1].path;
-          menu = [dashboardRoute, authRoute, levelRoute, linkRoute];
-          break;
-        default:
-          menu = [];
-      }
-
-      return resultSuccess(menu);
-    },
-  },
-] as MockMethod[];
+    }
+    return res(ctx.json(json));
+  }),
+];

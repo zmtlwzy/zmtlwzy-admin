@@ -26,7 +26,6 @@
 </script>
 
 <script lang="ts" setup>
-  import { getCurrentInstance, ref, toRefs, unref, computed, useAttrs } from 'vue';
   import { omit } from 'lodash-es';
   import { useModalDragMove } from './hooks/useModalDrag';
   import { deepMerge } from '/@/utils';

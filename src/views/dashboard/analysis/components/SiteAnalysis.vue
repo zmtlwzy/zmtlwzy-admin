@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-  import { CSSProperties, computed } from 'vue';
+  import type { CSSProperties } from 'vue';
   import VisitAnalysis from './VisitAnalysis.vue';
   import VisitAnalysisBar from './VisitAnalysisBar.vue';
   import { useLoading } from './useLoading';

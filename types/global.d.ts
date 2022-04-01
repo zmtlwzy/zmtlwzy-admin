@@ -6,12 +6,7 @@ import type {
   FunctionalComponent,
 } from 'vue';
 
-import type {
-  MessageProviderInst,
-  LoadingBarProviderInst,
-  DialogProviderInst,
-  NotificationProviderInst,
-} from 'naive-ui';
+import type { LoadingBarProviderInst } from 'naive-ui';
 
 declare global {
   const __APP_INFO__: {

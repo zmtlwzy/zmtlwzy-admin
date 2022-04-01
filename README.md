@@ -3,7 +3,7 @@
 
 [![use Vue](https://img.shields.io/badge/use-Vue3-41b883?style=flat-square)](./package.json)
 [![use Naive-ui](https://img.shields.io/badge/use-NaiveUI-5fbc21?style=flat-square)](./package.json)
-[![windiCss Support](https://img.shields.io/badge/support-WindiCss-46acef?style=flat-square)](./package.json)
+[![Unocss Support](https://img.shields.io/badge/support-Unocss-46acef?style=flat-square)](./package.json)
 <br />
 [![license](https://img.shields.io/github/license/zmtlwzy/zmtlwzy-admin?style=flat-square)](./LICENSE)
 

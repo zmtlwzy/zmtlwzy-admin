@@ -43,7 +43,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { h, reactive, ref } from 'vue';
   import { useMessage } from 'naive-ui';
   import { BasicTable, TableAction, BasicColumn } from '/@/components/Table';
   import { BasicForm, useForm } from '/@/components/Form/index';
@@ -135,16 +134,17 @@
   }
 
   const loadDataTable = async (res) => {
-    const sdf = await demoListApi({ ...formParams, ...params.value, ...res });
-    console.log(sdf, 'sdf');
-    return sdf;
+    return await demoListApi({ ...formParams, ...params.value, ...res });
   };
+
   function onCheckedRow(rowKeys) {
     console.log(rowKeys);
   }
+
   function reloadTable() {
     actionRef.value.reload();
   }
+
   function confirmForm(e) {
     e.preventDefault();
     formBtnLoading.value = true;

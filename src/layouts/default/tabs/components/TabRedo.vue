@@ -1,17 +1,17 @@
 <template>
-  <span :class="wrapperClass" @click="handleRedo">
-    <i-codicon-refresh :class="[iconClass, loading ? '*spin animate-duration-1200' : '']" />
-  </span>
+  <div class="app-mtabs-anction-btn-wrapper group" @click="handleRedo">
+    <span
+      class="i-codicon-refresh app-mtabs-anction-btn"
+      :class="{ 'app-ease-spin animate-duration-1200': loading }"
+    />
+  </div>
 </template>
 <script setup lang="ts">
-  import { ref } from 'vue';
   import { promiseTimeout } from '@vueuse/core';
   import { useTabs } from '/@/composables/web/useTabs';
-  import getCommonCls from './useExtra';
 
   const loading = ref(false);
   const { refreshPage } = useTabs();
-  const { wrapperClass, iconClass } = getCommonCls();
 
   async function handleRedo() {
     const currentTime = Date.now();

@@ -5,7 +5,6 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
   import SettingDrawer from './SettingDrawer.vue';
 
   import { useDrawer, useDrawerEnum } from '/@/composables/component/useDrawer';

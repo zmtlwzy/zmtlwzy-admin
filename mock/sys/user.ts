@@ -1,5 +1,6 @@
-import { MockMethod } from 'vite-plugin-mock';
-import { resultError, resultSuccess, getRequestToken, requestParams } from '../_util';
+import { rest } from 'msw';
+import type { requestParams } from '../_util';
+import { getRequestToken, resultError, resultSuccess } from '../_util';
 
 export function createFakeUserList() {
   return [
@@ -39,26 +40,21 @@ export function createFakeUserList() {
 }
 
 const fakeCodeList: any = {
-  '1': ['1000', '3000', '5000'],
+  1: ['1000', '3000', '5000'],
 
-  '2': ['2000', '4000', '6000'],
+  2: ['2000', '4000', '6000'],
 };
 export default [
-  // mock user login
-  {
-    url: '/basic-api/login',
-    timeout: 200,
-    method: 'post',
-    response: ({ body }) => {
-      const { username, password } = body;
-      const checkUser = createFakeUserList().find(
-        (item) => item.username === username && password === item.password
-      );
-      if (!checkUser) {
-        return resultError('Incorrect account or password！');
-      }
+  rest.post('/basic-api/login', (req, res, ctx) => {
+    const { username, password } = req.body as any;
+    let json: any = resultError('Incorrect account or password！');
+    const checkUser = createFakeUserList().find(
+      (item) => item.username === username && password === item.password
+    );
+    if (checkUser) {
       const { userId, username: _username, token, realName, desc, roles } = checkUser;
-      return resultSuccess({
+      console.log('登录成功')
+      json = resultSuccess({
         roles,
         userId,
         username: _username,
@@ -66,49 +62,43 @@ export default [
         realName,
         desc,
       });
-    },
-  },
-  {
-    url: '/basic-api/getUserInfo',
-    method: 'get',
-    response: (request: requestParams) => {
-      const token = getRequestToken(request);
-      if (!token) return resultError('Invalid token');
+    }
+    return res(ctx.delay(200), ctx.json(json));
+  }),
+  rest.get('/basic-api/getUserInfo', (req, res, ctx) => {
+    const token = getRequestToken(req as unknown as requestParams);
+    let json: any = resultError('Invalid token');
+    if (token) {
+      const checkUser = createFakeUserList().find((item) => item.token === token);
+      if (!checkUser) json = resultError('The corresponding user information was not obtained!');
+      else json = resultSuccess(checkUser);
+    }
+    return res(ctx.json(json));
+  }),
+  rest.get('/basic-api/getPermCode', (req, res, ctx) => {
+    const token = getRequestToken(req as unknown as requestParams);
+    let json: any = resultError('Invalid token');
+    if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);
       if (!checkUser) {
-        return resultError('The corresponding user information was not obtained!');
+        json = resultError('The corresponding user information was not obtained!');
+      } else {
+        const codeList = fakeCodeList[checkUser.userId];
+        json = resultSuccess(codeList);
       }
-      return resultSuccess(checkUser);
-    },
-  },
-  {
-    url: '/basic-api/getPermCode',
-    timeout: 200,
-    method: 'get',
-    response: (request: requestParams) => {
-      const token = getRequestToken(request);
-      if (!token) return resultError('Invalid token');
-      const checkUser = createFakeUserList().find((item) => item.token === token);
-      if (!checkUser) {
-        return resultError('Invalid token!');
-      }
-      const codeList = fakeCodeList[checkUser.userId];
+    }
+    return res(ctx.delay(200), ctx.json(json));
+  }),
 
-      return resultSuccess(codeList);
-    },
-  },
-  {
-    url: '/basic-api/logout',
-    timeout: 200,
-    method: 'get',
-    response: (request: requestParams) => {
-      const token = getRequestToken(request);
-      if (!token) return resultError('Invalid token');
+  rest.get('/basic-api/logout', (req, res, ctx) => {
+    const token = getRequestToken(req as unknown as requestParams);
+    let json: any = resultError('Invalid token');
+    if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);
-      if (!checkUser) {
-        return resultError('Invalid token!');
-      }
-      return resultSuccess(undefined, { message: 'Token has been destroyed' });
-    },
-  },
-] as MockMethod[];
+      if (!checkUser) json = resultError('The corresponding user information was not obtained!');
+      else json = resultSuccess(undefined, { message: 'Token has been destroyed' });
+    }
+
+    return res(ctx.delay(200), ctx.json(json));
+  }),
+];

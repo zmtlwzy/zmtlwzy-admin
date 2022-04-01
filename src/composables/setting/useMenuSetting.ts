@@ -1,7 +1,5 @@
 import type { MenuSetting } from '/#/config';
 
-import { computed, unref, ref, nextTick } from 'vue';
-
 import { useAppStore } from '/@/store/modules/app';
 
 import { MenuModeEnum, MenuTypeEnum, TriggerEnum, MixSidebarEnum } from '/@/enums/menuEnum';

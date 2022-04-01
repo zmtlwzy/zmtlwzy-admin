@@ -29,7 +29,6 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, unref } from 'vue';
   import { useMessage, useDialog } from 'naive-ui';
 
   import { useAppStore } from '/@/store/modules/app';

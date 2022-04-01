@@ -16,7 +16,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, useSlots, computed } from 'vue';
   import { omit } from 'lodash-es';
   import { CardProps } from 'naive-ui';
 

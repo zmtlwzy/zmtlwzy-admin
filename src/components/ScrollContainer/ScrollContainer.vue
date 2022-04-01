@@ -11,7 +11,6 @@
 </script>
 
 <script setup lang="ts">
-  import { computed } from 'vue';
   import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal';
 
   const props = defineProps<{

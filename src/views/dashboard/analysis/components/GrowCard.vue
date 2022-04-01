@@ -15,7 +15,6 @@
 
           <div class="py-4 px-4 flex justify-between items-center">
             <CountTo
-              :autoplay="true"
               :is-play="!isLoading"
               :prefix="item.prefix"
               :end-val="item.value"

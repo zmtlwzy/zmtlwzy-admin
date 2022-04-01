@@ -1,12 +1,11 @@
 import type { DropdownOption } from 'naive-ui';
 import type { TabContentProps } from './types';
 import type { ComputedRef } from 'vue';
+import type { RouteLocationNormalized } from 'vue-router';
 import { MenuEventEnum } from './types';
 
-import { computed, unref, reactive } from 'vue';
 import { and, not } from '@vueuse/core';
 import { useMultipleTabStore } from '/@/store/modules/multipleTab';
-import { RouteLocationNormalized, useRouter } from 'vue-router';
 import { useTabs } from '/@/composables/web/useTabs';
 import { useI18n } from '/@/composables/web/useI18n';
 import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting';

@@ -15,7 +15,6 @@
 </template>
 <script setup lang="ts">
   import Tiny from 'tinycolor2';
-  import { computed, useCssVars, unref } from 'vue';
   import { asyncComputed, promiseTimeout } from '@vueuse/core';
 
   import { useRootSetting } from '/@/composables/setting/useRootSetting';

@@ -1,11 +1,11 @@
 <template>
   <n-card>
-    <div class="*hb-layout flex-col">
+    <div class="flex-jb-ac flex-col">
       <n-avatar :src="userinfo.avatar || headerImg" round :size="108" class="mb-6" />
       <div class="font-semibold text-lg font-segoe">{{ userinfo.realName }}</div>
       <div>日月之行，若出其中</div>
     </div>
-    <div class="grid grid-cols-[auto,1fr] gap-2 mt-6">
+    <div class="grid grid-cols-[auto_1fr] gap-2 mt-6">
       <template v-for="{ icon, text } in userMessage" :key="text">
         <component :is="icon" class="text-16px mt-2px" />
         <span>{{ text }}</span>
@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
   import Team from '/@/views/dashboard/workbench/components/Team.vue';
   import { useUserStore } from '/@/store/modules/user';
   import headerImg from '/@/assets/images/header.jpg';

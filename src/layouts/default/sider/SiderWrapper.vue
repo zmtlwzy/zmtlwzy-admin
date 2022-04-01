@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, CSSProperties, unref, useCssVars } from 'vue';
+  import type { CSSProperties } from 'vue';
   import { useElementSize, MaybeElementRef } from '@vueuse/core';
   import { isBoolean } from 'lodash-es';
   import { formatLength } from 'naive-ui/lib/_utils';

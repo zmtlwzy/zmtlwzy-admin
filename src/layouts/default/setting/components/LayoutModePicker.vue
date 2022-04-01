@@ -13,7 +13,6 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
   import { baseHandler } from '../handler';
 
   import { useDesign } from '/@/composables/web/useDesign';

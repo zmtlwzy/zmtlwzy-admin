@@ -1,12 +1,11 @@
-import { MockMethod } from 'vite-plugin-mock';
-import { Random } from 'mockjs';
+import { rest } from 'msw';
+import faker from '@faker-js/faker/locale/zh_CN';
+import { format } from 'date-fns';
 import { resultSuccess } from '../_util';
 
 function getRandomPics(count = 10): string[] {
   const arr: string[] = [];
-  for (let i = 0; i < count; i++) {
-    arr.push(Random.image('800x600', Random.color(), Random.color(), Random.title()));
-  }
+  for (let i = 0; i < count; i++) arr.push(faker.image.food(800, 600, true));
   return arr;
 }
 
@@ -14,33 +13,37 @@ const demoList = (pageSize: number) => {
   const result: any[] = [];
   for (let index = 0; index < pageSize; index++) {
     result.push({
-      id: '@integer(1,99999)',
-      beginTime: '@datetime',
-      endTime: '@datetime',
-      address: '@city()',
-      name: '@cname()',
-      avatar: Random.image('400x400', Random.color(), Random.color(), Random.first()),
+      id: faker.finance.account(5),
+      beginTime: format(new Date(faker.date.past(5)), 'yyyy-MM-dd HH:mm:ss'),
+      endTime: format(new Date(faker.date.future(5)), 'yyyy-MM-dd HH:mm:ss'),
+      address: faker.address.cityPrefix() + faker.address.citySuffix(),
+      name: faker.name.lastName() + faker.name.firstName(),
+      avatar: faker.image.nature(200, 200, true),
       imgArr: getRandomPics(Math.ceil(Math.random() * 3) + 1),
       imgs: getRandomPics(Math.ceil(Math.random() * 3) + 1),
-      date: `@date('yyyy-MM-dd')`,
-      time: `@time('HH:mm')`,
+      date: format(new Date(faker.date.soon()), 'yyyy-MM-dd'),
+      time: format(new Date(faker.date.soon()), 'HH:mm:ss'),
       'no|100000-10000000': 100000,
-      // 'status|1': ['normal', 'enable', 'disable'],
-      'status|1': [true, false],
+      'status|1': faker.random.arrayElement([true, false]),
     });
   }
   return result;
 };
 
 export default [
-  {
-    url: '/basic-api/table/getDemoList',
-    timeout: 100,
-    method: 'get',
-    response: ({ query }) => {
-      const { page = 1, pageSize = 10 } = query;
-      const items = demoList(Number(pageSize));
-      return resultSuccess({ page: Number(page), pageSize: Number(pageSize), total: 45, items });
-    },
-  },
-] as MockMethod[];
+  rest.get('/basic-api/table/getDemoList', (req, res, ctx) => {
+    const { page = 1, pageSize = 10 } = Object.fromEntries(req.url.searchParams.entries());
+    const items = demoList(Number(pageSize));
+    return res(
+      ctx.delay(100),
+      ctx.json(
+        resultSuccess({
+          page: Number(page),
+          pageSize: Number(pageSize),
+          total: 45,
+          items,
+        })
+      )
+    );
+  }),
+];

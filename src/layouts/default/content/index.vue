@@ -1,5 +1,5 @@
 <template>
-  <main ref="contentEl" :class="[prefixCls, 'transform-gpu']">
+  <main ref="contentEl" :class="[prefixCls, 'transform-gpu transform']">
     <Loading :show="getShowLoading" />
     <NLayout embedded class="h-full" position="absolute">
       <NScrollbar ref="scrollBarEl" :style="{ maxHeight: `${height}px` }">
@@ -22,8 +22,6 @@
 </script>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
-  import { useRoute } from 'vue-router';
   import { useElementSize, MaybeElementRef, useResizeObserver, promiseTimeout } from '@vueuse/core';
   import { ScrollbarInst } from 'naive-ui';
   import PageLayout from '/@/layouts/page/index.vue';

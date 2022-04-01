@@ -20,8 +20,6 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-
   import FrameLayout from '/@/layouts/iframe/index.vue';
 
   import { useRootSetting } from '/@/composables/setting/useRootSetting';

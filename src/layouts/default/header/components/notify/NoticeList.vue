@@ -48,7 +48,7 @@
           </NListItem>
         </template>
       </template>
-      <n-empty v-else class="min-h-200px *center-layout" />
+      <n-empty v-else class="min-h-200px flex-jc-ac" />
     </NList>
   </n-scrollbar>
 </template>

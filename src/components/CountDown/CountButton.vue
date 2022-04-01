@@ -4,7 +4,6 @@
   </NButton>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, watchEffect, computed, unref } from 'vue';
   import { useCountdown } from './useCountdown';
   import { isFunction } from '/@/utils/is';
   import { useI18n } from '/@/composables/web/useI18n';

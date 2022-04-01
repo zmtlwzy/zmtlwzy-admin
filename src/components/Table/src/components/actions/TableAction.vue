@@ -27,7 +27,6 @@
 </template>
 
 <script lang="ts">
-  import { computed, toRaw } from 'vue';
   import { usePermission } from '/@/composables/web/usePermission';
   import { isBoolean, isFunction } from '/@/utils/is';
   import type { DropdownProps } from 'naive-ui';

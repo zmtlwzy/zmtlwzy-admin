@@ -9,8 +9,6 @@ type I18nGlobalTranslation = {
   (key: string, named: Record<string, unknown>): string;
 };
 
-type I18nTranslationRestParameters = [string, any];
-
 function getKey(namespace: string | undefined, key: string) {
   if (!namespace) {
     return key;
@@ -39,7 +37,8 @@ export function useI18n(namespace?: string): {
   const tFn: I18nGlobalTranslation = (key: string, ...arg: any[]) => {
     if (!key) return '';
     if (!key.includes('.') && !namespace) return key;
-    return t(getKey(namespace, key), ...(arg as I18nTranslationRestParameters));
+    // @ts-ignore
+    return t(getKey(namespace, key), ...arg);
   };
   return {
     ...methods,

@@ -49,7 +49,7 @@ export function pagination<T = any>(pageNo: number, pageSize: number, array: T[]
 export interface requestParams {
   method: string;
   body: any;
-  headers?: { authorization?: string };
+  headers?: { _headers: { authorization?: any } };
   query: any;
 }
 
@@ -57,6 +57,6 @@ export interface requestParams {
  * @description 本函数用于从request数据中获取token，请根据项目的实际情况修改
  *
  */
-export function getRequestToken({ headers }: requestParams): string | undefined {
-  return headers?.authorization;
+export function getRequestToken(req: requestParams): string | undefined {
+  return req?.headers?._headers?.authorization;
 }

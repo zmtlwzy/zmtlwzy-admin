@@ -1,4 +1,4 @@
-import { defineAsyncComponent, AsyncComponentOptions } from 'vue';
+import type { AsyncComponentOptions } from 'vue';
 import { NSpin } from 'naive-ui';
 import { noop } from '/@/utils/index';
 

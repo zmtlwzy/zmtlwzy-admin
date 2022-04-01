@@ -2,7 +2,6 @@
   <div ref="chartRef" :style="{ height, width }"></div>
 </template>
 <script lang="ts" setup>
-  import { ref } from 'vue';
   import { useECharts } from '/@/composables/web/useECharts';
   import { basicProps } from './chartProps';
 

@@ -1,7 +1,5 @@
 import type { HeaderSetting } from '/#/config';
 
-import { computed, unref } from 'vue';
-
 import { useAppStore } from '/@/store/modules/app';
 
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting';

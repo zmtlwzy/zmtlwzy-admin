@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { watch, ref, toRefs, unref } from 'vue';
   import { useCssVar, useBreakpoints } from '@vueuse/core';
   import { kebabCase } from 'lodash-es';
   import { useThemeVars, useLoadingBar } from 'naive-ui';

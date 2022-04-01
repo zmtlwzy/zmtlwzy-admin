@@ -12,7 +12,6 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, useAttrs } from 'vue';
   import { omit } from 'lodash-es';
   import type { PopConfirm } from '../../types/tableAction';
   defineProps({

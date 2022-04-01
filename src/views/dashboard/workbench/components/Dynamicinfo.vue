@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { dynamicInfoItems } from './data';
+  import { dynamicInfoItems } from './data.json';
 </script>
 
 <style lang="less" scoped>

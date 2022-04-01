@@ -15,7 +15,6 @@
 </script>
 
 <script setup lang="ts">
-  import { computed, useAttrs } from 'vue';
   import { omit } from 'lodash-es';
   import { propTypes } from '/@/utils/propTypes';
   import { useDesign } from '/@/composables/web/useDesign';

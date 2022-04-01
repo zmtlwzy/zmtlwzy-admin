@@ -58,7 +58,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { computed, CSSProperties, ref } from 'vue';
+  import type { CSSProperties } from 'vue';
   import { promiseTimeout } from '@vueuse/core';
   import { cloneDeep } from 'lodash-es';
   import { tabListData } from './data';

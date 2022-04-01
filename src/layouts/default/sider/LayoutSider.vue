@@ -8,7 +8,7 @@
     <template #header>
       <AppLogo
         v-if="getIsSidebarType"
-        class="*vs-layout h-64px"
+        class="flex-ac h-64px"
         :collapsed="getCollapsed"
         :title-color="getMenuInverted ? 'white' : undefined"
       />
@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue';
   import { clamp } from 'lodash-es';
   import { MenuModeEnum, MenuSplitTypeEnum } from '/@/enums/menuEnum';
 

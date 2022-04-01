@@ -64,9 +64,8 @@
   import type { RouteLocationNormalized } from 'vue-router';
   import type { Menu } from '/@/router/types';
 
-  import { reactive, nextTick } from 'vue';
   import { unrefElement, MaybeElementRef } from '@vueuse/core';
-  import { computed, onMounted, ref, unref, watch, h } from 'vue';
+
   import { useRootSetting } from '/@/composables/setting/useRootSetting';
   import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
   import { usePermissionStore } from '/@/store/modules/permission';
@@ -368,12 +367,12 @@
         height: auto;
         transition: background-color var(--app-transition-duration) var(--n-bezier),
           height var(--app-transition-duration) var(--n-bezier);
-        &::before {
-          left: 4px;
-          right: 4px;
-        }
         .n-menu-item-content {
           padding-right: 0;
+          &::before {
+            left: 4px;
+            right: 4px;
+          }
           .item_wrapper {
             display: flex;
             flex-direction: column;

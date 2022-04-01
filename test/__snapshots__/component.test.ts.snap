@@ -1,0 +1,3 @@
+// Vitest Snapshot v1
+
+exports[`CountTo.vue > should render 1`] = `"<span>0</span>"`;

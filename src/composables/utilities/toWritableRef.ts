@@ -1,4 +1,4 @@
-import { watch, ref, Ref } from 'vue';
+import type { Ref } from 'vue';
 
 export function toWritableRef<T extends object, K extends keyof T>(object: T, key: K) {
   const val = ref(object[key]) as Ref<T[K]>;

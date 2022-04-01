@@ -1,7 +1,7 @@
 <template>
   <div
     ref="wrapperEl"
-    class="*vs-layout *n-ease-in-out cursor-pointer"
+    class="flex-ac ease-in-out-300 cursor-pointer"
     :style="getWrapperStyle"
     @click="goHome"
   >
@@ -9,7 +9,7 @@
     <div
       ref="titleEl"
       v-if="showTitle"
-      class="text-$app-primary-color dark:text-white font-segoe transition-colors *n-ease-in-out ml-3 font-semibold"
+      class="text-$app-primary-color dark:text-white font-segoe transition-colors ease-in-out-300 ml-3 font-semibold"
       :class="[`${prefixCls}__title`]"
       :style="getTitleStyle"
     >
@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, CSSProperties, ref, watch } from 'vue';
+  import type { CSSProperties } from 'vue';
   import { useRafFn, useEventListener, unrefElement, Pausable } from '@vueuse/core';
   import { clamp } from 'lodash-es';
   import { layoutSiderCollapsedWidth } from '/@/settings/designSetting';

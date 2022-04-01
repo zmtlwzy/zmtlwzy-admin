@@ -1,11 +1,11 @@
 <template>
   <PageWrapper title="表单基础示例" content="BasicForm组件支持使用 JSON-Schema 对象渲染表单。">
     <CollapseCard title="基础表单">
-      <div class="grid grid-cols-1 lg:grid-cols-[auto,1fr] gap-x-18 gap-y-8">
+      <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-x-18 gap-y-8">
         <n-scrollbar style="max-height: 550px">
           <n-code :code="JSON.stringify(schemas, null, 2)" language="json" />
         </n-scrollbar>
-        <div class="*hs-layout p-4">
+        <div class="flex-jc p-4">
           <BasicForm
             submit-button-text="提交"
             :grid-props="{ cols: 2, xGap: 24 }"

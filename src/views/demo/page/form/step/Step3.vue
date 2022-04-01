@@ -2,7 +2,7 @@
   <div class="mx-auto flex flex-col items-center">
     <n-result status="success" title="操作成功" description="预计两小时内到账">
       <template #footer>
-        <div class="*hs-layout space-x-4">
+        <div class="flex-jc space-x-4">
           <n-button type="primary" @click="redo">再转一笔</n-button>
           <n-button>查看账单</n-button>
         </div>

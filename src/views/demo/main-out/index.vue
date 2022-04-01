@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen *center-layout">
+  <div class="h-screen flex-jc-ac">
     <span>{{ text }}</span>
   </div>
 </template>

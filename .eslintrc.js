@@ -22,6 +22,7 @@ module.exports = {
     '@vue/typescript/recommended',
     'prettier',
     'plugin:prettier/recommended',
+    './.eslintrc-auto-import.json',
   ],
   rules: {
     '@typescript-eslint/ban-ts-ignore': 'off',

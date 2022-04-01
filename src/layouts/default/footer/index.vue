@@ -6,13 +6,11 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, unref } from 'vue';
-
   import { GITHUB_URL } from '/@/settings/siteSetting';
   import { openWindow } from '/@/utils';
 
   import { useRootSetting } from '/@/composables/setting/useRootSetting';
-  import { useRouter } from 'vue-router';
+
   import { useDesign } from '/@/composables/web/useDesign';
 
   export default defineComponent({
@@ -42,7 +40,7 @@
 <style lang="less">
   @prefix-cls: ~'@{namespace}-layout-footer';
   .@{prefix-cls} {
-    @apply text-center my-6 space-x-2 flex *hs-layout;
+    @apply text-center my-6 space-x-2 flex flex-jc;
     &__icon {
       @apply cursor-pointer text-18px text-gray-400 hover:text-gray-800 dark:(text-gray-600 hover:text-gray-400);
     }

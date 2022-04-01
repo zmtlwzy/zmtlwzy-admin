@@ -72,7 +72,6 @@
 </template>
 
 <script lang="ts">
-  import { ref, defineComponent, reactive, unref, toRaw, computed, toRefs } from 'vue';
   import { MaybeElementRef, unrefElement } from '@vueuse/core';
   import { createTableContext } from './hooks/useTableContext';
   import ColumnSetting from './components/settings/ColumnSetting.vue';

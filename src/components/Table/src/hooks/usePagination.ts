@@ -1,4 +1,4 @@
-import { computed, unref, ref, ComputedRef } from 'vue';
+import type { ComputedRef } from 'vue';
 import type { PaginationProps } from '../types/pagination';
 import type { BasicTableProps } from '../types/table';
 

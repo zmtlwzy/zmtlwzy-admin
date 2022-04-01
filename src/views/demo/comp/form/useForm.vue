@@ -15,9 +15,12 @@
       <BasicForm @register="register" @submit="handleSubmit">
         <template #dynamicSlot="{ model, field }">
           <n-dynamic-input v-model:value="model[field]" :on-create="onCreate" #="{ index, value }">
-            <div class="grid gap-x-4 grid-cols-[auto,auto,1fr] w-full">
-              <n-checkbox v-model:checked="value.isCheck" />
-              <div class="leading-$n-blank-height">第{{ index + 1 }}项: </div>
+            <div grid="~ gap-x-4 cols-[auto_1fr]" w-full>
+              <n-checkbox
+                class="items-center"
+                v-model:checked="value.isCheck"
+                :label="`第${index + 1}项 :`"
+              />
               <n-input-number v-model:value="value.number" />
             </div>
           </n-dynamic-input>

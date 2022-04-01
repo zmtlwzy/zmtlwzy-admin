@@ -12,6 +12,8 @@ lib
 /docs
 .vscode
 .local
+/types/components.d.ts
+/types/auto-import.d.ts
 index.html
 
 src/views/demo/main-out/*

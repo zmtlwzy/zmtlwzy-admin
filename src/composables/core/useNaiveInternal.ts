@@ -1,4 +1,3 @@
-import { getCurrentInstance, computed } from 'vue';
 import { darkTheme, lightTheme, GlobalTheme } from 'naive-ui';
 import { useRootSetting } from '../setting/useRootSetting';
 

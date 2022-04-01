@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, useSlots, computed } from 'vue';
   import { omit } from 'lodash-es';
   import { CardProps } from 'naive-ui';
   import NFadeInExpandTransition from 'naive-ui/lib/_internal/fade-in-expand-transition';

@@ -1,7 +1,7 @@
 <template>
   <PageWrapper>
     <n-card>
-      <div class="grid grid-cols-1 lg:grid-cols-[auto,1fr] gap-x-6 gap-y-4">
+      <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-x-6 gap-y-4">
         <n-menu
           v-model:value="val"
           :options="menuOptions"
@@ -9,7 +9,7 @@
           :class="[
             getIsMobile
               ? 'justify-center'
-              : 'w-200px border-r justify-center border-$app-border-color transition-all *n-ease-in-out',
+              : 'w-200px border-r justify-center border-$app-border-color transition-all ease-in-out-300',
           ]"
         />
 
@@ -22,7 +22,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed } from 'vue';
   import { MenuOption } from 'naive-ui';
   import { useAppInject } from '/@/composables/web/useAppInject';
   import BaseSetting from './components/BaseSetting.vue';

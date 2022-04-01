@@ -1,7 +1,6 @@
 .DS_Store
 node_modules
 /dist
-/types/components.d.ts
 *.sketch
 
 /src/views/**/Test*

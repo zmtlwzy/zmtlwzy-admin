@@ -10,7 +10,6 @@
   </NTooltip>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref } from 'vue';
   import { useI18n } from '/@/composables/web/useI18n';
   import { useFullscreen } from '@vueuse/core';
 

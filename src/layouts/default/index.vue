@@ -10,7 +10,6 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
   import { MenuTypeEnum, LayoutClsEnum } from '/@/enums/menuEnum';
 
   import { useDesign } from '/@/composables/web/useDesign';

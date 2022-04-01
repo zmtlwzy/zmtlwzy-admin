@@ -2,11 +2,9 @@
   import type { PropType } from 'vue';
 
   import { NResult, NButton } from 'naive-ui';
-  import { defineComponent, ref, computed, unref } from 'vue';
 
   import { ExceptionEnum } from '/@/enums/exceptionEnum';
 
-  import { useRoute } from 'vue-router';
   import { useDesign } from '/@/composables/web/useDesign';
   import { useI18n } from '/@/composables/web/useI18n';
   import { useGo, useRedo } from '/@/composables/web/usePage';

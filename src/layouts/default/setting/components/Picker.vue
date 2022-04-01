@@ -7,7 +7,7 @@
           `${prefixCls}__item--${mode}`,
           'hover:(outline-primary before:rounded-none after:rounded-none)',
           {
-            '*center-layout': tickCenter,
+            'flex-jc-ac': tickCenter,
           },
         ]"
         @click="handleClick"

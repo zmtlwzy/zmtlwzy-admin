@@ -18,7 +18,7 @@
 </script>
 
 <script lang="ts" setup>
-  import { PropType, computed, watch } from 'vue';
+  import type { PropType } from 'vue';
 
   import { useDesign } from '/@/composables/web/useDesign';
   import { useI18n } from '/@/composables/web/useI18n';

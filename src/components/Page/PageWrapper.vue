@@ -36,7 +36,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { CSSProperties, PropType, useSlots, computed } from 'vue';
+  import type { CSSProperties, PropType } from 'vue';
 
   import { omit } from 'lodash-es';
   import PageFooter from './PageFooter.vue';

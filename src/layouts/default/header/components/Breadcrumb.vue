@@ -8,8 +8,6 @@
   </NBreadcrumb>
 </template>
 <script lang="ts">
-  import { useRouter } from 'vue-router';
-  import { defineComponent, ref, watchEffect } from 'vue';
   import { useRootSetting } from '/@/composables/setting/useRootSetting';
   import { useI18n } from '/@/composables/web/useI18n';
   import { filter } from '/@/utils/helper/treeHelper';

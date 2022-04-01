@@ -1,5 +1,5 @@
 <script lang="tsx">
-  import { PropType, reactive, nextTick, shallowRef, defineComponent, computed, unref } from 'vue';
+  import type { PropType } from 'vue';
   import type { RouteLocationNormalized } from 'vue-router';
   import type { PopoverTrigger } from 'naive-ui';
 
@@ -10,7 +10,6 @@
   import { useDesign } from '/@/composables/web/useDesign';
   import { useI18n } from '/@/composables/web/useI18n';
   import { useTabDropdown } from '../useTabDropdown';
-  import getCommonCls from './useExtra';
 
   export default defineComponent({
     name: 'TabContent',
@@ -78,7 +77,6 @@
       }
 
       return () => {
-        const { wrapperClass, iconClass } = getCommonCls();
         return (
           <>
             {unref(getIsTabs) && (
@@ -98,9 +96,9 @@
               placement={unref(getPlacement)}
             >
               {!unref(getIsTabs) && (
-                <span class={unref(wrapperClass)} onClick={handleClick}>
-                  <i-fluent-options-48-regular class={`${iconClass}`} />
-                </span>
+                <div class="app-mtabs-anction-btn-wrapper group" onClick={handleClick}>
+                  <span class="i-fluent-options-48-regular app-mtabs-anction-btn" />
+                </div>
               )}
             </NDropdown>
           </>

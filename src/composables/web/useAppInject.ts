@@ -1,7 +1,6 @@
 import { useAppProviderContext } from '/@/components/Application/useAppContext';
 import { useContentSizeContext } from '/@/layouts/default/content/useContentSizeContext';
 import { usePageTransitionContext } from '/@/layouts/page/useTransitonContext';
-import { computed, unref } from 'vue';
 
 export function useAppInject() {
   const values = useAppProviderContext();

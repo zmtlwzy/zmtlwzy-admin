@@ -4,7 +4,6 @@
   </span>
 </template>
 <script setup lang="ts">
-  import { computed, unref, watch } from 'vue';
   import { useTransition, TransitionPresets } from '@vueuse/core';
   import { toWritableRef } from '/@/composables/utilities/toWritableRef';
   import { isNumber } from '/@/utils/is';
@@ -32,7 +31,7 @@
   const source = toWritableRef(props, 'startVal');
   let outputValue = useTransition(source);
 
-  const value = computed(() => formatNumber(unref(outputValue)));
+  const value = computed(() => formatNumber(outputValue.value));
 
   watch([() => props.startVal, () => props.endVal], () => {
     if (props.isPlay) {

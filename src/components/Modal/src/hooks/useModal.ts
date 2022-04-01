@@ -1,4 +1,3 @@
-import { ref, unref, getCurrentInstance, watch } from 'vue';
 import { isProdMode } from '/@/utils/env';
 import { tryOnUnmounted } from '@vueuse/core';
 import { BasicModalMethods, BasicModalProps, UseModalReturnType } from '../types';
