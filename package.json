@@ -4,7 +4,6 @@
   "author": {
     "name": "zmtlwzy"
   },
-  "packageManager": "pnpm@6.32.4",
   "scripts": {
     "dev": "vite --host",
     "build": "cross-env NODE_ENV=production vite build && esno ./build/script/postBuild.ts",
