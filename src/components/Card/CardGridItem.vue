@@ -40,6 +40,7 @@
   .@{prefix-cls} {
     .n-card.card-grid--hoverable {
       border-radius: 0;
+
       &:hover {
         position: relative;
         z-index: 1;

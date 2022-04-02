@@ -53,6 +53,7 @@
     top: calc(50% - 36px);
     right: -28px;
     z-index: 100;
+
     &__top,
     &__bottom {
       position: absolute;
@@ -64,18 +65,22 @@
       transition: background-color var(--app-transition-duration) var(--app-bezier),
         transform var(--app-transition-duration) var(--app-bezier);
     }
+
     &__bottom {
       position: absolute;
       top: 34px;
     }
+
     &:hover & {
       &__top,
       &__bottom {
         background-color: var(--toggle-bar-color-hover);
       }
+
       &__top {
         transform: rotate(12deg) scale(1.15) translateY(-2px);
       }
+
       &__bottom {
         transform: rotate(-12deg) scale(1.15) translateY(2px);
       }
@@ -85,6 +90,7 @@
       &__top {
         transform: rotate(-12deg) scale(1.15) translateY(-2px);
       }
+
       &__bottom {
         transform: rotate(12deg) scale(1.15) translateY(2px);
       }

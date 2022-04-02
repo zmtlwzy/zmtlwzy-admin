@@ -199,30 +199,36 @@
     &-inner-popover-title {
       padding: 3px 0;
     }
+
     &-right {
       &-icon {
         margin-left: 12px;
         font-size: 16px;
         color: var(--text-color);
         cursor: pointer;
+
         :hover {
           color: var(--app-primary-color);
         }
       }
     }
   }
+
   .shadow {
     box-shadow: 1px 0 8px rgba(0, 0, 0, 0.1);
   }
+
   .table-toolbar-inner {
     &-checkbox {
       display: flex;
       align-items: center;
       padding: 10px 14px;
       z-index: 9999;
+
       &:hover {
         background-color: var(--app-hover-color);
       }
+
       .drag-icon {
         cursor: move;
         display: inline-flex;
@@ -230,6 +236,7 @@
       }
     }
   }
+
   .toolbar-popover {
     .n-popover__content {
       padding: 0;

@@ -169,15 +169,18 @@
     overflow-x: hidden;
     transition: background-color var(--app-transition-duration) var(--app-bezier),
       border-color var(--app-transition-duration) var(--app-bezier);
+
     .n-tabs {
       .n-tabs-nav {
         .n-tabs-nav__prefix {
           padding-right: 12px;
         }
+
         .n-tabs-nav__suffix {
           padding-left: 0px;
           margin-left: -1px;
         }
+
         .n-tabs-tab-wrapper {
           .n-tabs-tab {
             .n-tabs-tab__close {
@@ -193,6 +196,7 @@
                 border-radius: 5px;
                 background-color: transparent;
               }
+
               &:hover::before {
                 background-color: var(--app-pressed-color);
               }

@@ -1,6 +1,6 @@
 import {
   defineConfig,
-  presetAttributify,
+  // presetAttributify,
   presetIcons,
   presetTypography,
   presetUno,
@@ -12,7 +12,11 @@ import {
 import { getWindiBreakpoint } from './src/enums/breakpointEnum';
 
 export default defineConfig({
-  include: ['src/**/*.{vue,html,jsx,tsx,ts,js,json}', 'public/**/*.{html}', './*.html'],
+  include: [
+    /src\/(.+\/)*.+\.(vue|html|jsx|tsx|ts|js|json)$/,
+    /public\/(.+\/)*.+\.html$/,
+    /index.html$/,
+  ],
   exclude: ['node_modules', '.git'],
   shortcuts: [
     [
@@ -69,7 +73,10 @@ export default defineConfig({
   ],
   presets: [
     presetUno(),
-    presetAttributify(),
+    // presetAttributify({
+    //   prefix: 'u:',
+    //   prefixedOnly: false,
+    // }),
     presetWind(),
     presetIcons({
       scale: 1,

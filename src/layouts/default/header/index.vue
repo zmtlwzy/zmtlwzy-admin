@@ -141,9 +141,10 @@
   @prefix-cls: ~'@{namespace}-layout-header';
 
   .@{prefix-cls} {
+    --hover-color: var(--app-hover-color);
     grid-area: header;
     height: @header-height;
-    --hover-color: var(--app-hover-color);
+
     &.inverted {
       --hover-color: rgba(255, 255, 255, 0.09);
     }

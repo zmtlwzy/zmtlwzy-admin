@@ -44,6 +44,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
+
     &-bg {
       position: absolute;
       top: 0;
@@ -53,6 +54,7 @@
       height: 100%;
       background-image: url('/@/assets/bg.svg');
       background-size: cover;
+
       :root.dark & {
         filter: invert(0.92);
       }

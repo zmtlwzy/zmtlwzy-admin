@@ -2,6 +2,7 @@
   &-enter-active {
     transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
   }
+
   &-leave-active {
     transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
   }
@@ -11,14 +12,16 @@
   }
 }
 
-.transition-primary(@property: all, @enterDuration: 0.38s, @leaveDuration:0.2s ) {
+.transition-primary(@property: all, @enterDuration: 0.38s, @leaveDuration: 0.2s) {
   &-enter-active {
     each(@property, {
-      transition-property+:@value;
-      transition-duration+:@enterDuration;
-      transition-timing-function+: @sine-out;
-    });
+        transition-property+:@value;
+        transition-duration+:@enterDuration;
+        transition-timing-function+: @sine-out;
+      }
+    );
   }
+
   &-leave-active {
     transition: opacity @leaveDuration @sine-in;
   }

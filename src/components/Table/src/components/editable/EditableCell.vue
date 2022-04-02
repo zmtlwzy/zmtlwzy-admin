@@ -323,9 +323,11 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+
       &-comp {
         flex: 1;
       }
+
       .edit-icon {
         font-size: 14px;
         //position: absolute;
@@ -335,12 +337,14 @@
         width: 20px;
         cursor: pointer;
       }
+
       &:hover {
         .edit-icon {
           display: inline-block;
         }
       }
     }
+
     &-action {
       display: flex;
       align-items: center;

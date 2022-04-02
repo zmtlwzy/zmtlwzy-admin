@@ -21,7 +21,7 @@
         <n-tab name="2">规则</n-tab>
       </n-tabs>
     </template>
-    <div grid="~ cols-1 gap-4">
+    <div class="grid grid-cols-1 grid-gap-4">
       <n-card size="small" title="流程进度" :segmented="{ content: true }">
         <n-timeline horizontal class="grid grid-cols-[1fr_1fr_1fr_auto] px-10 max-w-1200px mx-auto">
           <n-timeline-item type="success" time="2020-09-21 16:43:21">

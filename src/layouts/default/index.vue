@@ -67,6 +67,7 @@
   .@{prefix-cls} {
     display: grid;
     height: 100vh;
+
     &.sider-layout,
     &.mix-sider-layout {
       grid-template-areas:
@@ -76,6 +77,7 @@
       grid-template-rows: minmax(0, auto) minmax(0, auto) 1fr;
       grid-template-columns: minmax(0, auto) 1fr;
     }
+
     &.mix-layout {
       grid-template-areas:
         'header header'
@@ -84,6 +86,7 @@
       grid-template-rows: minmax(0, auto) minmax(0, auto) 1fr;
       grid-template-columns: minmax(0, auto) 1fr;
     }
+
     &.top-menu-layout {
       grid-template-areas:
         'header'

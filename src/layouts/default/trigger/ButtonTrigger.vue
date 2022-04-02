@@ -91,10 +91,12 @@
     background-color: var(--toggle-button-color);
     box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.06);
     transform: translateX(50%) translateY(-50%);
+
     .icon {
       transition: transform var(--app-transition-duration) var(--app-bezier);
       transform: rotate(180deg);
     }
+
     &.collapsed .icon {
       transform: rotate(0);
     }

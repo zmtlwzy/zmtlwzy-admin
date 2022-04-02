@@ -15,7 +15,7 @@
       <BasicForm @register="register" @submit="handleSubmit">
         <template #dynamicSlot="{ model, field }">
           <n-dynamic-input v-model:value="model[field]" :on-create="onCreate" #="{ index, value }">
-            <div grid="~ gap-x-4 cols-[auto_1fr]" w-full>
+            <div class="grid gap-x-4 grid-cols-[auto_1fr] w-full">
               <n-checkbox
                 class="items-center"
                 v-model:checked="value.isCheck"

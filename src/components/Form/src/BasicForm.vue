@@ -560,6 +560,7 @@
     width: 100%;
     justify-content: flex-start;
   }
+
   .unfold-icon {
     display: flex;
     align-items: center;

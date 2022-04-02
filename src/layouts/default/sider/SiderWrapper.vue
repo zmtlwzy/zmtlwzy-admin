@@ -112,16 +112,19 @@
     transition-property: width, background-color, border-color;
     transition-duration: var(--app-transition-duration);
     transition-timing-function: var(--app-bezier);
+
     &_wrapper {
       display: grid;
       grid-template-columns: auto auto;
       height: 100%;
+
       .menu_wrapper {
         display: flex;
         flex-direction: column;
         height: 100%;
         will-change: width;
         transition: width var(--app-transition-duration) var(--app-bezier);
+
         .menu {
           flex: 1;
         }

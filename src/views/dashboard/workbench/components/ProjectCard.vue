@@ -5,7 +5,7 @@
     </template>
     <CardGrid cols="400:1 600:2 820:3">
       <CardGridItem v-for="(item, index) in groupItems" :key="index">
-        <div flex>
+        <div class="flex">
           <span :class="item.icon" :style="{ color: item.color, fontSize: '30px' }" />
           <span class="text-lg ml-4">{{ item.title }}</span>
         </div>

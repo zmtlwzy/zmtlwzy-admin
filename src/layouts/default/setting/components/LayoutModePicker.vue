@@ -111,6 +111,7 @@
 
       &--top-menu {
         background-color: #f8f8f8;
+
         &::after {
           width: 100%;
           height: 25%;

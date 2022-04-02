@@ -40,10 +40,12 @@
 <style lang="less">
   @prefix-cls: ~'@{namespace}-layout-footer';
   .@{prefix-cls} {
-    @apply text-center my-6 space-x-2 flex flex-jc;
+    @apply text-center my-6 space-x-2 flex-jc;
+
     &__icon {
       @apply cursor-pointer text-18px text-gray-400 hover:text-gray-800 dark:(text-gray-600 hover:text-gray-400);
     }
+
     &__text {
       @apply text-gray-400 dark:text-gray-600;
     }

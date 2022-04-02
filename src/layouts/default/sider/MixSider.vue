@@ -343,10 +343,12 @@
       align-items: center;
       height: v-bind(getLogoHeight);
     }
+
     &-secondary-menu_wrapper {
       z-index: 2;
       overflow: hidden;
       border-left-width: 1px;
+
       .header_wrapper {
         display: flex;
         justify-content: space-between;
@@ -354,6 +356,7 @@
         padding: 0 12px;
         height: v-bind(getLogoHeight);
         transition: height var(--app-transition-duration) var(--app-bezier);
+
         .title {
           color: v-bind(getTitleColor);
           font-size: 18px;
@@ -362,23 +365,28 @@
         }
       }
     }
+
     &-menu {
       .n-menu-item {
         height: auto;
         transition: background-color var(--app-transition-duration) var(--n-bezier),
           height var(--app-transition-duration) var(--n-bezier);
+
         .n-menu-item-content {
           padding-right: 0;
+
           &::before {
             left: 4px;
             right: 4px;
           }
+
           .item_wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 12px 0;
             transition: padding var(--app-transition-duration) var(--app-bezier);
+
             p {
               font-size: 12px;
               will-change: transform;
@@ -387,6 +395,7 @@
               transition-timing-function: var(--app-bezier);
               height: 20px;
               margin-top: 3px;
+
               .mini & {
                 opacity: 0;
                 height: 0;

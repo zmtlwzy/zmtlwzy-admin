@@ -99,11 +99,13 @@
       &--dark {
         background-color: #354368;
         color: #fafafa;
+
         &::before {
           width: 100%;
           height: 25%;
           background-color: #273352;
         }
+
         &::after {
           z-index: 1;
           width: 33%;

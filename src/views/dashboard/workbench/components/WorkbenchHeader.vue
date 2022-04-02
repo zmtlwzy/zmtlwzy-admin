@@ -40,7 +40,8 @@
   .workbench-header-right {
     @apply flex-ja-col text-right px-7 relative;
   }
+
   .workbench-header-right-divider::after {
-    @apply content-empty absolute top-[20%] right-0 h-[60%] border-dashed border-r-1px text-gray-500/50;
+    @apply content-empty absolute top-[20%] right-0 h-[60%] border-dashed border-r-1px text-gray-500:50;
   }
 </style>
