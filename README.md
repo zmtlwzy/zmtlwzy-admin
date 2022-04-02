@@ -17,15 +17,16 @@ Zmtlwzy Admin 是一个基于 Vue3、Vite、Naive UI、TypeScript 的免费中�
 
 ## 特性
 
-- **最新技术栈**：使用 Vue3/vite2 等前端前沿技术开发
-- **TypeScript**: 应用程序级 JavaScript 的语言
+- **最新技术栈**：使用 Vue3 vite2 Typescript 等前端前沿技术开发
 - **国际化**：内置完善的国际化方案
-- **Mock 数据** 内置 Mock 数据方案
-- **组件** 二次封装了一些常用的组件
+- **Unocss**：高性能且极具灵活性的即时原子化 CSS 引擎
+- **Vitest**：基于 Vite 的单元测试框架
+- **Mock 数据**： 内置 Mock 数据方案
+- **组件**： 二次封装了一些常用的组件
 
 ## 预览
 
-- [zmtlwzy-admin](https://zmtlwzy-admin.vercel.app/)
+- [zmtlwzy-admin](https://zmtlwzy-admin.netlify.app/)
 
 <details>
    <summary> 📎 <b>预览图</b>: </summary>
@@ -35,10 +36,6 @@ Zmtlwzy Admin 是一个基于 Vue3、Vite、Naive UI、TypeScript 的免费中�
    <img src="https://s4.ax1x.com/2021/12/30/TWEZvj.png" />
    <img src="https://s4.ax1x.com/2021/12/30/TWEAPS.png" />
 </details>
-
-## 文档
-
-- [项目文档(未构建)](https://)
 
 ### 代码仓库
 
