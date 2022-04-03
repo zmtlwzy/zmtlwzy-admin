@@ -1,3 +1,23 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+# [0.2.0](https://github.com/zmtlwzy/zmtlwzy-admin/compare/0.1.1...0.2.0) (2022-04-03)
+
+
+### Refactor
+
+- Switch Windicss to Unocss
+- Switch vite-plugin-mock to msw
+- Switch mockjs to faker-js
+
+### Features
+
+- Add Vitest and demos
+- Add Stylelint
+- Add unplugin-auto-import
+
+
 ## [0.1.1](https://github.com/zmtlwzy/zmtlwzy-admin/compare/0.1.0...0.1.1) (2022-03-08)
 
 ### Bug Fixes
