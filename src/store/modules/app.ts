@@ -18,10 +18,15 @@ import { store } from '/@/store';
 import { darkTheme } from 'naive-ui';
 import { deepMerge } from '/@/utils';
 import { resetRouter } from '/@/router';
-// import themeOverrides from 'root/naive-ui-theme-overrides.json';
+import { APP_PRESET_COLOR_LIST } from '/@/settings/designSetting';
 import Tiny from 'tinycolor2';
 
 let timeId: TimeoutHandle;
+
+interface NaiveThemeProps {
+  theme: typeof darkTheme | null;
+  themeOverrides?: Record<string, unknown>;
+}
 
 interface AppState {
   darkMode?: ThemeEnum;
@@ -51,21 +56,6 @@ export const useAppStore = defineStore({
     getBeforeMiniInfo(): BeforeMiniState {
       return this.beforeMiniInfo;
     },
-    getThemeOverrides(): {
-      primaryColor: Tiny.Instance;
-      primaryColorHover: Tiny.Instance;
-      primaryColorPressed: Tiny.Instance;
-      primaryColorSuppl: Tiny.Instance;
-    } {
-      const a = {
-        primaryColor: Tiny('#18A058'),
-        primaryColorHover: Tiny('#36AD6A'),
-        primaryColorPressed: Tiny('#0C7A43'),
-        primaryColorSuppl: Tiny('#36AD6A'),
-      };
-      console.log(a, 'a');
-      return a;
-    },
     getNaiveThemeProps(): any {
       const ThemeColor = this.projectConfig?.themeColor || projectSetting.themeColor;
       const themeOverrides = {
@@ -86,15 +76,30 @@ export const useAppStore = defineStore({
             .toHex8String(),
         },
       };
-      if (this.darkMode === ThemeEnum.DARK) {
-        return {
-          theme: darkTheme,
-        };
-      }
-      return {
+      let result: NaiveThemeProps = {
         theme: null,
-        'theme-overrides': themeOverrides,
+        themeOverrides,
       };
+      if (this.darkMode === ThemeEnum.DARK) {
+        const themeColor = this.projectConfig?.themeColor;
+        if (
+          themeColor &&
+          APP_PRESET_COLOR_LIST.some((item) => {
+            return Tiny.equals(item, themeColor);
+          }) &&
+          !Tiny(themeColor).isLight()
+        ) {
+          result = {
+            theme: darkTheme,
+          };
+        } else {
+          result = {
+            theme: darkTheme,
+            themeOverrides,
+          };
+        }
+      }
+      return result;
     },
     getProjectConfig(): ProjectConfig {
       return this.projectConfig || ({} as ProjectConfig);
