@@ -57,6 +57,14 @@
   const triggerOptions = computed(() => {
     return getMenuTriggerOptions(unref(getSplit));
   });
+
+  // const getRandomPer = (length: number) => {
+  //   return Array.from({ length }).map(() => {
+  //     return `${Math.random() * 90 + 10}%`;
+  //   });
+  // };
+
+  // const skeletonWidthList = getRandomPer(7);
 </script>
 
 <template>
@@ -65,6 +73,8 @@
       <template #header>
         <NText>{{ t('layout.setting.drawerTitle') }}</NText>
       </template>
+      <!-- <Suspense> -->
+      <!-- <div> -->
       <NDivider>{{ t('layout.setting.darkMode') }}</NDivider>
       <ThemeModePicker />
 
@@ -78,6 +88,26 @@
         :swatches="APP_PRESET_COLOR_LIST"
         :show-alpha="false"
       />
+      <!-- </div> -->
+      <!-- <template #fallback>
+          <div class="flex flex-col gap-8 mt-12">
+            <div class="flex-ja gap-4 px-4">
+              <n-skeleton height="48px" width="56px" :sharp="false" v-for="i in 3" :key="i" />
+            </div>
+            <div class="flex-ja gap-4 px-4">
+              <n-skeleton height="48px" width="56px" :sharp="false" v-for="i in 4" :key="i" />
+            </div>
+            <div class="flex-jb-ac px-4">
+              <div class="w-80px">
+                <n-skeleton text height="6px" :repeat="2" />
+              </div>
+              <n-skeleton width="100px" height="36px" :sharp="false" />
+            </div>
+          </div>
+        </template> -->
+      <!-- </Suspense> -->
+      <!-- <Suspense> -->
+      <!-- <div> -->
       <NDivider>{{ t('layout.setting.interfaceFunction') }}</NDivider>
       <SwitchItem
         :title="t('layout.setting.splitMenu')"
@@ -176,6 +206,19 @@
       />
 
       <NDivider />
+      <!-- </div> -->
+      <!-- <template #fallback>
+          <div class="flex flex-col gap-6 mt-16">
+            <div class="flex-jb-ac px-4" v-for="(val, idx) in skeletonWidthList" :key="idx">
+              <div class="w-80px">
+                <n-skeleton text height="6px" />
+                <n-skeleton text height="6px" :width="val" />
+              </div>
+              <n-skeleton width="100px" height="36px" :sharp="false" />
+            </div>
+          </div>
+        </template> -->
+      <!-- </Suspense> -->
 
       <SettingFooter />
     </NDrawer-content>

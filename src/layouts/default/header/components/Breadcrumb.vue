@@ -2,8 +2,10 @@
   <NBreadcrumb>
     <NBreadcrumbItem v-for="{ title, link, icon } in routesList" :key="link">
       <Icon v-if="getShowBreadCrumbIcon && icon" class="mr-1" :icon="icon" />
-      <router-link v-if="link" :to="link">{{ title }}</router-link>
-      <span v-else>{{ title }}</span>
+      <router-link v-if="link" :to="link" #="{ navigate, href }" custom>
+        <n-a :href="href" @click="navigate"> {{ title }} </n-a>
+      </router-link>
+      <n-text v-else>{{ title }}</n-text>
     </NBreadcrumbItem>
   </NBreadcrumb>
 </template>
