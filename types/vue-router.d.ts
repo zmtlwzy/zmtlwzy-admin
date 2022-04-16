@@ -36,6 +36,8 @@ declare module 'vue-router' {
     hideTab?: boolean;
     // Never show in menu
     hideMenu?: boolean;
+    prefetch?: boolean | Fn;
+    prefetchFiles?: string[];
     isLink?: boolean;
     // only build for Menu
     ignoreRoute?: boolean;

@@ -19,6 +19,7 @@ const dashboard: AppRouteModule = {
       name: 'Analysis',
       component: () => import('/@/views/dashboard/analysis/index.vue'),
       meta: {
+        prefetch: true,
         title: t('routes.dashboard.analysis'),
       },
     },
@@ -28,6 +29,7 @@ const dashboard: AppRouteModule = {
       component: () => import('/@/views/dashboard/workbench/index.vue'),
       meta: {
         // affix: true,
+        prefetch: true,
         title: t('routes.dashboard.workbench'),
       },
     },

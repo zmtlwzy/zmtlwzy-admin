@@ -14,6 +14,7 @@
   import { getCurrentParentPath } from '/@/router/menus';
   import { REDIRECT_NAME } from '/@/router/constant';
   import { propTypes } from '/@/utils/propTypes';
+  import PrefetchLink from '/@/components/Prefetch/PrefetchLink.vue';
   import { useGo } from '/@/composables/web/usePage';
 
   import Icon from '/@/components/Icon/Icon.vue';
@@ -100,7 +101,19 @@
       };
 
       const renderLabel = (node: Menu) => {
-        return t(node.label ?? '');
+        return h(
+          PrefetchLink,
+          {
+            to: node.path,
+            custom: true,
+          },
+          {
+            default: () =>
+              h('span', null, {
+                default: () => t(node?.label ?? ''),
+              }),
+          }
+        );
       };
 
       return {
