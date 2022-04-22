@@ -19,10 +19,15 @@
 </template>
 
 <script setup lang="ts">
+  import { useLoading } from './components/useLoading';
+
   import WorkbenchHeader from './components/WorkbenchHeader.vue';
   import ProjectCard from './components/ProjectCard.vue';
   import Dynamicinfo from './components/Dynamicinfo.vue';
   import QuickNav from './components/QuickNav.vue';
   import TeamCard from './components/TeamCard.vue';
   import WorkbenchRadar from './components/WorkbenchRadar.vue';
+
+  const loadingRef = useLoading();
+  loadingRef.value = true;
 </script>

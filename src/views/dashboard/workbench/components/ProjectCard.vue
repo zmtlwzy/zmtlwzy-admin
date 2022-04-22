@@ -1,5 +1,15 @@
 <template>
-  <NCard title="项目" content-style="padding:0;">
+  <LoadingCard
+    title="项目"
+    :content-style="getContentStyle"
+    childSkeletonHeight="100px"
+    :head="false"
+    :sharp="false"
+    :y-gap="24"
+    :x-gap="24"
+    cols="400:1 600:2 820:3"
+    :loading="isLoading"
+  >
     <template #header-extra>
       <i-akar-icons-more-vertical class="text-18px cursor-pointer" />
     </template>
@@ -16,9 +26,23 @@
         </div>
       </CardGridItem>
     </CardGrid>
-  </NCard>
+  </LoadingCard>
 </template>
 
 <script setup lang="ts">
+  import type { CSSProperties } from 'vue';
+
   import { groupItems } from './data.json';
+  import { useLoading } from './useLoading';
+
+  const isLoading = useLoading();
+  const getContentStyle = computed(
+    (): CSSProperties => ({
+      ...(isLoading.value
+        ? {}
+        : {
+            padding: 0,
+          }),
+    })
+  );
 </script>

@@ -1,18 +1,21 @@
 <template>
-  <NCard title="数据统计">
+  <LoadingCard title="数据统计" :loading="isLoading">
     <div ref="chartRef" :style="{ width, height }"></div>
-  </NCard>
+  </LoadingCard>
 </template>
 
 <script lang="ts" setup>
   import { MaybeElementRef } from '@vueuse/core';
   import { propTypes } from '/@/utils/propTypes';
   import { useECharts } from '/@/composables/web/useECharts';
+  import { useLoading } from './useLoading';
 
   defineProps({
     width: propTypes.string.def('100%'),
     height: propTypes.string.def('350px'),
   });
+
+  const isLoading = useLoading();
 
   const chartRef: MaybeElementRef = ref();
   useECharts(
