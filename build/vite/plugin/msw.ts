@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite';
 import { resolve } from 'path';
 
-const targetPath = resolve(process.cwd(), '.', 'src/main.ts').replaceAll('\\', '/');
+const targetPath = resolve(process.cwd(), '.', 'src/main.ts').replace(/\\/g, '/');
 export function configMswPlugin({ VITE_USE_MOCK }: ViteEnv): Plugin {
   return {
     name: 'remove-msw',
