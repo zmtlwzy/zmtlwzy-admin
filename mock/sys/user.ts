@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import type { requestParams } from '../_util';
+import type { requestParams } from '../_type';
 import { getRequestToken, resultError, resultSuccess } from '../_util';
 
 export function createFakeUserList() {
@@ -47,7 +47,7 @@ const fakeCodeList: any = {
 export default [
   rest.post('/basic-api/login', (req, res, ctx) => {
     const { username, password } = req.body as any;
-    let json: any = resultError('Incorrect account or password！');
+    let json: Record<string, unknown> = resultError('Incorrect account or password！');
     const checkUser = createFakeUserList().find(
       (item) => item.username === username && password === item.password
     );
@@ -65,9 +65,9 @@ export default [
     }
     return res(ctx.delay(200), ctx.json(json));
   }),
-  rest.get('/basic-api/getUserInfo', (req, res, ctx) => {
-    const token = getRequestToken(req as unknown as requestParams);
-    let json: any = resultError('Invalid token');
+  rest.get('/basic-api/getUserInfo', (req: requestParams, res, ctx) => {
+    const token = getRequestToken(req);
+    let json: Record<string, unknown> = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);
       if (!checkUser) json = resultError('The corresponding user information was not obtained!');
@@ -75,9 +75,9 @@ export default [
     }
     return res(ctx.json(json));
   }),
-  rest.get('/basic-api/getPermCode', (req, res, ctx) => {
-    const token = getRequestToken(req as unknown as requestParams);
-    let json: any = resultError('Invalid token');
+  rest.get('/basic-api/getPermCode', (req: requestParams, res, ctx) => {
+    const token = getRequestToken(req);
+    let json: Record<string, unknown> = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);
       if (!checkUser) {
@@ -90,9 +90,9 @@ export default [
     return res(ctx.delay(200), ctx.json(json));
   }),
 
-  rest.get('/basic-api/logout', (req, res, ctx) => {
-    const token = getRequestToken(req as unknown as requestParams);
-    let json: any = resultError('Invalid token');
+  rest.get('/basic-api/logout', (req: requestParams, res, ctx) => {
+    const token = getRequestToken(req);
+    let json: Record<string, unknown> = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);
       if (!checkUser) json = resultError('The corresponding user information was not obtained!');

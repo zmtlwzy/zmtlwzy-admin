@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import type { requestParams } from '../_util';
+import type { requestParams } from '../_type';
 import { getRequestToken, resultError, resultSuccess } from '../_util';
 import { createFakeUserList } from './user';
 
@@ -209,8 +209,8 @@ const sysRoute = {
 };
 
 export default [
-  rest.get('/basic-api/getMenuList', (req, res, ctx) => {
-    const token = getRequestToken(req as unknown as requestParams);
+  rest.get('/basic-api/getMenuList', (req: requestParams, res, ctx) => {
+    const token = getRequestToken(req);
     let json: any = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);

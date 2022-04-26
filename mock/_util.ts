@@ -1,4 +1,5 @@
 // Interface data format used to return a unified format
+import type { requestParams } from './_type'
 
 export function resultSuccess<T = Recordable>(result: T, { message = 'ok' } = {}) {
   return {
@@ -46,17 +47,10 @@ export function pagination<T = any>(pageNo: number, pageSize: number, array: T[]
   return ret;
 }
 
-export interface requestParams {
-  method: string;
-  body: any;
-  headers?: { _headers: { authorization?: any } };
-  query: any;
-}
-
 /**
  * @description 本函数用于从request数据中获取token，请根据项目的实际情况修改
  *
  */
-export function getRequestToken(req: requestParams): string | undefined {
+export function getRequestToken(req: requestParams) {
   return req?.headers?._headers?.authorization;
 }

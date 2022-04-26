@@ -28,12 +28,16 @@ screenMap.set(sizeEnum.LG, screenEnum.LG);
 screenMap.set(sizeEnum.XL, screenEnum.XL);
 screenMap.set(sizeEnum.XXL, screenEnum.XXL);
 
-function genBreakpoint(suffix?: string) {
-  const breakpoints: { [k: string]: string | number } = {};
-  for (const [key, val] of screenMap) {
-    breakpoints[key] = suffix ? `${val}${suffix}` : val;
-  }
-  return breakpoints;
+function genBreakpoint<T>(suffix?: T): Record<string, T extends string ? string : number> {
+  return Object.fromEntries(
+    [...screenMap.entries()].map(([key, val]) => {
+      if (suffix && typeof suffix === 'string') {
+        return [key, `${val}${suffix}`];
+      } else {
+        return [key, val];
+      }
+    })
+  );
 }
 
 const getBreakpoint = genBreakpoint();
