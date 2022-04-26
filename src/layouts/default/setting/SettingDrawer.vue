@@ -10,6 +10,9 @@
     InputNumberItem,
   } from './components';
 
+  import { darkTheme } from 'naive-ui';
+  import { useAppStore } from '/@/store/modules/app';
+
   import { useRootSetting } from '/@/composables/setting/useRootSetting';
   import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting';
   import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
@@ -27,6 +30,7 @@
   const { t } = useI18n();
   const [state] = useDrawer(useDrawerEnum.AppConfigDrawer);
 
+  const appStore = useAppStore();
   const { getShowFooter, getShowBreadCrumb, getShowBreadCrumbIcon, getThemeColor } =
     useRootSetting();
 
@@ -58,6 +62,12 @@
     return getMenuTriggerOptions(unref(getSplit));
   });
 
+  const getColorPickerVal = computed(() => {
+    return !appStore.getThemeColorIsManualChange && appStore.getThemeColorIsFirstChange
+      ? darkTheme.common.primaryColor
+      : getThemeColor.value;
+  });
+
   // const getRandomPer = (length: number) => {
   //   return Array.from({ length }).map(() => {
   //     return `${Math.random() * 90 + 10}%`;
@@ -84,9 +94,10 @@
       <ThemeColorPicker
         :title="t('layout.setting.primaryColor')"
         :event="HandlerEnum.CHANGE_THEME_COLOR"
-        :val="getThemeColor"
+        :val="getColorPickerVal"
         :swatches="APP_PRESET_COLOR_LIST"
         :show-alpha="false"
+        :modes="['hex']"
       />
       <!-- </div> -->
       <!-- <template #fallback>

@@ -31,6 +31,7 @@ export default function useChangeTheme() {
           break;
         case DARK:
           !isInv && setMenuSetting({ inverted: true });
+          appStore.setThemeColorIsManualChange(false);
           changeTheme(DARK);
           break;
         case MENU_DARK:

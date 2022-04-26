@@ -2,8 +2,6 @@ import { HandlerEnum } from './enum';
 import { useAppStore } from '/@/store/modules/app';
 import { ProjectConfig } from '/#/config';
 
-import { useRootSetting } from '/@/composables/setting/useRootSetting';
-
 export function baseHandler(event: HandlerEnum, value: any) {
   const appStore = useAppStore();
   const config = handler(event, value);
@@ -14,7 +12,6 @@ export function baseHandler(event: HandlerEnum, value: any) {
 export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConfig> {
   const appStore = useAppStore();
 
-  const { getThemeColor } = useRootSetting();
   switch (event) {
     case HandlerEnum.CHANGE_LAYOUT:
       const { mode, type, split } = value;
@@ -31,9 +28,8 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
       };
 
     case HandlerEnum.CHANGE_THEME_COLOR:
-      if (getThemeColor.value === value) {
-        return {};
-      }
+      appStore.setThemeColorIsFirstChange(false);
+      appStore.setThemeColorIsManualChange(true);
       return { themeColor: value };
 
     case HandlerEnum.MENU_ACCORDION:
