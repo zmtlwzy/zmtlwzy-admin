@@ -35,9 +35,8 @@ interface PermissionState {
   backMenuList: Menu[];
   frontMenuList: Menu[];
 }
-export const usePermissionStore = defineStore({
-  id: 'app-permission',
-  state: (): PermissionState => ({
+export const usePermissionStore = defineStore('app-permission', () => {
+  const state = reactive<PermissionState>({
     permCodeList: [],
     // Whether the route has been dynamically added
     isDynamicAddedRoute: false,
@@ -47,166 +46,172 @@ export const usePermissionStore = defineStore({
     backMenuList: [],
     // menu List
     frontMenuList: [],
-  }),
-  getters: {
-    getPermCodeList(): string[] | number[] {
-      return this.permCodeList;
-    },
-    getBackMenuList(): Menu[] {
-      // @ts-ignore
-      return this.backMenuList;
-    },
-    getFrontMenuList(): Menu[] {
-      return this.frontMenuList;
-    },
-    getLastBuildMenuTime(): number {
-      return this.lastBuildMenuTime;
-    },
-    getIsDynamicAddedRoute(): boolean {
-      return this.isDynamicAddedRoute;
-    },
-  },
-  actions: {
-    setPermCodeList(codeList: string[]) {
-      this.permCodeList = codeList;
-    },
+  });
 
-    setBackMenuList(list: Menu[]) {
-      this.backMenuList = list;
-      list?.length > 0 && this.setLastBuildMenuTime();
-    },
+  const getPermCodeList = computed(() => state.permCodeList);
+  const getBackMenuList = computed(() => state.backMenuList);
+  const getFrontMenuList = computed(() => state.frontMenuList);
+  const getLastBuildMenuTime = computed(() => state.lastBuildMenuTime);
+  const getIsDynamicAddedRoute = computed(() => state.isDynamicAddedRoute);
 
-    setFrontMenuList(list: Menu[]) {
-      this.frontMenuList = list;
-    },
+  function setPermCodeList(codeList: string[]) {
+    state.permCodeList = codeList;
+  }
 
-    setLastBuildMenuTime() {
-      this.lastBuildMenuTime = new Date().getTime();
-    },
+  function setBackMenuList(list: Menu[]) {
+    state.backMenuList = list;
+    list?.length > 0 && setLastBuildMenuTime();
+  }
 
-    setDynamicAddedRoute(added: boolean) {
-      this.isDynamicAddedRoute = added;
-    },
+  function setFrontMenuList(list: Menu[]) {
+    state.frontMenuList = list;
+  }
 
-    resetState(): void {
-      this.isDynamicAddedRoute = false;
-      this.permCodeList = [];
-      this.backMenuList = [];
-      this.lastBuildMenuTime = 0;
-    },
-    async changePermissionCode() {
-      const codeList = await getPermCode();
-      this.setPermCodeList(codeList);
-    },
-    async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
-      const { t } = useI18n();
-      const userStore = useUserStore();
-      const appStore = useAppStoreWithOut();
+  function setLastBuildMenuTime() {
+    state.lastBuildMenuTime = new Date().getTime();
+  }
 
-      let routes: AppRouteRecordRaw[] = [];
-      const roleList = toRaw(userStore.getRoleList) || [];
-      const { permissionMode = projectSetting.permissionMode } = appStore.getProjectConfig;
+  function setDynamicAddedRoute(added: boolean) {
+    state.isDynamicAddedRoute = added;
+  }
 
-      const routeFilter = (route: AppRouteRecordRaw) => {
-        const { meta } = route;
-        const { roles } = meta || {};
-        if (!roles) return true;
-        return roleList.some((role) => roles.includes(role));
-      };
+  function resetState() {
+    state.isDynamicAddedRoute = false;
+    state.permCodeList = [];
+    state.backMenuList = [];
+    state.lastBuildMenuTime = 0;
+  }
 
-      const routeRemoveIgnoreFilter = (route: AppRouteRecordRaw) => {
-        const { meta } = route;
-        const { ignoreRoute } = meta || {};
-        return !ignoreRoute;
-      };
+  async function changePermissionCode() {
+    const codeList = await getPermCode();
+    setPermCodeList(codeList);
+  }
 
-      /**
-       * @description 根据设置的首页path，修正routes中的affix标记（固定首页）
-       * */
-      const patchHomeAffix = (routes: AppRouteRecordRaw[]) => {
-        if (!routes || routes.length === 0) return;
-        let homePath: string = userStore.getUserInfo.homePath || PageEnum.BASE_HOME;
-        function patcher(routes: AppRouteRecordRaw[], parentPath = '') {
-          if (parentPath) parentPath += '/';
-          routes.some((route: AppRouteRecordRaw) => {
-            const { path, children, redirect } = route;
-            const currentPath = path.startsWith('/') ? path : parentPath + path;
-            if (currentPath === homePath) {
-              if (redirect) {
-                homePath = route.redirect! as string;
-              } else {
-                route.meta = Object.assign({}, route.meta, { affix: true });
-                return true;
-              }
+  async function buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
+    const { t } = useI18n();
+    const userStore = useUserStore();
+    const appStore = useAppStoreWithOut();
+
+    let routes: AppRouteRecordRaw[] = [];
+    const roleList = toRaw(userStore.getRoleList) || [];
+    const { permissionMode = projectSetting.permissionMode } = appStore.getProjectConfig;
+
+    const routeFilter = (route: AppRouteRecordRaw) => {
+      const { meta } = route;
+      const { roles } = meta || {};
+      if (!roles) return true;
+      return roleList.some((role) => roles.includes(role));
+    };
+
+    const routeRemoveIgnoreFilter = (route: AppRouteRecordRaw) => {
+      const { meta } = route;
+      const { ignoreRoute } = meta || {};
+      return !ignoreRoute;
+    };
+
+    /**
+     * @description 根据设置的首页path，修正routes中的affix标记（固定首页）
+     * */
+    const patchHomeAffix = (routes: AppRouteRecordRaw[]) => {
+      if (!routes || routes.length === 0) return;
+      let homePath: string = userStore.getUserInfo.homePath || PageEnum.BASE_HOME;
+      function patcher(routes: AppRouteRecordRaw[], parentPath = '') {
+        if (parentPath) parentPath += '/';
+        routes.some((route: AppRouteRecordRaw) => {
+          const { path, children, redirect } = route;
+          const currentPath = path.startsWith('/') ? path : parentPath + path;
+          if (currentPath === homePath) {
+            if (redirect) {
+              homePath = route.redirect! as string;
+            } else {
+              route.meta = Object.assign({}, route.meta, { affix: true });
+              return true;
             }
-            children && children.length > 0 && patcher(children, currentPath);
-          });
-        }
-        patcher(routes);
-      };
-
-      switch (permissionMode) {
-        case PermissionModeEnum.ROLE:
-          routes = filter(asyncRoutes, routeFilter);
-          routes = routes.filter(routeFilter);
-          // Convert multi-level routing to level 2 routing
-          routes = flatMultiLevelRoutes(routes);
-          break;
-
-        case PermissionModeEnum.ROUTE_MAPPING:
-          routes = filter(asyncRoutes, routeFilter);
-          routes = routes.filter(routeFilter);
-          const menuList = transformRouteToMenu(routes, true);
-          routes = filter(routes, routeRemoveIgnoreFilter);
-          routes = routes.filter(routeRemoveIgnoreFilter);
-          menuList.sort((a, b) => {
-            return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0);
-          });
-
-          this.setFrontMenuList(menuList);
-          // Convert multi-level routing to level 2 routing
-          routes = flatMultiLevelRoutes(routes);
-          break;
-
-        //  If you are sure that you do not need to do background dynamic permissions, please comment the entire judgment below
-        case PermissionModeEnum.BACK:
-          const { createMessage } = useWrapperMessage();
-
-          createMessage?.loading(t('sys.app.menuLoading'), {
-            duration: 1000,
-          });
-
-          // !Simulate to obtain permission codes from the background,
-          // this function may only need to be executed once, and the actual project can be put at the right time by itself
-          let routeList: AppRouteRecordRaw[] = [];
-          try {
-            this.changePermissionCode();
-            routeList = (await getMenuList()) as AppRouteRecordRaw[];
-          } catch (error) {
-            console.error(error);
           }
-
-          // Dynamically introduce components
-          routeList = transformObjToRoute(routeList);
-
-          //  Background routing to menu structure
-          const backMenuList = transformRouteToMenu(routeList);
-          this.setBackMenuList(backMenuList);
-
-          // remove meta.ignoreRoute item
-          routeList = filter(routeList, routeRemoveIgnoreFilter);
-          routeList = routeList.filter(routeRemoveIgnoreFilter);
-
-          routeList = flatMultiLevelRoutes(routeList);
-          routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
-          break;
+          children && children.length > 0 && patcher(children, currentPath);
+        });
       }
+      patcher(routes);
+    };
 
-      // routes.push(ERROR_LOG_ROUTE);
-      patchHomeAffix(routes);
-      return routes;
-    },
-  },
+    switch (permissionMode) {
+      case PermissionModeEnum.ROLE:
+        routes = filter(asyncRoutes, routeFilter);
+        routes = routes.filter(routeFilter);
+        // Convert multi-level routing to level 2 routing
+        routes = flatMultiLevelRoutes(routes);
+        break;
+
+      case PermissionModeEnum.ROUTE_MAPPING:
+        routes = filter(asyncRoutes, routeFilter);
+        routes = routes.filter(routeFilter);
+        const menuList = transformRouteToMenu(routes, true);
+        routes = filter(routes, routeRemoveIgnoreFilter);
+        routes = routes.filter(routeRemoveIgnoreFilter);
+        menuList.sort((a, b) => {
+          return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0);
+        });
+
+        setFrontMenuList(menuList);
+        // Convert multi-level routing to level 2 routing
+        routes = flatMultiLevelRoutes(routes);
+        break;
+
+      //  If you are sure that you do not need to do background dynamic permissions, please comment the entire judgment below
+      case PermissionModeEnum.BACK:
+        const { createMessage } = useWrapperMessage();
+
+        createMessage?.loading(t('sys.app.menuLoading'), {
+          duration: 1000,
+        });
+
+        // !Simulate to obtain permission codes from the background,
+        // this function may only need to be executed once, and the actual project can be put at the right time by itself
+        let routeList: AppRouteRecordRaw[] = [];
+        try {
+          changePermissionCode();
+          routeList = (await getMenuList()) as AppRouteRecordRaw[];
+        } catch (error) {
+          console.error(error);
+        }
+
+        // Dynamically introduce components
+        routeList = transformObjToRoute(routeList);
+
+        //  Background routing to menu structure
+        const backMenuList = transformRouteToMenu(routeList);
+        setBackMenuList(backMenuList);
+
+        // remove meta.ignoreRoute item
+        routeList = filter(routeList, routeRemoveIgnoreFilter);
+        routeList = routeList.filter(routeRemoveIgnoreFilter);
+
+        routeList = flatMultiLevelRoutes(routeList);
+        routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
+        break;
+    }
+
+    // routes.push(ERROR_LOG_ROUTE);
+    patchHomeAffix(routes);
+    return routes;
+  }
+
+  return {
+    getPermCodeList,
+    getBackMenuList,
+    getFrontMenuList,
+    getLastBuildMenuTime,
+    getIsDynamicAddedRoute,
+
+    setPermCodeList,
+    setBackMenuList,
+    setFrontMenuList,
+    setLastBuildMenuTime,
+    setDynamicAddedRoute,
+    resetState,
+    changePermissionCode,
+    buildRoutesAction,
+  };
 });
 
 // Need to be used outside the setup

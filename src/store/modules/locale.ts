@@ -1,4 +1,4 @@
-import type { LocaleSetting, LocaleType } from '/#/config';
+import type { LocaleSetting } from '/#/config';
 
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
@@ -21,46 +21,49 @@ interface NaiveLocale {
   dateLocale: NDateLocale;
 }
 
-export const useLocaleStore = defineStore({
-  id: 'app-locale',
-  state: (): LocaleState => ({
+export const useLocaleStore = defineStore('app-locale', () => {
+  const state = reactive<LocaleState>({
     localInfo: lsLocaleSetting,
-  }),
-  getters: {
-    getShowPicker(): boolean {
-      return !!this.localInfo?.showPicker;
-    },
-    getLocale(): LocaleType {
-      return this.localInfo?.locale ?? 'zh_CN';
-    },
-    getNaiveLocale(): NaiveLocale | null {
-      return this.getLocale === 'zh_CN'
-        ? {
-            locale: zhCN,
-            dateLocale: dateZhCN,
-          }
-        : null;
-    },
-  },
-  actions: {
-    /**
-     * Set up multilingual information and cache
-     * @param info multilingual info
-     */
-    setLocaleInfo(info: Partial<LocaleSetting>) {
-      this.localInfo = { ...this.localInfo, ...info };
-      ls.set(LOCALE_KEY, this.localInfo);
-    },
-    /**
-     * Initialize multilingual information and load the existing configuration from the local cache
-     */
-    initLocale() {
-      this.setLocaleInfo({
-        ...localeSetting,
-        ...this.localInfo,
-      });
-    },
-  },
+  });
+
+  const getShowPicker = computed(() => !!state.localInfo?.showPicker);
+  const getLocale = computed(() => state.localInfo?.locale ?? 'zh_CN');
+  const getNaiveLocale = computed<NaiveLocale | null>(() =>
+    getLocale.value === 'zh_CN'
+      ? {
+          locale: zhCN,
+          dateLocale: dateZhCN,
+        }
+      : null
+  );
+
+  /**
+   * Set up multilingual information and cache
+   * @param info multilingual info
+   */
+  function setLocaleInfo(info: Partial<LocaleSetting>) {
+    state.localInfo = { ...state.localInfo, ...info };
+    ls.set(LOCALE_KEY, state.localInfo);
+  }
+
+  /**
+   * Initialize multilingual information and load the existing configuration from the local cache
+   */
+  function initLocale() {
+    setLocaleInfo({
+      ...localeSetting,
+      ...state.localInfo,
+    });
+  }
+
+  return {
+    getShowPicker,
+    getLocale,
+    getNaiveLocale,
+
+    setLocaleInfo,
+    initLocale,
+  };
 });
 
 // Need to be used outside the setup
