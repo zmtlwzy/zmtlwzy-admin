@@ -59,6 +59,7 @@ export const usePermissionStore = defineStore('app-permission', () => {
   }
 
   function setBackMenuList(list: Menu[]) {
+    // @ts-ignore
     state.backMenuList = list;
     list?.length > 0 && setLastBuildMenuTime();
   }

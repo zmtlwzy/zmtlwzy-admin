@@ -335,6 +335,7 @@ export const useMultipleTabStore = defineStore('app-multiple-tab', () => {
     closeRightTabs,
     closeAllTab,
     closeOtherTabs,
+    clearCacheTabs,
     updateTabPath,
   };
 });

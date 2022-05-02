@@ -39,5 +39,5 @@
     "mock/**/*.ts",
     "vite.config.ts"
   ],
-  "exclude": ["node_modules", "dist", "**/*.js", "src/views/demo/main-out/*"]
+  "exclude": ["node_modules", "dist", "**/*.js"]
 }

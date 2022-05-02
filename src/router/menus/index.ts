@@ -65,10 +65,10 @@ const staticMenus: Menu[] = [];
 async function getAsyncMenus() {
   const permissionStore = usePermissionStore();
   if (isBackMode()) {
-    return getVisibleMenus(permissionStore.getBackMenuList, true);
+    return getVisibleMenus(permissionStore.getBackMenuList as Menu[], true);
   }
   if (isRouteMappingMode()) {
-    return getVisibleMenus(permissionStore.getFrontMenuList);
+    return getVisibleMenus(permissionStore.getFrontMenuList as Menu[]);
   }
   return staticMenus;
 }
