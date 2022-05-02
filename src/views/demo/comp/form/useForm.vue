@@ -25,26 +25,65 @@
             </div>
           </n-dynamic-input>
         </template>
+        <template #uploadSlot="{ model, field }">
+          <n-upload
+            v-model:file-list="model[field]"
+            list-type="image-card"
+            @before-upload="beforeUpload"
+          >
+            <n-upload-dragger>
+              <n-icon size="48" :depth="3">
+                <i-bx:bxs-user />
+              </n-icon>
+            </n-upload-dragger>
+          </n-upload>
+        </template>
       </BasicForm>
     </CollapseCard>
   </PageWrapper>
 </template>
 
 <script setup lang="ts">
-  import { useMessage } from 'naive-ui';
+  import { useMessage, type UploadProps } from 'naive-ui';
+  import { isDevMode } from '/@/utils/env';
   import { schemas } from './data';
   import { useForm } from '/@/components/Form';
+  import { useFormDemoApi } from '/@/api/demo/useformDemoPage';
 
+  const submitButtonOptions = reactive({ loading: false });
   const [register, { setProps }] = useForm({
+    submitButtonOptions,
     submitButtonText: '提交',
     gridProps: { cols: 2, xGap: 24 },
     giProps: { span: 2 },
     schemas,
   });
 
-  const { info } = useMessage();
-  const handleSubmit = (e) => {
-    info(JSON.stringify(e, null, 2));
+  const { info, warning, error } = useMessage();
+  const handleSubmit = async (formData) => {
+    submitButtonOptions.loading = true;
+    try {
+      // 需要开启/test/server服务或真实服务器地址
+      const url = await useFormDemoApi(formData);
+      info(`提交成功： ${url}`, {
+        closable: true,
+        duration: 10 * 1000,
+      });
+    } catch {
+      isDevMode() && warning('可能需要开启/test/server服务');
+      info(JSON.stringify(formData, null, 2), {
+        closable: true,
+        duration: 10 * 1000,
+      });
+    }
+    submitButtonOptions.loading = false;
+  };
+  const beforeUpload: NonNullable<UploadProps['onBeforeUpload']> = async (data) => {
+    if (/^image\/.+/.test(data.file.file?.type || '')) {
+      return true;
+    }
+    error('只能上传图片文件，请重新选择');
+    return false;
   };
 
   const onCreate = (index: number) => {

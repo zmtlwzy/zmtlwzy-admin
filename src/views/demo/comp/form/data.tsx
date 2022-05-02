@@ -99,4 +99,10 @@ export const schemas: FormSchema[] = [
     // 插槽
     slot: 'dynamicSlot',
   },
+  {
+    field: 'upload',
+    label: '上传头像',
+    defaultValue: [],
+    slot: 'uploadSlot',
+  },
 ];

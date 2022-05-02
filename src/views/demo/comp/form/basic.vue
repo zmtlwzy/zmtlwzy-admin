@@ -3,14 +3,14 @@
     <CollapseCard title="基础表单">
       <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-x-18 gap-y-8">
         <n-scrollbar style="max-height: 550px">
-          <n-code :code="JSON.stringify(schemas, null, 2)" language="json" />
+          <n-code :code="JSON.stringify(getSchemas, null, 2)" language="json" />
         </n-scrollbar>
         <div class="flex-jc p-4">
           <BasicForm
             submit-button-text="提交"
             :grid-props="{ cols: 2, xGap: 24 }"
             :gi-props="{ span: 2 }"
-            :schemas="schemas"
+            :schemas="getSchemas"
             class="max-w-800px"
             @submit="handleSubmit"
           >
@@ -34,7 +34,11 @@
   import { schemas } from './data';
 
   const { info } = useMessage();
-  const handleSubmit = (e) => {
-    info(JSON.stringify(e, null, 2));
+  const getSchemas = computed(() => schemas.slice(0, -1));
+  const handleSubmit = (formData) => {
+    info(JSON.stringify(formData, null, 2), {
+      closable: true,
+      duration: 10 * 1000,
+    });
   };
 </script>
