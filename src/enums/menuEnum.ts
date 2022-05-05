@@ -56,6 +56,11 @@ export enum MixSidebarTriggerEnum {
   CLICK = 'click',
 }
 
+export enum MobileSiderWidthLimits {
+  MIN = 100,
+  MAX = 240,
+}
+
 export enum MixSidebarEnum {
   WIDTH = 80,
   COLLAPSED_WIDTH = 48,

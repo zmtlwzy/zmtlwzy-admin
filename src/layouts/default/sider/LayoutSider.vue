@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-  import { clamp } from 'lodash-es';
   import { MenuModeEnum, MenuSplitTypeEnum } from '/@/enums/menuEnum';
 
   import SiderWrapper from './SiderWrapper.vue';
@@ -34,8 +33,15 @@
   const { prefixCls } = useDesign('layout-sideBar');
   const { getIsMobile } = useAppInject();
 
-  const { getCollapsed, getRealWidth, getMenuHidden, getMenuInverted, getIsSidebarType, getSplit } =
-    useMenuSetting();
+  const {
+    getCollapsed,
+    getRealWidth,
+    getMobileWidth,
+    getMenuHidden,
+    getMenuInverted,
+    getIsSidebarType,
+    getSplit,
+  } = useMenuSetting();
 
   const getSplitType = computed(() => {
     return getSplit.value ? MenuSplitTypeEnum.SECONDARY : MenuSplitTypeEnum.NONE;
@@ -50,7 +56,5 @@
   });
 
   const getInverted = computed(() => getMenuInverted.value && !getSplit.value);
-  const getWidth = computed(() =>
-    getIsMobile.value ? clamp(100, getRealWidth.value, 240) : getRealWidth.value
-  );
+  const getWidth = computed(() => (getIsMobile.value ? getMobileWidth.value : getRealWidth.value));
 </script>

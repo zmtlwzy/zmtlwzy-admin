@@ -1,8 +1,15 @@
 import type { MenuSetting } from '/#/config';
 
+import { useClamp } from '@vueuse/core';
 import { useAppStore } from '/@/store/modules/app';
 
-import { MenuModeEnum, MenuTypeEnum, TriggerEnum, MixSidebarEnum } from '/@/enums/menuEnum';
+import {
+  MenuModeEnum,
+  MenuTypeEnum,
+  TriggerEnum,
+  MixSidebarEnum,
+  MobileSiderWidthLimits,
+} from '/@/enums/menuEnum';
 import { useFullContent } from '/@/composables/web/useFullContent';
 
 const tabsAnima = ref(true);
@@ -103,6 +110,12 @@ export function useMenuSetting() {
     return unref(getCollapsed) ? unref(getMiniWidthNumber) : unref(getMenuWidth);
   });
 
+  const getMobileWidth = useClamp(
+    getMenuWidth,
+    MobileSiderWidthLimits.MIN,
+    MobileSiderWidthLimits.MAX
+  );
+
   const getMiniWidthNumber = computed(() => {
     const { collapsedShowTitle } = appStore.getMenuSetting;
     return collapsedShowTitle ? MixSidebarEnum.WIDTH : MixSidebarEnum.COLLAPSED_WIDTH;
@@ -119,16 +132,17 @@ export function useMenuSetting() {
     });
   }
   return {
-    setMenuSetting,
-    toggleCollapsed,
-    getRealWidth,
+    tabsAnima,
+    mixSideHasChildrenRef,
+
     getMenuType,
     getMenuMode,
     getShowMenu,
-    tabsAnima,
     getCollapsed,
     getMiniWidthNumber,
     getMenuWidth,
+    getRealWidth,
+    getMobileWidth,
     getMenuRootIndent,
     getMenuIndent,
     getTrigger,
@@ -149,6 +163,8 @@ export function useMenuSetting() {
     getShowSidebar,
     getIsMixMode,
     getIsMixSidebar,
-    mixSideHasChildrenRef,
+
+    setMenuSetting,
+    toggleCollapsed,
   };
 }

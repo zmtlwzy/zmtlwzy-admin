@@ -4,7 +4,7 @@
       v-if="getIsMobile"
       placement="left"
       :class="prefixCls"
-      :width="getWidth"
+      :width="getMobileWidth"
       :show="!getCollapsed"
       @update:show="handleChange"
     >
@@ -18,14 +18,12 @@
 </template>
 
 <script lang="ts">
-  import { clamp } from 'lodash-es';
-  import Sider from './LayoutSider.vue';
-  import MixSider from './MixSider.vue';
-
   import { useAppInject } from '/@/composables/web/useAppInject';
   import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
-
   import { useDesign } from '/@/composables/web/useDesign';
+
+  import Sider from './LayoutSider.vue';
+  import MixSider from './MixSider.vue';
 
   export default defineComponent({
     name: 'SiderWrapper',
@@ -37,7 +35,7 @@
     setup() {
       const { prefixCls } = useDesign('layout-sider-wrapper');
       const { getIsMobile } = useAppInject();
-      const { setMenuSetting, getShowSidebar, getIsMixSidebar, getMenuWidth, getCollapsed } =
+      const { setMenuSetting, getShowSidebar, getIsMixSidebar, getMobileWidth, getCollapsed } =
         useMenuSetting();
 
       function handleChange(show: boolean) {
@@ -46,13 +44,9 @@
         });
       }
 
-      const getWidth = computed(() => {
-        return clamp(100, getMenuWidth.value, 240);
-      });
-
       return {
         prefixCls,
-        getWidth,
+        getMobileWidth,
         getShowSidebar,
         getIsMobile,
         getIsMixSidebar,

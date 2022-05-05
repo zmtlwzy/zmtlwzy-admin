@@ -47,7 +47,7 @@
   const { prefixCls } = useDesign('app-logo');
   const userStore = useUserStore();
   const { title } = useGlobSetting();
-  const { getMenuWidth, getMenuRootIndent, getCollapsed } = useMenuSetting();
+  const { getMenuWidth, getMobileWidth, getMenuRootIndent, getCollapsed } = useMenuSetting();
   const { getIsMobile } = useAppInject();
 
   const wrapperEl = ref<HTMLDivElement>();
@@ -86,7 +86,7 @@
       const tl = tEl.offsetLeft;
       const pr = 16;
       const res = tw - ww + tl + pr;
-      clip.value = `inset(0px ${res < 0 ? 0 : Math.min(res, tw + 1)}px 0px 0px)`;
+      clip.value = `inset(0px ${clamp(res, 0, tw + 1)}px 0px 0px)`;
     };
   }
 
@@ -102,9 +102,7 @@
               (collapsed ?? getCollapsed.value) && !collapsedShowTitle
                 ? formatLength(layoutSiderCollapsedWidth)
                 : formatLength(
-                    width ?? getIsMobile.value
-                      ? `${clamp(100, getMenuWidth.value, 240)}px`
-                      : getMenuWidth.value
+                    width ?? getIsMobile.value ? getMobileWidth.value : getMenuWidth.value
                   ),
           }
         : {}),

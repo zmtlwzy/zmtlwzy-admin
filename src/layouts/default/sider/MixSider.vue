@@ -68,18 +68,19 @@
 
   import { useRootSetting } from '/@/composables/setting/useRootSetting';
   import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
-  import { usePermissionStore } from '/@/store/modules/permission';
   import { useGlobSetting } from '/@/composables/setting';
   import { useDesign } from '/@/composables/web/useDesign';
   import { useI18n } from '/@/composables/web/useI18n';
   import { useGo } from '/@/composables/web/usePage';
 
-  import { MenuSplitTypeEnum, MixSidebarEnum } from '/@/enums/menuEnum';
+  import { usePermissionStore } from '/@/store/modules/permission';
+
   import clickOutside from '/@/directives/clickOutside';
+  import { MenuSplitTypeEnum, MixSidebarEnum } from '/@/enums/menuEnum';
   import { getChildrenMenus, getCurrentParentPath, getShallowMenus } from '/@/router/menus';
   import { listenerRouteChange } from '/@/logics/mitt/routeChange';
-  import Icon from '/@/components/Icon/Icon.vue';
 
+  import Icon from '/@/components/Icon/Icon.vue';
   import SiderWrapper from './SiderWrapper.vue';
   import SecMenu from '../menu/index.vue';
 
@@ -261,9 +262,9 @@
     if (unref(getIsMixSidebar)) {
       const modules = menuModules.value || [];
       const activeMenu = modules.find((item) => item.path === unref(activePath));
-      const p = activeMenu?.path;
-      if (p) {
-        const children = await getChildrenMenus(p);
+      const _path = activeMenu?.path;
+      if (_path) {
+        const children = await getChildrenMenus(_path);
         if (setChildren) {
           childrenMenus.value = children;
 
@@ -315,7 +316,7 @@
     }
   }
 
-  const renderMenuLabel = (item) => {
+  const renderMenuLabel = (item: Menu) => {
     return h('div', { class: 'item_wrapper', ...getItemEvents(item) }, [
       h(Icon, {
         useTranstion: true,
