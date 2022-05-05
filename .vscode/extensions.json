@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "antfu.iconify",
+    "antfu.unocss",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "lokalise.i18n-ally",
+    "mrmlnc.vscode-less",
+    "mikestead.dotenv",
+    "stylelint.vscode-stylelint",
+    "vue.vscode-typescript-vue-plugin",
+    "vue.volar"
+  ]
+}

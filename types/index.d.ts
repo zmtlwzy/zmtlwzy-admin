@@ -6,7 +6,7 @@ declare interface PromiseFn<T = any, R = T> {
   (...arg: T[]): Promise<R>;
 }
 
-declare type MaybeArray<T> = T | T;
+declare type MaybeArray<T> = T | T[];
 
 declare type RefType<T> = T | null;
 
@@ -37,3 +37,10 @@ declare type DynamicProps<T> = {
 declare interface ResizeObserverEntryTarget extends Omit<ResizeObserverEntry, 'target'> {
   target: HTMLElement;
 }
+
+declare type FilterConditionally<Source, Condition> = Pick<
+  Source,
+  {
+    [K in keyof Source]: Source[K] extends Condition ? K : never;
+  }[keyof Source]
+>;
