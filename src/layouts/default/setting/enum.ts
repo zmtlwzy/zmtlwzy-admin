@@ -106,6 +106,17 @@ export const getMenuTriggerOptions = (hideTop: boolean) => {
   ];
 };
 
+export const getMixSidebarTriggerOptions = [
+  {
+    value: MixSidebarTriggerEnum.CLICK,
+    label: t('layout.setting.triggerClick'),
+  },
+  {
+    value: MixSidebarTriggerEnum.HOVER,
+    label: t('layout.setting.triggerHover'),
+  },
+];
+
 export const routerTransitionOptions = [
   RouterTransitionEnum.FADE,
   RouterTransitionEnum.FADE_SIDE_RIGHT,

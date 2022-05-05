@@ -38,6 +38,9 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
     case HandlerEnum.MENU_TRIGGER:
       return { menuSetting: { trigger: value } };
 
+    case HandlerEnum.MENU_TRIGGER_MIX_SIDEBAR:
+      return { menuSetting: { mixSideTrigger: value } };
+
     // case HandlerEnum.MENU_COLLAPSED:
     //   return { menuSetting: { collapsed: value } };
 

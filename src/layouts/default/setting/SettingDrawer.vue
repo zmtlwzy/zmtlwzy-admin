@@ -20,7 +20,12 @@
   import { useTransitionSetting } from '/@/composables/setting/useTransitionSetting';
 
   import { MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
-  import { HandlerEnum, routerTransitionOptions, getMenuTriggerOptions } from './enum';
+  import {
+    HandlerEnum,
+    routerTransitionOptions,
+    getMenuTriggerOptions,
+    getMixSidebarTriggerOptions,
+  } from './enum';
 
   import { useI18n } from '/@/composables/web/useI18n';
   import { useDrawer, useDrawerEnum } from '/@/composables/component/useDrawer';
@@ -36,6 +41,7 @@
 
   const {
     getIsHorizontal,
+    getIsMixSidebar,
     getShowMenu,
     getMenuType,
     getSplit,
@@ -43,6 +49,7 @@
     getMenuRootIndent,
     getMenuIndent,
     getTrigger,
+    getMixSideTrigger,
   } = useMenuSetting();
 
   const { getShowHeader } = useHeaderSetting();
@@ -165,6 +172,14 @@
         :default-value="getDeftrigger"
         :options="triggerOptions"
         :disabled="!getShowMenuRef"
+      />
+
+      <SelectItem
+        :title="t('layout.setting.mixSidebarTrigger')"
+        :event="HandlerEnum.MENU_TRIGGER_MIX_SIDEBAR"
+        :val="getMixSideTrigger"
+        :options="getMixSidebarTriggerOptions"
+        :disabled="!getIsMixSidebar"
       />
       <NDivider>{{ t('layout.setting.interfaceDisplay') }}</NDivider>
       <SwitchItem
