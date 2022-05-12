@@ -1,6 +1,6 @@
 import type { MenuSetting } from '/#/config';
 
-import { useClamp } from '@vueuse/core';
+import { clamp } from 'lodash-es';
 import { useAppStore } from '/@/store/modules/app';
 
 import {
@@ -110,10 +110,8 @@ export function useMenuSetting() {
     return unref(getCollapsed) ? unref(getMiniWidthNumber) : unref(getMenuWidth);
   });
 
-  const getMobileWidth = useClamp(
-    getMenuWidth,
-    MobileSiderWidthLimits.MIN,
-    MobileSiderWidthLimits.MAX
+  const getMobileWidth = computed(() =>
+    clamp(getMenuWidth.value, MobileSiderWidthLimits.MIN, MobileSiderWidthLimits.MAX)
   );
 
   const getMiniWidthNumber = computed(() => {
