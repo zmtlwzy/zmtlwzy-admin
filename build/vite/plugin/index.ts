@@ -1,10 +1,11 @@
 import { Plugin, splitVendorChunkPlugin } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import defineOptions from 'unplugin-vue-define-options/vite';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
 // https://github.com/antfu/unocss
 // see unocss.config.ts for config
-import Unocss from 'unocss/vite';
+import unocss from 'unocss/vite';
 
 import { configHtmlPlugin } from './html';
 import { configComponentsPlugin } from './components';
@@ -15,9 +16,10 @@ import { configMswPlugin } from './msw';
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const vitePlugins: (Plugin | Plugin[])[] = [
     vue(),
+    defineOptions(),
     splitVendorChunkPlugin(),
     vueJsx(),
-    Unocss(),
+    unocss(),
     configMswPlugin(viteEnv),
     configComponentsPlugin(),
     configAutoImportPlugin(),

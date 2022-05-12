@@ -27,7 +27,7 @@
     "@types/koa-static": "^4.0.2",
     "@types/koa-websocket": "^5.0.7",
     "@types/koa2-cors": "^2.0.2",
-    "@types/node": "^17.0.31",
+    "@types/node": "^17.0.32",
     "nodemon": "^2.0.16",
     "pm2": "^5.2.0",
     "rimraf": "^3.0.2",
