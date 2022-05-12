@@ -9,12 +9,6 @@
   </Wrapper>
 </template>
 
-<script lang="ts">
-  export default {
-    inheritAttrs: false,
-  };
-</script>
-
 <script setup lang="ts">
   import { useDesign } from '/@/composables/web/useDesign';
   import { toWritableRef } from '/@/composables/utilities/toWritableRef';
@@ -23,6 +17,10 @@
   import Wrapper from './Wrapper.vue';
   import { baseHandler } from '../handler';
   import { HandlerEnum } from '../enum';
+
+  defineOptions({
+    inheritAttrs: false,
+  });
 
   const props = defineProps({
     event: {

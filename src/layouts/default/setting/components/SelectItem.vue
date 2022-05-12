@@ -11,12 +11,6 @@
   </Wrapper>
 </template>
 
-<script lang="ts">
-  export default {
-    inheritAttrs: false,
-  };
-</script>
-
 <script lang="ts" setup>
   import type { PropType } from 'vue';
 
@@ -27,6 +21,10 @@
 
   import { baseHandler } from '../handler';
   import { HandlerEnum } from '../enum';
+
+  defineOptions({
+    inheritAttrs: false,
+  });
 
   const props = defineProps({
     event: {

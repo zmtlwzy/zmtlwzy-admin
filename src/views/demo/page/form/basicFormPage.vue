@@ -17,15 +17,13 @@
   </PageWrapper>
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'BaseFromPage',
-  };
-</script>
-
 <script setup lang="ts">
   import { useMessage } from 'naive-ui';
   import { FormSchema } from '/@/components/Form';
+
+  defineOptions({
+    name: 'BaseFromPage',
+  });
 
   const schemas: FormSchema[] = [
     {

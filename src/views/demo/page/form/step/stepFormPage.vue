@@ -27,18 +27,16 @@
   </PageWrapper>
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'StepFormPage',
-  };
-</script>
-
 <script setup lang="ts">
   import type { StepsProps } from 'naive-ui';
   import { useBreakpoint } from '/@/composables/event/useBreakpoint';
   import Step1 from './Step1.vue';
   import Step2 from './Step2.vue';
   import Step3 from './Step3.vue';
+
+  defineOptions({
+    name: 'StepFormPage',
+  });
 
   const current = ref(1);
   const currentStatus = ref<StepsProps['status']>('process');

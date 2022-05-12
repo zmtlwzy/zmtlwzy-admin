@@ -128,7 +128,7 @@
     };
   });
 
-  const titleWidth = computed(() => (props.collapsed ? 0 : '100%'));
+  const getTitleWidth = computed(() => (props.collapsed ? 0 : '100%'));
 
   const getTitle = computed(() => title);
 
@@ -150,7 +150,7 @@
       }
       @supports not (-webkit-background-clip: text) {
         transition-property: width;
-        width: v-bind(titleWidth);
+        width: v-bind(getTitleWidth);
       }
     }
   }

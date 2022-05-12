@@ -13,14 +13,11 @@
   </section>
 </template>
 
-<script lang="ts">
-  export default {
+<script setup lang="ts">
+  defineOptions({
     name: 'Loading',
     inheritAttrs: false,
-  };
-</script>
-
-<script setup lang="ts">
+  });
   const props = withDefaults(
     defineProps<{
       show?: boolean;

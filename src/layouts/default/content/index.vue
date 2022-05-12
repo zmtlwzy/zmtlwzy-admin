@@ -15,12 +15,6 @@
   </main>
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'LayoutContent',
-  };
-</script>
-
 <script setup lang="ts">
   import { useElementSize, MaybeElementRef, useResizeObserver, promiseTimeout } from '@vueuse/core';
   import { ScrollbarInst } from 'naive-ui';
@@ -31,6 +25,10 @@
   import { listenerAfterRouteChange } from '/@/logics/mitt/routeChange';
   import { useLayoutContentResize } from '/@/logics/mitt/layoutContentResize';
   import { createContentSizeContext } from './useContentSizeContext';
+
+  defineOptions({
+    name: 'LayoutContent',
+  });
 
   const scrollBarEl = ref<ScrollbarInst>();
   const contentEl: MaybeElementRef = ref();

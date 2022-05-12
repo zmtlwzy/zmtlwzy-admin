@@ -2,12 +2,6 @@
   <component v-if="type" :is="componentMap.get(type)" @click="handleClick" />
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'Trigger',
-  };
-</script>
-
 <script setup lang="ts">
   import type { Component } from 'vue';
   import { TriggerEnum } from '/@/enums/menuEnum';
@@ -17,6 +11,10 @@
   import BarTrigger from './BarTrigger.vue';
   import ButtonTrigger from './ButtonTrigger.vue';
   import HeaderTrigger from './HeaderTrigger.vue';
+
+  defineOptions({
+    name: 'Trigger',
+  });
 
   const props = withDefaults(
     defineProps<{

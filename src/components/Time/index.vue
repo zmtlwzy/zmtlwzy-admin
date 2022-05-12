@@ -2,17 +2,15 @@
   <NTime :time="getTime" v-bind="naiveProps" />
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'Time',
-  };
-</script>
-
 <script setup lang="ts">
   import { Ref } from 'vue';
   import { useTimestamp } from '@vueuse/core';
   import { getTime as gt } from 'date-fns';
   import { omit } from 'lodash-es';
+
+  defineOptions({
+    name: 'Time',
+  });
 
   const props = withDefaults(
     defineProps<{

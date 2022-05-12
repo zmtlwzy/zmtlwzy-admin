@@ -27,6 +27,10 @@
   import javascript from 'highlight.js/lib/languages/javascript';
   import json from 'highlight.js/lib/languages/json';
 
+  defineOptions({
+    name: 'AppProvider',
+  });
+
   hljs.registerLanguage('javascript', javascript);
   hljs.registerLanguage('json', json);
 
@@ -34,10 +38,4 @@
   const localeStore = useLocaleStore();
   const theme = computed(() => appStore.getNaiveThemeProps);
   const locale = computed(() => localeStore.getNaiveLocale);
-</script>
-
-<script lang="ts">
-  export default {
-    name: 'AppProvider',
-  };
 </script>

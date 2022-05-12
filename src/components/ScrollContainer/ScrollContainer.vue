@@ -4,14 +4,12 @@
   </n-scrollbar>
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'ScrollContainer',
-  };
-</script>
-
 <script setup lang="ts">
   import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal';
+
+  defineOptions({
+    name: 'ScrollContainer',
+  });
 
   const props = defineProps<{
     inverted?: boolean;

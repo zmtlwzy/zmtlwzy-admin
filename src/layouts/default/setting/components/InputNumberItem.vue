@@ -14,12 +14,6 @@
   </Wrapper>
 </template>
 
-<script lang="ts">
-  export default {
-    inheritAttrs: false,
-  };
-</script>
-
 <script setup lang="ts">
   import { PropType } from 'vue';
   import { useDebounceFn } from '@vueuse/core';
@@ -31,6 +25,10 @@
   import { baseHandler } from '../handler';
   import { HandlerEnum } from '../enum';
   import Wrapper from './Wrapper.vue';
+
+  defineOptions({
+    inheritAttrs: false,
+  });
 
   const props = defineProps({
     event: {

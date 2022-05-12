@@ -6,12 +6,10 @@
   </Wrapper>
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'Menu111Demo',
-  };
-</script>
-
 <script setup lang="ts">
   import Wrapper from './Wrapper.vue';
+
+  defineOptions({
+    name: 'Menu111Demo',
+  });
 </script>

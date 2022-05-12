@@ -13,19 +13,17 @@
   </NGrid>
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'CountdownInput',
-    inheritAttrs: false,
-  };
-</script>
-
 <script setup lang="ts">
   import { PropType } from 'vue';
   import { InputProps } from 'naive-ui';
   import CountButton from './CountButton.vue';
   import { useDesign } from '/@/composables/web/useDesign';
   import { useRuleFormItem } from '/@/composables/component/useFormItem';
+
+  defineOptions({
+    name: 'CountdownInput',
+    inheritAttrs: false,
+  });
 
   const props = defineProps({
     value: String,

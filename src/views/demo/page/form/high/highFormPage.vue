@@ -20,17 +20,15 @@
   </PageWrapper>
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'HighFormPage',
-  };
-</script>
-
 <script setup lang="ts">
   import { useForm } from '/@/components/Form';
   import { useMessage } from 'naive-ui';
   import PersonTable from './PersonTable.vue';
   import { schemas, taskSchemas } from './data';
+
+  defineOptions({
+    name: 'HighFormPage',
+  });
 
   const { info: msg } = useMessage();
 

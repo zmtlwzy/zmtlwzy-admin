@@ -19,17 +19,15 @@
   </n-modal>
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'BasicModal',
-  };
-</script>
-
 <script lang="ts" setup>
   import { omit } from 'lodash-es';
   import { useModalDragMove } from './hooks/useModalDrag';
   import { deepMerge } from '/@/utils';
   import { BasicModalProps, BasicModalMethods } from './types';
+
+  defineOptions({
+    name: 'BasicModal',
+  });
 
   const attrs = useAttrs() as BasicModalProps;
   const props = withDefaults(
