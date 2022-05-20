@@ -24,7 +24,7 @@ const demoList = (pageSize: number) => {
       date: format(new Date(faker.date.soon()), 'yyyy-MM-dd'),
       time: format(new Date(faker.date.soon()), 'HH:mm:ss'),
       'no|100000-10000000': 100000,
-      'status|1': faker.random.arrayElement([true, false]),
+      'status|1': faker.helpers.arrayElement([true, false]),
     });
   }
   return result;
