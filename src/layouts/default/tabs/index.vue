@@ -33,7 +33,7 @@
   </div>
 </template>
 <script lang="ts">
-  import type { CSSProperties } from 'vue';
+  import type { CSSProperties, StyleValue } from 'vue';
   import { unrefElement, MaybeElementRef, whenever } from '@vueuse/core';
 
   import type { RouteLocationNormalized, RouteMeta } from 'vue-router';
@@ -58,7 +58,7 @@
     components: { TabRedo, TabContent },
     setup() {
       initAffixTabs();
-      const tabsElRef: MaybeElementRef = ref();
+      const tabsElRef = ref() as unknown as MaybeElementRef<HTMLDivElement>;
       const activeKeyRef = ref<string>();
 
       const router = useRouter();
@@ -75,7 +75,7 @@
         paddingRight: '6px',
       });
 
-      const getWrapperStyle = computed((): CSSProperties => {
+      const getWrapperStyle = computed((): StyleValue => {
         const headerColor = getNaiveCssVarsRef('Layout', 'headerColor')!;
         return {
           backgroundColor: headerColor.value,

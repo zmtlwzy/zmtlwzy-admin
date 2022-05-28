@@ -33,7 +33,7 @@
   </div>
 </template>
 <script lang="ts">
-  import type { CSSProperties, PropType } from 'vue';
+  import type { StyleValue, PropType } from 'vue';
   import { set, omit } from 'lodash-es';
   import { milliseconds } from 'date-fns';
   import type { BasicColumn } from '../../types/table';
@@ -122,7 +122,7 @@
         const option = options.find((item) => `${item.value}` === `${value}`);
         return option?.label ?? value;
       });
-      const getWrapperStyle = computed((): CSSProperties => {
+      const getWrapperStyle = computed((): StyleValue => {
         // if (unref(getIsCheckComp) || unref(getRowEditable)) {
         //   return {};
         // }

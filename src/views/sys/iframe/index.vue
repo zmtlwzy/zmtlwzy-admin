@@ -11,7 +11,7 @@
   </div>
 </template>
 <script lang="ts">
-  import type { CSSProperties } from 'vue';
+  import type { StyleValue } from 'vue';
 
   import { propTypes } from '/@/utils/propTypes';
   import { useDesign } from '/@/composables/web/useDesign';
@@ -32,7 +32,7 @@
       const { height } = useContentSizeInject();
       on(calcHeight);
 
-      const getWrapStyle = computed((): CSSProperties => {
+      const getWrapStyle = computed((): StyleValue => {
         return {
           height: `${unref(height)}px`,
         };

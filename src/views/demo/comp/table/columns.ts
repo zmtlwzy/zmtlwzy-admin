@@ -1,3 +1,4 @@
+import type { BasicColumn } from '/@/components/Table/src/types/table';
 import { NAvatar } from 'naive-ui';
 
 export const columns = [
@@ -16,6 +17,7 @@ export const columns = [
     key: 'avatar',
     width: 100,
     render(row) {
+      // @ts-ignore
       return h(NAvatar, {
         size: 48,
         src: row.avatar,
@@ -46,4 +48,4 @@ export const columns = [
     key: 'date',
     width: 100,
   },
-];
+] as BasicColumn[];

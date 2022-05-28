@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-  import type { CSSProperties } from 'vue';
+  import type { StyleValue } from 'vue';
   import { useElementSize, MaybeElementRef } from '@vueuse/core';
   import { isBoolean } from 'lodash-es';
   import { formatLength } from 'naive-ui/lib/_utils';
@@ -92,7 +92,7 @@
   }));
 
   const getMenuWrapperStyle = computed(
-    (): CSSProperties => ({
+    (): StyleValue => ({
       width: formatLength(props.width),
     })
   );

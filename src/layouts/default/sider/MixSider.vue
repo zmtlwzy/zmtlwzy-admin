@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-  import type { CSSProperties } from 'vue';
+  import type { StyleValue, CSSProperties } from 'vue';
   import type { RouteLocationNormalized } from 'vue-router';
   import type { Menu } from '/@/router/types';
 
@@ -96,7 +96,7 @@
   const activePath = ref('');
   const childrenMenus = ref<Menu[]>();
   const openSecMenu = ref(false);
-  const sideRef: MaybeElementRef = ref();
+  const sideRef = ref() as unknown as MaybeElementRef<HTMLDivElement>;
   const secMenuBorder = reactive<CSSProperties>({
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
@@ -125,7 +125,7 @@
   const { title } = useGlobSetting();
   const permissionStore = usePermissionStore();
 
-  const getMenuStyle = computed((): CSSProperties => {
+  const getMenuStyle = computed((): StyleValue => {
     return {
       left: unref(getMixSideFixed) ? 0 : `${unref(getMixSideWidth)}px`,
       position: unref(getMixSideFixed) ? 'static' : 'absolute',

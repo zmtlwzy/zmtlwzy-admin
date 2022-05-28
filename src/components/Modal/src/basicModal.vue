@@ -57,8 +57,8 @@
     callback,
   });
 
-  const getProps = computed((): BasicModalProps => {
-    return { ...props, ...unref(propsRef) };
+  const getProps = computed(() => {
+    return { ...props, ...unref(propsRef) } as BasicModalProps;
   });
 
   const subBtuText = computed(() => unref(propsRef)?.subBtuText || props.subBtuText);

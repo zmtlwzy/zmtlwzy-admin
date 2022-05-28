@@ -36,7 +36,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import type { CSSProperties, PropType } from 'vue';
+  import type { StyleValue, CSSProperties, PropType } from 'vue';
 
   import { omit } from 'lodash-es';
   import PageFooter from './PageFooter.vue';
@@ -71,7 +71,7 @@
     return Object.keys(omit(slots, 'default', 'leftFooter', 'rightFooter', 'headerContent'));
   });
 
-  const getHeaderStyle = computed((): CSSProperties => {
+  const getHeaderStyle = computed((): StyleValue => {
     return {
       padding: '16px 24px',
       transition:

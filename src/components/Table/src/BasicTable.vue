@@ -119,8 +119,8 @@
     ],
     setup(props, { emit }) {
       const deviceHeight = ref<string | number>(150);
-      const tableElRef: MaybeElementRef = ref();
-      const wrapRef = ref<Nullable<HTMLDivElement>>(null);
+      const tableElRef = ref() as unknown as MaybeElementRef<HTMLDivElement>;
+      const wrapRef = ref() as unknown as MaybeElementRef<HTMLDivElement>;
       let paginationEl: HTMLElement | null;
       const tableData = ref<Recordable[]>([]);
       const innerPropsRef = ref<Partial<BasicTableProps>>();

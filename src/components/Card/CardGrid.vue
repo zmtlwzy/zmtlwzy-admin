@@ -11,14 +11,14 @@
 </template>
 
 <script setup lang="ts">
-  import type { CSSProperties } from 'vue';
+  import type { StyleValue } from 'vue';
   import { omit } from 'lodash-es';
   import { getNaiveCssVarsRef } from '/@/composables/core/useNaiveInternal';
   import { useDesign } from '/@/composables/web/useDesign';
 
   const { prefixCls } = useDesign('card-grid');
   const borderColorRef = getNaiveCssVarsRef('Card', 'borderColor')!;
-  const getStyle = computed((): CSSProperties => {
+  const getStyle = computed((): StyleValue => {
     return {
       backgroundColor: borderColorRef.value,
       transition: 'background-color var(--app-transition-duration) var(--app-bezier)',

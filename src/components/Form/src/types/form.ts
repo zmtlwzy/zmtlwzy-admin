@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'vue';
+import type { StyleValue } from 'vue';
 import type { GridProps, GridItemProps } from 'naive-ui/lib/grid';
 import type { FormItemRule } from 'naive-ui';
 import type { FormItemProps } from 'naive-ui/lib/form';
@@ -56,7 +56,7 @@ export interface FormProps {
   resetFunc?: () => Promise<void>;
   submitFunc?: (...args: any) => Promise<void>;
   submitOnReset?: boolean;
-  baseGridStyle?: CSSProperties;
+  baseGridStyle?: StyleValue;
   disabled?: boolean;
 }
 

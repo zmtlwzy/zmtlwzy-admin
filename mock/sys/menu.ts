@@ -209,8 +209,8 @@ const sysRoute = {
 };
 
 export default [
-  rest.get('/basic-api/getMenuList', (req: requestParams, res, ctx) => {
-    const token = getRequestToken(req);
+  rest.get('/basic-api/getMenuList', (req, res, ctx) => {
+    const token = getRequestToken(req as unknown as requestParams);
     let json: any = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);

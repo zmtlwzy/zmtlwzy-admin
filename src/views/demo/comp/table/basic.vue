@@ -64,13 +64,14 @@
     pageSize: 5,
     name: 'xiaoMa',
   });
-  const actionColumn = reactive<BasicColumn>({
+  const actionColumn: BasicColumn = {
     width: 220,
     title: '操作',
     key: 'action',
     fixed: 'right',
+    // @ts-ignore
     render(record) {
-      return h(TableAction as any, {
+      return h(TableAction, {
         style: 'button',
         actions: [
           {
@@ -123,7 +124,8 @@
         },
       });
     },
-  });
+  };
+
   const [register] = useForm({
     gridProps: { cols: '1 sm:2 xl:3', xGap: 24 },
     inline: true,

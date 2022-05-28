@@ -65,8 +65,8 @@ export default [
     }
     return res(ctx.delay(200), ctx.json(json));
   }),
-  rest.get('/basic-api/getUserInfo', (req: requestParams, res, ctx) => {
-    const token = getRequestToken(req);
+  rest.get('/basic-api/getUserInfo', (req, res, ctx) => {
+    const token = getRequestToken(req as unknown as requestParams);
     let json: Record<string, unknown> = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);
@@ -75,8 +75,8 @@ export default [
     }
     return res(ctx.json(json));
   }),
-  rest.get('/basic-api/getPermCode', (req: requestParams, res, ctx) => {
-    const token = getRequestToken(req);
+  rest.get('/basic-api/getPermCode', (req, res, ctx) => {
+    const token = getRequestToken(req as unknown as requestParams);
     let json: Record<string, unknown> = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);
@@ -90,8 +90,8 @@ export default [
     return res(ctx.delay(200), ctx.json(json));
   }),
 
-  rest.get('/basic-api/logout', (req: requestParams, res, ctx) => {
-    const token = getRequestToken(req);
+  rest.get('/basic-api/logout', (req, res, ctx) => {
+    const token = getRequestToken(req as unknown as requestParams);
     let json: Record<string, unknown> = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);

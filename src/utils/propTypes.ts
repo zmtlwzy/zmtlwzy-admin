@@ -1,10 +1,10 @@
-import { CSSProperties, VNodeChild } from 'vue';
+import { StyleValue, VNodeChild } from 'vue';
 import { createTypes, VueTypeValidableDef, VueTypesInterface } from 'vue-types';
 
 export type VueNode = VNodeChild | JSX.Element;
 
 type PropTypes = VueTypesInterface & {
-  readonly style: VueTypeValidableDef<CSSProperties>;
+  readonly style: VueTypeValidableDef<StyleValue>;
   readonly VNodeChild: VueTypeValidableDef<VueNode>;
   // readonly trueBool: VueTypeValidableDef<boolean>;
   readonly stringNumber: VueTypeValidableDef<string | number>;

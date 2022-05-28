@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType } from 'vue';
+import type { StyleValue, PropType } from 'vue';
 import { FormSchema } from './types/form';
 import type { FormItemProps, ButtonProps, GridProps, GridItemProps } from 'naive-ui';
 import { propTypes } from '/@/utils/propTypes';
@@ -47,7 +47,7 @@ export const basicProps = {
   // formItem配置
   formItemProps: Object as PropType<FormItemProps>,
   // grid 样式
-  baseGridStyle: Object as PropType<CSSProperties>,
+  baseGridStyle: Object as PropType<StyleValue>,
   // 是否折叠
   collapsed: propTypes.bool.def(false),
   // 默认展示的行数

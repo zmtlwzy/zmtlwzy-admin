@@ -19,8 +19,14 @@
 </template>
 
 <script setup lang="ts">
-  import type { CSSProperties } from 'vue';
-  import { useRafFn, useEventListener, unrefElement, Pausable } from '@vueuse/core';
+  import type { StyleValue } from 'vue';
+  import {
+    useRafFn,
+    useEventListener,
+    unrefElement,
+    Pausable,
+    type MaybeElementRef,
+  } from '@vueuse/core';
   import { clamp } from 'lodash-es';
   import { layoutSiderCollapsedWidth } from '/@/settings/designSetting';
   import { formatLength } from 'naive-ui/lib/_utils';
@@ -50,8 +56,8 @@
   const { getMenuWidth, getMobileWidth, getMenuRootIndent, getCollapsed } = useMenuSetting();
   const { getIsMobile } = useAppInject();
 
-  const wrapperEl = ref<HTMLDivElement>();
-  const titleEl = ref<HTMLDivElement>();
+  const wrapperEl = ref() as unknown as MaybeElementRef<HTMLDivElement>;
+  const titleEl = ref() as unknown as MaybeElementRef<HTMLDivElement>;
   const clip = ref(`inset(0px ${props.collapsed ? 100 : 0}% 0px 0px)`);
 
   watch([wrapperEl, titleEl, () => props.showTitle], () => {
@@ -59,8 +65,8 @@
   });
 
   function handleListener() {
-    const wEl = unrefElement(wrapperEl) as HTMLDivElement;
-    const tEl = unrefElement(titleEl) as HTMLDivElement;
+    const wEl = unrefElement(wrapperEl);
+    const tEl = unrefElement(titleEl);
     if (!wEl || !tEl || !props.showTitle) return;
     const fn = clacClipPath(wEl, tEl);
     fn();
@@ -92,7 +98,7 @@
 
   const go = useGo();
 
-  const getWrapperStyle = computed((): CSSProperties => {
+  const getWrapperStyle = computed((): StyleValue => {
     const { collapsed, collapsedShowTitle, isStatic, width } = props;
     return {
       ...(!isStatic
@@ -109,7 +115,7 @@
     };
   });
 
-  const getLogoStyle = computed((): CSSProperties => {
+  const getLogoStyle = computed((): StyleValue => {
     return {
       fontSize: formatLength(props.logoSize),
       transition: 'font-size var(--app-transition-duration) var(--app-bezier)',
@@ -118,7 +124,7 @@
     };
   });
 
-  const getTitleStyle = computed((): CSSProperties => {
+  const getTitleStyle = computed((): StyleValue => {
     const { titleSize, titleColor } = props;
     return {
       fontSize: formatLength(titleSize),

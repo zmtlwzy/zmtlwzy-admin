@@ -30,14 +30,14 @@
 </template>
 
 <script setup lang="ts">
-  import type { CSSProperties } from 'vue';
+  import type { StyleValue } from 'vue';
 
   import { groupItems } from './data.json';
   import { useLoading } from './useLoading';
 
   const isLoading = useLoading();
   const getContentStyle = computed(
-    (): CSSProperties => ({
+    (): StyleValue => ({
       ...(isLoading.value
         ? {}
         : {

@@ -1,11 +1,11 @@
-import type { Ref } from 'vue';
 import type { ComputedRef } from 'vue';
-import type { BasicTableProps, TableActionType } from '../types/table';
+import { type MaybeElementRef } from '@vueuse/core';
 
+import type { BasicTableProps, TableActionType } from '../types/table';
 const key = Symbol('s-table');
 
 type Instance = TableActionType & {
-  wrapRef: Ref<Nullable<HTMLElement>>;
+  wrapRef: MaybeElementRef<HTMLDivElement>;
   getBindValues: ComputedRef<Recordable>;
 };
 
