@@ -1,9 +1,9 @@
-import type { RestRequest } from 'msw';
+import type { PathParams, MockedRequest } from 'msw';
 
-export type requestParams = RestRequest & {
-  headers: {
-    _headers?: {
-      authorization?: string;
-    };
-  };
+export type requestParams = Omit<MockedRequest['headers'], 'headers'> &
+{
+  headers: Record<'headers' | '_headers', {
+    authorization?: string;
+  }>
+  params: PathParams;
 }

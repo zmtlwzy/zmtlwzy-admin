@@ -52,5 +52,5 @@ export function pagination<T = any>(pageNo: number, pageSize: number, array: T[]
  *
  */
 export function getRequestToken(req: requestParams) {
-  return req?.headers?._headers?.authorization;
+  return req?.headers?._headers?.authorization || req?.headers?.headers?.authorization
 }
