@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import faker from '@faker-js/faker/locale/zh_CN';
+import { faker } from '@faker-js/faker';
 import { format } from 'date-fns';
 import { resultSuccess } from '../_util';
 
@@ -16,8 +16,8 @@ const demoList = (pageSize: number) => {
       id: faker.finance.account(5),
       beginTime: format(new Date(faker.date.past(5)), 'yyyy-MM-dd HH:mm:ss'),
       endTime: format(new Date(faker.date.future(5)), 'yyyy-MM-dd HH:mm:ss'),
-      address: faker.address.cityPrefix() + faker.address.citySuffix(),
-      name: faker.name.lastName() + faker.name.firstName(),
+      address: faker.address.cityPrefix(),
+      name: faker.name.firstName(),
       avatar: faker.image.nature(200, 200, true),
       imgArr: getRandomPics(Math.ceil(Math.random() * 3) + 1),
       imgs: getRandomPics(Math.ceil(Math.random() * 3) + 1),
