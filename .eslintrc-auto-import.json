@@ -11,6 +11,8 @@
     "getCurrentScope": true,
     "h": true,
     "inject": true,
+    "isProxy": true,
+    "isReactive": true,
     "isReadonly": true,
     "isRef": true,
     "markRaw": true,
@@ -48,6 +50,8 @@
     "useRouter": true,
     "useSlots": true,
     "watch": true,
-    "watchEffect": true
+    "watchEffect": true,
+    "watchPostEffect": true,
+    "watchSyncEffect": true
   }
 }

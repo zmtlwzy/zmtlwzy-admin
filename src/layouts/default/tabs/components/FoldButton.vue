@@ -1,7 +1,7 @@
 <template>
   <div :class="[prefixCls]" class="app-mtabs-anction-btn-wrapper group" @click="handleFold">
-    <span i-radix-icons-exit-full-screen v-if="getIsUnFold" class="app-mtabs-anction-btn" />
-    <span i-radix-icons-enter-full-screen v-else class="app-mtabs-anction-btn" />
+    <span v-if="getIsUnFold" class="app-mtabs-anction-btn i-radix-icons-exit-full-screen" />
+    <span v-else class="app-mtabs-anction-btn i-radix-icons-enter-full-screen" />
   </div>
 </template>
 <script setup lang="ts">

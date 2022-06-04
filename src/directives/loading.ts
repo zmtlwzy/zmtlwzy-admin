@@ -6,6 +6,7 @@ import type { Directive, App } from 'vue';
 function getAllAttribute(el: HTMLElement) {
   if (!el) return {};
   const prefix = 'loading';
+  // @ts-ignore
   const propsMap = Object.keys(omit(Loading.props, 'show'));
   const res: Partial<LoadingProps> = {};
   for (const keyName of propsMap) {

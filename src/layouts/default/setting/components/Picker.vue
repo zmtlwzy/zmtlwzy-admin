@@ -21,13 +21,13 @@
           <polyline
             fill="none"
             stroke="currentColor"
-            stroke-width="24"
             points="93,219 173,284 304,138"
-            stroke-dasharray="350"
-            stroke-dashoffset="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
             :class="{ [`${tickPrefixCls}`]: currentMode === mode }"
+            :[`stroke-width`]="24"
+            :[`stroke-dasharray`]="350"
+            :[`stroke-dashoffset`]="350"
+            :[`stroke-linecap`]="`round`"
+            :[`stroke-linejoin`]="`round`"
           />
         </svg>
       </div>
