@@ -44,7 +44,8 @@
 </template>
 
 <script setup lang="ts">
-  import { useMessage, type UploadProps } from 'naive-ui';
+  import { type UploadProps } from 'naive-ui';
+  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
   import { isDevMode } from '/@/utils/env';
   import { schemas } from './data';
   import { useForm } from '/@/components/Form';
@@ -59,19 +60,19 @@
     schemas,
   });
 
-  const { info, warning, error } = useMessage();
+  const { message } = useDiscreteApi();
   const handleSubmit = async (formData) => {
     submitButtonOptions.loading = true;
     try {
       // 需要开启/test/server服务或真实服务器地址
       const url = await useFormDemoApi(formData);
-      info(`提交成功： ${url}`, {
+      message?.info(`提交成功： ${url}`, {
         closable: true,
         duration: 10 * 1000,
       });
     } catch {
-      isDevMode() && warning('可能需要开启/test/server服务');
-      info(JSON.stringify(formData, null, 2), {
+      isDevMode() && message?.warning('可能需要开启/test/server服务');
+      message?.info(JSON.stringify(formData, null, 2), {
         closable: true,
         duration: 10 * 1000,
       });
@@ -82,7 +83,7 @@
     if (/^image\/.+/.test(data.file.file?.type || '')) {
       return true;
     }
-    error('只能上传图片文件，请重新选择');
+    message?.error('只能上传图片文件，请重新选择');
     return false;
   };
 

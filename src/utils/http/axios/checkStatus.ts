@@ -1,11 +1,11 @@
 import type { ErrorMessageMode } from '/#/axios';
 import { useI18n } from '/@/composables/web/useI18n';
-import useWrapperMessage from '/@/composables/web/useMessage';
+import useDiscreteApi from '/@/composables/web/useDiscreteApi';
 import { useUserStoreWithOut } from '/@/store/modules/user';
 import projectSetting from '/@/settings/projectSetting';
 import { SessionTimeoutProcessingEnum } from '/@/enums/appEnum';
 
-const { createMessage, createDialog } = useWrapperMessage();
+const { message, dialog } = useDiscreteApi();
 const stp = projectSetting.sessionTimeoutProcessing;
 
 export function checkStatus(
@@ -69,9 +69,9 @@ export function checkStatus(
 
   if (errMessage) {
     if (errorMessageMode === 'modal') {
-      createDialog?.error({ title: t('sys.api.errorTip'), content: errMessage });
+      dialog?.error({ title: t('sys.api.errorTip'), content: errMessage });
     } else if (errorMessageMode === 'message') {
-      createMessage?.error(errMessage);
+      message?.error(errMessage);
     }
   }
 }

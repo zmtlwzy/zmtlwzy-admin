@@ -1,27 +1,16 @@
 <template>
-  <NConfigProvider
-    v-bind="{ ...theme, ...locale }"
-    abstract
-    :breakpoints="getBreakpoint"
-    :hljs="hljs"
-  >
-    <NLoadingBarProvider>
-      <NMessageProvider>
-        <NNotificationProvider>
-          <NDialogProvider>
-            <AppConfigure>
-              <RouterView />
-            </AppConfigure>
-          </NDialogProvider>
-        </NNotificationProvider>
-      </NMessageProvider>
-    </NLoadingBarProvider>
+  <NConfigProvider v-bind="getConfigProviderProps">
+    <AppConfigure>
+      <RouterView />
+    </AppConfigure>
   </NConfigProvider>
 </template>
 
 <script lang="ts" setup>
+  import { type ConfigProviderProps } from 'naive-ui';
   import { useAppStore } from '/@/store/modules/app';
   import { useLocaleStore } from '/@/store/modules/locale';
+  import initDiscreteApi from '/@/composables/web/useDiscreteApi';
   import { getBreakpoint } from '/@/enums/breakpointEnum';
   import hljs from 'highlight.js/lib/core';
   import javascript from 'highlight.js/lib/languages/javascript';
@@ -36,6 +25,18 @@
 
   const appStore = useAppStore();
   const localeStore = useLocaleStore();
-  const theme = computed(() => appStore.getNaiveThemeProps);
-  const locale = computed(() => localeStore.getNaiveLocale);
+  // const theme = computed(() => appStore.getNaiveThemeProps);
+  // const locale = computed(() => localeStore.getNaiveLocale);
+
+  const getConfigProviderProps = computed(() => {
+    return {
+      hljs,
+      abstract: true,
+      breakpoints: getBreakpoint,
+      ...appStore.getNaiveThemeProps,
+      ...localeStore.getNaiveLocale,
+    };
+  });
+
+  initDiscreteApi(getConfigProviderProps as ConfigProviderProps);
 </script>

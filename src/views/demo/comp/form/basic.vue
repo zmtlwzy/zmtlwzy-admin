@@ -30,13 +30,13 @@
 </template>
 
 <script setup lang="ts">
-  import { useMessage } from 'naive-ui';
+  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
   import { schemas } from './data';
 
-  const { info } = useMessage();
+  const { message } = useDiscreteApi();
   const getSchemas = computed(() => schemas.slice(0, -1));
   const handleSubmit = (formData) => {
-    info(JSON.stringify(formData, null, 2), {
+    message?.info(JSON.stringify(formData, null, 2), {
       closable: true,
       duration: 10 * 1000,
     });

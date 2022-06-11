@@ -29,7 +29,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { useMessage, useDialog } from 'naive-ui';
+  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
 
   import { useAppStore } from '/@/store/modules/app';
   import { usePermissionStore } from '/@/store/modules/permission';
@@ -55,15 +55,14 @@
       const tabStore = useMultipleTabStore();
       const userStore = useUserStore();
       const appStore = useAppStore();
-      const createMessage = useMessage();
-      const createDialog = useDialog();
+      const { message, dialog } = useDiscreteApi();
       const { copy, isSupported } = useClipboard();
       const [_, resetDarkMode] = useChangeTheme();
 
       function handleCopy() {
         copy(JSON.stringify(unref(appStore.getProjectConfig), null, 2));
         isSupported &&
-          createDialog.success({
+          dialog?.success({
             closable: false,
             title: t('layout.setting.operatingTitle'),
             content: t('layout.setting.operatingContent'),
@@ -78,9 +77,9 @@
           // updateTheme(themeColor);
           // updateColorWeak(colorWeak);
           // updateGrayMode(grayMode);
-          createMessage.success(t('layout.setting.resetSuccess'));
+          message?.success(t('layout.setting.resetSuccess'));
         } catch (error) {
-          createMessage.error(String(error));
+          message?.error(String(error));
         }
       }
 

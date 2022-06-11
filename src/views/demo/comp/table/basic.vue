@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { useMessage } from 'naive-ui';
+  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
   import { BasicTable, TableAction, BasicColumn } from '/@/components/Table';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { demoListApi } from '/@/api/demo/table';
@@ -51,7 +51,7 @@
   import { schemas, modelSchemas } from './data';
 
   const formRef: any = ref(null);
-  const message = useMessage();
+  const { message } = useDiscreteApi();
   const actionRef = ref();
   const showModal = ref(false);
   const formBtnLoading = ref(false);
@@ -120,7 +120,7 @@
           },
         ],
         select: (key) => {
-          message.info(`您点击了，${key} 按钮`);
+          message?.info(`您点击了，${key} 按钮`);
         },
       });
     },

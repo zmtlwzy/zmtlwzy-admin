@@ -1,3 +1,5 @@
+// Legacy
+
 import { useMessage, useDialog, useNotification } from 'naive-ui';
 import { omit } from 'lodash-es';
 import { useI18n } from '/@/composables/web/useI18n';

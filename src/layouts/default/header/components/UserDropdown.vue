@@ -1,5 +1,5 @@
 <script lang="tsx">
-  import { NDropdown, DropdownOption, NAvatar } from 'naive-ui';
+  import { NDropdown, NAvatar, type DropdownOption } from 'naive-ui';
 
   import { useUserStore } from '/@/store/modules/user';
   // import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting';
@@ -28,18 +28,16 @@
         return { realName, avatar: avatar || headerImg, desc };
       });
 
-      // const [register, { openModal }] = useModal();
-
       const dropMenuList: DropdownOption[] = [
         {
           key: MenuEvents.AccountCenter,
           label: t('layout.header.accountCenter'),
-          icon: () => <i-ant-design-user-outlined />,
+          iconName: 'i-ant-design-user-outlined',
         },
         {
           key: MenuEvents.AccountSetting,
           label: t('layout.header.accountSetting'),
-          icon: () => <i-ant-design-setting-outline />,
+          iconName: 'i-ant-design-setting-outline',
         },
         {
           type: 'divider',
@@ -48,7 +46,7 @@
         {
           key: MenuEvents.LOGOUT,
           label: t('layout.header.dropdownItemLoginOut'),
-          icon: () => <i-ion-power-outline />,
+          iconName: 'i-ion-power-outline ',
         },
       ];
 
@@ -71,12 +69,18 @@
         }
       }
 
+      function renderIcon(option: DropdownOption) {
+        return <i class={option.iconName + ' z-1 text-4'} />;
+      }
+
       return () => {
         return (
           <NDropdown
             options={dropMenuList}
             trigger="click"
             onSelect={handleMenuClick}
+            render-label={({ label }) => label}
+            render-icon={renderIcon}
             width="trigger"
           >
             <div class="app-layout-header-anction-icon">

@@ -3,16 +3,13 @@ import { useAppStoreWithOut } from '/@/store/modules/app';
 import { useUserStoreWithOut } from '/@/store/modules/user';
 import { useTransitionSetting } from '/@/composables/setting/useTransitionSetting';
 import { AxiosCanceler } from '/@/utils/http/axios/axiosCancel';
-import useWrapperMessage from '/@/composables/web/useMessage';
+import useDiscreteApi from '/@/composables/web/useDiscreteApi';
 import { warn } from '/@/utils/log';
 
 import { setRouteChange, setAfterRouteChange } from '/@/logics/mitt/routeChange';
-import { LoadingBarProviderInst } from 'naive-ui';
 import { createPermissionGuard } from './permissionGuard';
 import { createStateGuard } from './stateGuard';
 import projectSetting from '/@/settings/projectSetting';
-
-export const loadingBarApiRef = ref<LoadingBarProviderInst>();
 
 // Don't change the order of creation
 export function setupRouterGuard(router: Router) {
@@ -103,7 +100,7 @@ export function createMessageGuard(router: Router) {
   const { closeMessageOnSwitch } = projectSetting;
 
   router.beforeEach(async () => {
-    const { destroyAllDialog, destroyAllNotification } = useWrapperMessage();
+    const { destroyAllDialog, destroyAllNotification } = useDiscreteApi();
     try {
       if (closeMessageOnSwitch) {
         destroyAllDialog?.();
@@ -123,12 +120,14 @@ export function createProgressGuard(router: Router) {
     if (to.meta.loaded) {
       return true;
     }
-    unref(getOpenNProgress) && window.$loadingBar?.start();
+    const { loadingBar } = useDiscreteApi();
+    unref(getOpenNProgress) && loadingBar?.start();
     return true;
   });
 
   router.afterEach(async () => {
-    unref(getOpenNProgress) && window.$loadingBar?.finish();
+    const { loadingBar } = useDiscreteApi();
+    unref(getOpenNProgress) && loadingBar?.finish();
     return true;
   });
 }

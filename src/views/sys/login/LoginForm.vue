@@ -98,14 +98,14 @@
 </template>
 <script lang="ts" setup>
   import { useI18n } from '/@/composables/web/useI18n';
-  import useWrapperMessage from '/@/composables/web/useMessage';
+  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
 
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/composables/web/useDesign';
 
   const { t } = useI18n();
-  const { notification, createDialog } = useWrapperMessage();
+  const { notification, dialog } = useDiscreteApi();
   const { prefixCls } = useDesign('login');
   const userStore = useUserStore();
 
@@ -144,7 +144,7 @@
           });
         }
       } catch (error: any) {
-        createDialog?.error({
+        dialog?.error({
           title: t('sys.api.errorTip'),
           content: error.message || t('sys.api.networkExceptionMsg'),
         });

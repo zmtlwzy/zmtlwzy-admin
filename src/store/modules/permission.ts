@@ -3,7 +3,7 @@ import type { AppRouteRecordRaw, Menu } from '/@/router/types';
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
 import { useI18n } from '/@/composables/web/useI18n';
-import useWrapperMessage from '/@/composables/web/useMessage';
+import useDiscreteApi from '/@/composables/web/useDiscreteApi';
 import { useUserStore } from './user';
 import { useAppStoreWithOut } from './app';
 
@@ -47,6 +47,8 @@ export const usePermissionStore = defineStore('app-permission', () => {
     // menu List
     frontMenuList: [],
   });
+
+  const { message } = useDiscreteApi();
 
   const getPermCodeList = computed(() => state.permCodeList);
   const getBackMenuList = computed(() => state.backMenuList);
@@ -160,9 +162,7 @@ export const usePermissionStore = defineStore('app-permission', () => {
 
       //  If you are sure that you do not need to do background dynamic permissions, please comment the entire judgment below
       case PermissionModeEnum.BACK:
-        const { createMessage } = useWrapperMessage();
-
-        createMessage?.loading(t('sys.app.menuLoading'), {
+        message?.loading(t('sys.app.menuLoading'), {
           duration: 1000,
         });
 

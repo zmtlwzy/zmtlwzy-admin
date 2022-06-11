@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-  import { useMessage } from 'naive-ui';
+  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
   import { set } from 'lodash-es';
   import { useUserStore } from '/@/store/modules/user';
   import { accountInfoApi } from '/@/api/demo/account';
@@ -33,7 +33,7 @@
 
   const userStore = useUserStore();
   const userinfo = computed(() => userStore.getUserInfo);
-  const { info } = useMessage();
+  const { message } = useDiscreteApi();
 
   const [register, { setFieldsValue }] = useForm({
     schemas,
@@ -44,7 +44,7 @@
   });
 
   const handleSubmit = (e) => {
-    info(JSON.stringify(e));
+    message?.info(JSON.stringify(e));
   };
 
   onMounted(async () => {

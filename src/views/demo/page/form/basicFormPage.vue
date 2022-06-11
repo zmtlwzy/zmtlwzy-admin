@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-  import { useMessage } from 'naive-ui';
+  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
   import { FormSchema } from '/@/components/Form';
 
   defineOptions({
@@ -137,10 +137,11 @@
     },
   ];
 
-  const message = useMessage();
+  const { message } = useDiscreteApi();
+
   function handleSubmit(values: Recordable) {
     console.log(values);
-    message.success(JSON.stringify(values));
+    message?.success(JSON.stringify(values));
   }
   function handleReset(values: Recordable) {
     console.log(values);

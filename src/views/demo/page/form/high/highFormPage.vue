@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
   import { useForm } from '/@/components/Form';
-  import { useMessage } from 'naive-ui';
+  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
   import PersonTable from './PersonTable.vue';
   import { schemas, taskSchemas } from './data';
 
@@ -30,7 +30,7 @@
     name: 'HighFormPage',
   });
 
-  const { info: msg } = useMessage();
+  const { message } = useDiscreteApi();
 
   const [register, { submit, validate }] = useForm({
     gridProps: {
@@ -59,7 +59,7 @@
   });
 
   async function handleSubmit(val: any) {
-    msg(JSON.stringify(val));
+    message?.info(JSON.stringify(val));
   }
 
   async function submitAll() {

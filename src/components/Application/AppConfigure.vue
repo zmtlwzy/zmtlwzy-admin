@@ -1,16 +1,14 @@
 <script setup lang="ts">
   import { useCssVar, useBreakpoints } from '@vueuse/core';
   import { kebabCase } from 'lodash-es';
-  import { useThemeVars, useLoadingBar } from 'naive-ui';
+  import { useThemeVars } from 'naive-ui';
 
   import { createAppProviderContext } from './useAppContext';
   import { prefixCls as _prefixCls } from '/@/settings/designSetting';
   import { useAppStore } from '/@/store/modules/app';
 
   import initDarkMode from '/@/composables/web/useChaneTheme';
-  import initMessage from '/@/composables/web/useMessage';
   import { useTitle } from '/@/composables/web/useTitle';
-  // import { useI18n } from '/@/composables/web/useI18n';
   import { getBreakpoint, sizeEnum } from '/@/enums/breakpointEnum';
   import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
 
@@ -21,7 +19,6 @@
   const el = document.documentElement;
   const prefix = '--app';
 
-  // const { t } = useI18n();
   const isMobile = ref(false);
   const isSetState = ref(false);
 
@@ -84,11 +81,10 @@
   );
 
   initDarkMode();
-  initMessage();
   // Listening to page changes and dynamically changing site titles
   useTitle();
 
-  window.$loadingBar = useLoadingBar();
+  // window.$loadingBar = useLoadingBar();
 
   function handleRestoreState() {
     if (unref(isMobile)) {

@@ -12,13 +12,14 @@ import { getToken } from '/@/utils/auth';
 import { setObjToUrlParams, deepMerge } from '/@/utils';
 import { useErrorLogStoreWithOut } from '/@/store/modules/errorLog';
 import { useI18n } from '/@/composables/web/useI18n';
-import useWrapperMessage from '/@/composables/web/useMessage';
+import useDiscreteApi from '/@/composables/web/useDiscreteApi';
 import { useGlobSetting } from '/@/composables/setting';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { useUserStoreWithOut } from '/@/store/modules/user';
 
 const globSetting = useGlobSetting();
 const { urlPrefix } = globSetting;
+const { dialog, message: createMessage } = useDiscreteApi();
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -73,9 +74,8 @@ const transform: AxiosTransform = {
 
     // errorMessageMode=‘modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
     // errorMessageMode='none' 一般是调用时明确表示不希望自动弹出错误提示
-    const { createDialog, createMessage } = useWrapperMessage();
     if (options.errorMessageMode === 'modal') {
-      createDialog?.error({ title: t('sys.api.errorTip'), content: timeoutMsg });
+      dialog?.error({ title: t('sys.api.errorTip'), content: timeoutMsg });
     } else if (options.errorMessageMode === 'message') {
       createMessage?.error(timeoutMsg);
     }
@@ -171,9 +171,8 @@ const transform: AxiosTransform = {
       }
 
       if (errMessage) {
-        const { createDialog, createMessage } = useWrapperMessage();
         if (errorMessageMode === 'modal') {
-          createDialog?.error({ title: t('sys.api.errorTip'), content: errMessage });
+          dialog?.error({ title: t('sys.api.errorTip'), content: errMessage });
         } else if (errorMessageMode === 'message') {
           createMessage?.error(errMessage);
         }

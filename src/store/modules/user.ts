@@ -9,7 +9,7 @@ import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
 import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
 import { useI18n } from '/@/composables/web/useI18n';
-import useWrapperMessage from '/@/composables/web/useMessage';
+import useDiscreteApi from '/@/composables/web/useDiscreteApi';
 import { router } from '/@/router';
 import { usePermissionStore } from '/@/store/modules/permission';
 import { RouteRecordRaw } from 'vue-router';
@@ -156,9 +156,9 @@ export const useUserStore = defineStore({
      * @description: Confirm before logging out
      */
     confirmLoginOut() {
-      const { createConfirm } = useWrapperMessage();
+      const { confirm } = useDiscreteApi();
       const { t } = useI18n();
-      createConfirm?.warning({
+      confirm?.warning({
         title: t('sys.app.logoutTip'),
         content: t('sys.app.logoutMessage'),
         onPositiveClick: async () => {
