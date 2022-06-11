@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/zmtlwzy/zmtlwzy-admin/compare/0.2.0...0.2.5)(2022-06-11)
+
+### Features
+
+* add mixSidebarTrigger setting ([3e11c6f](https://github.com/zmtlwzy/zmtlwzy-admin/commit/3e11c6f824d67f23b3b75f9c6ca8ff4934111aa0))
+* add prefetch componets ([c351a46](https://github.com/zmtlwzy/zmtlwzy-admin/commit/c351a463f67eabfa26cffec0dea10ca94e92a063))
+* add upload server test ([6530f52](https://github.com/zmtlwzy/zmtlwzy-admin/commit/6530f52adb031a6ad66ec924d94a727d6714a321))
+* **demo:** update useForm demo page ([769d5b2](https://github.com/zmtlwzy/zmtlwzy-admin/commit/769d5b26fd97863d825b3410b6f5ce127b73bfad))
+* **LoadingCard:** add more layout props ([db8cab7](https://github.com/zmtlwzy/zmtlwzy-admin/commit/db8cab74c0640427b4807b58b48aff457725ef98))
+
+
+### Bug Fixes
+
+* can not change themeColor in darkMode ([e8f70a3](https://github.com/zmtlwzy/zmtlwzy-admin/commit/e8f70a30965204519cf6873d46ecaea52d517d64))
+* fix themeColor change logic ([1383037](https://github.com/zmtlwzy/zmtlwzy-admin/commit/1383037265c1cb9b9002b1adf5e470f6be3c134f))
+* **msw:** iP地址环境下，[msw]headers属性参数兼容 ([7d2fb8a](https://github.com/zmtlwzy/zmtlwzy-admin/commit/7d2fb8a07b8593e9c1aba8472655e8b65d26cd71)), closes [#4](https://github.com/zmtlwzy/zmtlwzy-admin/issues/4)
+* **tableComponent:** css style fix ([48860f9](https://github.com/zmtlwzy/zmtlwzy-admin/commit/48860f9760aeab94fcdf1e90cfdbd6e6f31738bd))
+
+
 # [0.2.0](https://github.com/zmtlwzy/zmtlwzy-admin/compare/0.1.1...0.2.0) (2022-04-03)
 
 
