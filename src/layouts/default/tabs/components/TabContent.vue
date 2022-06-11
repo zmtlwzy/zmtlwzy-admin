@@ -1,7 +1,7 @@
 <script lang="tsx">
   import type { PropType } from 'vue';
   import type { RouteLocationNormalized } from 'vue-router';
-  import type { PopoverTrigger } from 'naive-ui';
+  import type { PopoverTrigger, DropdownOption } from 'naive-ui';
 
   import { NDropdown } from 'naive-ui';
 
@@ -76,6 +76,10 @@
         clickOutside();
       }
 
+      function renderIcon(option: DropdownOption) {
+        return <i class={option.iconName + ' z-1 text-4'} />;
+      }
+
       return () => {
         return (
           <>
@@ -92,6 +96,8 @@
               onSelect={onHandleSelect}
               onClickoutside={unref(ClickOutsize)}
               options={unref(getDropMenuList)}
+              render-label={({ label }) => label}
+              render-icon={renderIcon}
               trigger={unref(getTrigger)}
               placement={unref(getPlacement)}
             >

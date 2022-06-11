@@ -70,12 +70,9 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: Comp
       {
         key: MenuEventEnum.TOGGLE_FULL_SCREEN,
         label: t('layout.multipleTab.toggleFullScreen'),
-        icon: () =>
-          getIsUnFold.value ? (
-            <i-radix-icons-exit-full-screen />
-          ) : (
-            <i-radix-icons-enter-full-screen />
-          ),
+        iconName: getIsUnFold.value
+          ? 'i-radix-icons-exit-full-screen'
+          : 'i-radix-icons-enter-full-screen',
       },
       {
         type: 'divider',
@@ -85,25 +82,25 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: Comp
         key: MenuEventEnum.CLOSE_LEFT,
         label: t('layout.multipleTab.closeLeft'),
         disabled: closeLeftDisabled,
-        icon: () => <i-line-md-arrow-close-left />,
+        iconName: 'i-ph:arrow-line-left-bold',
       },
       {
         key: MenuEventEnum.CLOSE_RIGHT,
         label: t('layout.multipleTab.closeRight'),
         disabled: closeRightDisabled,
-        icon: () => <i-line-md-arrow-close-right />,
+        iconName: 'i-ph:arrow-line-right-bold',
       },
       {
         key: MenuEventEnum.CLOSE_OTHER,
         label: t('layout.multipleTab.closeOther'),
         disabled: disabled || !isCurItem,
-        icon: () => <i-dashicons-align-center />,
+        iconName: 'i-dashicons:align-center',
       },
       {
         key: MenuEventEnum.CLOSE_ALL,
         label: t('layout.multipleTab.closeAll'),
         disabled,
-        icon: () => <i-clarity-minus-line />,
+        iconName: 'i-clarity:minus-line',
       },
     ];
 
