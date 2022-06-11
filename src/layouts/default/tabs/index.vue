@@ -181,34 +181,35 @@
           margin-left: -1px;
         }
 
-        .n-tabs-tab-wrapper {
-          .n-tabs-tab {
-            .n-tabs-tab__close {
-              &::before {
-                content: '';
-                display: inline-block;
-                z-index: -1;
-                top: calc(50% - 10px);
-                left: calc(50% - 10px);
-                position: absolute;
-                width: 20px;
-                height: 20px;
-                border-radius: 5px;
-                background-color: transparent;
-              }
+        // IN 2.30.0 closeIcon add hover background
+        // .n-tabs-tab-wrapper {
+        //   .n-tabs-tab {
+        //     .n-tabs-tab__close {
+        //       &::before {
+        //         content: '';
+        //         display: inline-block;
+        //         z-index: -1;
+        //         top: calc(50% - 10px);
+        //         left: calc(50% - 10px);
+        //         position: absolute;
+        //         width: 20px;
+        //         height: 20px;
+        //         border-radius: 5px;
+        //         background-color: transparent;
+        //       }
 
-              &:hover::before {
-                background-color: var(--app-pressed-color);
-              }
-            }
+        //       &:hover::before {
+        //         background-color: var(--app-pressed-color);
+        //       }
+        //     }
 
-            &.n-tabs-tab--active .n-tabs-tab__close {
-              &:hover::before {
-                background-color: var(--app-hover-color);
-              }
-            }
-          }
-        }
+        //     &.n-tabs-tab--active .n-tabs-tab__close {
+        //       &:hover::before {
+        //         background-color: var(--app-hover-color);
+        //       }
+        //     }
+        //   }
+        // }
       }
     }
   }
