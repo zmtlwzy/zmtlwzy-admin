@@ -557,8 +557,7 @@
 
 <style lang="less" scoped>
   .isFull {
-    width: 100%;
-    justify-content: flex-start;
+    flex: 1;
   }
 
   .unfold-icon {

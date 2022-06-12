@@ -26,7 +26,7 @@ export const step1Schemas: FormSchema[] = [
         component: 'NSelect',
         defaultValue: 'zfb',
         componentProps: {
-          style: 'width:30%',
+          style: { flex: 3 },
           clearable: false,
           options: [
             {
@@ -45,7 +45,7 @@ export const step1Schemas: FormSchema[] = [
         component: 'NInput',
         defaultValue: 'test@example.com',
         componentProps: {
-          style: 'width:70%',
+          style: { flex: 7 },
         },
       },
     ],

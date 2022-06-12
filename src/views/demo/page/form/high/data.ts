@@ -47,7 +47,7 @@ export const schemas: FormSchema[] = [
         field: 'f2',
         component: 'NInputGroupLabel',
         isFull: false,
-        defaultSlot: 'com',
+        defaultSlot: '.com',
       },
     ],
   },
@@ -55,7 +55,6 @@ export const schemas: FormSchema[] = [
     field: 'f3',
     component: 'NSelect',
     label: '仓库管理员',
-    required: true,
     componentProps: {
       options: basicOptions,
     },
@@ -64,7 +63,6 @@ export const schemas: FormSchema[] = [
     field: 'f4',
     component: 'NSelect',
     label: '审批人',
-    required: true,
     componentProps: {
       options: basicOptions,
     },
@@ -73,7 +71,6 @@ export const schemas: FormSchema[] = [
     field: 'f5',
     component: 'NDateRangePicker',
     label: '生效日期',
-    required: true,
     componentProps: {
       type: 'daterange',
     },
@@ -85,6 +82,38 @@ export const schemas: FormSchema[] = [
     required: true,
     componentProps: {
       options: storeTypeOptions,
+    },
+  },
+  {
+    field: 'f7',
+    component: 'NInputGroup',
+    label: '结束时间',
+    childrens: [
+      {
+        field: ['f7', 'date'],
+        component: 'NDatePicker',
+      },
+      {
+        field: ['f7', 'time'],
+        component: 'NTimePicker',
+      },
+    ],
+  },
+  {
+    field: 'f8',
+    component: 'NInput',
+    label: '仓库描述',
+    giProps: {
+      span: 2,
+    },
+    componentProps: {
+      type: 'textarea',
+      placeholder: '自动调整尺寸',
+      autosize: {
+        minRows: 2,
+        maxRows: 5,
+      },
+      size: 'small',
     },
   },
 ];
