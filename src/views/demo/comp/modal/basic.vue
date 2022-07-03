@@ -34,7 +34,7 @@
     closeModal();
   }
 
-  function handleDrag() {
-    console.log(...arguments);
+  function handleDrag(...args) {
+    console.log(...args);
   }
 </script>

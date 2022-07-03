@@ -23,7 +23,7 @@
       </div>
       <div v-if="!getRowEditable" class="editable-cell-action">
         <n-icon class="mx-2 cursor-pointer">
-          <i-ant-design-check-outlined @click="(handleSubmit as Fn)" />
+          <i-ant-design-check-outlined @click="handleSubmit as Fn" />
         </n-icon>
         <n-icon class="mx-2 cursor-pointer">
           <i-ant-design-close-outlined @click="handleCancel" />
@@ -156,7 +156,7 @@
           el?.focus?.();
         });
       }
-      async function handleChange(e: any) {
+      async function handleChange(e: any, ...restArgs) {
         const component = unref(getComponent);
         if (!e) {
           currentValueRef.value = e;
@@ -172,7 +172,7 @@
         //   currentValueRef.value = format(currentValueRef.value,'yyyy-MM-dd HH:mm:ss');
         // }
         const onChange = props.column?.editComponentProps?.onChange;
-        if (onChange && isFunction(onChange)) onChange(...arguments);
+        if (onChange && isFunction(onChange)) onChange(e, ...restArgs);
         table.emit?.('edit-change', {
           column: props.column,
           value: unref(currentValueRef),
