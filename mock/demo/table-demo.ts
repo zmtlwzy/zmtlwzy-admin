@@ -16,7 +16,7 @@ const demoList = (pageSize: number) => {
       id: faker.finance.account(5),
       beginTime: format(new Date(faker.date.past(5)), 'yyyy-MM-dd HH:mm:ss'),
       endTime: format(new Date(faker.date.future(5)), 'yyyy-MM-dd HH:mm:ss'),
-      address: faker.address.cityPrefix(),
+      address: faker.address.city(),
       name: faker.name.firstName(),
       avatar: faker.image.nature(200, 200, true),
       imgArr: getRandomPics(Math.ceil(Math.random() * 3) + 1),
