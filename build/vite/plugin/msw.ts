@@ -8,10 +8,11 @@ export function configMswPlugin({ VITE_USE_MOCK }: ViteEnv): Plugin {
     transform(src, id) {
       if (!VITE_USE_MOCK && id === targetPath) {
         console.log(` 🔹 Remove msw code in '${id}`);
+        const res = src
+          .replace(/import.+_createMswWorker('|");?/, '')
+          .replace(/createWorker\(\);?/, '');
         return {
-          code: src
-            .replace(`import { createWorker } from 'root/mock/_createMswWorker';`, '')
-            .replace(`createWorker();`, ''),
+          code: res,
           map: null,
         };
       }

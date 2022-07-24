@@ -40,7 +40,6 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     plugins: createVitePlugins(viteEnv, isBuild),
-
     server: {
       // Listening on all local IPs
       host: true,
@@ -69,6 +68,7 @@ export default defineConfig(({ command, mode }) => {
             output: {
               manualChunks: {
                 msw: ['msw'],
+                faker: ['@faker-js/faker'],
               },
               format: 'es',
             },

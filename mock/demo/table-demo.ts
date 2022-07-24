@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker/locale/en';
 import { format } from 'date-fns';
 import { resultSuccess } from '../_util';
 

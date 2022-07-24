@@ -72,7 +72,6 @@ declare module '@vue/runtime-core' {
     IMdiDrag: typeof import('~icons/mdi/drag')['default']
     IMySvgLogo: typeof import('~icons/my-svg/logo')['default']
     ISimpleIconsGitee: typeof import('~icons/simple-icons/gitee')['default']
-    'ISystemUicons:resetHard': typeof import('~icons/system-uicons/reset-hard')['default']
     'ITabler:refresh': typeof import('~icons/tabler/refresh')['default']
     ITablerRefreshAlert: typeof import('~icons/tabler/refresh-alert')['default']
     Loading: typeof import('./../src/components/Loading/src/Loading.vue')['default']

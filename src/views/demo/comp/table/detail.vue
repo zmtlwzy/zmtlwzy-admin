@@ -58,12 +58,12 @@
       field: 'id',
       component: 'NInput',
       label: 'ID',
+      show: () => {
+        return isEdit.value;
+      },
       componentProps: {
         disabled: true,
         placeholder: '',
-        show: () => {
-          return isEdit;
-        },
       },
     },
     {

@@ -1,14 +1,13 @@
 import { setupWorker } from 'msw';
 
-const modules = import.meta.globEager('./**/*.ts');
-// const modules = import.meta.importGlob<Record<string, any>>(['./**/*.ts', '!./**/_*.ts'], { eager: true })
+const modules = import.meta.glob('./**/*.ts', { eager: true });
 
 export const handlers = Object.entries(modules)
   .filter(([key]) => {
     return !key.includes('/_');
   })
-  .map(([_, value]) => {
-    return value.default;
+  .map((entrie: any) => {
+    return entrie[1].default;
   })
   .flat();
 
