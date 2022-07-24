@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PropType, VNodeChild } from 'vue';
+  import type { MenuInst } from 'naive-ui';
 
   import { useSplitMenu } from './useLayoutMenu';
 
@@ -39,6 +40,7 @@
       },
     },
     setup(props) {
+      const menuInstRef = ref<MenuInst | null>(null);
       const { splitType, parentPath, globalSplit } = toRefs(props);
       const { menusRef } = useSplitMenu(splitType, parentPath, globalSplit);
       const { getMenuMode, getMenuIndent, getMenuRootIndent, getCollapsed, getAccordion } =
@@ -51,6 +53,7 @@
       const menuValue = ref<Menu['key']>();
 
       const handleUpdateExpandedKeys = (e: string[]) => {
+        console.log(e, 'expand');
         expandedKeys.value = e;
       };
 
@@ -69,7 +72,7 @@
       watch(
         [currentRoute, menusRef],
         async ([route, menuList]) => {
-          const { name, path } = route;
+          const { name, path, meta } = route;
           if (name === REDIRECT_NAME) return;
           menuValue.value = path;
           if (getAccordion.value && menuList && menuList.length > 0) {
@@ -77,6 +80,11 @@
             if (getIsRootType.value) {
               const parentPath = await getCurrentParentPath(path);
               menuValue.value = parentPath as string;
+            } else if (meta.currentActiveMenu) {
+              menuValue.value = meta.currentActiveMenu;
+              nextTick(() => {
+                menuInstRef.value?.showOption(meta.currentActiveMenu);
+              });
             } else {
               allPath.length >= 2 && allPath.pop();
               expandedKeys.value = allPath;
@@ -120,6 +128,7 @@
         getRealCollapsed,
         getInverted: toRef(props, 'inverted'),
         menuValue,
+        menuInstRef,
         menusRef,
         expandedKeys,
         handleUpdateExpandedKeys,
@@ -136,6 +145,7 @@
 
 <template>
   <NMenu
+    ref="menuInstRef"
     v-model:value="menuValue"
     :mode="getRealMenuMode"
     key-field="path"

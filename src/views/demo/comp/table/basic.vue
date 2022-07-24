@@ -14,13 +14,21 @@
       @update:checked-row-keys="onCheckedRow"
     >
       <template #tableTitle>
-        <n-button type="primary" @click="addTable">
+        <n-button type="primary" @click="addTable" class="mr-2">
           <template #icon>
             <n-icon>
               <i-ant-design-plus-outlined />
             </n-icon>
           </template>
-          新建
+          弹窗创建
+        </n-button>
+        <n-button type="primary" @click="router.push('/comp/table/basic-table-detail')">
+          <template #icon>
+            <n-icon>
+              <i-ant-design-plus-outlined />
+            </n-icon>
+          </template>
+          页面创建
         </n-button>
       </template>
 
@@ -51,6 +59,7 @@
   import { schemas, modelSchemas } from './data';
 
   const formRef: any = ref(null);
+  const router = useRouter();
   const { message } = useDiscreteApi();
   const actionRef = ref();
   const showModal = ref(false);
@@ -165,7 +174,9 @@
   }
   function handleEdit(record: Recordable) {
     console.log('点击了编辑', record);
-    message.info('点击了编辑');
+    // message.info('点击了编辑');
+    console.log('router');
+    router.push(`/comp/table/basic-table-detail/${record.id}`);
   }
   function handleDelete(record: Recordable) {
     console.log('点击了删除', record);

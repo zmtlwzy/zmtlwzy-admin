@@ -31,6 +31,17 @@ const routes: AppRouteModule = {
             title: t('routes.demo.table.basic'),
           },
         },
+        {
+          path: 'basic-table-detail/:id?',
+          name: 'TableBasicDemoDetail',
+          component: () => import('/@/views/demo/comp/table/detail.vue'),
+          meta: {
+            title: '表格详情页',
+            hideMenu: true,
+            hideTab: true,
+            currentActiveMenu: '/comp/table/basic-table',
+          },
+        },
       ],
     },
     {
