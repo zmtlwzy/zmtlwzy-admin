@@ -53,13 +53,17 @@ export default defineConfig(({ command, mode }) => {
       cssTarget: 'chrome95',
       outDir: OUTPUT_DIR,
 
-      minify: 'terser',
-      terserOptions: {
-        compress: {
-          keep_infinity: true,
-          drop_console: VITE_DROP_CONSOLE,
-        },
+      esbuild: {
+        pure: VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],
       },
+
+      // minify: 'terser',
+      // terserOptions: {
+      //   compress: {
+      //     keep_infinity: true,
+      //     drop_console: VITE_DROP_CONSOLE,
+      //   },
+      // },
       rollupOptions: VITE_USE_MOCK
         ? {
             output: {
