@@ -1,6 +1,6 @@
 import type { PropType } from 'vue';
 import { propTypes } from '/@/utils/propTypes';
-import { dataTableProps } from 'naive-ui/es/data-table/src/DataTable';
+import { dataTableProps } from 'naive-ui';
 import { BasicColumn } from './types/table';
 // import { NDataTable } from 'naive-ui';
 

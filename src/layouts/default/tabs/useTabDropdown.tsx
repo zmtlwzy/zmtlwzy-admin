@@ -4,7 +4,7 @@ import type { ComputedRef } from 'vue';
 import type { RouteLocationNormalized } from 'vue-router';
 import { MenuEventEnum } from './types';
 
-import { and, not } from '@vueuse/core';
+import { logicAnd, logicNot } from '@vueuse/math';
 import { useMultipleTabStore } from '/@/store/modules/multipleTab';
 import { useTabs } from '/@/composables/web/useTabs';
 import { useI18n } from '/@/composables/web/useI18n';
@@ -29,7 +29,7 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: Comp
   const { getShowMenu, setMenuSetting } = useMenuSetting();
   const { getShowHeader, setHeaderSetting } = useHeaderSetting();
 
-  const getIsUnFold = and(not(getShowMenu), not(getShowHeader));
+  const getIsUnFold = logicAnd(logicNot(getShowMenu), logicNot(getShowHeader));
 
   function handleFold() {
     const isUnFold = getIsUnFold.value;

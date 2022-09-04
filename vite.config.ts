@@ -97,14 +97,14 @@ export default defineConfig(({ command, mode }) => {
     },
 
     optimizeDeps: {
-      include: ['vue', 'vue-router', '@vueuse/core', '@iconify/iconify'],
+      include: ['echarts'],
     },
 
     test: {
       include: ['test/**/*.test.ts'],
       environment: 'jsdom',
       deps: {
-        inline: ['@vue', '@vueuse', 'vue-demi'],
+        inline: ['@vue', '@vueuse', 'vue-demi', 'date-fns'],
       },
     },
   };

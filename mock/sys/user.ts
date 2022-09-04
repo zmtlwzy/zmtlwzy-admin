@@ -1,5 +1,4 @@
 import { rest } from 'msw';
-import type { requestParams } from '../_type';
 import { getRequestToken, resultError, resultSuccess } from '../_util';
 
 export function createFakeUserList() {
@@ -45,19 +44,20 @@ const fakeCodeList: any = {
   2: ['2000', '4000', '6000'],
 };
 export default [
-  rest.post('/basic-api/login', (req, res, ctx) => {
-    const { username, password } = req.body as any;
+  rest.post('/basic-api/login', async (req, res, ctx) => {
+
+    const body = await req.json()
     let json: Record<string, unknown> = resultError('Incorrect account or password！');
     const checkUser = createFakeUserList().find(
-      (item) => item.username === username && password === item.password
+      (item) => item.username === body.username && body.password === item.password
     );
     if (checkUser) {
-      const { userId, username: _username, token, realName, desc, roles } = checkUser;
-      console.log('登录成功')
+      const { userId, username, token, realName, desc, roles } = checkUser;
+      console.log('登录成功');
       json = resultSuccess({
         roles,
         userId,
-        username: _username,
+        username,
         token,
         realName,
         desc,
@@ -66,7 +66,7 @@ export default [
     return res(ctx.delay(200), ctx.json(json));
   }),
   rest.get('/basic-api/getUserInfo', (req, res, ctx) => {
-    const token = getRequestToken(req as unknown as requestParams);
+    const token = getRequestToken(req);
     let json: Record<string, unknown> = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);
@@ -76,7 +76,7 @@ export default [
     return res(ctx.json(json));
   }),
   rest.get('/basic-api/getPermCode', (req, res, ctx) => {
-    const token = getRequestToken(req as unknown as requestParams);
+    const token = getRequestToken(req);
     let json: Record<string, unknown> = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);
@@ -91,7 +91,7 @@ export default [
   }),
 
   rest.get('/basic-api/logout', (req, res, ctx) => {
-    const token = getRequestToken(req as unknown as requestParams);
+    const token = getRequestToken(req);
     let json: Record<string, unknown> = resultError('Invalid token');
     if (token) {
       const checkUser = createFakeUserList().find((item) => item.token === token);

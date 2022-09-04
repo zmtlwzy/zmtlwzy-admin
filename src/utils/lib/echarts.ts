@@ -8,6 +8,7 @@ import {
   PictorialBarChart,
   RadarChart,
   GaugeChart,
+  CustomChart
 } from 'echarts/charts';
 
 import {
@@ -44,6 +45,7 @@ echarts.use([
   MapChart,
   RadarChart,
   GaugeChart,
+  CustomChart,
   SVGRenderer,
   PictorialBarChart,
   RadarComponent,

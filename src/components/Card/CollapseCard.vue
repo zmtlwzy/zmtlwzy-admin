@@ -20,7 +20,7 @@
 <script setup lang="ts">
   import { omit } from 'lodash-es';
   import { CardProps } from 'naive-ui';
-  import NFadeInExpandTransition from 'naive-ui/lib/_internal/fade-in-expand-transition';
+  import NFadeInExpandTransition from '/@/components/FadeInExpandTransition';
   import { useDesign } from '/@/composables/web/useDesign';
 
   const slots = useSlots();

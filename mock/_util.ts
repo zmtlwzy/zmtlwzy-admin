@@ -1,5 +1,5 @@
 // Interface data format used to return a unified format
-import type { requestParams } from './_type'
+import type { MockedRequest } from 'msw';
 
 export function resultSuccess<T = Recordable>(result: T, { message = 'ok' } = {}) {
   return {
@@ -51,6 +51,10 @@ export function pagination<T = any>(pageNo: number, pageSize: number, array: T[]
  * @description 本函数用于从request数据中获取token，请根据项目的实际情况修改
  *
  */
-export function getRequestToken(req: requestParams) {
-  return req?.headers?._headers?.authorization || req?.headers?.headers?.authorization
+export function getRequestToken(req: MockedRequest) {
+  const symbolKey = Reflect.ownKeys(req.headers)
+  .find(key => {
+    return key.toString() === 'Symbol(normalizedHeaders)'
+  })
+  return req.headers[symbolKey!]?.authorization
 }

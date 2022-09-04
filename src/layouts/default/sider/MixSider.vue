@@ -96,7 +96,7 @@
   const activePath = ref('');
   const childrenMenus = ref<Menu[]>();
   const openSecMenu = ref(false);
-  const sideRef = ref() as unknown as MaybeElementRef<HTMLDivElement>;
+  const sideRef = ref() as MaybeElementRef<HTMLDivElement>;
   const secMenuBorder = reactive<CSSProperties>({
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',

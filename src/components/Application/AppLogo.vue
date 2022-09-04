@@ -29,7 +29,7 @@
   } from '@vueuse/core';
   import { clamp } from 'lodash-es';
   import { layoutSiderCollapsedWidth } from '/@/settings/designSetting';
-  import { formatLength } from 'naive-ui/lib/_utils';
+  import { formatLength } from '/@/utils/css';
   import { useDesign } from '/@/composables/web/useDesign';
   import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
   import { useGlobSetting } from '/@/composables/setting';
@@ -56,8 +56,8 @@
   const { getMenuWidth, getMobileWidth, getMenuRootIndent, getCollapsed } = useMenuSetting();
   const { getIsMobile } = useAppInject();
 
-  const wrapperEl = ref() as unknown as MaybeElementRef<HTMLDivElement>;
-  const titleEl = ref() as unknown as MaybeElementRef<HTMLDivElement>;
+  const wrapperEl = ref() as MaybeElementRef<HTMLDivElement>;
+  const titleEl = ref() as MaybeElementRef<HTMLDivElement>;
   const clip = ref(`inset(0px ${props.collapsed ? 100 : 0}% 0px 0px)`);
 
   watch([wrapperEl, titleEl, () => props.showTitle], () => {

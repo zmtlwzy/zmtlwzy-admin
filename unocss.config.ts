@@ -12,7 +12,7 @@ import {
   transformerVariantGroup,
 } from 'unocss';
 import { getWindiBreakpoint } from './src/enums/breakpointEnum';
-import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
+import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders';
 
 export default defineConfig({
   include: [
@@ -83,7 +83,7 @@ export default defineConfig({
     presetWind(),
     presetIcons({
       warn: true,
-      mode: 'background-img',
+      // mode: 'background-img',
       collections: {
         'my-svg': FileSystemIconLoader(path.resolve(process.cwd(), 'src/assets/icons')),
       },
@@ -92,9 +92,9 @@ export default defineConfig({
       },
       customizations: {
         customize(props) {
-          props.width = '1em'
-          props.height = '1em'
-          return props
+          props.width = '1em';
+          props.height = '1em';
+          return props;
         },
       },
     }),

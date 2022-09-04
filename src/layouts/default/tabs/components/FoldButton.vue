@@ -5,7 +5,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { and, not } from '@vueuse/core';
+  import { logicAnd, logicNot } from '@vueuse/math';
 
   import { useDesign } from '/@/composables/web/useDesign';
   import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting';
@@ -15,7 +15,7 @@
   const { getShowMenu, setMenuSetting } = useMenuSetting();
   const { getShowHeader, setHeaderSetting } = useHeaderSetting();
 
-  const getIsUnFold = and(not(getShowMenu), not(getShowHeader));
+  const getIsUnFold = logicAnd(logicNot(getShowMenu), logicNot(getShowHeader));
 
   function handleFold() {
     const isUnFold = getIsUnFold.value;

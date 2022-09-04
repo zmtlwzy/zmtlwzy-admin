@@ -25,7 +25,7 @@
   import type { StyleValue } from 'vue';
   import { useElementSize, MaybeElementRef } from '@vueuse/core';
   import { isBoolean } from 'lodash-es';
-  import { formatLength } from 'naive-ui/lib/_utils';
+  import { formatLength } from '/@/utils/css';
   import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal';
 
   import { useDesign } from '/@/composables/web/useDesign';

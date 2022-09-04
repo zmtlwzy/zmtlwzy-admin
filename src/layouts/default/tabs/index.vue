@@ -58,7 +58,7 @@
     components: { TabRedo, TabContent },
     setup() {
       initAffixTabs();
-      const tabsElRef = ref() as unknown as MaybeElementRef<HTMLDivElement>;
+      const tabsElRef = ref() as MaybeElementRef<HTMLDivElement>;
       const activeKeyRef = ref<string>();
 
       const router = useRouter();

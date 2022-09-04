@@ -1,6 +1,6 @@
 import { Plugin, splitVendorChunkPlugin } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import defineOptions from 'unplugin-vue-define-options/vite';
+import vueMacros from 'unplugin-vue-macros/vite';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
 // https://github.com/antfu/unocss
@@ -15,8 +15,8 @@ import { configMswPlugin } from './msw';
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const vitePlugins: (Plugin | Plugin[])[] = [
-    vue(),
-    defineOptions(),
+    vueMacros(), // must be before Vue plugin!
+    vue({ reactivityTransform: true }),
     splitVendorChunkPlugin(),
     vueJsx(),
     unocss(),
