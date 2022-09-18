@@ -1,7 +1,13 @@
 <template>
   <n-card>
     <div class="flex-jb-ac flex-col">
-      <n-avatar :src="userinfo.avatar || headerImg" round :size="108" class="mb-6" />
+      <n-avatar
+        :src="userinfo.avatar || headerImg"
+        object-fit="cover"
+        round
+        :size="108"
+        class="mb-6"
+      />
       <div class="font-semibold text-lg font-segoe">{{ userinfo.realName }}</div>
       <div>日月之行，若出其中</div>
     </div>

@@ -5,7 +5,7 @@
       <BasicForm @register="register" @submit="handleSubmit" />
 
       <div class="mt-12 ml-12 <md:row-start-1">
-        <n-avatar :src="userinfo.avatar" round :size="108" class="mb-6" />
+        <n-avatar :src="userinfo.avatar" round object-fit="cover" :size="108" class="mb-6" />
         <n-upload
           action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
           :headers="{

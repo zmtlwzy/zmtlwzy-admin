@@ -84,7 +84,13 @@
             width="trigger"
           >
             <div class="app-layout-header-anction-icon">
-              <NAvatar class="mr-3" src={getUserInfo.value.avatar} round size={24} />
+              <NAvatar
+                class="mr-3"
+                src={getUserInfo.value.avatar}
+                objectFit="cover"
+                round
+                size={24}
+              />
               <span class="text-14px text-$text-color">{getUserInfo.value.realName}</span>
             </div>
           </NDropdown>

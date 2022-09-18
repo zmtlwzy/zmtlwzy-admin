@@ -2,7 +2,7 @@
   <div class="lg:flex">
     <div class="flex items-center space-x-2">
       <div class="w-72px mr-3">
-        <n-avatar :src="userinfo.avatar || headerImg" round :size="72" />
+        <n-avatar :src="userinfo.avatar || headerImg" object-fit="cover" round :size="72" />
       </div>
       <div class="flex flex-col space-y-2">
         <span class="text-lg mb-2"> 晚上好，{{ userinfo.realName }}，今天记得加班哦！ </span>

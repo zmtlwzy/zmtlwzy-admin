@@ -7,6 +7,7 @@
   import { prefixCls as _prefixCls } from '/@/settings/designSetting';
   import { useAppStore } from '/@/store/modules/app';
 
+  import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal';
   import useChangeTheme from '/@/composables/web/useChaneTheme';
   import { useTitle } from '/@/composables/web/useTitle';
   import { getBreakpoint, sizeEnum } from '/@/enums/breakpointEnum';
@@ -75,15 +76,17 @@
     return [useCssVar(`${prefix}-${kebabCase(alias ?? keyName)}`, el), keyName] as const;
   }
 
+  const { color: darkComBgColor } = getNaiveCssVars('Modal', true);
+
   watch(
     darkModeRef,
     (val) => {
       switch (val) {
         case ThemeEnum.DARK:
-          appComBgColorRef.value = themeVars.value.modalColor;
+          appComBgColorRef.value = darkComBgColor;
           break;
         case ThemeEnum.LIGHT:
-          appComBgColorRef.value = themeVars.value.tableHeaderColor;
+          appComBgColorRef.value = '#fff';
           break;
         default:
           break;
@@ -95,6 +98,7 @@
   watch(
     themeVars,
     (list) => {
+      console.log(list, 'list');
       for (const [key, val] of cssVarsMap) {
         key.value = list[val] ?? val;
       }
