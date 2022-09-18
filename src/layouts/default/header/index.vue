@@ -31,6 +31,7 @@
         </ScrollContainer>
       </div>
       <div class="flex-ac h-full">
+        <AppSearch />
         <Notify v-if="!getIs2xs" />
         <AppLocalePicker v-if="getShowLocalePicker" trigger-cls="app-layout-header-anction-icon" />
         <FullScreen v-if="!getIs2xs" />
@@ -43,6 +44,7 @@
 <script lang="ts">
   import { propTypes } from '/@/utils/propTypes';
   import { LayoutBreadcrumb, FullScreen, Notify, UserDropDown } from './components';
+  import AppSearch from '/@/components/Application/Search/index.vue';
   import Trigger from '../trigger/index.vue';
   import LayoutMenu from '../menu/index.vue';
 
@@ -63,6 +65,7 @@
       Trigger,
       LayoutBreadcrumb,
       LayoutMenu,
+      AppSearch,
       FullScreen,
       Notify,
       UserDropDown,
