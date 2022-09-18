@@ -174,7 +174,7 @@
       position: relative;
       width: 632px;
       margin: 0 auto auto;
-      background-color: var(--app-hover-color);
+      background-color: var(--app-component-bg-color);
       border-radius: 8px;
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%);
       flex-direction: column;

@@ -7,9 +7,10 @@
   import { prefixCls as _prefixCls } from '/@/settings/designSetting';
   import { useAppStore } from '/@/store/modules/app';
 
-  import initDarkMode from '/@/composables/web/useChaneTheme';
+  import useChangeTheme from '/@/composables/web/useChaneTheme';
   import { useTitle } from '/@/composables/web/useTitle';
   import { getBreakpoint, sizeEnum } from '/@/enums/breakpointEnum';
+  import { ThemeEnum } from '/@/enums/appEnum';
   import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
 
   const props = defineProps({
@@ -23,6 +24,7 @@
   const isSetState = ref(false);
 
   const appStore = useAppStore();
+  const [darkModeRef] = useChangeTheme();
 
   // Monitor screen breakpoint information changes
   const breakpoints = useBreakpoints(getBreakpoint);
@@ -62,13 +64,33 @@
     ['cubicBezierEaseOut', 'bezier-out'],
   ];
 
+  const appComBgColorRef = useCssVar(`${prefix}-component-bg-color`, el);
   useCssVar(`${prefix}-transition-duration`, el).value = '.3s';
+
   for (const item of cssVarsList) {
     cssVarsMap.set(...genCssVarMapParameters(...item));
   }
+
   function genCssVarMapParameters(keyName: string, alias?: string) {
     return [useCssVar(`${prefix}-${kebabCase(alias ?? keyName)}`, el), keyName] as const;
   }
+
+  watch(
+    darkModeRef,
+    (val) => {
+      switch (val) {
+        case ThemeEnum.DARK:
+          appComBgColorRef.value = themeVars.value.modalColor;
+          break;
+        case ThemeEnum.LIGHT:
+          appComBgColorRef.value = themeVars.value.tableHeaderColor;
+          break;
+        default:
+          break;
+      }
+    },
+    { immediate: true }
+  );
 
   watch(
     themeVars,
@@ -80,7 +102,6 @@
     { immediate: true }
   );
 
-  initDarkMode();
   // Listening to page changes and dynamically changing site titles
   useTitle();
 

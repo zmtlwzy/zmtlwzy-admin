@@ -36,10 +36,10 @@
     padding: 0 16px;
     font-size: 12px;
     color: #666;
-    background-color: var(--app-hover-color);
+    background-color: var(--app-component-bg-color);
     border-top: 1px solid var(--app-border-color);
     border-radius: 0 0 16px 16px;
-    box-shadow: 0 -1px 0 0 #e0e3e8a7, 0 -3px 6px 0 rgba(69, 98, 155, 0.07);
+    box-shadow: 0 -1px 0 0 #e0e3e853, 0 -3px 6px 0 rgba(69, 98, 155, 0.07);
     align-items: center;
     flex-shrink: 0;
 
