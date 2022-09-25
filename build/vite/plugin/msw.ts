@@ -1,5 +1,6 @@
 import type { Plugin } from 'vite';
 import { resolve } from 'path';
+import pc from 'picocolors';
 
 const targetPath = resolve(process.cwd(), '.', 'src/main.ts').replace(/\\/g, '/');
 export function configMswPlugin({ VITE_USE_MOCK }: ViteEnv): Plugin {
@@ -7,7 +8,7 @@ export function configMswPlugin({ VITE_USE_MOCK }: ViteEnv): Plugin {
     name: 'remove-msw',
     transform(src, id) {
       if (!VITE_USE_MOCK && id === targetPath) {
-        console.log(` 🔹 Remove msw code in '${id}`);
+        console.log(` 🔹 ${pc.white(pc.bold('Remove msw code in'))}: "${pc.green(id)}"`);
         const res = src
           .replace(/import.+_createMswWorker('|");?/, '')
           .replace(/createWorker\(\);?/, '');

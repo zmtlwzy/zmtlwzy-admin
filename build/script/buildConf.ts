@@ -3,7 +3,7 @@
  */
 import { GLOB_CONFIG_FILE_NAME, OUTPUT_DIR } from '../constant';
 import fs, { writeFileSync } from 'fs-extra';
-import chalk from 'chalk';
+import pc from 'picocolors';
 
 import { getEnvConfig, getRootPath } from '../utils';
 import { getConfigFileName } from '../getConfigFileName';
@@ -31,10 +31,10 @@ function createConfig(params: CreateConfigParams) {
     fs.mkdirp(getRootPath(OUTPUT_DIR));
     writeFileSync(getRootPath(`${OUTPUT_DIR}/${configFileName}`), configStr);
 
-    console.log(chalk.cyan(`✨ [${pkg.name}]`) + ` - configuration file is build successfully:`);
-    console.log(chalk.gray(OUTPUT_DIR + '/' + chalk.green(configFileName)) + '\n');
+    console.log(pc.cyan(`✨ [${pkg.name}]`) + ` - configuration file is build successfully:`);
+    console.log(pc.gray(OUTPUT_DIR + '/' + pc.green(configFileName)) + '\n');
   } catch (error) {
-    console.log(chalk.red('configuration file configuration file failed to package:\n' + error));
+    console.log(pc.red('configuration file configuration file failed to package:\n' + error));
   }
 }
 

@@ -10,7 +10,12 @@ import { router } from '/@/router';
 import { PermissionModeEnum } from '/@/enums/appEnum';
 import { pathToRegexp } from 'path-to-regexp';
 
-const modules = import.meta.glob('./modules/**/*.ts', { eager: true });
+const modules = import.meta.glob('./modules/**/*.ts', { eager: true }) as Record<
+  string,
+  {
+    default: unknown;
+  }
+>;
 
 const menuModules: MenuModule[] = [];
 

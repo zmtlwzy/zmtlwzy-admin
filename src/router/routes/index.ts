@@ -6,7 +6,12 @@ import { mainOutRoutes } from './mainOut';
 import { PageEnum } from '/@/enums/pageEnum';
 import { t } from '/@/composables/web/useI18n';
 
-const modules = import.meta.glob('./modules/**/*.ts', { eager: true });
+const modules = import.meta.glob('./modules/**/*.ts', { eager: true }) as Record<
+  string,
+  {
+    default: unknown;
+  }
+>;
 
 const routeModuleList: AppRouteModule[] = [];
 
