@@ -11,7 +11,9 @@
             <i-logos-svelte-icon v-else />
           </n-icon>
         </template>
-        <template #header> 货币 </template>
+        <template #header>
+          货币
+        </template>
         <template #header-extra>
           <n-button circle size="small">
             <template #icon>
@@ -57,10 +59,10 @@
 </template>
 
 <script lang="ts" setup>
-  defineProps({
-    num: {
-      type: Number,
-      default: 6,
-    },
-  });
+defineProps({
+  num: {
+    type: Number,
+    default: 6,
+  },
+})
 </script>

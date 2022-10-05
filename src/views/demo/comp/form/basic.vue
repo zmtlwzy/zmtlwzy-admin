@@ -30,15 +30,15 @@
 </template>
 
 <script setup lang="ts">
-  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
-  import { schemas } from './data';
+import useDiscreteApi from '/@/composables/web/useDiscreteApi'
+import { schemas } from './data'
 
-  const { message } = useDiscreteApi();
-  const getSchemas = computed(() => schemas.slice(0, -1));
-  const handleSubmit = (formData) => {
-    message?.info(JSON.stringify(formData, null, 2), {
-      closable: true,
-      duration: 10 * 1000,
-    });
-  };
+const { message } = useDiscreteApi()
+const getSchemas = computed(() => schemas.slice(0, -1))
+const handleSubmit = (formData) => {
+  message?.info(JSON.stringify(formData, null, 2), {
+    closable: true,
+    duration: 10 * 1000,
+  })
+}
 </script>

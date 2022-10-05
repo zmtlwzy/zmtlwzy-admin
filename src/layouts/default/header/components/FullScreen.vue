@@ -9,27 +9,28 @@
     {{ getTitle }}
   </NTooltip>
 </template>
+
 <script lang="ts">
-  import { useI18n } from '/@/composables/web/useI18n';
-  import { useFullscreen } from '@vueuse/core';
+import { useI18n } from '/@/composables/web/useI18n'
+import { useFullscreen } from '@vueuse/core'
 
-  export default defineComponent({
-    name: 'FullScreen',
-    setup() {
-      const { t } = useI18n();
-      const { toggle, isFullscreen } = useFullscreen();
+export default defineComponent({
+  name: 'FullScreen',
+  setup() {
+    const { t } = useI18n()
+    const { toggle, isFullscreen } = useFullscreen()
 
-      const getTitle = computed(() =>
-        unref(isFullscreen)
-          ? t('layout.header.tooltipExitFull')
-          : t('layout.header.tooltipEntryFull')
-      );
+    const getTitle = computed(() =>
+      unref(isFullscreen)
+        ? t('layout.header.tooltipExitFull')
+        : t('layout.header.tooltipEntryFull'),
+    )
 
-      return {
-        getTitle,
-        isFullscreen,
-        toggle,
-      };
-    },
-  });
+    return {
+      getTitle,
+      isFullscreen,
+      toggle,
+    }
+  },
+})
 </script>

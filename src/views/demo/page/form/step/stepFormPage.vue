@@ -28,42 +28,42 @@
 </template>
 
 <script setup lang="ts">
-  import type { StepsProps } from 'naive-ui';
-  import { useBreakpoint } from '/@/composables/event/useBreakpoint';
-  import Step1 from './Step1.vue';
-  import Step2 from './Step2.vue';
-  import Step3 from './Step3.vue';
+import type { StepsProps } from 'naive-ui'
+import { useBreakpoint } from '/@/composables/event/useBreakpoint'
+import Step1 from './Step1.vue'
+import Step2 from './Step2.vue'
+import Step3 from './Step3.vue'
 
-  defineOptions({
-    name: 'StepFormPage',
-  });
+defineOptions({
+  name: 'StepFormPage',
+})
 
-  const current = ref(1);
-  const currentStatus = ref<StepsProps['status']>('process');
-  const initSetp2 = ref(false);
-  const initSetp3 = ref(false);
+const current = ref(1)
+const currentStatus = ref<StepsProps['status']>('process')
+const initSetp2 = ref(false)
+const initSetp3 = ref(false)
 
-  const { smaller, sizeEnum } = useBreakpoint();
-  const isVertical = smaller(sizeEnum.MD);
+const { smaller, sizeEnum } = useBreakpoint()
+const isVertical = smaller(sizeEnum.MD)
 
-  function handleStep1Next(step1Values: any) {
-    current.value++;
-    initSetp2.value = true;
-    console.log(step1Values);
-  }
+function handleStep1Next(step1Values: any) {
+  current.value++
+  initSetp2.value = true
+  console.log(step1Values)
+}
 
-  function handleStepPrev() {
-    current.value--;
-  }
+function handleStepPrev() {
+  current.value--
+}
 
-  function handleStep2Next() {
-    current.value++;
-    initSetp3.value = true;
-  }
+function handleStep2Next() {
+  current.value++
+  initSetp3.value = true
+}
 
-  function handleRedo() {
-    current.value = 1;
-    initSetp2.value = false;
-    initSetp3.value = false;
-  }
+function handleRedo() {
+  current.value = 1
+  initSetp2.value = false
+  initSetp3.value = false
+}
 </script>

@@ -18,51 +18,51 @@
 </template>
 
 <script setup lang="ts">
-  import type { PropType } from 'vue';
-  import { useRootSetting } from '/@/composables/setting/useRootSetting';
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { propTypes } from '/@/utils/propTypes';
-  import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal';
+import type { PropType } from 'vue'
+import { useRootSetting } from '/@/composables/setting/useRootSetting'
+import { useDesign } from '/@/composables/web/useDesign'
+import { propTypes } from '/@/utils/propTypes'
+import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal'
 
-  defineProps({
-    collapsed: propTypes.bool.def(false),
-    onClick: {
-      type: Function as PropType<(e: MouseEvent) => void>,
-    },
-  });
+defineProps({
+  collapsed: propTypes.bool.def(false),
+  onClick: {
+    type: Function as PropType<(e: MouseEvent) => void>,
+  },
+})
 
-  const {
-    siderToggleButtonColor: bg_color,
-    siderToggleButtonIconColor: icon_color,
-    siderToggleButtonBorder: border,
-  } = getNaiveCssVars('Layout');
-  const {
-    siderToggleBarColor: dark_bg_color,
-    siderToggleButtonIconColor: dark_icon_color,
-    siderToggleButtonBorder: dark_border,
-  } = getNaiveCssVars('Layout', true);
+const {
+  siderToggleButtonColor: bg_color,
+  siderToggleButtonIconColor: icon_color,
+  siderToggleButtonBorder: border,
+} = getNaiveCssVars('Layout')
+const {
+  siderToggleBarColor: dark_bg_color,
+  siderToggleButtonIconColor: dark_icon_color,
+  siderToggleButtonBorder: dark_border,
+} = getNaiveCssVars('Layout', true)
 
-  const { getIsDarkMode } = useRootSetting();
+const { getIsDarkMode } = useRootSetting()
 
-  const getVars = computed(() => {
-    const isDark = getIsDarkMode.value;
-    return {
-      bgColor: isDark ? dark_bg_color : bg_color,
-      iconColor: isDark ? dark_icon_color : icon_color,
-      border: isDark ? dark_border : border,
-    };
-  });
+const getVars = computed(() => {
+  const isDark = getIsDarkMode.value
+  return {
+    bgColor: isDark ? dark_bg_color : bg_color,
+    iconColor: isDark ? dark_icon_color : icon_color,
+    border: isDark ? dark_border : border,
+  }
+})
 
-  useCssVars(() => {
-    const obj = getVars.value;
-    return {
-      'toggle-button-color': obj.bgColor,
-      'toggle-button-icon-color': obj.iconColor,
-      'toggle-button-border': obj.border,
-    };
-  });
+useCssVars(() => {
+  const obj = getVars.value
+  return {
+    'toggle-button-color': obj.bgColor,
+    'toggle-button-icon-color': obj.iconColor,
+    'toggle-button-border': obj.border,
+  }
+})
 
-  const { prefixCls } = useDesign('layout-toggle-button');
+const { prefixCls } = useDesign('layout-toggle-button')
 </script>
 
 <style lang="less">

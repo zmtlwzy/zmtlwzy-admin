@@ -1,5 +1,5 @@
-import type { BasicColumn } from '/@/components/Table/src/types/table';
-import { NAvatar } from 'naive-ui';
+import type { BasicColumn } from '/@/components/Table/src/types/table'
+import { NAvatar } from 'naive-ui'
 
 export const columns = [
   {
@@ -17,11 +17,11 @@ export const columns = [
     key: 'avatar',
     width: 100,
     render(row) {
-      // @ts-ignore
+      // @ts-expect-error
       return h(NAvatar, {
         size: 48,
         src: row.avatar,
-      });
+      })
     },
   },
   {
@@ -29,7 +29,7 @@ export const columns = [
     key: 'address',
     auth: ['super'], // 同时根据权限控制是否显示
     ifShow: () => {
-      return true; // 根据业务控制是否显示
+      return true // 根据业务控制是否显示
     },
     width: 150,
   },
@@ -48,4 +48,4 @@ export const columns = [
     key: 'date',
     width: 100,
   },
-] as BasicColumn[];
+] as BasicColumn[]

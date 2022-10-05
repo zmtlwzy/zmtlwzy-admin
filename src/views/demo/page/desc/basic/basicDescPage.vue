@@ -24,21 +24,21 @@
 </template>
 
 <script setup lang="ts">
-  import { DataTableCreateSummary } from 'naive-ui';
-  import { data, data2, tableColumns, tableData, tableColumns2, tableData2 } from './data';
+import type { DataTableCreateSummary } from 'naive-ui'
+import { data, data2, tableColumns, tableColumns2, tableData, tableData2 } from './data'
 
-  const summary: DataTableCreateSummary<typeof tableData[number]> = (rowData) => {
-    return {
-      t1: {
-        colSpan: 4,
-        value: '总计',
-      },
-      t5: {
-        value: rowData.reduce((prevValue, row) => prevValue + row.t5, 0),
-      },
-      t6: {
-        value: rowData.reduce((prevValue, row) => prevValue + row.t6, 0),
-      },
-    };
-  };
+const summary: DataTableCreateSummary<typeof tableData[number]> = (rowData) => {
+  return {
+    t1: {
+      colSpan: 4,
+      value: '总计',
+    },
+    t5: {
+      value: rowData.reduce((prevValue, row) => prevValue + row.t5, 0),
+    },
+    t6: {
+      value: rowData.reduce((prevValue, row) => prevValue + row.t6, 0),
+    },
+  }
+}
 </script>

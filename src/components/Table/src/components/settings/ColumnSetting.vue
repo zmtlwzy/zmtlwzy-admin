@@ -11,15 +11,15 @@
           <template #header>
             <div class="table-toolbar-inner-popover-title">
               <n-space>
-                <n-checkbox v-model:checked="checkAll" @update:checked="onCheckAll"
-                  >列展示</n-checkbox
-                >
-                <n-checkbox v-model:checked="selection" @update:checked="onSelection"
-                  >勾选列</n-checkbox
-                >
-                <n-button text type="primary" size="small" class="mt-1" @click="resetColumns"
-                  >重置</n-button
-                >
+                <n-checkbox v-model:checked="checkAll" @update:checked="onCheckAll">
+                  列展示
+                </n-checkbox>
+                <n-checkbox v-model:checked="selection" @update:checked="onSelection">
+                  勾选列
+                </n-checkbox>
+                <n-button text type="primary" size="small" class="mt-1" @click="resetColumns">
+                  重置
+                </n-button>
               </n-space>
             </div>
           </template>
@@ -59,139 +59,141 @@
 </template>
 
 <script lang="ts">
-  import {
-    ref,
-    defineComponent,
-    reactive,
-    unref,
-    toRaw,
-    toRefs,
-    watchEffect,
-    onUnmounted,
-  } from 'vue';
-  import { SlickList, SlickItem, HandleDirective } from 'vue-slicksort';
-  import { cloneDeep } from 'lodash-es';
-  import { useTableContext } from '../../hooks/useTableContext';
+import {
+  defineComponent,
+  onUnmounted,
+  reactive,
+  ref,
+  toRaw,
+  toRefs,
+  unref,
+  watchEffect,
+} from 'vue'
+import { HandleDirective, SlickItem, SlickList } from 'vue-slicksort'
+import { cloneDeep } from 'lodash-es'
+import { useTableContext } from '../../hooks/useTableContext'
 
-  interface Options {
-    title: string;
-    key: string;
-  }
-  export default defineComponent({
-    name: 'ColumnSetting',
-    components: { SlickList, SlickItem },
-    directives: { handle: HandleDirective },
-    setup() {
-      const table: any = useTableContext();
-      const columnsList = ref<Options[]>([]);
-      const cacheColumnsList = ref<Options[]>([]);
-      const state = reactive({
-        selection: false,
-        checkAll: true,
-        checkList: [],
-        defaultCheckList: [],
-      });
-      // const getSelection = computed(() => {
-      //   return state.selection;
-      // });
-      watchEffect(() => {
-        const columns = table.getColumns();
-        if (columns.length) {
-          init();
-        }
-      });
-      // 初始化
-      function init() {
-        const columns: any[] = getColumns();
-        const checkList: any = columns.map((item) => item.key);
-        state.checkList = checkList;
-        state.defaultCheckList = checkList;
-        const newColumns = columns.filter((item) => item.key != 'action' && item.title != '操作');
-        if (!columnsList.value.length) {
-          columnsList.value = cloneDeep(newColumns);
-          cacheColumnsList.value = cloneDeep(newColumns);
-        }
+interface Options {
+  title: string
+  key: string
+}
+export default defineComponent({
+  name: 'ColumnSetting',
+  components: { SlickList, SlickItem },
+  directives: { handle: HandleDirective },
+  setup() {
+    const table: any = useTableContext()
+    const columnsList = ref<Options[]>([])
+    const cacheColumnsList = ref<Options[]>([])
+    const state = reactive({
+      selection: false,
+      checkAll: true,
+      checkList: [],
+      defaultCheckList: [],
+    })
+    // const getSelection = computed(() => {
+    //   return state.selection;
+    // });
+    watchEffect(() => {
+      const columns = table.getColumns()
+      if (columns.length)
+        init()
+    })
+    // 初始化
+    function init() {
+      const columns: any[] = getColumns()
+      const checkList: any = columns.map(item => item.key)
+      state.checkList = checkList
+      state.defaultCheckList = checkList
+      // eslint-disable-next-line eqeqeq
+      const newColumns = columns.filter(item => item.key != 'action' && item.title != '操作')
+      if (!columnsList.value.length) {
+        columnsList.value = cloneDeep(newColumns)
+        cacheColumnsList.value = cloneDeep(newColumns)
       }
-      // 切换
-      function onChange(checkList) {
-        if (state.selection) {
-          checkList.unshift('selection');
-        }
-        setColumns(checkList);
-      }
-      // 设置
-      function setColumns(columns) {
-        table.setColumns(columns);
-      }
-      // 获取
-      function getColumns() {
-        const newRet: any[] = [];
-        table.getColumns().forEach((item) => {
-          newRet.push({ ...item });
-        });
-        return newRet;
-      }
-      // 重置
-      function resetColumns() {
-        state.checkList = [...state.defaultCheckList];
-        state.checkAll = true;
-        const cacheColumnsKeys: any[] = table.getCacheColumns();
-        const newColumns = cacheColumnsKeys.map((item) => {
-          return {
-            ...item,
-          };
-        });
-        setColumns(newColumns);
-        columnsList.value = newColumns;
-      }
-      // 全选
-      function onCheckAll(e) {
-        const checkList = table.getCacheColumns(true);
-        if (e) {
-          setColumns(checkList);
-          state.checkList = checkList;
-        } else {
-          setColumns([]);
-          state.checkList = [];
-        }
-      }
-      // 拖拽排序
-      function dragStart() {
-        document.body.style.cursor = 'move';
-      }
-      function dragEnd() {
-        const newColumns = toRaw(unref(columnsList));
-        columnsList.value = newColumns;
-        setColumns(newColumns);
-        document.body.style.cursor = '';
-      }
-      onUnmounted(() => {
-        document.body.style.cursor = '';
-      });
-      // 勾选列
-      function onSelection(e) {
-        const checkList = table.getCacheColumns();
-        if (e) {
-          checkList.unshift({ type: 'selection', key: 'selection' });
-          setColumns(checkList);
-        } else {
-          checkList.splice(0, 1);
-          setColumns(checkList);
-        }
-      }
+    }
+    // 切换
+    function onChange(checkList) {
+      if (state.selection)
+        checkList.unshift('selection')
 
-      return {
-        ...toRefs(state),
-        columnsList,
-        onChange,
-        onCheckAll,
-        onSelection,
-        resetColumns,
-        dragEnd,
-        dragStart,
-      };
-    },
-  });
+      setColumns(checkList)
+    }
+    // 设置
+    function setColumns(columns) {
+      table.setColumns(columns)
+    }
+    // 获取
+    function getColumns() {
+      const newRet: any[] = []
+      table.getColumns().forEach((item) => {
+        newRet.push({ ...item })
+      })
+      return newRet
+    }
+    // 重置
+    function resetColumns() {
+      state.checkList = [...state.defaultCheckList]
+      state.checkAll = true
+      const cacheColumnsKeys: any[] = table.getCacheColumns()
+      const newColumns = cacheColumnsKeys.map((item) => {
+        return {
+          ...item,
+        }
+      })
+      setColumns(newColumns)
+      columnsList.value = newColumns
+    }
+    // 全选
+    function onCheckAll(e) {
+      const checkList = table.getCacheColumns(true)
+      if (e) {
+        setColumns(checkList)
+        state.checkList = checkList
+      }
+      else {
+        setColumns([])
+        state.checkList = []
+      }
+    }
+    // 拖拽排序
+    function dragStart() {
+      document.body.style.cursor = 'move'
+    }
+    function dragEnd() {
+      const newColumns = toRaw(unref(columnsList))
+      columnsList.value = newColumns
+      setColumns(newColumns)
+      document.body.style.cursor = ''
+    }
+    onUnmounted(() => {
+      document.body.style.cursor = ''
+    })
+    // 勾选列
+    function onSelection(e) {
+      const checkList = table.getCacheColumns()
+      if (e) {
+        checkList.unshift({ type: 'selection', key: 'selection' })
+        setColumns(checkList)
+      }
+      else {
+        checkList.splice(0, 1)
+        setColumns(checkList)
+      }
+    }
+
+    return {
+      ...toRefs(state),
+      columnsList,
+      onChange,
+      onCheckAll,
+      onSelection,
+      resetColumns,
+      dragEnd,
+      dragStart,
+    }
+  },
+})
 </script>
 
 <style lang="less">

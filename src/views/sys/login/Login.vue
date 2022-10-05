@@ -19,22 +19,23 @@
     </div>
   </div>
 </template>
+
 <script lang="ts" setup>
-  import LoginForm from './LoginForm.vue';
-  import MobileForm from './MobileForm.vue';
-  import Footer from '/@/layouts/default/footer/index.vue';
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { useLocaleStore } from '/@/store/modules/locale';
+import LoginForm from './LoginForm.vue'
+import MobileForm from './MobileForm.vue'
+import Footer from '/@/layouts/default/footer/index.vue'
+import { useDesign } from '/@/composables/web/useDesign'
+import { useLocaleStore } from '/@/store/modules/locale'
 
-  defineProps({
-    sessionTimeout: {
-      type: Boolean,
-    },
-  });
+defineProps({
+  sessionTimeout: {
+    type: Boolean,
+  },
+})
 
-  const { prefixCls } = useDesign('login');
-  const localeStore = useLocaleStore();
-  const showLocale = localeStore.getShowPicker;
+const { prefixCls } = useDesign('login')
+const localeStore = useLocaleStore()
+const showLocale = localeStore.getShowPicker
 </script>
 
 <style lang="less">

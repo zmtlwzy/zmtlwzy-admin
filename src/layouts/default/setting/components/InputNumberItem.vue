@@ -8,40 +8,40 @@
       @update-value="handleUpdate"
     >
       <template v-for="item in Object.keys($slots)" #[item]="data">
-        <slot :name="item" v-bind="data || {}"></slot>
+        <slot :name="item" v-bind="data || {}" />
       </template>
     </NInputNumber>
   </Wrapper>
 </template>
 
 <script setup lang="ts">
-  import { PropType } from 'vue';
-  import { useDebounceFn } from '@vueuse/core';
-  import { NInputNumber } from 'naive-ui';
+import type { PropType } from 'vue'
+import { useDebounceFn } from '@vueuse/core'
+import { NInputNumber } from 'naive-ui'
 
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { toWritableRef } from '/@/composables/utilities/toWritableRef';
-  import { propTypes } from '/@/utils/propTypes';
-  import { baseHandler } from '../handler';
-  import { HandlerEnum } from '../enum';
-  import Wrapper from './Wrapper.vue';
+import { useDesign } from '/@/composables/web/useDesign'
+import { toWritableRef } from '/@/composables/utilities/toWritableRef'
+import { propTypes } from '/@/utils/propTypes'
+import { baseHandler } from '../handler'
+import type { HandlerEnum } from '../enum'
+import Wrapper from './Wrapper.vue'
 
-  defineOptions({
-    inheritAttrs: false,
-  });
+const props = defineProps({
+  event: {
+    type: Number as PropType<HandlerEnum>,
+  },
+  title: propTypes.string,
+  val: propTypes.number,
+})
 
-  const props = defineProps({
-    event: {
-      type: Number as PropType<HandlerEnum>,
-    },
-    title: propTypes.string,
-    val: propTypes.number,
-  });
+defineOptions({
+  inheritAttrs: false,
+})
 
-  const { prefixCls } = useDesign('setting-input-number-item');
-  const valRef = toWritableRef(props, 'val');
+const { prefixCls } = useDesign('setting-input-number-item')
+const valRef = toWritableRef(props, 'val')
 
-  const handleUpdate = useDebounceFn((val: number) => {
-    props.event && baseHandler(props.event, val);
-  }, 200);
+const handleUpdate = useDebounceFn((val: number) => {
+  props.event && baseHandler(props.event, val)
+}, 200)
 </script>

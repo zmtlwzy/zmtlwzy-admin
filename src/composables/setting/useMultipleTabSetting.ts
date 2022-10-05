@@ -1,17 +1,17 @@
-import type { MultiTabsSetting } from '/#/config';
+import type { MultiTabsSetting } from '/#/config'
 
-import { useAppStore } from '/@/store/modules/app';
+import { useAppStore } from '/@/store/modules/app'
 
 export function useMultipleTabSetting() {
-  const appStore = useAppStore();
+  const appStore = useAppStore()
 
-  const getShowMultipleTab = computed(() => appStore.getMultiTabsSetting.show);
+  const getShowMultipleTab = computed(() => appStore.getMultiTabsSetting.show)
 
   function setMultipleTabSetting(multiTabsSetting: Partial<MultiTabsSetting>) {
-    appStore.setProjectConfig({ multiTabsSetting });
+    appStore.setProjectConfig({ multiTabsSetting })
   }
   return {
     setMultipleTabSetting,
     getShowMultipleTab,
-  };
+  }
 }

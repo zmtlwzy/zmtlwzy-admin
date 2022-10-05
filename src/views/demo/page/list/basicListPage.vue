@@ -7,5 +7,5 @@
 </template>
 
 <script lang="ts" setup>
-  import DemoList from './components/DemoList.vue';
+import DemoList from './components/DemoList.vue'
 </script>

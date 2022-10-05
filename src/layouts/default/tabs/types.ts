@@ -1,5 +1,5 @@
 // import type { DropMenu } from '/@/components/Dropdown/index';
-import type { RouteLocationNormalized } from 'vue-router';
+import type { RouteLocationNormalized } from 'vue-router'
 
 export enum TabContentEnum {
   TAB_TYPE,
@@ -9,9 +9,9 @@ export enum TabContentEnum {
 // export type { DropMenu };
 
 export interface TabContentProps {
-  tabItem: RouteLocationNormalized;
-  type?: TabContentEnum;
-  trigger?: ('click' | 'hover' | 'contextmenu')[];
+  tabItem: RouteLocationNormalized
+  type?: TabContentEnum
+  trigger?: ('click' | 'hover' | 'contextmenu')[]
 }
 
 export enum MenuEventEnum {

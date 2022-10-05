@@ -24,4 +24,4 @@ export type ComponentType =
   | 'NUpload'
   | 'NSlider'
   | 'NRate'
-  | 'NDivider';
+  | 'NDivider'

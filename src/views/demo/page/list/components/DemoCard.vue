@@ -12,7 +12,9 @@
               <i-logos-svelte-icon v-else />
             </n-icon>
           </template>
-          <template #header> 一个八个字的标题 </template>
+          <template #header>
+            一个八个字的标题
+          </template>
 
           <template #description>
             <n-text :depth="3">
@@ -27,10 +29,10 @@
 </template>
 
 <script lang="ts" setup>
-  defineProps({
-    num: {
-      type: Number,
-      default: 16,
-    },
-  });
+defineProps({
+  num: {
+    type: Number,
+    default: 16,
+  },
+})
 </script>

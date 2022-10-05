@@ -8,7 +8,9 @@
         :size="108"
         class="mb-6"
       />
-      <div class="font-semibold text-lg font-segoe">{{ userinfo.realName }}</div>
+      <div class="font-semibold text-lg font-segoe">
+        {{ userinfo.realName }}
+      </div>
       <div>日月之行，若出其中</div>
     </div>
     <div class="grid grid-cols-[auto_1fr] gap-2 mt-6">
@@ -18,22 +20,26 @@
       </template>
     </div>
     <n-divider />
-    <div class="mb-2">标签</div>
+    <div class="mb-2">
+      标签
+    </div>
     <n-dynamic-tags v-model:value="tagsRef" :closable="false" />
     <n-divider />
-    <div class="mb-4">团队</div>
+    <div class="mb-4">
+      团队
+    </div>
     <Team />
   </n-card>
 </template>
 
 <script setup lang="ts">
-  import Team from '/@/views/dashboard/workbench/components/Team.vue';
-  import { useUserStore } from '/@/store/modules/user';
-  import headerImg from '/@/assets/images/header.jpg';
-  import { userMessage, tags } from './data';
+import Team from '/@/views/dashboard/workbench/components/Team.vue'
+import { useUserStore } from '/@/store/modules/user'
+import headerImg from '/@/assets/images/header.jpg'
+import { tags, userMessage } from './data'
 
-  const userStore = useUserStore();
-  const userinfo = computed(() => userStore.getUserInfo);
+const userStore = useUserStore()
+const userinfo = computed(() => userStore.getUserInfo)
 
-  const tagsRef = ref(tags);
+const tagsRef = ref(tags)
 </script>

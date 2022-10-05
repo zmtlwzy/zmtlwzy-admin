@@ -6,40 +6,40 @@
 </template>
 
 <script setup lang="ts">
-  import type { PropType } from 'vue';
-  import { useRootSetting } from '/@/composables/setting/useRootSetting';
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { propTypes } from '/@/utils/propTypes';
-  import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal';
+import type { PropType } from 'vue'
+import { useRootSetting } from '/@/composables/setting/useRootSetting'
+import { useDesign } from '/@/composables/web/useDesign'
+import { propTypes } from '/@/utils/propTypes'
+import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal'
 
-  defineProps({
-    collapsed: propTypes.bool.def(false),
-    onClick: {
-      type: Function as PropType<(e: MouseEvent) => void>,
-    },
-  });
+defineProps({
+  collapsed: propTypes.bool.def(false),
+  onClick: {
+    type: Function as PropType<(e: MouseEvent) => void>,
+  },
+})
 
-  const { siderToggleBarColor, siderToggleBarColorHover } = getNaiveCssVars('Layout');
-  const {
-    siderToggleBarColor: dark_siderToggleBarColor,
-    siderToggleBarColorHover: dark_siderToggleBarColorHover,
-  } = getNaiveCssVars('Layout', true);
+const { siderToggleBarColor, siderToggleBarColorHover } = getNaiveCssVars('Layout')
+const {
+  siderToggleBarColor: dark_siderToggleBarColor,
+  siderToggleBarColorHover: dark_siderToggleBarColorHover,
+} = getNaiveCssVars('Layout', true)
 
-  const { getIsDarkMode } = useRootSetting();
-  const getColors = computed(() => {
-    const isDark = getIsDarkMode.value;
-    return {
-      color: isDark ? dark_siderToggleBarColor : siderToggleBarColor,
-      hoverColor: isDark ? dark_siderToggleBarColorHover : siderToggleBarColorHover,
-    };
-  });
+const { getIsDarkMode } = useRootSetting()
+const getColors = computed(() => {
+  const isDark = getIsDarkMode.value
+  return {
+    color: isDark ? dark_siderToggleBarColor : siderToggleBarColor,
+    hoverColor: isDark ? dark_siderToggleBarColorHover : siderToggleBarColorHover,
+  }
+})
 
-  useCssVars(() => ({
-    'toggle-bar-color': getColors.value.color,
-    'toggle-bar-color-hover': getColors.value.hoverColor,
-  }));
+useCssVars(() => ({
+  'toggle-bar-color': getColors.value.color,
+  'toggle-bar-color-hover': getColors.value.hoverColor,
+}))
 
-  const { prefixCls } = useDesign('layout-toggle-bar');
+const { prefixCls } = useDesign('layout-toggle-bar')
 </script>
 
 <style lang="less">

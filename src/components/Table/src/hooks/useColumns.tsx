@@ -1,57 +1,58 @@
-import type { Ref, ComputedRef } from 'vue';
-import { isEqual, cloneDeep } from 'lodash-es';
-import { NTooltip, NIcon } from 'naive-ui';
-import type { BasicColumn, BasicTableProps } from '../types/table';
-import { isArray, isString, isBoolean, isFunction } from '/@/utils/is';
-import { usePermission } from '/@/composables/web/usePermission';
-import { ActionItem } from '/@/components/Table';
-import { renderEditCell } from '../components/editable';
-// @ts-ignore
-import FormOutlined from '~icons/ant-design/form-outlined';
+import type { ComputedRef, Ref } from 'vue'
+import { cloneDeep, isEqual } from 'lodash-es'
+import { NIcon, NTooltip } from 'naive-ui'
+import type { BasicColumn, BasicTableProps } from '../types/table'
+import { isArray, isBoolean, isFunction, isString } from '/@/utils/is'
+import { usePermission } from '/@/composables/web/usePermission'
+import type { ActionItem } from '/@/components/Table'
+import { renderEditCell } from '../components/editable'
+// @ts-expect-error
+import FormOutlined from '~icons/ant-design/form-outlined'
 
 export function useColumns(propsRef: ComputedRef<BasicTableProps>) {
-  const columnsRef = ref(unref(propsRef).columns) as unknown as Ref<BasicColumn[]>;
-  let cacheColumns = unref(propsRef).columns;
+  const columnsRef = ref(unref(propsRef).columns) as unknown as Ref<BasicColumn[]>
+  let cacheColumns = unref(propsRef).columns
 
   const getColumnsRef = computed(() => {
-    const columns = cloneDeep(unref(columnsRef));
+    const columns = cloneDeep(unref(columnsRef))
 
-    handleActionColumn(propsRef, columns);
-    if (!columns) return [];
-    return columns;
-  });
+    handleActionColumn(propsRef, columns)
+    if (!columns)
+      return []
+    return columns
+  })
 
-  const { hasPermission } = usePermission();
+  const { hasPermission } = usePermission()
 
   function isIfShow(action: ActionItem): boolean {
-    const { ifShow } = action;
+    const { ifShow } = action
 
-    let isIfShow = true;
+    let isIfShow = true
 
-    if (isBoolean(ifShow)) {
-      isIfShow = ifShow;
-    }
-    if (isFunction(ifShow)) {
-      isIfShow = ifShow(action);
-    }
-    return isIfShow;
+    if (isBoolean(ifShow))
+      isIfShow = ifShow
+
+    if (isFunction(ifShow))
+      isIfShow = ifShow(action)
+
+    return isIfShow
   }
 
   const getPageColumns = computed(() => {
-    const pageColumns = unref(getColumnsRef);
-    const columns = cloneDeep(pageColumns);
+    const pageColumns = unref(getColumnsRef)
+    const columns = cloneDeep(pageColumns)
     return columns
       .filter((column) => {
-        return hasPermission(column.auth as string[]) && isIfShow(column);
+        return hasPermission(column.auth as string[]) && isIfShow(column)
       })
       .map((column) => {
         // 默认 ellipsis 为true
-        column.ellipsis = typeof column.ellipsis === 'undefined' ? { tooltip: true } : false;
-        const { edit } = column;
+        column.ellipsis = typeof column.ellipsis === 'undefined' ? { tooltip: true } : false
+        const { edit } = column
         if (edit) {
-          column.render = renderEditCell(column);
+          column.render = renderEditCell(column)
           if (edit) {
-            const title = column.title as string;
+            const title = column.title as string
             column.title = () => {
               return (
                 <NTooltip>
@@ -67,83 +68,84 @@ export function useColumns(propsRef: ComputedRef<BasicTableProps>) {
                     default: () => '该列可编辑',
                   }}
                 </NTooltip>
-              );
-            };
+              )
+            }
           }
         }
-        return column;
-      });
-  });
+        return column
+      })
+  })
 
   watch(
     () => unref(propsRef).columns,
     (columns) => {
-      columnsRef.value = columns;
-      cacheColumns = columns;
-    }
-  );
+      columnsRef.value = columns
+      cacheColumns = columns
+    },
+  )
 
   function handleActionColumn(propsRef: ComputedRef<BasicTableProps>, columns: BasicColumn[]) {
-    const { actionColumn } = unref(propsRef);
-    if (!actionColumn) return;
-    !columns.find((col) => col.key === 'action') &&
-      columns.push({
+    const { actionColumn } = unref(propsRef)
+    if (!actionColumn)
+      return
+    !columns.find(col => col.key === 'action')
+      && columns.push({
         ...(actionColumn as any),
-      });
+      })
   }
 
   // 设置
   function setColumns(columnList: string[]) {
-    const columns: any[] = cloneDeep(columnList);
-    if (!isArray(columns)) return;
+    const columns: any[] = cloneDeep(columnList)
+    if (!isArray(columns))
+      return
 
     if (!columns.length) {
-      columnsRef.value = [];
-      return;
+      columnsRef.value = []
+      return
     }
-    const cacheKeys = cacheColumns.map((item) => item.key);
+    const cacheKeys = cacheColumns.map(item => item.key)
     // 针对拖拽排序
     if (!isString(columns[0])) {
-      columnsRef.value = columns;
-    } else {
-      const newColumns: any[] = [];
+      columnsRef.value = columns
+    }
+    else {
+      const newColumns: any[] = []
       cacheColumns.forEach((item) => {
-        if (columnList.includes(item.key)) {
-          newColumns.push({ ...item });
-        }
-      });
+        if (columnList.includes(item.key))
+          newColumns.push({ ...item })
+      })
       if (!isEqual(cacheKeys, columns)) {
         newColumns.sort((prev, next) => {
-          return cacheKeys.indexOf(prev.key) - cacheKeys.indexOf(next.key);
-        });
+          return cacheKeys.indexOf(prev.key) - cacheKeys.indexOf(next.key)
+        })
       }
-      columnsRef.value = newColumns;
+      columnsRef.value = newColumns
     }
   }
 
   // 获取
   function getColumns(): BasicColumn[] {
-    const columns = toRaw(unref(getColumnsRef));
+    const columns = toRaw(unref(getColumnsRef))
     return columns.map((item) => {
-      return { ...item, title: item.title, key: item.key, fixed: item.fixed || undefined };
-    });
+      return { ...item, title: item.title, key: item.key, fixed: item.fixed || undefined }
+    })
   }
 
   // 获取原始
   function getCacheColumns(isKey?: boolean): any[] {
-    return isKey ? cacheColumns.map((item) => item.key) : cacheColumns;
+    return isKey ? cacheColumns.map(item => item.key) : cacheColumns
   }
 
   // 更新原始数据单个字段
   function setCacheColumnsField(key: string | undefined, value: Partial<BasicColumn>) {
-    if (!key || !value) {
-      return;
-    }
+    if (!key || !value)
+      return
+
     cacheColumns.forEach((item) => {
-      if (item.key === key) {
-        Object.assign(item, value);
-      }
-    });
+      if (item.key === key)
+        Object.assign(item, value)
+    })
   }
 
   return {
@@ -153,5 +155,5 @@ export function useColumns(propsRef: ComputedRef<BasicTableProps>) {
     setColumns,
     getColumns,
     getPageColumns,
-  };
+  }
 }

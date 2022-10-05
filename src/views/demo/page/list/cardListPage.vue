@@ -30,5 +30,5 @@
 </template>
 
 <script lang="ts" setup>
-  import DemoCard from './components/DemoCard.vue';
+import DemoCard from './components/DemoCard.vue'
 </script>

@@ -16,10 +16,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-import { canPrefetch } from './utils';
-import { isClient } from '/@/utils/is';
+import { canPrefetch } from './utils'
+import { isClient } from '/@/utils/is'
 
-const preFetched = {};
+const preFetched = {}
 
 /**
  * Checks if a feature on `link` is natively supported.
@@ -28,11 +28,11 @@ const preFetched = {};
  * @return {Boolean} whether the feature is supported
  */
 function support(feature: string): boolean {
-  if (!isClient) {
-    return false;
-  }
-  const link = document.createElement('link');
-  return link?.relList?.supports(feature);
+  if (!isClient)
+    return false
+
+  const link = document.createElement('link')
+  return link?.relList?.supports(feature)
 }
 
 /**
@@ -42,15 +42,15 @@ function support(feature: string): boolean {
  */
 function linkPrefetchStrategy(url: string): Promise<unknown> {
   return new Promise((resolve, reject) => {
-    const link = document.createElement(`link`);
-    link.rel = `prefetch`;
-    link.href = url;
+    const link = document.createElement('link')
+    link.rel = 'prefetch'
+    link.href = url
 
-    link.addEventListener('load', resolve);
-    link.addEventListener('error', reject);
+    link.addEventListener('load', resolve)
+    link.addEventListener('error', reject)
 
-    document.head.appendChild(link);
-  });
+    document.head.appendChild(link)
+  })
 }
 
 /**
@@ -60,16 +60,17 @@ function linkPrefetchStrategy(url: string): Promise<unknown> {
  */
 function xhrPrefetchStrategy(url: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    const req = new XMLHttpRequest();
+    const req = new XMLHttpRequest()
 
-    req.open(`GET`, url, (req.withCredentials = true));
+    req.open('GET', url, (req.withCredentials = true))
 
     req.addEventListener('load', () => {
-      req.status === 200 ? resolve() : reject();
-    });
+      // eslint-disable-next-line prefer-promise-reject-errors
+      req.status === 200 ? resolve() : reject()
+    })
 
-    req.send();
-  });
+    req.send()
+  })
 }
 
 /**
@@ -80,11 +81,11 @@ function xhrPrefetchStrategy(url: string): Promise<void> {
  */
 function highPriFetchStrategy(url: string): Promise<unknown> {
   return Reflect.has(window, 'fetch')
-    ? fetch(url, { credentials: `include` })
-    : xhrPrefetchStrategy(url);
+    ? fetch(url, { credentials: 'include' })
+    : xhrPrefetchStrategy(url)
 }
 
-const supportedPrefetchStrategy = support('prefetch') ? linkPrefetchStrategy : xhrPrefetchStrategy;
+const supportedPrefetchStrategy = support('prefetch') ? linkPrefetchStrategy : xhrPrefetchStrategy
 
 /**
  * Prefetch a given URL with an optional preferred fetch priority
@@ -92,13 +93,12 @@ const supportedPrefetchStrategy = support('prefetch') ? linkPrefetchStrategy : x
  * @param isPriority - if is "high" priority
  */
 function prefetcher(url: string, isPriority?: boolean) {
-  if (!canPrefetch || preFetched[url]) {
-    return;
-  }
+  if (!canPrefetch || preFetched[url])
+    return
 
   return (isPriority ? highPriFetchStrategy : supportedPrefetchStrategy)(url).then(() => {
-    preFetched[url] = true;
-  });
+    preFetched[url] = true
+  })
 }
 
-export default prefetcher;
+export default prefetcher

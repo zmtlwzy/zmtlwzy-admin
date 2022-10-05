@@ -23,8 +23,8 @@
       </div>
       <div
         v-if="getShowTopMenu && !getIsMobile"
-        class="flex-jb-ac flex-1 min-w-0 px-2 relative h-full"
         ref="scrollEl"
+        class="flex-jb-ac flex-1 min-w-0 px-2 relative h-full"
       >
         <ScrollContainer x-scrollable :inverted="getInverted" class="absolute left-0 top-2px">
           <LayoutMenu :menu-mode="getMenuMode" :split-type="getSplitType" :inverted="getInverted" />
@@ -41,105 +41,107 @@
     </div>
   </n-layout-header>
 </template>
+
 <script lang="ts">
-  import { propTypes } from '/@/utils/propTypes';
-  import { LayoutBreadcrumb, FullScreen, Notify, UserDropDown } from './components';
-  import AppSearch from '/@/components/Application/Search/index.vue';
-  import Trigger from '../trigger/index.vue';
-  import LayoutMenu from '../menu/index.vue';
+import { propTypes } from '/@/utils/propTypes'
+import { FullScreen, LayoutBreadcrumb, Notify, UserDropDown } from './components'
+import AppSearch from '/@/components/Application/Search/index.vue'
+import Trigger from '../trigger/index.vue'
+import LayoutMenu from '../menu/index.vue'
 
-  import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting';
-  import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { useAppInject } from '/@/composables/web/useAppInject';
-  import { useBreakpoint } from '/@/composables/event/useBreakpoint';
+import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting'
+import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
+import { useDesign } from '/@/composables/web/useDesign'
+import { useAppInject } from '/@/composables/web/useAppInject'
+import { useBreakpoint } from '/@/composables/event/useBreakpoint'
 
-  import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
-  import { useLocale } from '/@/locales/useLocale';
+import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent'
+import { useLocale } from '/@/locales/useLocale'
 
-  import { MenuModeEnum, MenuSplitTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
+import { MenuModeEnum, MenuSplitTypeEnum, TriggerEnum } from '/@/enums/menuEnum'
 
-  export default defineComponent({
-    name: 'LayoutHeader',
-    components: {
-      Trigger,
-      LayoutBreadcrumb,
-      LayoutMenu,
-      AppSearch,
-      FullScreen,
-      Notify,
-      UserDropDown,
-      SettingDrawer: createAsyncComponent(() => import('/@/layouts/default/setting/index.vue'), {
-        loading: true,
-        size: 16,
-      }),
-    },
-    props: {
-      fixed: propTypes.bool,
-    },
-    setup() {
-      const { prefixCls } = useDesign('layout-header');
-      const { getIsMobile } = useAppInject();
-      const { smaller, sizeEnum } = useBreakpoint();
-      const getIs2xs = smaller(sizeEnum.XXS);
+export default defineComponent({
+  name: 'LayoutHeader',
+  components: {
+    Trigger,
+    LayoutBreadcrumb,
+    LayoutMenu,
+    AppSearch,
+    FullScreen,
+    Notify,
+    UserDropDown,
+    SettingDrawer: createAsyncComponent(() => import('/@/layouts/default/setting/index.vue'), {
+      loading: true,
+      size: 16,
+    }),
+  },
+  props: {
+    fixed: propTypes.bool,
+  },
+  setup() {
+    const { prefixCls } = useDesign('layout-header')
+    const { getIsMobile } = useAppInject()
+    const { smaller, sizeEnum } = useBreakpoint()
+    const getIs2xs = smaller(sizeEnum.XXS)
 
-      const {
-        getSplit,
-        getCollapsed,
-        getMenuInverted,
-        getShowTopMenu,
-        getIsSidebarType,
-        getIsMixSidebar,
-        getIsTopMenu,
-        getTrigger,
-      } = useMenuSetting();
-      const { getShowBread, getShowContent, getShowHeader } = useHeaderSetting();
+    const {
+      getSplit,
+      getCollapsed,
+      getMenuInverted,
+      getShowTopMenu,
+      getIsSidebarType,
+      getIsMixSidebar,
+      getIsTopMenu,
+      getTrigger,
+    } = useMenuSetting()
+    const { getShowBread, getShowContent, getShowHeader } = useHeaderSetting()
 
-      const getShowTrigger = computed(() => {
-        return (
-          getTrigger.value === TriggerEnum.HEADER &&
-          !getIsTopMenu.value &&
-          getShowContent.value &&
-          !getSplit.value
-        );
-      });
+    const getShowTrigger = computed(() => {
+      return (
+        getTrigger.value === TriggerEnum.HEADER
+          && !getIsTopMenu.value
+          && getShowContent.value
+          && !getSplit.value
+      )
+    })
 
-      const { getShowLocalePicker } = useLocale();
+    const { getShowLocalePicker } = useLocale()
 
-      const getShowLogo = computed(() => !(unref(getIsSidebarType) || unref(getIsMixSidebar)));
+    const getShowLogo = computed(() => !(unref(getIsSidebarType) || unref(getIsMixSidebar)))
 
-      const getSplitType = computed(() => {
-        return getSplit.value ? MenuSplitTypeEnum.ROOT : MenuSplitTypeEnum.NONE;
-      });
+    const getSplitType = computed(() => {
+      return getSplit.value ? MenuSplitTypeEnum.ROOT : MenuSplitTypeEnum.NONE
+    })
 
-      const getMenuMode = computed(() => {
-        return MenuModeEnum.HORIZONTAL;
-      });
+    const getMenuMode = computed(() => {
+      return MenuModeEnum.HORIZONTAL
+    })
 
-      const getInverted = computed(
-        () => getMenuInverted.value && (getSplit.value || getIsTopMenu.value)
-      );
+    const getInverted = computed(
+      () => getMenuInverted.value && (getSplit.value || getIsTopMenu.value),
+    )
 
-      return {
-        getShowHeader,
-        getIsMobile,
-        getShowLocalePicker,
-        prefixCls,
-        getShowBread,
-        getShowContent,
-        getShowLogo,
-        getCollapsed,
-        getShowTopMenu,
-        getShowTrigger,
-        TriggerEnum,
-        getSplitType,
-        getMenuMode,
-        getInverted,
-        getIs2xs,
-      };
-    },
-  });
+    return {
+      getShowHeader,
+      getIsMobile,
+      getShowLocalePicker,
+      prefixCls,
+      getShowBread,
+      getShowContent,
+      getShowLogo,
+      getCollapsed,
+      getShowTopMenu,
+      getShowTrigger,
+      TriggerEnum,
+      getSplitType,
+      getMenuMode,
+      getInverted,
+      getIs2xs,
+    }
+  },
+})
 </script>
+
 <style lang="less">
   @prefix-cls: ~'@{namespace}-layout-header';
 

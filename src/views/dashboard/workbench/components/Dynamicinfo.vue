@@ -33,7 +33,9 @@
             </NAvatar>
           </template>
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <template #header> {{ item.name }} <span v-html="item.desc" /></template>
+          <template #header>
+            {{ item.name }} <span v-html="item.desc" />
+          </template>
           <template #description>
             <span class="text-$app-text-color-3">{{ item.date }}</span>
           </template>
@@ -44,10 +46,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { dynamicInfoItems } from './data.json';
-  import { useLoading } from './useLoading';
+import { dynamicInfoItems } from './data.json'
+import { useLoading } from './useLoading'
 
-  const isLoading = useLoading();
+const isLoading = useLoading()
 </script>
 
 <style lang="less" scoped>

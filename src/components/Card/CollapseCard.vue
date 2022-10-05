@@ -5,7 +5,7 @@
       <n-switch v-else v-model:value="show" />
     </template>
     <template v-for="item in getSlots" #[item]="data">
-      <slot :name="item" v-bind="data || {}"></slot>
+      <slot :name="item" v-bind="data || {}" />
     </template>
     <template #default>
       <NFadeInExpandTransition :appear="appear">
@@ -18,27 +18,27 @@
 </template>
 
 <script setup lang="ts">
-  import { omit } from 'lodash-es';
-  import { CardProps } from 'naive-ui';
-  import NFadeInExpandTransition from '/@/components/FadeInExpandTransition';
-  import { useDesign } from '/@/composables/web/useDesign';
+import { omit } from 'lodash-es'
+import type { CardProps } from 'naive-ui'
+import NFadeInExpandTransition from '/@/components/FadeInExpandTransition'
+import { useDesign } from '/@/composables/web/useDesign'
 
-  const slots = useSlots();
-  const { prefixCls } = useDesign('collapse-transition');
-  withDefaults(
-    defineProps<{
-      size?: CardProps['size'];
-      segmented?: CardProps['segmented'];
-      appear?: boolean;
-    }>(),
-    {
-      size: 'small',
-      segmented: true,
-      appear: false,
-    }
-  );
-  const show = ref(true);
-  const getSlots = computed(() => Object.keys(omit(slots, ['header-extra', 'default'])));
+withDefaults(
+  defineProps<{
+    size?: CardProps['size']
+    segmented?: CardProps['segmented']
+    appear?: boolean
+  }>(),
+  {
+    size: 'small',
+    segmented: true,
+    appear: false,
+  },
+)
+const slots = useSlots()
+const { prefixCls } = useDesign('collapse-transition')
+const show = ref(true)
+const getSlots = computed(() => Object.keys(omit(slots, ['header-extra', 'default'])))
 </script>
 
 <style lang="less">

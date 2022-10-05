@@ -29,4 +29,4 @@ export default {
     // 图片上传类型
     fileType: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/svg+xml'],
   },
-};
+}

@@ -7,7 +7,9 @@
             {{ btn }}
           </n-radio-button>
         </n-radio-group>
-        <n-button type="primary">主操作</n-button>
+        <n-button type="primary">
+          主操作
+        </n-button>
       </n-space>
     </template>
     <template #headerContent>
@@ -17,8 +19,12 @@
         </n-descriptions-item>
       </n-descriptions>
       <n-tabs type="line" size="large" class="mt-5">
-        <n-tab name="1">详情</n-tab>
-        <n-tab name="2">规则</n-tab>
+        <n-tab name="1">
+          详情
+        </n-tab>
+        <n-tab name="2">
+          规则
+        </n-tab>
       </n-tabs>
     </template>
     <div class="grid grid-cols-1 grid-gap-4">
@@ -30,9 +36,13 @@
             </template>
             <template #header>
               <n-space vertical>
-                <n-text class="text-16px">创建项目</n-text>
+                <n-text class="text-16px">
+                  创建项目
+                </n-text>
                 <div class="space-x-2">
-                  <n-text :depth="3">陈美雪</n-text>
+                  <n-text :depth="3">
+                    陈美雪
+                  </n-text>
                   <i-ant-design-message-outlined />
                 </div>
               </n-space>
@@ -45,7 +55,9 @@
             </template>
             <template #header>
               <n-space vertical>
-                <n-text class="text-16px">部门初审</n-text>
+                <n-text class="text-16px">
+                  部门初审
+                </n-text>
                 <div class="space-x-2">
                   <n-text>林宋琴</n-text>
                   <i-ant-design-message-outlined class="text-$app-primary-color" />
@@ -55,10 +67,14 @@
             </template>
           </n-timeline-item>
           <n-timeline-item #header>
-            <n-text :depth="3" class="text-16px">财务复核</n-text>
+            <n-text :depth="3" class="text-16px">
+              财务复核
+            </n-text>
           </n-timeline-item>
           <n-timeline-item #header>
-            <n-text :depth="3" class="text-16px">完成</n-text>
+            <n-text :depth="3" class="text-16px">
+              完成
+            </n-text>
           </n-timeline-item>
         </n-timeline>
       </n-card>
@@ -70,7 +86,9 @@
                 {{ val }}
               </n-descriptions-item>
             </n-descriptions>
-            <div class="text-16px font-semibold mt-5 mb-4">信息组</div>
+            <div class="text-16px font-semibold mt-5 mb-4">
+              信息组
+            </div>
             <n-descriptions label-placement="left">
               <n-descriptions-item v-for="[key, val] in pageContentDes2" :key="key" :label="key">
                 {{ val }}
@@ -80,17 +98,23 @@
           <n-card size="small" header-style="padding:0;" :segmented="{ content: true }">
             <template #header>
               <div class="bg-$n-action-color py-3 px-4">
-                <n-text class="text-14px">多层信息组</n-text>
+                <n-text class="text-14px">
+                  多层信息组
+                </n-text>
               </div>
             </template>
-            <div class="text-16px font-semibold mt-5 mb-4">组名称</div>
+            <div class="text-16px font-semibold mt-5 mb-4">
+              组名称
+            </div>
             <n-descriptions label-placement="left">
               <n-descriptions-item v-for="[key, val] in pageContentDes3" :key="key" :label="key">
                 {{ val }}
               </n-descriptions-item>
             </n-descriptions>
             <n-divider />
-            <div class="text-16px font-semibold mt-5 mb-4">组名称</div>
+            <div class="text-16px font-semibold mt-5 mb-4">
+              组名称
+            </div>
             <n-descriptions label-placement="left">
               <n-descriptions-item label="学名">
                 Citrullus lanatus (Thunb.) Matsum. et
@@ -98,7 +122,9 @@
               </n-descriptions-item>
             </n-descriptions>
             <n-divider />
-            <div class="text-16px font-semibold mt-5 mb-4">组名称</div>
+            <div class="text-16px font-semibold mt-5 mb-4">
+              组名称
+            </div>
             <n-descriptions label-placement="left">
               <n-descriptions-item v-for="[key, val] in pageContentDes3" :key="key" :label="key">
                 {{ val }}
@@ -126,6 +152,6 @@
 </template>
 
 <script setup lang="ts">
-  import { pageHeaderDes, pageContentDes, pageContentDes2, pageContentDes3 } from './data';
-  import { tableColumns2, tableData2 } from '../basic/data';
+import { tableColumns2, tableData2 } from '../basic/data'
+import { pageContentDes, pageContentDes2, pageContentDes3, pageHeaderDes } from './data'
 </script>

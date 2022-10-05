@@ -1,87 +1,87 @@
 <script setup lang="ts">
-  import {
-    ThemeModePicker,
-    LayoutModePicker,
-    ThemeColorPicker,
-    SettingFooter,
-    SliderItem,
-    SwitchItem,
-    SelectItem,
-    InputNumberItem,
-  } from './components';
+import {
+  InputNumberItem,
+  LayoutModePicker,
+  SelectItem,
+  SettingFooter,
+  SliderItem,
+  SwitchItem,
+  ThemeColorPicker,
+  ThemeModePicker,
+} from './components'
 
-  import { darkTheme } from 'naive-ui';
-  import { useAppStore } from '/@/store/modules/app';
+import { darkTheme } from 'naive-ui'
+import { useAppStore } from '/@/store/modules/app'
 
-  import { useRootSetting } from '/@/composables/setting/useRootSetting';
-  import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting';
-  import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
-  import { useMultipleTabSetting } from '/@/composables/setting/useMultipleTabSetting';
-  import { useTransitionSetting } from '/@/composables/setting/useTransitionSetting';
+import { useRootSetting } from '/@/composables/setting/useRootSetting'
+import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting'
+import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
+import { useMultipleTabSetting } from '/@/composables/setting/useMultipleTabSetting'
+import { useTransitionSetting } from '/@/composables/setting/useTransitionSetting'
 
-  import { MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
-  import {
-    HandlerEnum,
-    routerTransitionOptions,
-    getMenuTriggerOptions,
-    getMixSidebarTriggerOptions,
-  } from './enum';
+import { MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum'
+import {
+  HandlerEnum,
+  getMenuTriggerOptions,
+  getMixSidebarTriggerOptions,
+  routerTransitionOptions,
+} from './enum'
 
-  import { useI18n } from '/@/composables/web/useI18n';
-  import { useDrawer, useDrawerEnum } from '/@/composables/component/useDrawer';
+import { useI18n } from '/@/composables/web/useI18n'
+import { useDrawer, useDrawerEnum } from '/@/composables/component/useDrawer'
 
-  import { APP_PRESET_COLOR_LIST } from '/@/settings/designSetting';
+import { APP_PRESET_COLOR_LIST } from '/@/settings/designSetting'
 
-  const { t } = useI18n();
-  const [state] = useDrawer(useDrawerEnum.AppConfigDrawer);
+const { t } = useI18n()
+const [state] = useDrawer(useDrawerEnum.AppConfigDrawer)
 
-  const appStore = useAppStore();
-  const { getShowFooter, getShowBreadCrumb, getShowBreadCrumbIcon, getThemeColor } =
-    useRootSetting();
+const appStore = useAppStore()
+const { getShowFooter, getShowBreadCrumb, getShowBreadCrumbIcon, getThemeColor }
+    = useRootSetting()
 
-  const {
-    getIsHorizontal,
-    getIsMixSidebar,
-    getShowMenu,
-    getMenuType,
-    getSplit,
-    getMenuWidth,
-    getMenuRootIndent,
-    getMenuIndent,
-    getTrigger,
-    getMixSideTrigger,
-  } = useMenuSetting();
+const {
+  getIsHorizontal,
+  getIsMixSidebar,
+  getShowMenu,
+  getMenuType,
+  getSplit,
+  getMenuWidth,
+  getMenuRootIndent,
+  getMenuIndent,
+  getTrigger,
+  getMixSideTrigger,
+} = useMenuSetting()
 
-  const { getShowHeader } = useHeaderSetting();
+const { getShowHeader } = useHeaderSetting()
 
-  const { getShowMultipleTab } = useMultipleTabSetting();
+const { getShowMultipleTab } = useMultipleTabSetting()
 
-  const getShowMenuRef = computed(() => {
-    return unref(getShowMenu) && !unref(getIsHorizontal);
-  });
+const getShowMenuRef = computed(() => {
+  return unref(getShowMenu) && !unref(getIsHorizontal)
+})
 
-  const { getOpenPageLoading, getBasicTransition, getEnableTransition, getOpenNProgress } =
-    useTransitionSetting();
+const { getOpenPageLoading, getBasicTransition, getEnableTransition, getOpenNProgress }
+    = useTransitionSetting()
 
-  const getDeftrigger = computed(() => (getSplit.value ? TriggerEnum.HEADER : TriggerEnum.BAR));
+const getDeftrigger = computed(() => (getSplit.value ? TriggerEnum.HEADER : TriggerEnum.BAR))
 
-  const triggerOptions = computed(() => {
-    return getMenuTriggerOptions(unref(getSplit));
-  });
+const triggerOptions = computed(() => {
+  return getMenuTriggerOptions(unref(getSplit))
+})
 
-  const getColorPickerVal = computed(() => {
-    return !appStore.getThemeColorIsManualChange && appStore.getThemeColorIsFirstChange
-      ? darkTheme.common.primaryColor
-      : getThemeColor.value;
-  });
+const getColorPickerVal = computed(() => {
+  return !appStore.getThemeColorIsManualChange && appStore.getThemeColorIsFirstChange
+    ? darkTheme.common.primaryColor
+    : getThemeColor.value
+})
 
-  // const getRandomPer = (length: number) => {
-  //   return Array.from({ length }).map(() => {
-  //     return `${Math.random() * 90 + 10}%`;
-  //   });
-  // };
+// const getRandomPer = (length: number) => {
+//   return Array.from({ length }).map(() => {
+//     return `${Math.random() * 90 + 10}%`;
+//   });
+// };
 
-  // const skeletonWidthList = getRandomPer(7);
+// const skeletonWidthList = getRandomPer(7);
 </script>
 
 <template>

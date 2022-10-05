@@ -1,40 +1,42 @@
 <template>
   <footer v-if="show || getShowLayoutFooter" :class="prefixCls">
     <i-ant-design-github-filled :class="`${prefixCls}__icon`" @click="openWindow(GITHUB_URL)" />
-    <div :class="`${prefixCls}__text`">Copyright &copy;2021 Zmtlwzy Admin</div>
+    <div :class="`${prefixCls}__text`">
+      Copyright &copy;2021 Zmtlwzy Admin
+    </div>
   </footer>
 </template>
 
 <script lang="ts">
-  import { GITHUB_URL } from '/@/settings/siteSetting';
-  import { openWindow } from '/@/utils';
+import { GITHUB_URL } from '/@/settings/siteSetting'
+import { openWindow } from '/@/utils'
 
-  import { useRootSetting } from '/@/composables/setting/useRootSetting';
+import { useRootSetting } from '/@/composables/setting/useRootSetting'
 
-  import { useDesign } from '/@/composables/web/useDesign';
+import { useDesign } from '/@/composables/web/useDesign'
 
-  export default defineComponent({
-    name: 'LayoutFooter',
-    props: {
-      show: Boolean,
-    },
-    setup() {
-      const { getShowFooter } = useRootSetting();
-      const { currentRoute } = useRouter();
-      const { prefixCls } = useDesign('layout-footer');
+export default defineComponent({
+  name: 'LayoutFooter',
+  props: {
+    show: Boolean,
+  },
+  setup() {
+    const { getShowFooter } = useRootSetting()
+    const { currentRoute } = useRouter()
+    const { prefixCls } = useDesign('layout-footer')
 
-      const getShowLayoutFooter = computed(() => {
-        return unref(getShowFooter) && !unref(currentRoute).meta?.hiddenFooter;
-      });
+    const getShowLayoutFooter = computed(() => {
+      return unref(getShowFooter) && !unref(currentRoute).meta?.hiddenFooter
+    })
 
-      return {
-        getShowLayoutFooter,
-        prefixCls,
-        GITHUB_URL,
-        openWindow,
-      };
-    },
-  });
+    return {
+      getShowLayoutFooter,
+      prefixCls,
+      GITHUB_URL,
+      openWindow,
+    }
+  },
+})
 </script>
 
 <style lang="less">

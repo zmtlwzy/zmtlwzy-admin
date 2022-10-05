@@ -5,4 +5,4 @@ export type ComponentType =
   | 'NCheckbox'
   | 'NSwitch'
   | 'NDatePicker'
-  | 'NTimePicker';
+  | 'NTimePicker'

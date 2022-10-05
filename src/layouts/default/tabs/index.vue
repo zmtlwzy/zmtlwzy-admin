@@ -32,133 +32,136 @@
     </n-tabs>
   </div>
 </template>
+
 <script lang="ts">
-  import type { CSSProperties, StyleValue } from 'vue';
-  import { unrefElement, MaybeElementRef, whenever } from '@vueuse/core';
+import type { CSSProperties, StyleValue } from 'vue'
+import type { MaybeElementRef } from '@vueuse/core'
+import { unrefElement, whenever } from '@vueuse/core'
 
-  import type { RouteLocationNormalized, RouteMeta } from 'vue-router';
+import type { RouteLocationNormalized, RouteMeta } from 'vue-router'
 
-  import TabRedo from './components/TabRedo.vue';
-  import TabContent from './components/TabContent.vue';
+import TabRedo from './components/TabRedo.vue'
+import TabContent from './components/TabContent.vue'
 
-  import { useGo } from '/@/composables/web/usePage';
-  import { useDesign } from '/@/composables/web/useDesign';
-  // import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
-  import { useMultipleTabSetting } from '/@/composables/setting/useMultipleTabSetting';
-  import { multipleTabsHeight } from '/@/settings/designSetting';
-  import { initAffixTabs } from './useMultipleTabs';
-  import { getNaiveCssVarsRef } from '/@/composables/core/useNaiveInternal';
+import { useGo } from '/@/composables/web/usePage'
+import { useDesign } from '/@/composables/web/useDesign'
+// import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
+import { useMultipleTabSetting } from '/@/composables/setting/useMultipleTabSetting'
+import { multipleTabsHeight } from '/@/settings/designSetting'
+import { initAffixTabs } from './useMultipleTabs'
+import { getNaiveCssVarsRef } from '/@/composables/core/useNaiveInternal'
 
-  import { REDIRECT_NAME } from '/@/router/constant';
-  import { useMultipleTabStore } from '/@/store/modules/multipleTab';
-  import { listenerRouteChange } from '/@/logics/mitt/routeChange';
+import { REDIRECT_NAME } from '/@/router/constant'
+import { useMultipleTabStore } from '/@/store/modules/multipleTab'
+import { listenerRouteChange } from '/@/logics/mitt/routeChange'
 
-  export default defineComponent({
-    name: 'MultipleTabs',
-    components: { TabRedo, TabContent },
-    setup() {
-      initAffixTabs();
-      const tabsElRef = ref() as MaybeElementRef<HTMLDivElement>;
-      const activeKeyRef = ref<string>();
+export default defineComponent({
+  name: 'MultipleTabs',
+  components: { TabRedo, TabContent },
+  setup() {
+    initAffixTabs()
+    const tabsElRef = ref() as MaybeElementRef<HTMLDivElement>
+    const activeKeyRef = ref<string>()
 
-      const router = useRouter();
-      const tabStore = useMultipleTabStore();
+    const router = useRouter()
+    const tabStore = useMultipleTabStore()
 
-      const { prefixCls } = useDesign('multiple-tabs');
-      const { getShowMultipleTab } = useMultipleTabSetting();
+    const { prefixCls } = useDesign('multiple-tabs')
+    const { getShowMultipleTab } = useMultipleTabSetting()
 
-      const go = useGo();
-      const getTabStyle = ref<CSSProperties>({
-        borderTop: 'none',
-        borderRadius: '0px',
-        padding: '0px',
-        paddingRight: '6px',
-      });
+    const go = useGo()
+    const getTabStyle = ref<CSSProperties>({
+      borderTop: 'none',
+      borderRadius: '0px',
+      padding: '0px',
+      paddingRight: '6px',
+    })
 
-      const getWrapperStyle = computed((): StyleValue => {
-        const headerColor = getNaiveCssVarsRef('Layout', 'headerColor')!;
-        return {
-          backgroundColor: headerColor.value,
-        };
-      });
-      const getTabsState = computed(() => {
-        return tabStore.getTabList.filter((item) => !item.meta?.hideTab);
-      });
-
-      listenerRouteChange((route) => {
-        const { name } = route;
-        if (name === REDIRECT_NAME || !route) {
-          return;
-        }
-
-        const { path, fullPath, meta = {} } = route;
-        const { currentActiveMenu, hideTab } = meta as RouteMeta;
-        const isHide = !hideTab ? null : currentActiveMenu;
-        const p = isHide || fullPath || path;
-        if (activeKeyRef.value !== p) {
-          activeKeyRef.value = p as string;
-        }
-
-        if (isHide) {
-          const findParentRoute = router
-            .getRoutes()
-            .find((item) => item.path === currentActiveMenu);
-
-          findParentRoute && tabStore.addTab(findParentRoute as unknown as RouteLocationNormalized);
-        } else {
-          tabStore.addTab(unref(route));
-        }
-      });
-
-      watch(
-        () => activeKeyRef.value,
-        (val) => {
-          nextTick(() => {
-            if (!val) return;
-            const tabElItem = unrefElement(tabsElRef)?.querySelector(`[data-name="${val}"]`);
-            if (!tabElItem) return;
-            setTimeout(() => {
-              tabElItem.scrollIntoView({
-                behavior: 'smooth',
-              });
-            }, 50);
-          });
-        },
-        {
-          immediate: true,
-        }
-      );
-
-      whenever(
-        () => unrefElement(tabsElRef),
-        (el) => {
-          const elRef = el.querySelector('.n-tabs-nav') as HTMLElement;
-          elRef.style.minHeight = `${multipleTabsHeight}px`;
-        }
-      );
-
-      const handleClose = (key: string) => {
-        tabStore.closeTabByKey(key, router);
-      };
-
-      const handleTabChange = (activeKey: string) => {
-        activeKeyRef.value = activeKey;
-        go(activeKey, false);
-      };
-
+    const getWrapperStyle = computed((): StyleValue => {
+      const headerColor = getNaiveCssVarsRef('Layout', 'headerColor')!
       return {
-        activeKeyRef,
-        panels: getTabsState,
-        tabsElRef,
-        handleClose,
-        handleTabChange,
-        prefixCls,
-        getTabStyle,
-        getWrapperStyle,
-        getShowMultipleTab,
-      };
-    },
-  });
+        backgroundColor: headerColor.value,
+      }
+    })
+    const getTabsState = computed(() => {
+      return tabStore.getTabList.filter(item => !item.meta?.hideTab)
+    })
+
+    listenerRouteChange((route) => {
+      const { name } = route
+      if (name === REDIRECT_NAME || !route)
+        return
+
+      const { path, fullPath, meta = {} } = route
+      const { currentActiveMenu, hideTab } = meta as RouteMeta
+      const isHide = !hideTab ? null : currentActiveMenu
+      const p = isHide || fullPath || path
+      if (activeKeyRef.value !== p)
+        activeKeyRef.value = p as string
+
+      if (isHide) {
+        const findParentRoute = router
+          .getRoutes()
+          .find(item => item.path === currentActiveMenu)
+
+        findParentRoute && tabStore.addTab(findParentRoute as unknown as RouteLocationNormalized)
+      }
+      else {
+        tabStore.addTab(unref(route))
+      }
+    })
+
+    watch(
+      () => activeKeyRef.value,
+      (val) => {
+        nextTick(() => {
+          if (!val)
+            return
+          const tabElItem = unrefElement(tabsElRef)?.querySelector(`[data-name="${val}"]`)
+          if (!tabElItem)
+            return
+          setTimeout(() => {
+            tabElItem.scrollIntoView({
+              behavior: 'smooth',
+            })
+          }, 50)
+        })
+      },
+      {
+        immediate: true,
+      },
+    )
+
+    whenever(
+      () => unrefElement(tabsElRef),
+      (el) => {
+        const elRef = el.querySelector('.n-tabs-nav') as HTMLElement
+        elRef.style.minHeight = `${multipleTabsHeight}px`
+      },
+    )
+
+    const handleClose = (key: string) => {
+      tabStore.closeTabByKey(key, router)
+    }
+
+    const handleTabChange = (activeKey: string) => {
+      activeKeyRef.value = activeKey
+      go(activeKey, false)
+    }
+
+    return {
+      activeKeyRef,
+      panels: getTabsState,
+      tabsElRef,
+      handleClose,
+      handleTabChange,
+      prefixCls,
+      getTabStyle,
+      getWrapperStyle,
+      getShowMultipleTab,
+    }
+  },
+})
 </script>
 
 <style lang="less">

@@ -4,19 +4,20 @@
     <SettingDrawer />
   </div>
 </template>
+
 <script lang="ts">
-  import SettingDrawer from './SettingDrawer.vue';
+import SettingDrawer from './SettingDrawer.vue'
 
-  import { useDrawer, useDrawerEnum } from '/@/composables/component/useDrawer';
+import { useDrawer, useDrawerEnum } from '/@/composables/component/useDrawer'
 
-  export default defineComponent({
-    name: 'SettingButton',
-    components: { SettingDrawer },
-    setup() {
-      const [_, setDrawerState] = useDrawer(useDrawerEnum.AppConfigDrawer);
-      return {
-        setDrawerState,
-      };
-    },
-  });
+export default defineComponent({
+  name: 'SettingButton',
+  components: { SettingDrawer },
+  setup() {
+    const [_, setDrawerState] = useDrawer(useDrawerEnum.AppConfigDrawer)
+    return {
+      setDrawerState,
+    }
+  },
+})
 </script>

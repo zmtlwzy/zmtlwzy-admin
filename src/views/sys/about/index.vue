@@ -11,5 +11,5 @@ Zmtlwzy Admin 是一个基于 Vue3、Vite、Naive UI、TypeScript 的中后台�
 </template>
 
 <script lang="ts" setup>
-  const appInfo = __APP_INFO__;
+const appInfo = __APP_INFO__
 </script>

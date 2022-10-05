@@ -48,7 +48,7 @@ export default {
   exception: {
     backLogin: 'Back Login',
     backHome: 'Back Home',
-    subTitle403: "Sorry, you don't have access to this page.",
+    subTitle403: 'Sorry, you don\'t have access to this page.',
     subTitle404: 'Sorry, the page you visited does not exist.',
     subTitle500: 'Sorry, the server is reporting an error.',
     noDataTitle: 'No data on the current page.',
@@ -74,7 +74,7 @@ export default {
     signInTitle: 'Backstage management system',
     signInDesc: 'Enter your personal details and get started!',
     policy: 'I agree to the xxx Privacy Policy',
-    scanSign: `scanning the code to complete the login`,
+    scanSign: 'scanning the code to complete the login',
 
     loginButton: 'Sign in',
     registerButton: 'Sign up',
@@ -101,4 +101,4 @@ export default {
     smsCode: 'SMS code',
     mobile: 'Mobile',
   },
-};
+}

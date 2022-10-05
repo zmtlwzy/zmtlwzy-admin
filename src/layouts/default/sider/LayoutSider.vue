@@ -21,40 +21,40 @@
 </template>
 
 <script setup lang="ts">
-  import { MenuModeEnum, MenuSplitTypeEnum } from '/@/enums/menuEnum';
+import { MenuModeEnum, MenuSplitTypeEnum } from '/@/enums/menuEnum'
 
-  import SiderWrapper from './SiderWrapper.vue';
-  import LayoutMenu from '../menu/index.vue';
+import SiderWrapper from './SiderWrapper.vue'
+import LayoutMenu from '../menu/index.vue'
 
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { useAppInject } from '/@/composables/web/useAppInject';
-  import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
+import { useDesign } from '/@/composables/web/useDesign'
+import { useAppInject } from '/@/composables/web/useAppInject'
+import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 
-  const { prefixCls } = useDesign('layout-sideBar');
-  const { getIsMobile } = useAppInject();
+const { prefixCls } = useDesign('layout-sideBar')
+const { getIsMobile } = useAppInject()
 
-  const {
-    getCollapsed,
-    getRealWidth,
-    getMobileWidth,
-    getMenuHidden,
-    getMenuInverted,
-    getIsSidebarType,
-    getSplit,
-  } = useMenuSetting();
+const {
+  getCollapsed,
+  getRealWidth,
+  getMobileWidth,
+  getMenuHidden,
+  getMenuInverted,
+  getIsSidebarType,
+  getSplit,
+} = useMenuSetting()
 
-  const getSplitType = computed(() => {
-    return getSplit.value ? MenuSplitTypeEnum.SECONDARY : MenuSplitTypeEnum.NONE;
-  });
+const getSplitType = computed(() => {
+  return getSplit.value ? MenuSplitTypeEnum.SECONDARY : MenuSplitTypeEnum.NONE
+})
 
-  const getMode = computed(() => {
-    return getSplit.value ? MenuModeEnum.VERTICAL : null;
-  });
+const getMode = computed(() => {
+  return getSplit.value ? MenuModeEnum.VERTICAL : null
+})
 
-  const getShowSideBar = computed(() => {
-    return getSplit.value ? !getMenuHidden.value : true;
-  });
+const getShowSideBar = computed(() => {
+  return getSplit.value ? !getMenuHidden.value : true
+})
 
-  const getInverted = computed(() => getMenuInverted.value && !getSplit.value);
-  const getWidth = computed(() => (getIsMobile.value ? getMobileWidth.value : getRealWidth.value));
+const getInverted = computed(() => getMenuInverted.value && !getSplit.value)
+const getWidth = computed(() => (getIsMobile.value ? getMobileWidth.value : getRealWidth.value))
 </script>

@@ -1,4 +1,4 @@
-import { FormSchema } from '/@/components/Form';
+import type { FormSchema } from '/@/components/Form'
 
 export const schemas: FormSchema[] = [
   {
@@ -96,7 +96,7 @@ export const schemas: FormSchema[] = [
     label: '电话号码',
     component: 'NInput',
   },
-];
+]
 
 export const SecureList = [
   {
@@ -119,7 +119,7 @@ export const SecureList = [
     title: 'MFA 设备',
     description: '未绑定 MFA 设备，绑定后，可以进行二次确认m',
   },
-];
+]
 
 export const bindList = [
   {
@@ -139,7 +139,7 @@ export const bindList = [
     title: '绑定支付宝',
     description: '当前未绑定支付宝账号',
   },
-];
+]
 
 export const msgList = [
   {
@@ -154,4 +154,4 @@ export const msgList = [
     title: '待办任务',
     description: '待办任务将以站内信的形式通知',
   },
-];
+]

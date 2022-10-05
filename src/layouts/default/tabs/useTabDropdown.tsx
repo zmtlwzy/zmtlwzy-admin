@@ -1,70 +1,70 @@
-import type { DropdownOption } from 'naive-ui';
-import type { TabContentProps } from './types';
-import type { ComputedRef } from 'vue';
-import type { RouteLocationNormalized } from 'vue-router';
-import { MenuEventEnum } from './types';
+import type { DropdownOption } from 'naive-ui'
+import type { TabContentProps } from './types'
+import type { ComputedRef } from 'vue'
+import type { RouteLocationNormalized } from 'vue-router'
+import { MenuEventEnum } from './types'
 
-import { logicAnd, logicNot } from '@vueuse/math';
-import { useMultipleTabStore } from '/@/store/modules/multipleTab';
-import { useTabs } from '/@/composables/web/useTabs';
-import { useI18n } from '/@/composables/web/useI18n';
-import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting';
-import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
+import { logicAnd, logicNot } from '@vueuse/math'
+import { useMultipleTabStore } from '/@/store/modules/multipleTab'
+import { useTabs } from '/@/composables/web/useTabs'
+import { useI18n } from '/@/composables/web/useI18n'
+import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting'
+import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 
 export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: ComputedRef<boolean>) {
   const state = reactive({
     current: null as Nullable<RouteLocationNormalized>,
     currentIndex: 0,
-  });
+  })
 
-  const { t } = useI18n();
-  const tabStore = useMultipleTabStore();
-  const { currentRoute } = useRouter();
-  const { refreshPage, closeAll, close, closeLeft, closeOther, closeRight } = useTabs();
+  const { t } = useI18n()
+  const tabStore = useMultipleTabStore()
+  const { currentRoute } = useRouter()
+  const { refreshPage, closeAll, close, closeLeft, closeOther, closeRight } = useTabs()
 
   const getTargetTab = computed((): RouteLocationNormalized => {
-    return unref(getIsTabs) ? tabContentProps.tabItem : unref(currentRoute);
-  });
+    return unref(getIsTabs) ? tabContentProps.tabItem : unref(currentRoute)
+  })
 
-  const { getShowMenu, setMenuSetting } = useMenuSetting();
-  const { getShowHeader, setHeaderSetting } = useHeaderSetting();
+  const { getShowMenu, setMenuSetting } = useMenuSetting()
+  const { getShowHeader, setHeaderSetting } = useHeaderSetting()
 
-  const getIsUnFold = logicAnd(logicNot(getShowMenu), logicNot(getShowHeader));
+  const getIsUnFold = logicAnd(logicNot(getShowMenu), logicNot(getShowHeader))
 
   function handleFold() {
-    const isUnFold = getIsUnFold.value;
+    const isUnFold = getIsUnFold.value
     setMenuSetting({
       show: isUnFold,
       hidden: !isUnFold,
-    });
-    setHeaderSetting({ show: isUnFold });
+    })
+    setHeaderSetting({ show: isUnFold })
   }
 
   /**
    * @description: drop-down list
    */
   const getDropMenuList = computed(() => {
-    if (!unref(getTargetTab)) {
-      return;
-    }
+    if (!unref(getTargetTab))
+      return
+
     // const { meta } = unref(getTargetTab);
-    const { path } = unref(currentRoute);
+    const { path } = unref(currentRoute)
 
-    const curItem = state.current;
+    const curItem = state.current
 
-    const isCurItem = curItem ? curItem.path === path : false;
+    const isCurItem = curItem ? curItem.path === path : false
 
     // Refresh button
-    const index = state.currentIndex;
+    const index = state.currentIndex
     // const refreshDisabled = !isCurItem;
     // Close left
-    const closeLeftDisabled = index === 0 || !isCurItem;
+    const closeLeftDisabled = index === 0 || !isCurItem
 
-    const disabled = tabStore.getTabList.length === 1;
+    const disabled = tabStore.getTabList.length === 1
 
     // Close right
-    const closeRightDisabled =
-      !isCurItem || (index === tabStore.getTabList.length - 1 && tabStore.getLastDragEndIndex >= 0);
+    const closeRightDisabled
+      = !isCurItem || (index === tabStore.getTabList.length - 1 && tabStore.getLastDragEndIndex >= 0)
 
     const dropMenuList: DropdownOption[] = [
       {
@@ -102,21 +102,21 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: Comp
         disabled,
         iconName: 'i-clarity:minus-line',
       },
-    ];
+    ]
 
-    return getIsTabs.value ? dropMenuList.slice(2) : dropMenuList;
-  });
+    return getIsTabs.value ? dropMenuList.slice(2) : dropMenuList
+  })
 
   function handleContextMenu(tabItem: RouteLocationNormalized) {
     return (e: Event) => {
-      if (!tabItem) {
-        return;
-      }
-      e?.preventDefault();
-      const index = tabStore.getTabList.findIndex((tab) => tab.path === tabItem.path);
-      state.current = tabItem;
-      state.currentIndex = index;
-    };
+      if (!tabItem)
+        return
+
+      e?.preventDefault()
+      const index = tabStore.getTabList.findIndex(tab => tab.path === tabItem.path)
+      state.current = tabItem
+      state.currentIndex = index
+    }
   }
 
   // Handle right click event
@@ -124,32 +124,32 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: Comp
     switch (event) {
       case MenuEventEnum.REFRESH_PAGE:
         // refresh page
-        refreshPage();
-        break;
+        refreshPage()
+        break
       case MenuEventEnum.TOGGLE_FULL_SCREEN:
-        handleFold();
-        break;
+        handleFold()
+        break
       // Close current
       case MenuEventEnum.CLOSE_CURRENT:
-        close(tabContentProps.tabItem);
-        break;
+        close(tabContentProps.tabItem)
+        break
       // Close left
       case MenuEventEnum.CLOSE_LEFT:
-        closeLeft();
-        break;
+        closeLeft()
+        break
       // Close right
       case MenuEventEnum.CLOSE_RIGHT:
-        closeRight();
-        break;
+        closeRight()
+        break
       // Close other
       case MenuEventEnum.CLOSE_OTHER:
-        closeOther();
-        break;
+        closeOther()
+        break
       // Close all
       case MenuEventEnum.CLOSE_ALL:
-        closeAll();
-        break;
+        closeAll()
+        break
     }
   }
-  return { getDropMenuList, handleMenuEvent, handleContextMenu };
+  return { getDropMenuList, handleMenuEvent, handleContextMenu }
 }

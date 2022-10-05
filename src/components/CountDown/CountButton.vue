@@ -3,57 +3,60 @@
     {{ getButtonText }}
   </NButton>
 </template>
+
 <script lang="ts">
-  import { useCountdown } from './useCountdown';
-  import { isFunction } from '/@/utils/is';
-  import { useI18n } from '/@/composables/web/useI18n';
+import { useCountdown } from './useCountdown'
+import { isFunction } from '/@/utils/is'
+import { useI18n } from '/@/composables/web/useI18n'
 
-  const props = {
-    value: { type: [Object, Number, String, Array] },
-    count: { type: Number, default: 60 },
-    beforeStartFunc: {
-      type: Function as PropType<() => Promise<boolean>>,
-      default: null,
-    },
-  };
+const props = {
+  value: { type: [Object, Number, String, Array] },
+  count: { type: Number, default: 60 },
+  beforeStartFunc: {
+    type: Function as PropType<() => Promise<boolean>>,
+    default: null,
+  },
+}
 
-  export default defineComponent({
-    name: 'CountButton',
-    props,
-    setup(props) {
-      const loading = ref(false);
+export default defineComponent({
+  name: 'CountButton',
+  props,
+  setup(props) {
+    const loading = ref(false)
 
-      const { currentCount, isStart, start, reset } = useCountdown(props.count);
-      const { t } = useI18n();
+    const { currentCount, isStart, start, reset } = useCountdown(props.count)
+    const { t } = useI18n()
 
-      const getButtonText = computed(() => {
-        return !unref(isStart)
-          ? t('component.countdown.normalText')
-          : t('component.countdown.sendText', [unref(currentCount)]);
-      });
+    const getButtonText = computed(() => {
+      return !unref(isStart)
+        ? t('component.countdown.normalText')
+        : t('component.countdown.sendText', [unref(currentCount)])
+    })
 
-      watchEffect(() => {
-        props.value === undefined && reset();
-      });
+    watchEffect(() => {
+      props.value === undefined && reset()
+    })
 
-      /**
+    /**
        * @description: Judge whether there is an external function before execution, and decide whether to start after execution
        */
-      async function handleStart() {
-        const { beforeStartFunc } = props;
-        if (beforeStartFunc && isFunction(beforeStartFunc)) {
-          loading.value = true;
-          try {
-            const canStart = await beforeStartFunc();
-            canStart && start();
-          } finally {
-            loading.value = false;
-          }
-        } else {
-          start();
+    async function handleStart() {
+      const { beforeStartFunc } = props
+      if (beforeStartFunc && isFunction(beforeStartFunc)) {
+        loading.value = true
+        try {
+          const canStart = await beforeStartFunc()
+          canStart && start()
+        }
+        finally {
+          loading.value = false
         }
       }
-      return { handleStart, currentCount, loading, getButtonText, isStart };
-    },
-  });
+      else {
+        start()
+      }
+    }
+    return { handleStart, currentCount, loading, getButtonText, isStart }
+  },
+})
 </script>

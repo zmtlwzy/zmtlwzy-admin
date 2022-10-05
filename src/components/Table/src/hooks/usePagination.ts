@@ -1,20 +1,20 @@
-import type { ComputedRef } from 'vue';
-import type { PaginationProps } from '../types/pagination';
-import type { BasicTableProps } from '../types/table';
+import type { ComputedRef } from 'vue'
+import type { PaginationProps } from '../types/pagination'
+import type { BasicTableProps } from '../types/table'
 
-import { isBoolean } from '/@/utils/is';
-import { APISETTING, DEFAULTPAGESIZE, PAGESIZES } from '../const';
+import { isBoolean } from '/@/utils/is'
+import { APISETTING, DEFAULTPAGESIZE, PAGESIZES } from '../const'
 
 export function usePagination(refProps: ComputedRef<BasicTableProps>) {
-  const configRef = ref<PaginationProps>({});
-  const show = ref(true);
+  const configRef = ref<PaginationProps>({})
+  const show = ref(true)
 
   const getPaginationInfo = computed((): PaginationProps | false => {
-    const { pagination } = unref(refProps);
-    if (!unref(show) || (isBoolean(pagination) && !pagination)) {
-      return false;
-    }
-    const { totalField } = APISETTING;
+    const { pagination } = unref(refProps)
+    if (!unref(show) || (isBoolean(pagination) && !pagination))
+      return false
+
+    const { totalField } = APISETTING
     return {
       pageSize: DEFAULTPAGESIZE,
       pageSizes: PAGESIZES,
@@ -23,28 +23,28 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
       ...(isBoolean(pagination) ? {} : pagination),
       ...unref(configRef),
       pageCount: unref(configRef)[totalField],
-    };
-  });
+    }
+  })
 
   function setPagination(info: Partial<PaginationProps>) {
-    const paginationInfo = unref(getPaginationInfo);
+    const paginationInfo = unref(getPaginationInfo)
     configRef.value = {
       ...(!isBoolean(paginationInfo) ? paginationInfo : {}),
       ...info,
-    };
+    }
   }
 
   function getPagination() {
-    return unref(getPaginationInfo);
+    return unref(getPaginationInfo)
   }
 
   function getShowPagination() {
-    return unref(show);
+    return unref(show)
   }
 
   async function setShowPagination(flag: boolean) {
-    show.value = flag;
+    show.value = flag
   }
 
-  return { getPagination, getPaginationInfo, setShowPagination, getShowPagination, setPagination };
+  return { getPagination, getPaginationInfo, setShowPagination, getShowPagination, setPagination }
 }

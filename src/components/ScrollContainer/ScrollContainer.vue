@@ -5,18 +5,18 @@
 </template>
 
 <script setup lang="ts">
-  import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal';
+import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal'
 
-  defineOptions({
-    name: 'ScrollContainer',
-  });
+const props = defineProps<{
+  inverted?: boolean
+}>()
 
-  const props = defineProps<{
-    inverted?: boolean;
-  }>();
+defineOptions({
+  name: 'ScrollContainer',
+})
 
-  const { color, colorHover } = getNaiveCssVars('Scrollbar', true);
-  const scrollBarThemeOverrides = computed(() => {
-    return props.inverted ? { color, colorHover } : undefined;
-  });
+const { color, colorHover } = getNaiveCssVars('Scrollbar', true)
+const scrollBarThemeOverrides = computed(() => {
+  return props.inverted ? { color, colorHover } : undefined
+})
 </script>

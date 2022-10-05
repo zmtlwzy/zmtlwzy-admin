@@ -1,23 +1,23 @@
-import { BadgeProps, TagProps } from 'naive-ui';
+import type { BadgeProps, TagProps } from 'naive-ui'
 
 export interface ListItem {
-  id: string;
-  avatar: string;
-  title: string;
-  datetime: string;
-  type: string;
-  read?: boolean;
-  description?: string;
-  extra?: string;
-  color?: TagProps['type'];
+  id: string
+  avatar: string
+  title: string
+  datetime: string
+  type: string
+  read?: boolean
+  description?: string
+  extra?: string
+  color?: TagProps['type']
 }
 
 export interface TabItem {
-  key: string;
-  name: string;
-  badgeType?: BadgeProps['type'];
-  list: ListItem[];
-  unreadlist?: ListItem[];
+  key: string
+  name: string
+  badgeType?: BadgeProps['type']
+  list: ListItem[]
+  unreadlist?: ListItem[]
 }
 
 export const tabListData: TabItem[] = [
@@ -142,4 +142,4 @@ export const tabListData: TabItem[] = [
       },
     ],
   },
-];
+]

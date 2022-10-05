@@ -1,48 +1,51 @@
-import { unrefElement, MaybeElementRef } from '@vueuse/core';
-import { createLoading } from './createLoading';
-import type { LoadingProps } from './type';
+import type { MaybeElementRef } from '@vueuse/core'
+import { unrefElement } from '@vueuse/core'
+import { createLoading } from './createLoading'
+import type { LoadingProps } from './type'
 
 export interface UseLoadingOptions {
-  target?: any;
-  props?: Partial<LoadingProps>;
+  target?: any
+  props?: Partial<LoadingProps>
 }
 
 interface Fn {
-  (): void;
+  (): void
 }
 
-export function useLoading(props: Partial<LoadingProps>): [Fn, Fn, (string) => void];
-export function useLoading(opt: Partial<UseLoadingOptions>): [Fn, Fn, (string) => void];
+export function useLoading(props: Partial<LoadingProps>): [Fn, Fn, (string) => void]
+export function useLoading(opt: Partial<UseLoadingOptions>): [Fn, Fn, (string) => void]
 
 export function useLoading(
-  opt: Partial<LoadingProps> | Partial<UseLoadingOptions>
+  opt: Partial<LoadingProps> | Partial<UseLoadingOptions>,
 ): [Fn, Fn, (string) => void] {
-  let props: Partial<LoadingProps>;
-  let target: MaybeElementRef = document.body;
+  let props: Partial<LoadingProps>
+  let target: MaybeElementRef = document.body
 
   if (Reflect.has(opt, 'target') || Reflect.has(opt, 'props')) {
-    const options = opt as Partial<UseLoadingOptions>;
-    props = options.props || {};
-    target = options.target || document.body;
-  } else {
-    props = opt as Partial<LoadingProps>;
+    const options = opt as Partial<UseLoadingOptions>
+    props = options.props || {}
+    target = options.target || document.body
+  }
+  else {
+    props = opt as Partial<LoadingProps>
   }
 
-  const instance = createLoading(props, undefined, true);
+  const instance = createLoading(props, undefined, true)
 
   const open = (): void => {
-    const t = unrefElement(target as MaybeElementRef) as HTMLDivElement;
-    if (!t) return;
-    instance.open(t);
-  };
+    const t = unrefElement(target as MaybeElementRef) as HTMLDivElement
+    if (!t)
+      return
+    instance.open(t)
+  }
 
   const close = (): void => {
-    instance.close();
-  };
+    instance.close()
+  }
 
   const setProps = (props: Partial<LoadingProps>) => {
-    instance.setProps(props);
-  };
+    instance.setProps(props)
+  }
 
-  return [open, close, setProps];
+  return [open, close, setProps]
 }

@@ -1,50 +1,51 @@
-import { tryOnScopeDispose } from '@vueuse/core';
+import { tryOnScopeDispose } from '@vueuse/core'
 
 export function useCountdown(count: number) {
-  const currentCount = ref(count);
+  const currentCount = ref(count)
 
-  const isStart = ref(false);
+  const isStart = ref(false)
 
-  let timerId: ReturnType<typeof setInterval> | null;
+  let timerId: ReturnType<typeof setInterval> | null
 
   function clear() {
-    timerId && window.clearInterval(timerId);
+    timerId && window.clearInterval(timerId)
   }
 
   function stop() {
-    isStart.value = false;
-    clear();
-    timerId = null;
+    isStart.value = false
+    clear()
+    timerId = null
   }
 
   function start() {
-    if (unref(isStart) || !!timerId) {
-      return;
-    }
-    isStart.value = true;
+    if (unref(isStart) || !!timerId)
+      return
+
+    isStart.value = true
     timerId = setInterval(() => {
       if (unref(currentCount) === 1) {
-        stop();
-        currentCount.value = count;
-      } else {
-        currentCount.value -= 1;
+        stop()
+        currentCount.value = count
       }
-    }, 1000);
+      else {
+        currentCount.value -= 1
+      }
+    }, 1000)
   }
 
   function reset() {
-    currentCount.value = count;
-    stop();
+    currentCount.value = count
+    stop()
   }
 
   function restart() {
-    reset();
-    start();
+    reset()
+    start()
   }
 
   tryOnScopeDispose(() => {
-    reset();
-  });
+    reset()
+  })
 
-  return { start, reset, restart, clear, stop, currentCount, isStart };
+  return { start, reset, restart, clear, stop, currentCount, isStart }
 }

@@ -1,15 +1,15 @@
-import type { ProjectConfig } from '/#/config';
-import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '/@/enums/menuEnum';
-import { CacheTypeEnum } from '/@/enums/cacheEnum';
+import type { ProjectConfig } from '/#/config'
+import { MenuModeEnum, MenuTypeEnum, MixSidebarTriggerEnum, TriggerEnum } from '/@/enums/menuEnum'
+import { CacheTypeEnum } from '/@/enums/cacheEnum'
 import {
   ContentEnum,
   PermissionModeEnum,
-  ThemeEnum,
   RouterTransitionEnum,
-  SettingButtonPositionEnum,
   SessionTimeoutProcessingEnum,
-} from '/@/enums/appEnum';
-import { primaryColor } from '../../build/config/themeConfig';
+  SettingButtonPositionEnum,
+  ThemeEnum,
+} from '/@/enums/appEnum'
+import { primaryColor } from '../../build/config/themeConfig'
 
 // ! You need to clear the browser cache after the change
 const setting: ProjectConfig = {
@@ -148,6 +148,6 @@ const setting: ProjectConfig = {
   // Whether to cancel the http request that has been sent but not responded when switching the interface.
   // If it is enabled, I want to overwrite a single interface. Can be set in a separate interface
   removeAllHttpPending: false,
-};
+}
 
-export default setting;
+export default setting

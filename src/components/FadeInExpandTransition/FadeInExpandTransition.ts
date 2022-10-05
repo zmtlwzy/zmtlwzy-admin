@@ -1,6 +1,7 @@
 // clone from 'naive-ui/src/_internal/fade-in-expand-transition/src/FadeInExpandTransition.ts'
 
-import { h, Transition, TransitionGroup, defineComponent, PropType } from 'vue';
+import type { PropType } from 'vue'
+import { Transition, TransitionGroup, defineComponent, h } from 'vue'
 
 export default defineComponent({
   name: 'FadeInExpandTransition',
@@ -18,68 +19,78 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     function handleBeforeLeave(el: HTMLElement): void {
-      if (props.width) {
-        el.style.maxWidth = `${el.offsetWidth}px`;
-      } else {
-        el.style.maxHeight = `${el.offsetHeight}px`;
-      }
-      void el.offsetWidth;
+      if (props.width)
+        el.style.maxWidth = `${el.offsetWidth}px`
+      else
+        el.style.maxHeight = `${el.offsetHeight}px`
+
+      // eslint-disable-next-line no-unused-expressions
+      el.offsetWidth
     }
     function handleLeave(el: HTMLElement): void {
-      if (props.width) {
-        el.style.maxWidth = '0';
-      } else {
-        el.style.maxHeight = '0';
-      }
-      void el.offsetWidth;
-      const { onLeave } = props;
-      if (onLeave) onLeave();
+      if (props.width)
+        el.style.maxWidth = '0'
+      else
+        el.style.maxHeight = '0'
+
+      // eslint-disable-next-line no-unused-expressions
+      el.offsetWidth
+      const { onLeave } = props
+      if (onLeave)
+        onLeave()
     }
     function handleAfterLeave(el: HTMLElement): void {
-      if (props.width) {
-        el.style.maxWidth = '';
-      } else {
-        el.style.maxHeight = '';
-      }
-      const { onAfterLeave } = props;
-      if (onAfterLeave) onAfterLeave();
+      if (props.width)
+        el.style.maxWidth = ''
+      else
+        el.style.maxHeight = ''
+
+      const { onAfterLeave } = props
+      if (onAfterLeave)
+        onAfterLeave()
     }
     function handleEnter(el: HTMLElement): void {
-      el.style.transition = 'none';
+      el.style.transition = 'none'
       if (props.width) {
-        const memorizedWidth = el.offsetWidth;
-        el.style.maxWidth = '0';
-        void el.offsetWidth;
-        el.style.transition = '';
-        el.style.maxWidth = `${memorizedWidth}px`;
-      } else {
+        const memorizedWidth = el.offsetWidth
+        el.style.maxWidth = '0'
+        // eslint-disable-next-line no-unused-expressions
+        el.offsetWidth
+        el.style.transition = ''
+        el.style.maxWidth = `${memorizedWidth}px`
+      }
+      else {
         if (props.reverse) {
-          el.style.maxHeight = `${el.offsetHeight}px`;
-          void el.offsetHeight;
-          el.style.transition = '';
-          el.style.maxHeight = '0';
-        } else {
-          const memorizedHeight = el.offsetHeight;
-          el.style.maxHeight = '0';
-          void el.offsetWidth;
-          el.style.transition = '';
-          el.style.maxHeight = `${memorizedHeight}px`;
+          el.style.maxHeight = `${el.offsetHeight}px`
+          // eslint-disable-next-line no-unused-expressions
+          el.offsetHeight
+          el.style.transition = ''
+          el.style.maxHeight = '0'
+        }
+        else {
+          const memorizedHeight = el.offsetHeight
+          el.style.maxHeight = '0'
+          // eslint-disable-next-line no-unused-expressions
+          el.offsetWidth
+          el.style.transition = ''
+          el.style.maxHeight = `${memorizedHeight}px`
         }
       }
-      void el.offsetWidth;
+      // eslint-disable-next-line no-unused-expressions
+      el.offsetWidth
     }
     function handleAfterEnter(el: HTMLElement): void {
       if (props.width) {
-        el.style.maxWidth = '';
-      } else {
-        if (!props.reverse) {
-          el.style.maxHeight = '';
-        }
+        el.style.maxWidth = ''
       }
-      props.onAfterEnter?.();
+      else {
+        if (!props.reverse)
+          el.style.maxHeight = ''
+      }
+      props.onAfterEnter?.()
     }
     return () => {
-      const type = props.group ? TransitionGroup : Transition;
+      const type = props.group ? TransitionGroup : Transition
       return h(
         type as any,
         {
@@ -94,8 +105,8 @@ export default defineComponent({
           onLeave: handleLeave,
           onAfterLeave: handleAfterLeave,
         },
-        slots
-      );
-    };
+        slots,
+      )
+    }
   },
-});
+})

@@ -3,65 +3,65 @@
     <transition name="page-footer-fade" appear>
       <div v-show="getShow" :class="[prefixCls]">
         <div :class="`${prefixCls}__left`">
-          <slot name="left"></slot>
+          <slot name="left" />
         </div>
-        <slot></slot>
+        <slot />
         <div :class="`${prefixCls}__right`">
-          <slot name="right"></slot>
+          <slot name="right" />
         </div>
       </div>
     </transition>
   </div>
 </template>
+
 <script setup lang="ts">
-  import Tiny from 'tinycolor2';
-  import { asyncComputed, promiseTimeout } from '@vueuse/core';
+import Tiny from 'tinycolor2'
+import { asyncComputed, promiseTimeout } from '@vueuse/core'
 
-  import { useRootSetting } from '/@/composables/setting/useRootSetting';
-  import { useTransitionSetting } from '/@/composables/setting/useTransitionSetting';
-  import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal';
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { usePageTransitionInject } from '/@/composables/web/useAppInject';
+import { useRootSetting } from '/@/composables/setting/useRootSetting'
+import { useTransitionSetting } from '/@/composables/setting/useTransitionSetting'
+import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal'
+import { useDesign } from '/@/composables/web/useDesign'
+import { usePageTransitionInject } from '/@/composables/web/useAppInject'
 
-  const { prefixCls } = useDesign('page-footer');
-  const { getIsDarkMode } = useRootSetting();
-  const { getEnableTransition } = useTransitionSetting();
+const { prefixCls } = useDesign('page-footer')
+const { getIsDarkMode } = useRootSetting()
+const { getEnableTransition } = useTransitionSetting()
 
-  const { headerColor: fc, footerBorderColor: fbc } = getNaiveCssVars('Layout');
-  const { footerColor: dark_fc, footerBorderColor: dark_fbc } = getNaiveCssVars('Layout', true);
+const { headerColor: fc, footerBorderColor: fbc } = getNaiveCssVars('Layout')
+const { footerColor: dark_fc, footerBorderColor: dark_fbc } = getNaiveCssVars('Layout', true)
 
-  const getColors = computed(() => {
-    const isDark = getIsDarkMode.value;
-    return {
-      color: isDark ? dark_fc : fc,
-      backdropColor: Tiny(isDark ? dark_fc : fc)
-        .setAlpha(0.25)
-        .toRgbString(),
-      borderColor: isDark ? dark_fbc : fbc,
-    };
-  });
+const getColors = computed(() => {
+  const isDark = getIsDarkMode.value
+  return {
+    color: isDark ? dark_fc : fc,
+    backdropColor: Tiny(isDark ? dark_fc : fc)
+      .setAlpha(0.25)
+      .toRgbString(),
+    borderColor: isDark ? dark_fbc : fbc,
+  }
+})
 
-  useCssVars(() => {
-    const prefix = 'page-footer';
-    const { color, backdropColor, borderColor } = getColors.value;
-    return {
-      [`${prefix}-color`]: color,
-      [`${prefix}-backdrop-color`]: backdropColor,
-      [`${prefix}-border-color`]: borderColor,
-    };
-  });
+useCssVars(() => {
+  const prefix = 'page-footer'
+  const { color, backdropColor, borderColor } = getColors.value
+  return {
+    [`${prefix}-color`]: color,
+    [`${prefix}-backdrop-color`]: backdropColor,
+    [`${prefix}-border-color`]: borderColor,
+  }
+})
 
-  const { getPageTranstionState, getPageTranstionName } = usePageTransitionInject();
+const { getPageTranstionState, getPageTranstionName } = usePageTransitionInject()
 
-  const getShow = asyncComputed(async () => {
-    if (!unref(getEnableTransition) || !unref(getPageTranstionName)) {
-      await promiseTimeout(100);
-      return true;
-    }
-    if (unref(getPageTranstionState) !== 'running') {
-      return true;
-    }
-  });
+const getShow = asyncComputed(async () => {
+  if (!unref(getEnableTransition) || !unref(getPageTranstionName)) {
+    await promiseTimeout(100)
+    return true
+  }
+  if (unref(getPageTranstionState) !== 'running')
+    return true
+})
 </script>
 
 <style lang="less">

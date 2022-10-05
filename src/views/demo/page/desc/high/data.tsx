@@ -5,7 +5,7 @@ export const pageHeaderDes: [string, string][] = [
   ['关联单据', '1234987'],
   ['生效日期', '2020-12-27 ~ 2022-01-05'],
   ['备注', '请于两个工作日内确认'],
-];
+]
 
 export const pageContentDes: [string, string][] = [
   ['用户姓名', '吕率缕'],
@@ -13,14 +13,14 @@ export const pageContentDes: [string, string][] = [
   ['身份证', '4551450450540545050'],
   ['联系方式', '18841465471'],
   ['联系地址', '浙江省杭州市西湖区黄姑山路工专路交叉路口'],
-];
+]
 
 export const pageContentDes2: [string, string][] = [
   ['数据ID', '7987984'],
   ['更新时间', '2021-08-08'],
   ['数据ID', '2156465'],
   ['更新时间', '2021-11-04'],
-];
+]
 
 export const pageContentDes3: [string, string][] = [
   ['负责人', '江西溪'],
@@ -28,4 +28,4 @@ export const pageContentDes3: [string, string][] = [
   ['所属部门', 'XX部-XX组'],
   ['过期时间', '2023-11-04'],
   ['描述', '这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长···'],
-];
+]

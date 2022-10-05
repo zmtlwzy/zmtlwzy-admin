@@ -31,195 +31,198 @@
           </template>
           重置
         </n-button>
-        <n-button type="primary" @click="handleSubmit"> 提交 </n-button>
+        <n-button type="primary" @click="handleSubmit">
+          提交
+        </n-button>
       </div>
     </template>
   </PageWrapper>
 </template>
 
 <script lang="ts" setup>
-  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
-  import { FormSchema } from '/@/components/Form';
-  import { useForm } from '/@/components/Form/index';
+import useDiscreteApi from '/@/composables/web/useDiscreteApi'
+import type { FormSchema } from '/@/components/Form'
+import { useForm } from '/@/components/Form/index'
 
-  const router = useRouter();
-  const route = useRoute();
-  const { message } = useDiscreteApi();
+const router = useRouter()
+const route = useRoute()
+const { message } = useDiscreteApi()
 
-  const id = computed(() => route.params.id);
-  const isEdit = computed(() => !!id.value);
+const id = computed(() => route.params.id)
+const isEdit = computed(() => !!id.value)
 
-  const actionName = computed(() => {
-    return isEdit.value ? '编辑' : '创建';
-  });
+const actionName = computed(() => {
+  return isEdit.value ? '编辑' : '创建'
+})
 
-  const schemas: FormSchema[] = [
-    {
-      field: 'id',
-      component: 'NInput',
-      label: 'ID',
-      show: () => {
-        return isEdit.value;
-      },
-      componentProps: {
-        disabled: true,
-        placeholder: '',
-      },
+const schemas: FormSchema[] = [
+  {
+    field: 'id',
+    component: 'NInput',
+    label: 'ID',
+    show: () => {
+      return isEdit.value
     },
-    {
-      field: 'title',
-      component: 'NInput',
-      label: '标题',
-      required: true,
-      componentProps: {
-        placeholder: '给目标起个名字',
-      },
+    componentProps: {
+      disabled: true,
+      placeholder: '',
     },
-    {
-      field: 'title2',
-      component: 'NInput',
-      label: '副标题',
-      componentProps: {
-        placeholder: '给目标起个名字2',
-      },
+  },
+  {
+    field: 'title',
+    component: 'NInput',
+    label: '标题',
+    required: true,
+    componentProps: {
+      placeholder: '给目标起个名字',
     },
-    {
-      field: 'title3',
-      component: 'NInput',
-      label: '次要标题',
-      componentProps: {
-        placeholder: '给目标起个名字3',
-      },
+  },
+  {
+    field: 'title2',
+    component: 'NInput',
+    label: '副标题',
+    componentProps: {
+      placeholder: '给目标起个名字2',
     },
-    {
-      field: 'dateRange',
-      component: 'NDateRangePicker',
-      label: '起止日期',
-      required: true,
-      componentProps: {
-        actions: ['clear', 'confirm'],
-        updateValueOnClose: true,
-      },
+  },
+  {
+    field: 'title3',
+    component: 'NInput',
+    label: '次要标题',
+    componentProps: {
+      placeholder: '给目标起个名字3',
     },
-    {
-      field: 'target',
-      component: 'NInputTextarea',
-      label: '目标描述',
-      componentProps: {
-        placeholder: '请输入你的阶段性工作目标',
-        rows: 4,
-      },
+  },
+  {
+    field: 'dateRange',
+    component: 'NDateRangePicker',
+    label: '起止日期',
+    required: true,
+    componentProps: {
+      actions: ['clear', 'confirm'],
+      updateValueOnClose: true,
     },
-    {
-      field: 'metrics',
-      component: 'NInputTextarea',
-      label: '衡量标准',
-      componentProps: {
-        rows: 3,
-      },
+  },
+  {
+    field: 'target',
+    component: 'NInputTextarea',
+    label: '目标描述',
+    componentProps: {
+      placeholder: '请输入你的阶段性工作目标',
+      rows: 4,
     },
-    {
-      field: 'client',
-      component: 'NInput',
-      label: '客户',
-      labelMessage: '目标的服务对象',
-      subLabel: '( 选填 )',
-      componentProps: {
-        placeholder: '请描述你服务的客户，内部客户直接 @姓名／工号',
-      },
+  },
+  {
+    field: 'metrics',
+    component: 'NInputTextarea',
+    label: '衡量标准',
+    componentProps: {
+      rows: 3,
     },
-    {
-      field: 'inviteer',
-      component: 'NInput',
-      label: '邀评人',
-      subLabel: '( 选填 )',
-      componentProps: {
-        placeholder: '请直接 @姓名／工号，最多可邀请 5 人',
-      },
+  },
+  {
+    field: 'client',
+    component: 'NInput',
+    label: '客户',
+    labelMessage: '目标的服务对象',
+    subLabel: '( 选填 )',
+    componentProps: {
+      placeholder: '请描述你服务的客户，内部客户直接 @姓名／工号',
     },
-    {
-      field: 'weights',
-      component: 'NInputNumber',
-      label: '权重',
-      subLabel: '( 选填 )',
+  },
+  {
+    field: 'inviteer',
+    component: 'NInput',
+    label: '邀评人',
+    subLabel: '( 选填 )',
+    componentProps: {
+      placeholder: '请直接 @姓名／工号，最多可邀请 5 人',
     },
-    {
-      field: 'disclosure',
-      component: 'NRadioGroup',
-      label: '目标公开',
-      labelMessage: '客户、邀评人默认被分享',
-      defaultValue: '1',
-      componentProps: {
-        options: [
-          {
-            label: '公开',
-            value: '1',
-          },
-          {
-            label: '部分公开',
-            value: '2',
-          },
-          {
-            label: '不公开',
-            value: '3',
-          },
-        ],
-      },
+  },
+  {
+    field: 'weights',
+    component: 'NInputNumber',
+    label: '权重',
+    subLabel: '( 选填 )',
+  },
+  {
+    field: 'disclosure',
+    component: 'NRadioGroup',
+    label: '目标公开',
+    labelMessage: '客户、邀评人默认被分享',
+    defaultValue: '1',
+    componentProps: {
+      options: [
+        {
+          label: '公开',
+          value: '1',
+        },
+        {
+          label: '部分公开',
+          value: '2',
+        },
+        {
+          label: '不公开',
+          value: '3',
+        },
+      ],
     },
-    {
-      field: 'disclosurer',
-      component: 'NSelect',
-      label: ' ',
-      show: ({ model }) => {
-        return model.disclosure === '2';
-      },
-      componentProps: {
-        placeholder: '公开给',
-        multiple: true,
-        options: [
-          {
-            label: '同事1',
-            value: '1',
-          },
-          {
-            label: '同事2',
-            value: '2',
-          },
-          {
-            label: '同事3',
-            value: '3',
-          },
-        ],
-      },
+  },
+  {
+    field: 'disclosurer',
+    component: 'NSelect',
+    label: ' ',
+    show: ({ model }) => {
+      return model.disclosure === '2'
     },
-  ];
+    componentProps: {
+      placeholder: '公开给',
+      multiple: true,
+      options: [
+        {
+          label: '同事1',
+          value: '1',
+        },
+        {
+          label: '同事2',
+          value: '2',
+        },
+        {
+          label: '同事3',
+          value: '3',
+        },
+      ],
+    },
+  },
+]
 
-  const [register, { setFieldsValue, submit, validate, resetFields }] = useForm({
-    schemas,
-    labelWidth: 120,
-    showActionButtonGroup: false,
-    submitFunc: async (e) => {
-      const res = toRaw(e);
-      message.info(JSON.stringify(res));
-      message.success(`${actionName.value}成功`);
-      router.push('/comp/table/basic-table');
-    },
-  });
+const [register, { setFieldsValue, submit, validate, resetFields }] = useForm({
+  schemas,
+  labelWidth: 120,
+  showActionButtonGroup: false,
+  submitFunc: async (e) => {
+    const res = toRaw(e)
+    message.info(JSON.stringify(res))
+    message.success(`${actionName.value}成功`)
+    router.push('/comp/table/basic-table')
+  },
+})
 
-  onMounted(async () => {
-    const data = {
-      id: id.value,
-      title: 'heihei',
-      title2: 'sdfsdf',
-      title3: '78979',
-    };
-    setFieldsValue(isEdit.value ? data : {});
-  });
-
-  async function handleSubmit() {
-    try {
-      await validate();
-      submit();
-    } catch (error) {}
+onMounted(async () => {
+  const data = {
+    id: id.value,
+    title: 'heihei',
+    title2: 'sdfsdf',
+    title3: '78979',
   }
+  setFieldsValue(isEdit.value ? data : {})
+})
+
+async function handleSubmit() {
+  try {
+    await validate()
+    submit()
+  }
+  catch (error) {}
+}
 </script>

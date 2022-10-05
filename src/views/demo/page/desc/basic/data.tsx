@@ -1,11 +1,12 @@
-import { NButton, NBadge, NSpace, NText, DataTableBaseColumn } from 'naive-ui';
+import type { DataTableBaseColumn } from 'naive-ui'
+import { NBadge, NButton, NSpace, NText } from 'naive-ui'
 
 export const data: Record<string, string> = {
   取货单号: '1000000000',
   状态: '已取货',
   销售单号: '1234123421',
   子订单: '3214321432',
-};
+}
 
 export const data2: Record<string, string> = {
   用户姓名: '付小小',
@@ -13,7 +14,7 @@ export const data2: Record<string, string> = {
   常用快递: '菜鸟仓储',
   取货地址: '浙江省杭州市西湖区万塘路18号',
   备注: '无',
-};
+}
 
 export const tableColumns: DataTableBaseColumn[] = [
   {
@@ -25,7 +26,7 @@ export const tableColumns: DataTableBaseColumn[] = [
         <NButton text type="info" size="small">
           {() => rowData.t1}
         </NButton>
-      );
+      )
     },
   },
   {
@@ -51,7 +52,7 @@ export const tableColumns: DataTableBaseColumn[] = [
     title: '金额',
     key: 't6',
   },
-];
+]
 
 export const tableData = [
   {
@@ -86,7 +87,7 @@ export const tableData = [
     t5: 1,
     t6: 9.0,
   },
-];
+]
 
 export const tableColumns2: DataTableBaseColumn[] = [
   {
@@ -103,13 +104,13 @@ export const tableColumns2: DataTableBaseColumn[] = [
     title: '状态',
     key: 't3',
     render: (rowData) => {
-      const isProcess = rowData.t3 === '进行中';
+      const isProcess = rowData.t3 === '进行中'
       return (
         <NSpace>
           <NBadge dot type={isProcess ? 'info' : 'success'} processing={isProcess} />
           <NText>{rowData.t3}</NText>
         </NSpace>
-      );
+      )
     },
   },
   {
@@ -121,7 +122,7 @@ export const tableColumns2: DataTableBaseColumn[] = [
     ellipsis: true,
     key: 't5',
   },
-];
+]
 
 export const tableData2 = [
   {
@@ -152,4 +153,4 @@ export const tableData2 = [
     t4: '用户',
     t5: '1h',
   },
-];
+]

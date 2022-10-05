@@ -1,4 +1,4 @@
-import { FormSchema } from '/@/components/Form';
+import type { FormSchema } from '/@/components/Form'
 
 export const step1Schemas: FormSchema[] = [
   {
@@ -67,7 +67,7 @@ export const step1Schemas: FormSchema[] = [
     slot: 'money',
     rules: [{ required: true, message: '请输入转账金额' }],
   },
-];
+]
 
 export const step2Schemas: FormSchema[] = [
   {
@@ -76,9 +76,9 @@ export const step2Schemas: FormSchema[] = [
     label: '支付密码',
     defaultValue: '123456',
     componentProps: {
-      type: 'password',
+      'type': 'password',
       'show-password-on': 'mousedown',
     },
     rules: [{ required: true, message: '请输入密码' }],
   },
-];
+]

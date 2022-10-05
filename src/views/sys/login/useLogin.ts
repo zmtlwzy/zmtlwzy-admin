@@ -1,9 +1,9 @@
-import type { Ref } from 'vue';
-import type { FormRules } from 'naive-ui';
-import type { FormItemRuleValidator } from 'naive-ui/lib/form/src/interface';
+import type { Ref } from 'vue'
+import type { FormRules } from 'naive-ui'
+import type { FormItemRuleValidator } from 'naive-ui/lib/form/src/interface'
 
-import { createEventHook } from '@vueuse/core';
-import { useI18n } from '/@/composables/web/useI18n';
+import { createEventHook } from '@vueuse/core'
+import { useI18n } from '/@/composables/web/useI18n'
 
 export enum LoginStateEnum {
   LOGIN,
@@ -13,70 +13,70 @@ export enum LoginStateEnum {
   QR_CODE,
 }
 
-const currentState = ref(LoginStateEnum.LOGIN);
+const currentState = ref(LoginStateEnum.LOGIN)
 
 export function useLoginState() {
   function setLoginState(state: LoginStateEnum) {
-    currentState.value = state;
+    currentState.value = state
   }
 
-  const getLoginState = computed(() => currentState.value);
+  const getLoginState = computed(() => currentState.value)
 
   function handleBackLogin() {
-    setLoginState(LoginStateEnum.LOGIN);
+    setLoginState(LoginStateEnum.LOGIN)
   }
 
-  return { setLoginState, getLoginState, handleBackLogin };
+  return { setLoginState, getLoginState, handleBackLogin }
 }
 
 export function useFormValid(formRef: Ref<any>) {
-  const form = unref(formRef);
-  if (!form) return;
-  const resHook = createEventHook();
-  const errHook = createEventHook();
+  const form = unref(formRef)
+  if (!form)
+    return
+  const resHook = createEventHook()
+  const errHook = createEventHook()
 
   form.validate((err) => {
-    if (err) {
-      errHook.trigger(err);
-    } else {
-      resHook.trigger(err);
-    }
-  });
+    if (err)
+      errHook.trigger(err)
+    else
+      resHook.trigger(err)
+  })
 
-  return { onSuccess: resHook.on, onError: errHook.on };
+  return { onSuccess: resHook.on, onError: errHook.on }
 }
 
 export function useFormRules(formData?: Recordable) {
-  const { t } = useI18n();
+  const { t } = useI18n()
 
-  const getAccountFormRule = computed(() => createRule(t('sys.login.accountPlaceholder')));
-  const getPasswordFormRule = computed(() => createRule(t('sys.login.passwordPlaceholder')));
-  const getSmsFormRule = computed(() => createRule(t('sys.login.smsPlaceholder')));
-  const getMobileFormRule = computed(() => createRule(t('sys.login.mobilePlaceholder')));
+  const getAccountFormRule = computed(() => createRule(t('sys.login.accountPlaceholder')))
+  const getPasswordFormRule = computed(() => createRule(t('sys.login.passwordPlaceholder')))
+  const getSmsFormRule = computed(() => createRule(t('sys.login.smsPlaceholder')))
+  const getMobileFormRule = computed(() => createRule(t('sys.login.mobilePlaceholder')))
 
   const validatePolicy: FormItemRuleValidator = (_, value: boolean) => {
-    return !value ? new Error(t('sys.login.policyPlaceholder')) : true;
-  };
+    return !value ? new Error(t('sys.login.policyPlaceholder')) : true
+  }
 
   const validatePasswordStartWith: FormItemRuleValidator = (_, value: string) => {
-    const password = formData?.password;
-    return !!password && password.startsWith(value) && password.length >= value.length;
-  };
+    const password = formData?.password
+    return !!password && password.startsWith(value) && password.length >= value.length
+  }
 
   const validatePasswordSame: FormItemRuleValidator = (_, value: string) => {
-    return formData?.password === value;
-  };
+    return formData?.password === value
+  }
 
   const getFormRules = computed((): FormRules => {
-    const accountFormRule = unref(getAccountFormRule);
-    const passwordFormRule = unref(getPasswordFormRule);
-    const smsFormRule = unref(getSmsFormRule);
-    const mobileFormRule = unref(getMobileFormRule);
+    const accountFormRule = unref(getAccountFormRule)
+    const passwordFormRule = unref(getPasswordFormRule)
+    const smsFormRule = unref(getSmsFormRule)
+    const mobileFormRule = unref(getMobileFormRule)
 
     const mobileRule = {
       sms: smsFormRule,
       mobile: mobileFormRule,
-    };
+    }
     switch (unref(currentState)) {
       // register form rules
       case LoginStateEnum.REGISTER:
@@ -90,28 +90,28 @@ export function useFormRules(formData?: Recordable) {
           ],
           policy: [{ validator: validatePolicy, trigger: 'change' }],
           ...mobileRule,
-        };
+        }
 
       // reset password form rules
       case LoginStateEnum.RESET_PASSWORD:
         return {
           account: accountFormRule,
           ...mobileRule,
-        };
+        }
 
       // mobile form rules
       case LoginStateEnum.MOBILE:
-        return mobileRule;
+        return mobileRule
 
       // login form rules
       default:
         return {
           account: accountFormRule,
           password: passwordFormRule,
-        };
+        }
     }
-  });
-  return { getFormRules };
+  })
+  return { getFormRules }
 }
 
 function createRule(message: string) {
@@ -121,5 +121,5 @@ function createRule(message: string) {
       message,
       trigger: 'change',
     },
-  ];
+  ]
 }

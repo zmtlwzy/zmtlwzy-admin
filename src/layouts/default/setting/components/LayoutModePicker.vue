@@ -12,45 +12,47 @@
     </template>
   </div>
 </template>
+
 <script lang="ts">
-  import { baseHandler } from '../handler';
+import { baseHandler } from '../handler'
 
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
-  import { useI18n } from '/@/composables/web/useI18n';
+import { useDesign } from '/@/composables/web/useDesign'
+import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
+import { useI18n } from '/@/composables/web/useI18n'
 
-  import Picker from './Picker.vue';
+import Picker from './Picker.vue'
 
-  import { HandlerEnum, menuTypeList } from '../enum';
-  import { MenuTypeEnum } from '/@/enums/menuEnum';
+import { HandlerEnum, menuTypeList } from '../enum'
+import { MenuTypeEnum } from '/@/enums/menuEnum'
 
-  export default defineComponent({
-    name: 'ThemeModePicker',
-    components: { Picker },
-    setup() {
-      const { prefixCls } = useDesign('setting-layout-mode-picker');
-      const { getMenuType, getIsTopMenu } = useMenuSetting();
-      const { t } = useI18n();
+export default defineComponent({
+  name: 'ThemeModePicker',
+  components: { Picker },
+  setup() {
+    const { prefixCls } = useDesign('setting-layout-mode-picker')
+    const { getMenuType, getIsTopMenu } = useMenuSetting()
+    const { t } = useI18n()
 
-      const handleChange = ({ mode, type }: typeof menuTypeList[0]) => {
-        baseHandler(HandlerEnum.CHANGE_LAYOUT, {
-          mode,
-          type,
-          split: type !== MenuTypeEnum.MIX ? false : undefined,
-        });
-      };
+    const handleChange = ({ mode, type }: typeof menuTypeList[0]) => {
+      baseHandler(HandlerEnum.CHANGE_LAYOUT, {
+        mode,
+        type,
+        split: type !== MenuTypeEnum.MIX ? false : undefined,
+      })
+    }
 
-      return {
-        t,
-        prefixCls,
-        menuTypeList,
-        handleChange,
-        getMenuType,
-        getIsTopMenu,
-      };
-    },
-  });
+    return {
+      t,
+      prefixCls,
+      menuTypeList,
+      handleChange,
+      getMenuType,
+      getIsTopMenu,
+    }
+  },
+})
 </script>
+
 <style lang="less">
   @prefix-cls: ~'@{namespace}-setting-layout-mode-picker';
 

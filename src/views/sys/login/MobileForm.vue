@@ -22,28 +22,29 @@
     </NForm>
   </template>
 </template>
+
 <script lang="ts" setup>
-  import { useI18n } from '/@/composables/web/useI18n';
-  import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
+import { useI18n } from '/@/composables/web/useI18n'
+import { LoginStateEnum, useFormRules, useFormValid, useLoginState } from './useLogin'
 
-  const { t } = useI18n();
-  const { handleBackLogin, getLoginState } = useLoginState();
-  const { getFormRules } = useFormRules();
+const { t } = useI18n()
+const { handleBackLogin, getLoginState } = useLoginState()
+const { getFormRules } = useFormRules()
 
-  const formRef = ref();
-  const loading = ref(false);
+const formRef = ref()
+const loading = ref(false)
 
-  const formData = reactive({
-    mobile: '',
-    sms: '',
-  });
+const formData = reactive({
+  mobile: '',
+  sms: '',
+})
 
-  const getShow = computed(() => unref(getLoginState) === LoginStateEnum.MOBILE);
+const getShow = computed(() => unref(getLoginState) === LoginStateEnum.MOBILE)
 
-  async function handleLogin() {
-    const { onSuccess } = useFormValid(formRef)!;
-    onSuccess(() => {
-      console.log(formData, 'formData');
-    });
-  }
+async function handleLogin() {
+  const { onSuccess } = useFormValid(formRef)!
+  onSuccess(() => {
+    console.log(formData, 'formData')
+  })
+}
 </script>

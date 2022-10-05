@@ -1,8 +1,9 @@
 <template>
-  <div></div>
+  <div />
 </template>
+
 <script lang="ts">
-  export default defineComponent({
-    name: 'FrameBlank',
-  });
+export default defineComponent({
+  name: 'FrameBlank',
+})
 </script>

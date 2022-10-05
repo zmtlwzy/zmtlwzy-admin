@@ -20,10 +20,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { useI18n } from '/@/composables/web/useI18n';
-  const { prefixCls } = useDesign('app-search-footer');
-  const { t } = useI18n();
+import { useDesign } from '/@/composables/web/useDesign'
+import { useI18n } from '/@/composables/web/useI18n'
+const { prefixCls } = useDesign('app-search-footer')
+const { t } = useI18n()
 </script>
 
 <style lang="less" scoped>

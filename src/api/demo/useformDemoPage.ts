@@ -1,9 +1,9 @@
-import { ContentTypeEnum } from '/@/enums/httpEnum';
-import { UploadApiResult } from '../model/uploadModel';
-import { defHttp } from '/@/utils/http/axios';
-import { useGlobSetting } from '/@/composables/setting';
+import { ContentTypeEnum } from '/@/enums/httpEnum'
+import type { UploadApiResult } from '../model/uploadModel'
+import { defHttp } from '/@/utils/http/axios'
+import { useGlobSetting } from '/@/composables/setting'
 
-const { uploadUrl = '' } = useGlobSetting();
+const { uploadUrl = '' } = useGlobSetting()
 
 /**
  * @description: Upload interface
@@ -15,14 +15,14 @@ export function useFormDemoApi(params: Record<string, unknown>) {
       timeout: 3 * 1000,
       headers: {
         'Content-type': ContentTypeEnum.FORM_DATA,
-        // @ts-ignore
-        ignoreCancelToken: true,
+        // @ts-expect-error
+        'ignoreCancelToken': true,
       },
       params,
     },
     {
       errorMessageMode: 'none',
       apiUrl: '',
-    }
-  );
+    },
+  )
 }

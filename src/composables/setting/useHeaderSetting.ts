@@ -1,13 +1,13 @@
-import type { HeaderSetting } from '/#/config';
+import type { HeaderSetting } from '/#/config'
 
-import { useAppStore } from '/@/store/modules/app';
+import { useAppStore } from '/@/store/modules/app'
 
-import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
-import { useRootSetting } from '/@/composables/setting/useRootSetting';
-import { MenuModeEnum } from '/@/enums/menuEnum';
+import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
+import { useRootSetting } from '/@/composables/setting/useRootSetting'
+import { MenuModeEnum } from '/@/enums/menuEnum'
 
 export function useHeaderSetting() {
-  const appStore = useAppStore();
+  const appStore = useAppStore()
 
   const {
     getMenuMode,
@@ -16,30 +16,30 @@ export function useHeaderSetting() {
     getIsSidebarType,
     getIsMixSidebar,
     //   getIsTopMenu,
-  } = useMenuSetting();
-  const { getShowBreadCrumb, getShowLogo } = useRootSetting();
+  } = useMenuSetting()
+  const { getShowBreadCrumb, getShowLogo } = useRootSetting()
 
-  const getShowHeader = computed(() => appStore.getHeaderSetting.show);
+  const getShowHeader = computed(() => appStore.getHeaderSetting.show)
 
-  const getHeaderHeight = computed(() => appStore.getHeaderSetting.height);
+  const getHeaderHeight = computed(() => appStore.getHeaderSetting.height)
 
   const getShowBread = computed(() => {
     return (
       unref(getMenuMode) !== MenuModeEnum.HORIZONTAL && unref(getShowBreadCrumb) && !unref(getSplit)
-    );
-  });
+    )
+  })
 
   const getShowHeaderLogo = computed(() => {
-    return unref(getShowLogo) && !unref(getIsSidebarType) && !unref(getIsMixSidebar);
-  });
+    return unref(getShowLogo) && !unref(getIsSidebarType) && !unref(getIsMixSidebar)
+  })
 
   const getShowContent = computed(() => {
-    return unref(getShowBread) || unref(getShowHeaderTrigger);
-  });
+    return unref(getShowBread) || unref(getShowHeaderTrigger)
+  })
 
   // Set header configuration
   function setHeaderSetting(headerSetting: Partial<HeaderSetting>) {
-    appStore.setProjectConfig({ headerSetting });
+    appStore.setProjectConfig({ headerSetting })
   }
   return {
     setHeaderSetting,
@@ -48,5 +48,5 @@ export function useHeaderSetting() {
     getShowHeaderLogo,
     getShowHeader,
     getHeaderHeight,
-  };
+  }
 }

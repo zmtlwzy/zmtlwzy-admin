@@ -1,9 +1,9 @@
-const key = Symbol('formElRef');
+const key = Symbol('formElRef')
 
 export function createFormContext(instance) {
-  provide(key, instance);
+  provide(key, instance)
 }
 
 export function useFormContext() {
-  return inject(key);
+  return inject(key)
 }

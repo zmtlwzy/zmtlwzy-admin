@@ -1,17 +1,17 @@
-import type { InjectionKey, Ref } from 'vue';
-import { createContext, useContext } from '/@/composables/core/useContext';
+import type { InjectionKey, Ref } from 'vue'
+import { createContext, useContext } from '/@/composables/core/useContext'
 
 export interface ContentSizeContextProps {
-  width: Ref<number>;
-  height: Ref<number>;
+  width: Ref<number>
+  height: Ref<number>
 }
 
-const key: InjectionKey<ContentSizeContextProps> = Symbol();
+const key: InjectionKey<ContentSizeContextProps> = Symbol()
 
 export function createContentSizeContext(context: ContentSizeContextProps) {
-  return createContext<ContentSizeContextProps>(context, key);
+  return createContext<ContentSizeContextProps>(context, key)
 }
 
 export function useContentSizeContext() {
-  return useContext<ContentSizeContextProps>(key);
+  return useContext<ContentSizeContextProps>(key)
 }

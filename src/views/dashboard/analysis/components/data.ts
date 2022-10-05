@@ -1,11 +1,11 @@
 export interface GrowCardItem {
-  title: string;
-  value: number;
-  total: number;
-  type: 'default' | 'error' | 'info' | 'success' | 'warning' | 'primary';
-  prefix: string;
-  content: string;
-  action: string;
+  title: string
+  value: number
+  total: number
+  type: 'default' | 'error' | 'info' | 'success' | 'warning' | 'primary'
+  prefix: string
+  content: string
+  action: string
 }
 
 export const growCardList: GrowCardItem[] = [
@@ -45,4 +45,4 @@ export const growCardList: GrowCardItem[] = [
     type: 'info',
     action: '季',
   },
-];
+]

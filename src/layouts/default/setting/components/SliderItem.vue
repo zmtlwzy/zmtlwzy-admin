@@ -5,35 +5,35 @@
 </template>
 
 <script setup lang="ts">
-  import { useDebounceFn } from '@vueuse/core';
+import { useDebounceFn } from '@vueuse/core'
 
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { toWritableRef } from '/@/composables/utilities/toWritableRef';
-  import Wrapper from './Wrapper.vue';
+import { useDesign } from '/@/composables/web/useDesign'
+import { toWritableRef } from '/@/composables/utilities/toWritableRef'
 
-  import { baseHandler } from '../handler';
-  import { HandlerEnum } from '../enum';
+import { baseHandler } from '../handler'
+import type { HandlerEnum } from '../enum'
+import Wrapper from './Wrapper.vue'
 
-  defineOptions({
-    inheritAttrs: false,
-  });
+const props = defineProps({
+  event: {
+    type: Number as PropType<HandlerEnum>,
+  },
+  title: {
+    type: String,
+  },
+  val: {
+    type: [Number, Array] as PropType<number | [number, number]>,
+  },
+})
 
-  const props = defineProps({
-    event: {
-      type: Number as PropType<HandlerEnum>,
-    },
-    title: {
-      type: String,
-    },
-    val: {
-      type: [Number, Array] as PropType<number | [number, number]>,
-    },
-  });
+defineOptions({
+  inheritAttrs: false,
+})
 
-  const { prefixCls } = useDesign('setting-slider-item');
-  const valRef = toWritableRef(props, 'val');
+const { prefixCls } = useDesign('setting-slider-item')
+const valRef = toWritableRef(props, 'val')
 
-  const handleUpdate = useDebounceFn((val: number) => {
-    props.event && baseHandler(props.event, val);
-  }, 200);
+const handleUpdate = useDebounceFn((val: number) => {
+  props.event && baseHandler(props.event, val)
+}, 200)
 </script>

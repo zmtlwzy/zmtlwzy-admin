@@ -1,4 +1,4 @@
-import { FormSchema } from '/@/components/Form/index';
+import type { FormSchema } from '/@/components/Form/index'
 
 export const schemas: FormSchema[] = [
   {
@@ -9,7 +9,7 @@ export const schemas: FormSchema[] = [
     required: true,
     componentProps: {
       onInput: (e: any) => {
-        console.log(e);
+        console.log(e)
       },
     },
   },
@@ -68,7 +68,7 @@ export const schemas: FormSchema[] = [
       ],
     },
   },
-];
+]
 
 export const modelSchemas: FormSchema[] = [
   {
@@ -89,4 +89,4 @@ export const modelSchemas: FormSchema[] = [
     label: '日期',
     required: true,
   },
-];
+]

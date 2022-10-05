@@ -1,7 +1,7 @@
-import type { StyleValue, PropType } from 'vue';
-import { FormSchema } from './types/form';
-import type { FormItemProps, ButtonProps, GridProps, GridItemProps } from 'naive-ui';
-import { propTypes } from '/@/utils/propTypes';
+import type { PropType, StyleValue } from 'vue'
+import type { FormSchema } from './types/form'
+import type { ButtonProps, FormItemProps, GridItemProps, GridProps } from 'naive-ui'
+import { propTypes } from '/@/utils/propTypes'
 
 export const basicProps = {
   disabled: propTypes.bool.def(false),
@@ -52,4 +52,4 @@ export const basicProps = {
   collapsed: propTypes.bool.def(false),
   // 默认展示的行数
   collapsedRows: propTypes.number.def(1),
-};
+}

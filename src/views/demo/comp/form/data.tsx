@@ -1,4 +1,4 @@
-import { FormSchema } from '/@/components/Form';
+import type { FormSchema } from '/@/components/Form'
 
 export const schemas: FormSchema[] = [
   {
@@ -105,4 +105,4 @@ export const schemas: FormSchema[] = [
     defaultValue: [],
     slot: 'uploadSlot',
   },
-];
+]

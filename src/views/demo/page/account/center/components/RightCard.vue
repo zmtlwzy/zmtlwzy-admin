@@ -18,17 +18,17 @@
 </template>
 
 <script setup lang="ts">
-  import DemoList from '/@/views/demo/page/list/components/DemoList.vue';
-  import DemoCard from '/@/views/demo/page/list/components/DemoCard.vue';
+import DemoList from '/@/views/demo/page/list/components/DemoList.vue'
+import DemoCard from '/@/views/demo/page/list/components/DemoCard.vue'
 
-  const loadingRef = ref(false);
-  function handleBeforeLeave() {
-    loadingRef.value = true;
-    return new Promise<boolean>((resolve) => {
-      setTimeout(() => {
-        loadingRef.value = false;
-        resolve(true);
-      }, 1000);
-    });
-  }
+const loadingRef = ref(false)
+function handleBeforeLeave() {
+  loadingRef.value = true
+  return new Promise<boolean>((resolve) => {
+    setTimeout(() => {
+      loadingRef.value = false
+      resolve(true)
+    }, 1000)
+  })
+}
 </script>

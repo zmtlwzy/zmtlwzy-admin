@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-  import { useLoading } from './useLoading';
-  import Team from './Team.vue';
+import { useLoading } from './useLoading'
+import Team from './Team.vue'
 
-  const isLoading = useLoading();
+const isLoading = useLoading()
 </script>

@@ -69,4 +69,4 @@ export default {
     table: '表格',
     basic: '基础表格',
   },
-};
+}

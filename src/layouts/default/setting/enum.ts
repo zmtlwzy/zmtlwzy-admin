@@ -1,13 +1,13 @@
-import { ContentEnum, RouterTransitionEnum, ThemeStateEnum } from '/@/enums/appEnum';
+import { ContentEnum, RouterTransitionEnum, ThemeStateEnum } from '/@/enums/appEnum'
 import {
   MenuModeEnum,
   MenuTypeEnum,
+  MixSidebarTriggerEnum,
   TopMenuAlignEnum,
   TriggerEnum,
-  MixSidebarTriggerEnum,
-} from '/@/enums/menuEnum';
+} from '/@/enums/menuEnum'
 
-import { t } from '/@/composables/web/useI18n';
+import { t } from '/@/composables/web/useI18n'
 
 export enum HandlerEnum {
   CHANGE_LAYOUT,
@@ -68,7 +68,7 @@ export const contentModeOptions = [
     value: ContentEnum.FIXED,
     label: t('layout.setting.contentModeFixed'),
   },
-];
+]
 
 export const topMenuAlignOptions = [
   {
@@ -83,7 +83,7 @@ export const topMenuAlignOptions = [
     value: TopMenuAlignEnum.END,
     label: t('layout.setting.topMenuAlignCenter'),
   },
-];
+]
 
 export const getMenuTriggerOptions = (hideTop: boolean) => {
   return [
@@ -103,8 +103,8 @@ export const getMenuTriggerOptions = (hideTop: boolean) => {
             label: t('layout.setting.menuTriggerTop'),
           },
         ]),
-  ];
-};
+  ]
+}
 
 export const getMixSidebarTriggerOptions = [
   {
@@ -115,7 +115,7 @@ export const getMixSidebarTriggerOptions = [
     value: MixSidebarTriggerEnum.HOVER,
     label: t('layout.setting.triggerHover'),
   },
-];
+]
 
 export const routerTransitionOptions = [
   RouterTransitionEnum.FADE,
@@ -130,8 +130,8 @@ export const routerTransitionOptions = [
   return {
     label: item,
     value: item,
-  };
-});
+  }
+})
 
 export const menuTypeList = [
   {
@@ -155,7 +155,7 @@ export const menuTypeList = [
     mode: MenuModeEnum.VERTICAL,
     type: MenuTypeEnum.MIX_SIDEBAR,
   },
-];
+]
 
 export const themeModeList = [
   {
@@ -170,7 +170,7 @@ export const themeModeList = [
     title: t('common.dark'),
     mode: ThemeStateEnum.DARK,
   },
-];
+]
 
 export const mixSidebarTriggerOptions = [
   {
@@ -181,4 +181,4 @@ export const mixSidebarTriggerOptions = [
     value: MixSidebarTriggerEnum.CLICK,
     label: t('layout.setting.triggerClick'),
   },
-];
+]

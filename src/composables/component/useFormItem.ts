@@ -1,53 +1,54 @@
-import type { UnwrapRef, Ref } from 'vue';
+import type { Ref, UnwrapRef } from 'vue'
 import {
-  reactive,
-  readonly,
   computed,
   getCurrentInstance,
-  watchEffect,
-  unref,
   nextTick,
+  reactive,
+  readonly,
   toRaw,
-} from 'vue';
+  unref,
+  watchEffect,
+} from 'vue'
 
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'lodash-es'
 
 export function useRuleFormItem<T extends Recordable>(
   props: T,
   key: keyof T = 'value',
   changeEvent = 'change',
-  emitData?: Ref<any[]>
+  emitData?: Ref<any[]>,
 ) {
-  const instance = getCurrentInstance();
-  const emit = instance?.emit;
+  const instance = getCurrentInstance()
+  const emit = instance?.emit
 
   const innerState = reactive({
     value: props[key],
-  });
+  })
 
-  const defaultState = readonly(innerState);
+  const defaultState = readonly(innerState)
 
   const setState = (val: UnwrapRef<T[keyof T]>): void => {
-    innerState.value = val as T[keyof T];
-  };
+    innerState.value = val as T[keyof T]
+  }
 
   watchEffect(() => {
-    innerState.value = props[key];
-  });
+    innerState.value = props[key]
+  })
 
   const state: any = computed({
     get() {
-      return innerState.value;
+      return innerState.value
     },
     set(value) {
-      if (isEqual(value, defaultState.value)) return;
+      if (isEqual(value, defaultState.value))
+        return
 
-      innerState.value = value as T[keyof T];
+      innerState.value = value as T[keyof T]
       nextTick(() => {
-        emit?.(changeEvent, value, ...(toRaw(unref(emitData)) || []));
-      });
+        emit?.(changeEvent, value, ...(toRaw(unref(emitData)) || []))
+      })
     },
-  });
+  })
 
-  return [state, setState, defaultState];
+  return [state, setState, defaultState]
 }

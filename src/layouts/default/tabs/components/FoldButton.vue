@@ -4,25 +4,26 @@
     <span v-else class="app-mtabs-anction-btn i-radix-icons-enter-full-screen" />
   </div>
 </template>
+
 <script setup lang="ts">
-  import { logicAnd, logicNot } from '@vueuse/math';
+import { logicAnd, logicNot } from '@vueuse/math'
 
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting';
-  import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
+import { useDesign } from '/@/composables/web/useDesign'
+import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting'
+import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 
-  const { prefixCls } = useDesign('multiple-tabs-content');
-  const { getShowMenu, setMenuSetting } = useMenuSetting();
-  const { getShowHeader, setHeaderSetting } = useHeaderSetting();
+const { prefixCls } = useDesign('multiple-tabs-content')
+const { getShowMenu, setMenuSetting } = useMenuSetting()
+const { getShowHeader, setHeaderSetting } = useHeaderSetting()
 
-  const getIsUnFold = logicAnd(logicNot(getShowMenu), logicNot(getShowHeader));
+const getIsUnFold = logicAnd(logicNot(getShowMenu), logicNot(getShowHeader))
 
-  function handleFold() {
-    const isUnFold = getIsUnFold.value;
-    setMenuSetting({
-      show: isUnFold,
-      hidden: !isUnFold,
-    });
-    setHeaderSetting({ show: isUnFold });
-  }
+function handleFold() {
+  const isUnFold = getIsUnFold.value
+  setMenuSetting({
+    show: isUnFold,
+    hidden: !isUnFold,
+  })
+  setHeaderSetting({ show: isUnFold })
+}
 </script>

@@ -9,14 +9,18 @@
               <component :is="icon" />
             </n-icon>
           </template>
-          <template #header> {{ title }} </template>
+          <template #header>
+            {{ title }}
+          </template>
           <template #description>
             <span class="text-$app-text-color-3">
               {{ description }}
             </span>
           </template>
           <template #header-extra>
-            <n-button text type="primary">绑定</n-button>
+            <n-button text type="primary">
+              绑定
+            </n-button>
           </template>
         </n-thing>
       </n-list-item>
@@ -25,5 +29,5 @@
 </template>
 
 <script setup lang="ts">
-  import { bindList } from './data';
+import { bindList } from './data'
 </script>

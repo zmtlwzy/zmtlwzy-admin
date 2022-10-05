@@ -1,9 +1,9 @@
-import type { AppRouteModule } from '/@/router/types';
+import type { AppRouteModule } from '/@/router/types'
 
-import { LAYOUT } from '/@/router/constant';
-import { t } from '/@/composables/web/useI18n';
+import { LAYOUT } from '/@/router/constant'
+import { t } from '/@/composables/web/useI18n'
 
-const IFrame = () => import('/@/views/sys/iframe/FrameBlank.vue');
+const IFrame = () => import('/@/views/sys/iframe/FrameBlank.vue')
 
 const routes: AppRouteModule = {
   path: '/frame',
@@ -38,6 +38,6 @@ const routes: AppRouteModule = {
       },
     },
   ],
-};
+}
 
-export default routes;
+export default routes

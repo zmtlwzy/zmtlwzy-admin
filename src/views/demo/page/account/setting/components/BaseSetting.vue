@@ -15,7 +15,9 @@
             'naive-data': 'cool! naive!',
           }"
         >
-          <n-button class="ml-2">上传文件</n-button>
+          <n-button class="ml-2">
+            上传文件
+          </n-button>
         </n-upload>
       </div>
     </div>
@@ -23,33 +25,33 @@
 </template>
 
 <script setup lang="ts">
-  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
-  import { set } from 'lodash-es';
-  import { useUserStore } from '/@/store/modules/user';
-  import { accountInfoApi } from '/@/api/demo/account';
-  import { useForm } from '/@/components/Form/index';
+import useDiscreteApi from '/@/composables/web/useDiscreteApi'
+import { set } from 'lodash-es'
+import { useUserStore } from '/@/store/modules/user'
+import { accountInfoApi } from '/@/api/demo/account'
+import { useForm } from '/@/components/Form/index'
 
-  import { schemas } from './data';
+import { schemas } from './data'
 
-  const userStore = useUserStore();
-  const userinfo = computed(() => userStore.getUserInfo);
-  const { message } = useDiscreteApi();
+const userStore = useUserStore()
+const userinfo = computed(() => userStore.getUserInfo)
+const { message } = useDiscreteApi()
 
-  const [register, { setFieldsValue }] = useForm({
-    schemas,
-    labelPlacement: 'top',
-    gridProps: { cols: 2, xGap: 8 },
-    giProps: { span: 2 },
-    submitButtonText: '更新',
-  });
+const [register, { setFieldsValue }] = useForm({
+  schemas,
+  labelPlacement: 'top',
+  gridProps: { cols: 2, xGap: 8 },
+  giProps: { span: 2 },
+  submitButtonText: '更新',
+})
 
-  const handleSubmit = (e) => {
-    message?.info(JSON.stringify(e));
-  };
+const handleSubmit = (e) => {
+  message?.info(JSON.stringify(e))
+}
 
-  onMounted(async () => {
-    const data = await accountInfoApi();
-    console.log(set({ a: 1, b: 2 }, ['sdf', 'sdf'], 15), 'data');
-    setFieldsValue(data);
-  });
+onMounted(async () => {
+  const data = await accountInfoApi()
+  console.log(set({ a: 1, b: 2 }, ['sdf', 'sdf'], 15), 'data')
+  setFieldsValue(data)
+})
 </script>

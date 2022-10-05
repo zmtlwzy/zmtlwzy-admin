@@ -1,7 +1,7 @@
-import type { AppRouteModule } from '/@/router/types';
+import type { AppRouteModule } from '/@/router/types'
 
-import { LAYOUT, getParentLayout } from '/@/router/constant';
-import { t } from '/@/composables/web/useI18n';
+import { LAYOUT, getParentLayout } from '/@/router/constant'
+import { t } from '/@/composables/web/useI18n'
 
 const routes: AppRouteModule = {
   path: '/comp',
@@ -88,6 +88,6 @@ const routes: AppRouteModule = {
       },
     },
   ],
-};
+}
 
-export default routes;
+export default routes

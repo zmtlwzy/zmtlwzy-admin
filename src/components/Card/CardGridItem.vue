@@ -2,36 +2,34 @@
   <NGridItem v-bind="NGIProps" :class="prefixCls">
     <NCard class="card-grid--hoverable" hoverable :bordered="false" v-bind="getCardBindVal">
       <template v-for="item in Object.keys($slots)" :key="item" #[item]="data">
-        <slot :name="item" v-bind="data || {}"></slot>
+        <slot :name="item" v-bind="data || {}" />
       </template>
     </NCard>
   </NGridItem>
 </template>
 
-<script lang="ts">
-  export default {
-    __GRID_ITEM__: true,
-  };
-</script>
-
 <script setup lang="ts">
-  import { omit } from 'lodash-es';
-  import { propTypes } from '/@/utils/propTypes';
-  import { useDesign } from '/@/composables/web/useDesign';
+import { omit } from 'lodash-es'
+import { propTypes } from '/@/utils/propTypes'
+import { useDesign } from '/@/composables/web/useDesign'
 
-  const { prefixCls } = useDesign('card-grid-item');
+const NGIProps = defineProps({
+  offset: propTypes.stringNumber,
+  span: propTypes.stringNumber,
+  suffix: propTypes.bool,
+})
 
-  const NGIProps = defineProps({
-    offset: propTypes.stringNumber,
-    span: propTypes.stringNumber,
-    suffix: propTypes.bool,
-  });
+defineOptions({
+  __GRID_ITEM__: true,
+})
 
-  const attrs = useAttrs();
+const { prefixCls } = useDesign('card-grid-item')
 
-  const getCardBindVal = computed(() => {
-    return omit(attrs, ['hoverable', 'bordered']);
-  });
+const attrs = useAttrs()
+
+const getCardBindVal = computed(() => {
+  return omit(attrs, ['hoverable', 'bordered'])
+})
 </script>
 
 <style lang="less">

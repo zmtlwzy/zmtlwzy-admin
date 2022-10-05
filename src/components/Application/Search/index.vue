@@ -1,12 +1,12 @@
 <script setup lang="ts">
-  import AppSearchModal from './components/AppSearchModal.vue';
-  import { useToggle } from '@vueuse/core';
+import { useToggle } from '@vueuse/core'
+import AppSearchModal from './components/AppSearchModal.vue'
 
-  defineOptions({
-    name: 'AppSearch',
-  });
+defineOptions({
+  name: 'AppSearch',
+})
 
-  const [showModal, toggle] = useToggle();
+const [showModal, toggle] = useToggle()
 </script>
 
 <template>
@@ -19,6 +19,6 @@
       </template>
       菜单搜索
     </NTooltip>
-    <AppSearchModal @close="toggle(false)" :visible="showModal" />
+    <AppSearchModal :visible="showModal" @close="toggle(false)" />
   </div>
 </template>

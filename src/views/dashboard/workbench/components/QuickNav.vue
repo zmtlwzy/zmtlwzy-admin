@@ -2,7 +2,7 @@
   <LoadingCard
     title="项目"
     :content-style="getContentStyle"
-    childSkeletonHeight="48px"
+    child-skeleton-height="48px"
     :y-gap="16"
     :x-gap="16"
     :cols="2"
@@ -23,19 +23,19 @@
 </template>
 
 <script setup lang="ts">
-  import type { StyleValue } from 'vue';
+import type { StyleValue } from 'vue'
 
-  import { navItems } from './data.json';
-  import { useLoading } from './useLoading';
+import { navItems } from './data.json'
+import { useLoading } from './useLoading'
 
-  const isLoading = useLoading();
-  const getContentStyle = computed(
-    (): StyleValue => ({
-      ...(isLoading.value
-        ? {}
-        : {
-            padding: 0,
-          }),
-    })
-  );
+const isLoading = useLoading()
+const getContentStyle = computed(
+  (): StyleValue => ({
+    ...(isLoading.value
+      ? {}
+      : {
+          padding: 0,
+        }),
+  }),
+)
 </script>

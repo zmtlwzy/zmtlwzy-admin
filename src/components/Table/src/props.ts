@@ -1,7 +1,7 @@
-import type { PropType } from 'vue';
-import { propTypes } from '/@/utils/propTypes';
-import { dataTableProps } from 'naive-ui';
-import { BasicColumn } from './types/table';
+import type { PropType } from 'vue'
+import { propTypes } from '/@/utils/propTypes'
+import { dataTableProps } from 'naive-ui'
+import type { BasicColumn } from './types/table'
 // import { NDataTable } from 'naive-ui';
 
 export const props = {
@@ -46,4 +46,4 @@ export const props = {
   showAdvanced: propTypes.bool.def(true),
   canResize: propTypes.bool.def(true),
   resizeHeightOffset: propTypes.number.def(0),
-};
+}

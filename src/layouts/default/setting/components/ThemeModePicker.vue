@@ -11,33 +11,35 @@
     </template>
   </div>
 </template>
+
 <script lang="ts">
-  import useChangeTheme from '/@/composables/web/useChaneTheme';
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { useI18n } from '/@/composables/web/useI18n';
+import useChangeTheme from '/@/composables/web/useChaneTheme'
+import { useDesign } from '/@/composables/web/useDesign'
+import { useI18n } from '/@/composables/web/useI18n'
 
-  import Picker from './Picker.vue';
+import Picker from './Picker.vue'
 
-  import { themeModeList } from '../enum';
+import { themeModeList } from '../enum'
 
-  export default defineComponent({
-    name: 'ThemeModePicker',
-    components: { Picker },
-    setup() {
-      const { prefixCls } = useDesign('setting-menu-theme-picker');
-      const [currentMode, handleChange] = useChangeTheme();
-      const { t } = useI18n();
+export default defineComponent({
+  name: 'ThemeModePicker',
+  components: { Picker },
+  setup() {
+    const { prefixCls } = useDesign('setting-menu-theme-picker')
+    const [currentMode, handleChange] = useChangeTheme()
+    const { t } = useI18n()
 
-      return {
-        t,
-        prefixCls,
-        themeModeList,
-        currentMode,
-        handleChange,
-      };
-    },
-  });
+    return {
+      t,
+      prefixCls,
+      themeModeList,
+      currentMode,
+      handleChange,
+    }
+  },
+})
 </script>
+
 <style lang="less">
   @prefix-cls: ~'@{namespace}-setting-menu-theme-picker';
 

@@ -11,7 +11,7 @@ export const userMessage = [
     icon: <i-bx-bx-map />,
     text: '广东省汕头市',
   },
-];
+]
 
 export const tags = [
   '前端开发',
@@ -21,4 +21,4 @@ export const tags = [
   '不想加班',
   '配色鬼才',
   '扣脚黑丝大叔',
-];
+]

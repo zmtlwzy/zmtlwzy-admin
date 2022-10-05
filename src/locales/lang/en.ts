@@ -1,13 +1,13 @@
-import { genMessage } from '../helper';
+import { genMessage } from '../helper'
 // import antdLocale from 'ant-design-vue/es/locale/en_US';
 // import momentLocale from 'moment/dist/locale/en-us';
 
 const modules = import.meta.glob('./en/**/*.ts', { eager: true }) as Record<
   string,
   {
-    default: unknown;
+    default: unknown
   }
->;
+>
 export default {
   message: {
     ...genMessage(modules, 'en'),
@@ -15,4 +15,4 @@ export default {
   },
   // momentLocale: null,
   // momentLocaleName: 'en',
-};
+}

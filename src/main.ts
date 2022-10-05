@@ -1,43 +1,43 @@
-import 'uno.css';
-import '/@/design/index.less';
+import 'uno.css'
+import '/@/design/index.less'
 
-import { createApp } from 'vue';
-import App from './App.vue';
+import { createApp } from 'vue'
+import { createWorker } from 'root/mock/_createMswWorker'
+import App from './App.vue'
 
-import { initAppConfigStore } from '/@/logics/initAppConfig';
-import router, { setupRouter } from '/@/router';
-import { setupRouterGuard } from '/@/router/guard';
-import { setupStore } from '/@/store';
-import { setupGlobDirectives } from '/@/directives';
-import { setupI18n } from '/@/locales/setupI18n';
-import { createWorker } from 'root/mock/_createMswWorker';
+import { initAppConfigStore } from '/@/logics/initAppConfig'
+import router, { setupRouter } from '/@/router'
+import { setupRouterGuard } from '/@/router/guard'
+import { setupStore } from '/@/store'
+import { setupGlobDirectives } from '/@/directives'
+import { setupI18n } from '/@/locales/setupI18n'
 
-async function bootstrap() {
-  createWorker();
+async function setupApp() {
+  createWorker()
 
-  const app = createApp(App);
+  const app = createApp(App)
 
   // Configure store
-  setupStore(app);
+  setupStore(app)
 
   // Initialize internal system configuration
-  initAppConfigStore();
+  initAppConfigStore()
 
   // Configure routing
-  setupRouter(app);
+  setupRouter(app)
 
   // router-guard
-  setupRouterGuard(router);
+  setupRouterGuard(router)
 
   // Multilingual configuration
-  await setupI18n(app);
+  await setupI18n(app)
 
   // Register global directive
-  setupGlobDirectives(app);
+  setupGlobDirectives(app)
 
-  await router.isReady();
+  await router.isReady()
 
-  app.mount('#app', true);
+  app.mount('#app', true)
 }
 
-void bootstrap();
+setupApp()

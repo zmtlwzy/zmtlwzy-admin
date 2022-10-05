@@ -1,14 +1,14 @@
 <template>
   <Teleport to="body">
     <transition name="zoom-fade" mode="out-in">
-      <div :class="getClass" @click.stop v-if="visible">
-        <div :class="`${prefixCls}-content`" ref="contentRef">
+      <div v-if="visible" :class="getClass" @click.stop>
+        <div ref="contentRef" :class="`${prefixCls}-content`">
           <div :class="`${prefixCls}-input__wrapper`">
             <n-input
+              ref="inputRef"
               :class="`${prefixCls}-input`"
               placeholder="菜单搜索"
               size="large"
-              ref="inputRef"
               allow-clear
               @input="handleSearch"
             >
@@ -21,25 +21,25 @@
             </span>
           </div>
 
-          <div :class="`${prefixCls}-not-data`" v-show="getIsNotData">
+          <div v-show="getIsNotData" :class="`${prefixCls}-not-data`">
             {{ t('component.app.searchNotData') }}
           </div>
 
           <div v-show="!getIsNotData">
-            <n-scrollbar :class="`${prefixCls}-list`" ref="scrollWrap" trigger="none">
+            <n-scrollbar ref="scrollWrap" :class="`${prefixCls}-list`" trigger="none">
               <div
-                :ref="refs.set"
                 v-for="(item, index) in searchResult"
+                :ref="refs.set"
                 :key="item.path"
                 :data-index="index"
-                @mouseenter="handleMouseenter"
-                @click="handleEnter"
                 :class="[
                   `${prefixCls}-list__item`,
                   {
                     [`${prefixCls}-list__item--active`]: activeIndex === index,
                   },
                 ]"
+                @mouseenter="handleMouseenter"
+                @click="handleEnter"
               >
                 <div :class="`${prefixCls}-list__item-icon`">
                   <Icon :icon="item.icon || 'mdi:form-select'" :size="20" />
@@ -61,62 +61,62 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, unref, ref, watch, nextTick, type ComponentPublicInstance } from 'vue';
-  import { type ScrollbarInst } from 'naive-ui';
-  import { onClickOutside, type MaybeElement } from '@vueuse/core';
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { useTemplateRefsList } from '@vueuse/core';
-  import { useMenuSearch } from '../useMenuSearch';
-  import { useI18n } from '/@/composables/web/useI18n';
-  import { useAppInject } from '/@/composables/web/useAppInject';
-  import AppSearchFooter from './AppSearchFooter.vue';
+import { type ComponentPublicInstance, computed, nextTick, ref, unref, watch } from 'vue'
+import { type ScrollbarInst } from 'naive-ui'
+import { type MaybeElement, onClickOutside, useTemplateRefsList } from '@vueuse/core'
+import { useDesign } from '/@/composables/web/useDesign'
+import { useMenuSearch } from '../useMenuSearch'
+import { useI18n } from '/@/composables/web/useI18n'
+import { useAppInject } from '/@/composables/web/useAppInject'
+import AppSearchFooter from './AppSearchFooter.vue'
 
-  const props = defineProps({
-    visible: { type: Boolean },
-  });
+const props = defineProps({
+  visible: { type: Boolean },
+})
 
-  const emit = defineEmits(['close']);
+const emit = defineEmits(['close'])
 
-  const scrollWrap = ref<Nullable<ComponentPublicInstance<ScrollbarInst>>>(null);
-  const inputRef = ref<Nullable<HTMLElement>>(null);
+const scrollWrap = ref<Nullable<ComponentPublicInstance<ScrollbarInst>>>(null)
+const inputRef = ref<Nullable<HTMLElement>>(null)
 
-  const { t } = useI18n();
-  const { prefixCls } = useDesign('app-search-modal');
-  const contentRef = ref<MaybeElement>();
-  const refs = useTemplateRefsList<HTMLDivElement>();
-  const { getIsMobile } = useAppInject();
+const { t } = useI18n()
+const { prefixCls } = useDesign('app-search-modal')
+const contentRef = ref<MaybeElement>()
+const refs = useTemplateRefsList<HTMLDivElement>()
+const { getIsMobile } = useAppInject()
 
-  const { handleSearch, searchResult, keyword, activeIndex, handleEnter, handleMouseenter } =
-    useMenuSearch(refs, scrollWrap, emit);
+const { handleSearch, searchResult, keyword, activeIndex, handleEnter, handleMouseenter }
+    = useMenuSearch(refs, scrollWrap, emit)
 
-  const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0);
+const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0)
 
-  const getClass = computed(() => {
-    return [
-      prefixCls,
-      {
-        [`${prefixCls}--mobile`]: unref(getIsMobile),
-      },
-    ];
-  });
+const getClass = computed(() => {
+  return [
+    prefixCls,
+    {
+      [`${prefixCls}--mobile`]: unref(getIsMobile),
+    },
+  ]
+})
 
-  watch(
-    () => props.visible,
-    (visible: boolean) => {
-      visible &&
-        nextTick(() => {
-          unref(inputRef)?.focus();
-        });
-    }
-  );
+watch(
+  () => props.visible,
+  (visible: boolean) => {
+    visible
+        && nextTick(() => {
+          unref(inputRef)?.focus()
+        })
+  },
+)
 
-  onClickOutside(contentRef, handleClose);
+onClickOutside(contentRef, handleClose)
 
-  function handleClose() {
-    searchResult.value = [];
-    emit('close');
-  }
+function handleClose() {
+  searchResult.value = []
+  emit('close')
+}
 </script>
+
 <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-app-search-modal';
   @footer-prefix-cls: ~'@{namespace}-app-search-footer';

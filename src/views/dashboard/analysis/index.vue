@@ -17,13 +17,13 @@
 </template>
 
 <script setup lang="ts">
-  import { useLoading } from './components/useLoading';
-  import GrowCard from './components/GrowCard.vue';
-  import SiteAnalysis from './components/SiteAnalysis.vue';
-  import BarLineMixChart from './components/BarLineMixChart.vue';
-  import Gauge from './components/Gauge.vue';
-  import RingPie from './components/RingPie.vue';
+import { useLoading } from './components/useLoading'
+import GrowCard from './components/GrowCard.vue'
+import SiteAnalysis from './components/SiteAnalysis.vue'
+import BarLineMixChart from './components/BarLineMixChart.vue'
+import Gauge from './components/Gauge.vue'
+import RingPie from './components/RingPie.vue'
 
-  const loadingRef = useLoading();
-  loadingRef.value = true;
+const loadingRef = useLoading()
+loadingRef.value = true
 </script>

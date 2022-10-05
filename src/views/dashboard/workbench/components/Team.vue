@@ -10,5 +10,5 @@
 </template>
 
 <script setup lang="ts">
-  import { team } from './data.json';
+import { team } from './data.json'
 </script>

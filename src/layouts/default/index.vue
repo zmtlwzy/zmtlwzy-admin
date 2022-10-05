@@ -10,55 +10,55 @@
 </template>
 
 <script lang="ts">
-  import { MenuTypeEnum, LayoutClsEnum } from '/@/enums/menuEnum';
+import { LayoutClsEnum, MenuTypeEnum } from '/@/enums/menuEnum'
 
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
+import { useDesign } from '/@/composables/web/useDesign'
+import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 
-  import LayoutHeader from './header/index.vue';
-  import LayoutSider from './sider/index.vue';
-  import LayoutContent from './content/index.vue';
-  import LayoutFooter from './footer/index.vue';
-  import MTabs from './tabs/index.vue';
+import LayoutHeader from './header/index.vue'
+import LayoutSider from './sider/index.vue'
+import LayoutContent from './content/index.vue'
+import LayoutFooter from './footer/index.vue'
+import MTabs from './tabs/index.vue'
 
-  export default defineComponent({
-    name: 'DefaultLayout',
-    components: {
-      LayoutSider,
-      LayoutHeader,
-      LayoutContent,
-      LayoutFooter,
-      MTabs,
-    },
-    setup() {
-      const { prefixCls } = useDesign('default-layout');
-      const { getMenuType } = useMenuSetting();
+export default defineComponent({
+  name: 'DefaultLayout',
+  components: {
+    LayoutSider,
+    LayoutHeader,
+    LayoutContent,
+    LayoutFooter,
+    MTabs,
+  },
+  setup() {
+    const { prefixCls } = useDesign('default-layout')
+    const { getMenuType } = useMenuSetting()
 
-      const getLayoutCls = computed(() => {
-        let layout = '';
-        switch (getMenuType.value) {
-          case MenuTypeEnum.SIDEBAR:
-            layout = LayoutClsEnum.SIDEBAR;
-            break;
-          case MenuTypeEnum.MIX_SIDEBAR:
-            layout = LayoutClsEnum.MIX_SIDEBAR;
-            break;
-          case MenuTypeEnum.MIX:
-            layout = LayoutClsEnum.MIX;
-            break;
-          case MenuTypeEnum.TOP_MENU:
-            layout = LayoutClsEnum.TOP_MENU;
-            break;
-        }
-        return `${layout}`;
-      });
+    const getLayoutCls = computed(() => {
+      let layout = ''
+      switch (getMenuType.value) {
+        case MenuTypeEnum.SIDEBAR:
+          layout = LayoutClsEnum.SIDEBAR
+          break
+        case MenuTypeEnum.MIX_SIDEBAR:
+          layout = LayoutClsEnum.MIX_SIDEBAR
+          break
+        case MenuTypeEnum.MIX:
+          layout = LayoutClsEnum.MIX
+          break
+        case MenuTypeEnum.TOP_MENU:
+          layout = LayoutClsEnum.TOP_MENU
+          break
+      }
+      return `${layout}`
+    })
 
-      return {
-        getLayoutCls,
-        prefixCls,
-      };
-    },
-  });
+    return {
+      getLayoutCls,
+      prefixCls,
+    }
+  },
+})
 </script>
 
 <style lang="less">

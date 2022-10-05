@@ -28,79 +28,81 @@
     </NGrid>
   </div>
 </template>
+
 <script lang="ts">
-  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
+import useDiscreteApi from '/@/composables/web/useDiscreteApi'
 
-  import { useAppStore } from '/@/store/modules/app';
-  import { usePermissionStore } from '/@/store/modules/permission';
-  import { useMultipleTabStore } from '/@/store/modules/multipleTab';
-  import { useUserStore } from '/@/store/modules/user';
-  import useChangeTheme from '/@/composables/web/useChaneTheme';
-  // import { themeState } from '/@/settings/designSetting';
+import { useAppStore } from '/@/store/modules/app'
+import { usePermissionStore } from '/@/store/modules/permission'
+import { useMultipleTabStore } from '/@/store/modules/multipleTab'
+import { useUserStore } from '/@/store/modules/user'
+import useChangeTheme from '/@/composables/web/useChaneTheme'
+// import { themeState } from '/@/settings/designSetting';
 
-  // import { useDesign } from '/@/composables/web/useDesign';
-  import { useI18n } from '/@/composables/web/useI18n';
-  import { useClipboard } from '@vueuse/core';
+// import { useDesign } from '/@/composables/web/useDesign';
+import { useI18n } from '/@/composables/web/useI18n'
+import { useClipboard } from '@vueuse/core'
 
-  // import { updateColorWeak } from '/@/logics/theme/updateColorWeak';
-  // import { updateGrayMode } from '/@/logics/theme/updateGrayMode';
-  import defaultSetting from '/@/settings/projectSetting';
+// import { updateColorWeak } from '/@/logics/theme/updateColorWeak';
+// import { updateGrayMode } from '/@/logics/theme/updateGrayMode';
+import defaultSetting from '/@/settings/projectSetting'
 
-  export default defineComponent({
-    name: 'SettingFooter',
-    setup() {
-      const permissionStore = usePermissionStore();
-      // const { prefixCls } = useDesign('setting-footer');
-      const { t } = useI18n();
-      const tabStore = useMultipleTabStore();
-      const userStore = useUserStore();
-      const appStore = useAppStore();
-      const { message, dialog } = useDiscreteApi();
-      const { copy, isSupported } = useClipboard();
-      const [_, resetDarkMode] = useChangeTheme();
+export default defineComponent({
+  name: 'SettingFooter',
+  setup() {
+    const permissionStore = usePermissionStore()
+    // const { prefixCls } = useDesign('setting-footer');
+    const { t } = useI18n()
+    const tabStore = useMultipleTabStore()
+    const userStore = useUserStore()
+    const appStore = useAppStore()
+    const { message, dialog } = useDiscreteApi()
+    const { copy, isSupported } = useClipboard()
+    const [_, resetDarkMode] = useChangeTheme()
 
-      function handleCopy() {
-        copy(JSON.stringify(unref(appStore.getProjectConfig), null, 2));
-        isSupported &&
-          dialog?.success({
+    function handleCopy() {
+      copy(JSON.stringify(unref(appStore.getProjectConfig), null, 2))
+      isSupported
+          && dialog?.success({
             closable: false,
             title: t('layout.setting.operatingTitle'),
             content: t('layout.setting.operatingContent'),
             positiveText: t('common.okText'),
-          });
+          })
+    }
+    function handleResetSetting() {
+      try {
+        appStore.setProjectConfig(defaultSetting)
+        resetDarkMode()
+        // const { colorWeak, grayMode } = defaultSetting;
+        // updateTheme(themeColor);
+        // updateColorWeak(colorWeak);
+        // updateGrayMode(grayMode);
+        message?.success(t('layout.setting.resetSuccess'))
       }
-      function handleResetSetting() {
-        try {
-          appStore.setProjectConfig(defaultSetting);
-          resetDarkMode();
-          // const { colorWeak, grayMode } = defaultSetting;
-          // updateTheme(themeColor);
-          // updateColorWeak(colorWeak);
-          // updateGrayMode(grayMode);
-          message?.success(t('layout.setting.resetSuccess'));
-        } catch (error) {
-          message?.error(String(error));
-        }
+      catch (error) {
+        message?.error(String(error))
       }
+    }
 
-      function handleClearAndRedo() {
-        localStorage.clear();
-        appStore.resetAllState();
-        permissionStore.resetState();
-        tabStore.resetState();
-        userStore.resetState();
-        location.reload();
-      }
-      return {
-        // prefixCls,
-        t,
-        isSupported,
-        handleCopy,
-        handleResetSetting,
-        handleClearAndRedo,
-      };
-    },
-  });
+    function handleClearAndRedo() {
+      localStorage.clear()
+      appStore.resetAllState()
+      permissionStore.resetState()
+      tabStore.resetState()
+      userStore.resetState()
+      location.reload()
+    }
+    return {
+      // prefixCls,
+      t,
+      isSupported,
+      handleCopy,
+      handleResetSetting,
+      handleClearAndRedo,
+    }
+  },
+})
 </script>
 <!-- <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-setting-footer';

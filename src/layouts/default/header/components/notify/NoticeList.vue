@@ -29,7 +29,9 @@
                 </NEllipsis>
               </template>
               <template v-if="item.extra" #header-extra>
-                <NTag :type="item?.color" size="small">{{ item.extra }}</NTag>
+                <NTag :type="item?.color" size="small">
+                  {{ item.extra }}
+                </NTag>
               </template>
               <template #description>
                 <NEllipsis v-if="item.description" :line-clamp="descRows">
@@ -52,25 +54,26 @@
     </NList>
   </n-scrollbar>
 </template>
+
 <script setup lang="ts">
-  import { ListItem } from './data';
+import type { ListItem } from './data'
 
-  withDefaults(
-    defineProps<{
-      list?: ListItem[];
-      loading?: boolean;
-      titleRows?: number;
-      descRows?: number;
-    }>(),
-    {
-      list: () => [],
-      loading: false,
-      titleRows: 1,
-      descRows: 2,
-    }
-  );
+withDefaults(
+  defineProps<{
+    list?: ListItem[]
+    loading?: boolean
+    titleRows?: number
+    descRows?: number
+  }>(),
+  {
+    list: () => [],
+    loading: false,
+    titleRows: 1,
+    descRows: 2,
+  },
+)
 
-  const handleTitleClick = (item: ListItem) => {
-    item.read = true;
-  };
+const handleTitleClick = (item: ListItem) => {
+  item.read = true
+}
 </script>

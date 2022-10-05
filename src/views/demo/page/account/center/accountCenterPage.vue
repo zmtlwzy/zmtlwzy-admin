@@ -12,6 +12,6 @@
 </template>
 
 <script setup lang="ts">
-  import LeftCard from './components/LeftCard.vue';
-  import RightCard from './components/RightCard.vue';
+import LeftCard from './components/LeftCard.vue'
+import RightCard from './components/RightCard.vue'
 </script>

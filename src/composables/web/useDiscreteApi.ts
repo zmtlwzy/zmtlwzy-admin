@@ -1,30 +1,30 @@
-import { createDiscreteApi } from 'naive-ui';
-import { useI18n } from '/@/composables/web/useI18n';
+import { createDiscreteApi } from 'naive-ui'
+import { useI18n } from '/@/composables/web/useI18n'
 
 import type {
-  LoadingBarApi,
-  MessageApi,
+  ConfigProviderProps,
   DialogApi,
   DialogOptions,
+  LoadingBarApi,
+  MessageApi,
   NotificationApi,
   NotificationOptions,
-  ConfigProviderProps,
-} from 'naive-ui';
+} from 'naive-ui'
 
-type MessageOpt = {
-  loadingBar: LoadingBarApi;
-  message: MessageApi;
-  notification: NotificationApi;
-  dialog: DialogApi;
-  confirm: DialogApi;
-  destroyAllDialog: () => void;
-  destroyAllNotification: () => void;
-};
+interface MessageOpt {
+  loadingBar: LoadingBarApi
+  message: MessageApi
+  notification: NotificationApi
+  dialog: DialogApi
+  confirm: DialogApi
+  destroyAllDialog: () => void
+  destroyAllNotification: () => void
+}
 
-const typeMap = ['create', 'error', 'info', 'success', 'warning'];
+const typeMap = ['create', 'error', 'info', 'success', 'warning']
 
-let state = {} as MessageOpt;
-let isInitialization = false;
+let state = {} as MessageOpt
+let isInitialization = false
 
 /**
  * @description: [message, notification, dialog, loadingBar] used outside the setup
@@ -35,10 +35,10 @@ export default function useDiscreteApi(props?: ConfigProviderProps) {
       ['message', 'dialog', 'notification', 'loadingBar'],
       {
         configProviderProps: props,
-      }
-    );
+      },
+    )
 
-    const { t } = useI18n();
+    const { t } = useI18n()
     try {
       state = {
         loadingBar,
@@ -51,21 +51,22 @@ export default function useDiscreteApi(props?: ConfigProviderProps) {
         }),
         destroyAllDialog: dialog.destroyAll,
         destroyAllNotification: notification.destroyAll,
-      };
-      isInitialization = true;
-    } catch (error) {
-      console.warn(`useDiscreteApi init failed: ${error}`);
+      }
+      isInitialization = true
+    }
+    catch (error) {
+      console.warn(`useDiscreteApi init failed: ${error}`)
     }
   }
-  return state;
+  return state
 }
 
 function createDialog(dialog: DialogApi, opt: DialogOptions) {
-  return createApi(dialog, opt);
+  return createApi(dialog, opt)
 }
 
 function createNotification(notification: NotificationApi, opt: NotificationOptions) {
-  return createApi(notification, opt);
+  return createApi(notification, opt)
 }
 
 function createApi<T extends object, O>(coreApi: T, opt: O) {
@@ -74,11 +75,11 @@ function createApi<T extends object, O>(coreApi: T, opt: O) {
       if (typeMap.includes(propKey as string)) {
         return new Proxy(target[propKey], {
           apply(funTarget, ctx, args) {
-            return Reflect.apply(funTarget, ctx, [{ ...opt, ...args[0] }]);
+            return Reflect.apply(funTarget, ctx, [{ ...opt, ...args[0] }])
           },
-        });
+        })
       }
-      return Reflect.get(target, propKey);
+      return Reflect.get(target, propKey)
     },
-  });
+  })
 }

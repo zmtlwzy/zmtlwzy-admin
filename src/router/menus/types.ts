@@ -1,35 +1,35 @@
-import type { MenuOption } from 'naive-ui';
-import type { RouteMeta } from 'vue-router';
+import type { MenuOption } from 'naive-ui'
+import type { RouteMeta } from 'vue-router'
 
-import { RoleEnum } from '/@/enums/roleEnum';
+import type { RoleEnum } from '/@/enums/roleEnum'
 
 export interface MenuTag {
-  type?: 'primary' | 'error' | 'warn' | 'success';
-  content?: string;
-  dot?: boolean;
+  type?: 'primary' | 'error' | 'warn' | 'success'
+  content?: string
+  dot?: boolean
 }
 
 export type Menu = MenuOption & {
-  name: string;
+  name: string
 
-  icon?: string;
+  icon?: string
 
-  path: string;
+  path: string
 
   // path contains param, auto assignment.
-  paramPath?: string;
+  paramPath?: string
 
-  disabled?: boolean;
+  disabled?: boolean
 
-  children?: Menu[];
+  children?: Menu[]
 
-  orderNo?: number;
+  orderNo?: number
 
-  roles?: RoleEnum[];
+  roles?: RoleEnum[]
 
-  meta?: Partial<RouteMeta>;
+  meta?: Partial<RouteMeta>
 
-  tag?: MenuTag;
+  tag?: MenuTag
 
-  hideMenu?: boolean;
-};
+  hideMenu?: boolean
+}

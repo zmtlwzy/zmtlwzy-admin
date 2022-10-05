@@ -15,58 +15,61 @@
     </n-card>
 
     <template #rightFooter>
-      <n-button type="primary" @click="submitAll"> 提交 </n-button>
+      <n-button type="primary" @click="submitAll">
+        提交
+      </n-button>
     </template>
   </PageWrapper>
 </template>
 
 <script setup lang="ts">
-  import { useForm } from '/@/components/Form';
-  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
-  import PersonTable from './PersonTable.vue';
-  import { schemas, taskSchemas } from './data';
+import { useForm } from '/@/components/Form'
+import useDiscreteApi from '/@/composables/web/useDiscreteApi'
+import PersonTable from './PersonTable.vue'
+import { schemas, taskSchemas } from './data'
 
-  defineOptions({
-    name: 'HighFormPage',
-  });
+defineOptions({
+  name: 'HighFormPage',
+})
 
-  const { message } = useDiscreteApi();
+const { message } = useDiscreteApi()
 
-  const [register, { submit, validate }] = useForm({
-    gridProps: {
-      cols: '1 550:2 800:3',
-      xGap: 48,
-      yGap: 16,
-      responsive: 'self',
-    },
-    labelPlacement: 'top',
-    schemas,
-    showActionButtonGroup: false,
-    submitFunc: handleSubmit,
-  });
+const [register, { submit, validate }] = useForm({
+  gridProps: {
+    cols: '1 550:2 800:3',
+    xGap: 48,
+    yGap: 16,
+    responsive: 'self',
+  },
+  labelPlacement: 'top',
+  schemas,
+  showActionButtonGroup: false,
+  submitFunc: handleSubmit,
+})
 
-  const [registerTask, { submit: submitTaskForm, validate: validateTaskForm }] = useForm({
-    gridProps: {
-      cols: '1 550:2 800:3',
-      xGap: 48,
-      yGap: 16,
-      responsive: 'self',
-    },
-    labelPlacement: 'top',
-    schemas: taskSchemas,
-    showActionButtonGroup: false,
-    submitFunc: handleSubmit,
-  });
+const [registerTask, { submit: submitTaskForm, validate: validateTaskForm }] = useForm({
+  gridProps: {
+    cols: '1 550:2 800:3',
+    xGap: 48,
+    yGap: 16,
+    responsive: 'self',
+  },
+  labelPlacement: 'top',
+  schemas: taskSchemas,
+  showActionButtonGroup: false,
+  submitFunc: handleSubmit,
+})
 
-  async function handleSubmit(val: any) {
-    message?.info(JSON.stringify(val));
+async function handleSubmit(val: any) {
+  message?.info(JSON.stringify(val))
+}
+
+async function submitAll() {
+  try {
+    await Promise.all([validate(), validateTaskForm()])
+    submit()
+    submitTaskForm()
   }
-
-  async function submitAll() {
-    try {
-      await Promise.all([validate(), validateTaskForm()]);
-      submit();
-      submitTaskForm();
-    } catch (error) {}
-  }
+  catch (error) {}
+}
 </script>

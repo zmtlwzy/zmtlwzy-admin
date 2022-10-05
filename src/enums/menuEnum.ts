@@ -29,7 +29,7 @@ export enum TriggerEnum {
   HEADER = 'header',
 }
 
-export type Mode = 'vertical' | 'vertical-right' | 'horizontal' | 'inline';
+export type Mode = 'vertical' | 'vertical-right' | 'horizontal' | 'inline'
 
 // menu mode
 export enum MenuModeEnum {

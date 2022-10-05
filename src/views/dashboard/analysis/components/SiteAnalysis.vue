@@ -12,19 +12,19 @@
 </template>
 
 <script setup lang="ts">
-  import type { StyleValue } from 'vue';
-  import VisitAnalysis from './VisitAnalysis.vue';
-  import VisitAnalysisBar from './VisitAnalysisBar.vue';
-  import { useLoading } from './useLoading';
+import type { StyleValue } from 'vue'
+import VisitAnalysis from './VisitAnalysis.vue'
+import VisitAnalysisBar from './VisitAnalysisBar.vue'
+import { useLoading } from './useLoading'
 
-  const isLoading = useLoading();
-  const getContentStyle = computed(
-    (): StyleValue => ({
-      ...(isLoading.value
-        ? {}
-        : {
-            padding: 0,
-          }),
-    })
-  );
+const isLoading = useLoading()
+const getContentStyle = computed(
+  (): StyleValue => ({
+    ...(isLoading.value
+      ? {}
+      : {
+          padding: 0,
+        }),
+  }),
+)
 </script>

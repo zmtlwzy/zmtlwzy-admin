@@ -96,61 +96,64 @@
     </div>
   </NForm>
 </template>
+
 <script lang="ts" setup>
-  import { useI18n } from '/@/composables/web/useI18n';
-  import useDiscreteApi from '/@/composables/web/useDiscreteApi';
+import { useI18n } from '/@/composables/web/useI18n'
+import useDiscreteApi from '/@/composables/web/useDiscreteApi'
 
-  import { useUserStore } from '/@/store/modules/user';
-  import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
-  import { useDesign } from '/@/composables/web/useDesign';
+import { useUserStore } from '/@/store/modules/user'
+import { LoginStateEnum, useFormRules, useFormValid, useLoginState } from './useLogin'
+import { useDesign } from '/@/composables/web/useDesign'
 
-  const { t } = useI18n();
-  const { notification, dialog } = useDiscreteApi();
-  const { prefixCls } = useDesign('login');
-  const userStore = useUserStore();
+const { t } = useI18n()
+const { notification, dialog } = useDiscreteApi()
+const { prefixCls } = useDesign('login')
+const userStore = useUserStore()
 
-  const { setLoginState, getLoginState } = useLoginState();
-  const { getFormRules } = useFormRules();
+const { setLoginState, getLoginState } = useLoginState()
+const { getFormRules } = useFormRules()
 
-  const formRef = ref();
-  const loading = ref(false);
-  const rememberMe = ref(false);
+const formRef = ref()
+const loading = ref(false)
+const rememberMe = ref(false)
 
-  const formData = reactive({
-    account: 'admin',
-    password: '123456',
-  });
+const formData = reactive({
+  account: 'admin',
+  password: '123456',
+})
 
-  const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
+const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN)
 
-  async function handleLogin() {
-    const { onSuccess } = useFormValid(formRef)!;
+async function handleLogin() {
+  const { onSuccess } = useFormValid(formRef)!
 
-    onSuccess(async () => {
-      try {
-        loading.value = true;
-        const userInfo = await userStore.login(
-          toRaw({
-            password: formData.password,
-            username: formData.account,
-            mode: 'none', // 不要默认的错误提示
-          })
-        );
-        if (userInfo) {
-          notification?.success({
-            title: t('sys.login.loginSuccessTitle'),
-            content: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
-            duration: 3000,
-          });
-        }
-      } catch (error: any) {
-        dialog?.error({
-          title: t('sys.api.errorTip'),
-          content: error.message || t('sys.api.networkExceptionMsg'),
-        });
-      } finally {
-        loading.value = false;
+  onSuccess(async () => {
+    try {
+      loading.value = true
+      const userInfo = await userStore.login(
+        toRaw({
+          password: formData.password,
+          username: formData.account,
+          mode: 'none', // 不要默认的错误提示
+        }),
+      )
+      if (userInfo) {
+        notification?.success({
+          title: t('sys.login.loginSuccessTitle'),
+          content: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
+          duration: 3000,
+        })
       }
-    });
-  }
+    }
+    catch (error: any) {
+      dialog?.error({
+        title: t('sys.api.errorTip'),
+        content: error.message || t('sys.api.networkExceptionMsg'),
+      })
+    }
+    finally {
+      loading.value = false
+    }
+  })
+}
 </script>

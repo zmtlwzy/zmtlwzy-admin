@@ -69,4 +69,4 @@ export default {
     table: 'Table',
     basic: 'Basic',
   },
-};
+}

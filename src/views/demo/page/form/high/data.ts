@@ -1,4 +1,4 @@
-import { FormSchema } from '/@/components/Form';
+import type { FormSchema } from '/@/components/Form'
 
 const basicOptions: LabelValueOptions = [
   {
@@ -9,7 +9,7 @@ const basicOptions: LabelValueOptions = [
     label: '李四',
     value: '2',
   },
-];
+]
 
 const storeTypeOptions: LabelValueOptions = [
   {
@@ -20,7 +20,7 @@ const storeTypeOptions: LabelValueOptions = [
     label: '公开',
     value: '2',
   },
-];
+]
 
 export const schemas: FormSchema[] = [
   {
@@ -116,7 +116,7 @@ export const schemas: FormSchema[] = [
       size: 'small',
     },
   },
-];
+]
 
 export const taskSchemas: FormSchema[] = [
   {
@@ -161,4 +161,4 @@ export const taskSchemas: FormSchema[] = [
       options: storeTypeOptions,
     },
   },
-];
+]

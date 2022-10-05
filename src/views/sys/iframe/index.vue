@@ -6,63 +6,64 @@
         :src="frameSrc"
         :class="`${prefixCls}__main`"
         @load="hideLoading"
-      ></iframe>
+      />
     </NSpin>
   </div>
 </template>
+
 <script lang="ts">
-  import type { StyleValue } from 'vue';
+import type { StyleValue } from 'vue'
 
-  import { propTypes } from '/@/utils/propTypes';
-  import { useDesign } from '/@/composables/web/useDesign';
-  import { useLayoutContentResize } from '/@/logics/mitt/layoutContentResize';
-  import { useContentSizeInject } from '/@/composables/web/useAppInject';
+import { propTypes } from '/@/utils/propTypes'
+import { useDesign } from '/@/composables/web/useDesign'
+import { useLayoutContentResize } from '/@/logics/mitt/layoutContentResize'
+import { useContentSizeInject } from '/@/composables/web/useAppInject'
 
-  export default defineComponent({
-    name: 'IFrame',
-    props: {
-      frameSrc: propTypes.string.def(''),
-    },
-    setup() {
-      const loading = ref(true);
-      const frameRef = ref();
+export default defineComponent({
+  name: 'IFrame',
+  props: {
+    frameSrc: propTypes.string.def(''),
+  },
+  setup() {
+    const loading = ref(true)
+    const frameRef = ref()
 
-      const { prefixCls } = useDesign('iframe-page');
-      const { on, emit } = useLayoutContentResize();
-      const { height } = useContentSizeInject();
-      on(calcHeight);
+    const { prefixCls } = useDesign('iframe-page')
+    const { on, emit } = useLayoutContentResize()
+    const { height } = useContentSizeInject()
+    on(calcHeight)
 
-      const getWrapStyle = computed((): StyleValue => {
-        return {
-          height: `${unref(height)}px`,
-        };
-      });
-
-      function calcHeight() {
-        const iframe = unref(frameRef);
-        if (!iframe) {
-          return;
-        }
-
-        iframe.style.height = `${unref(height)}px`;
-      }
-
-      function hideLoading() {
-        loading.value = false;
-        emit();
-      }
-
+    const getWrapStyle = computed((): StyleValue => {
       return {
-        getWrapStyle,
-        loading,
-        frameRef,
-        prefixCls,
+        height: `${unref(height)}px`,
+      }
+    })
 
-        hideLoading,
-      };
-    },
-  });
+    function calcHeight() {
+      const iframe = unref(frameRef)
+      if (!iframe)
+        return
+
+      iframe.style.height = `${unref(height)}px`
+    }
+
+    function hideLoading() {
+      loading.value = false
+      emit()
+    }
+
+    return {
+      getWrapStyle,
+      loading,
+      frameRef,
+      prefixCls,
+
+      hideLoading,
+    }
+  },
+})
 </script>
+
 <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-iframe-page';
 

@@ -1,15 +1,16 @@
-import { StyleValue, VNodeChild } from 'vue';
-import { createTypes, VueTypeValidableDef, VueTypesInterface } from 'vue-types';
+import type { StyleValue, VNodeChild } from 'vue'
+import type { VueTypeValidableDef, VueTypesInterface } from 'vue-types'
+import { createTypes } from 'vue-types'
 
-export type VueNode = VNodeChild | JSX.Element;
+export type VueNode = VNodeChild | JSX.Element
 
 type PropTypes = VueTypesInterface & {
-  readonly style: VueTypeValidableDef<StyleValue>;
-  readonly VNodeChild: VueTypeValidableDef<VueNode>;
+  readonly style: VueTypeValidableDef<StyleValue>
+  readonly VNodeChild: VueTypeValidableDef<VueNode>
   // readonly trueBool: VueTypeValidableDef<boolean>;
-  readonly stringNumber: VueTypeValidableDef<string | number>;
-  readonly Date: VueTypeValidableDef<number | Date>;
-};
+  readonly stringNumber: VueTypeValidableDef<string | number>
+  readonly Date: VueTypeValidableDef<number | Date>
+}
 
 const propTypes = createTypes({
   func: undefined,
@@ -18,7 +19,7 @@ const propTypes = createTypes({
   number: undefined,
   object: undefined,
   integer: undefined,
-}) as PropTypes;
+}) as PropTypes
 
 propTypes.extend([
   {
@@ -44,5 +45,5 @@ propTypes.extend([
     getter: true,
     type: undefined,
   },
-]);
-export { propTypes };
+])
+export { propTypes }
