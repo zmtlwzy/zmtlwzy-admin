@@ -71,6 +71,7 @@ importers:
       vitest: ^0.24.3
       vue: ^3.2.41
       vue-i18n: ~9.2.2
+      vue-json-pretty: ^2.2.2
       vue-router: ^4.1.5
       vue-slicksort: ^2.0.0-alpha.5
       vue-tsc: ^1.0.8
@@ -92,6 +93,7 @@ importers:
       tinycolor2: 1.4.2
       vue: 3.2.41
       vue-i18n: 9.2.2_vue@3.2.41
+      vue-json-pretty: 2.2.2_vue@3.2.41
       vue-router: 4.1.5_vue@3.2.41
       vue-slicksort: 2.0.0-alpha.5_vue@3.2.41
       vue-types: 4.2.1_vue@3.2.41
@@ -8734,6 +8736,15 @@ packages:
       '@intlify/shared': 9.2.2
       '@intlify/vue-devtools': 9.2.2
       '@vue/devtools-api': 6.2.1
+      vue: 3.2.41
+    dev: false
+
+  /vue-json-pretty/2.2.2_vue@3.2.41:
+    resolution: {integrity: sha512-eZkcJKrzGmKNto0ZqTjUkIFP1SMaoDxW6VLtRj0awmIqpN7glFZLBm5tNYMJcdgTGweDp4zIPyvaewZVs3Exvg==}
+    engines: {node: '>= 10.0.0', npm: '>= 5.0.0'}
+    peerDependencies:
+      vue: '>=3.0.0'
+    dependencies:
       vue: 3.2.41
     dev: false
 
