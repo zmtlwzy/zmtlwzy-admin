@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.3.0 (2022-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **composables:** useMessage useWrapperMessage -> useDescreteApi
+
+### Features
+
+* **AppLogo:** add canGoHome props ([035dcf0](https://github.com/zmtlwzy/zmtlwzy-admin/commit/035dcf077fe18293f9c7b07b9a30b73dd321e7ab))
+* **BasicForm:** add bindVal bindEvent props ([fb0c800](https://github.com/zmtlwzy/zmtlwzy-admin/commit/fb0c8004bc9aacdea419f32b0293a5c215a13081))
+* **comp:** add datajson preview comp ([6bc1715](https://github.com/zmtlwzy/zmtlwzy-admin/commit/6bc1715964e1cd75d29ec065fae63215fc7f32be))
+* **components:** add appSearch components ([c53a221](https://github.com/zmtlwzy/zmtlwzy-admin/commit/c53a2216b62731bc1ca4331b45fb2ef8fb9d2491))
+* **composables:** feat: add useDiscreteApi ([12edca9](https://github.com/zmtlwzy/zmtlwzy-admin/commit/12edca9a7cfa7c90151df962525443d3d02813ea))
+* config unocss fileSystemIconLoader feature ([9bc5252](https://github.com/zmtlwzy/zmtlwzy-admin/commit/9bc5252aa30d568f94fb8029e2cd7fb7935c72be))
+* **CountdownInput:** perf style ([a645204](https://github.com/zmtlwzy/zmtlwzy-admin/commit/a64520425204ce793bb228e3e08b36254d19a020))
+* **loginPage:** perf loginPage and add some comp ([b78473a](https://github.com/zmtlwzy/zmtlwzy-admin/commit/b78473a3926a64f6222b14af89ab4c3468024259))
+* **page:** loading title can custom title ([0db94f8](https://github.com/zmtlwzy/zmtlwzy-admin/commit/0db94f8d263c3c72e0c9b2c51a5aa1c341b11e01))
+* **pageWrapper:** add back btn ([2b4f3ea](https://github.com/zmtlwzy/zmtlwzy-admin/commit/2b4f3ea4f365062f541e5b61fcdfa39cbd103145))
+* **views:** add detail page demo ([e472089](https://github.com/zmtlwzy/zmtlwzy-admin/commit/e472089eb22402aaedfbea968b7e7510338d2b2a))
+
+
+### Bug Fixes
+
+* **AppSearch:** darkMode backroundColor bad ([1c473c3](https://github.com/zmtlwzy/zmtlwzy-admin/commit/1c473c3c1000cfb6a6002968a092daa3103e5cce))
+* **BasicForm:** n-input-group width invalid ([edd21ba](https://github.com/zmtlwzy/zmtlwzy-admin/commit/edd21ba46b8ce89de254e2fee895baf75c1b2a76))
+* demo avatar src fixed ([8f2ea4a](https://github.com/zmtlwzy/zmtlwzy-admin/commit/8f2ea4a2d1bd0090082f19b298e9942b0b9e0d12))
+* dropdown item hover icon blocked ([6247e4a](https://github.com/zmtlwzy/zmtlwzy-admin/commit/6247e4af9656b1ba5e4c86a3a6662aa3bc08a46a))
+* **useRedo:** missing params on refresh ([cb3f744](https://github.com/zmtlwzy/zmtlwzy-admin/commit/cb3f744ff2a744fb4eab62f65d16a1bd77865ee5))
+
 ### [0.2.5](https://github.com/zmtlwzy/zmtlwzy-admin/compare/0.2.0...0.2.5)(2022-06-11)
 
 ### Features
