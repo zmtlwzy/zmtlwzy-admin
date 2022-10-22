@@ -2,6 +2,7 @@ import type { RouteLocationRaw, Router } from 'vue-router'
 import { PageEnum } from '/@/enums/pageEnum'
 import { isString } from '/@/utils/is'
 import { REDIRECT_NAME } from '/@/router/constant'
+import { useRedirectStore } from '/@/store/modules/redirect'
 
 export type RouteLocationRawEx = Omit<RouteLocationRaw, 'path'> & { path: PageEnum }
 
@@ -35,19 +36,27 @@ export function useGo(_router?: Router) {
  * @description: redo current page
  */
 export const useRedo = (_router?: Router) => {
-  const { push, currentRoute } = _router || useRouter()
+  const redirectStore = useRedirectStore()
+  const { replace, currentRoute } = _router || useRouter()
   const { query, params = {}, name, fullPath } = unref(currentRoute.value)
+  console.log(params, query, name, 'params, query')
   function redo(): Promise<boolean> {
     return new Promise((resolve) => {
+      if (name === REDIRECT_NAME) {
+        resolve(false)
+        return
+      }
       if (name && Object.keys(params).length > 0) {
-        params._redirect_type = 'name'
-        params.path = String(name)
+        redirectStore.setPath(String(name))
+        redirectStore.setRedirentType('name')
       }
       else {
-        params._redirect_type = 'path'
-        params.path = fullPath
+        redirectStore.setRedirentType('path')
+        redirectStore.setPath(fullPath)
       }
-      push({ name: REDIRECT_NAME, params, query }).then(() => resolve(true))
+      redirectStore.setParams(params)
+      const path = redirectStore.getPath.startsWith('/') ? redirectStore.getPath.slice(1) : redirectStore.getPath
+      replace({ path: `/redirect/${String(name) || path}`, query }).then(() => resolve(true))
     })
   }
   return redo

@@ -37,7 +37,6 @@ const routes: AppRouteModule = {
           meta: {
             title: '表格详情页',
             hideMenu: true,
-            hideTab: true,
             currentActiveMenu: '/comp/table/basic-table',
           },
         },

@@ -1,23 +1,20 @@
-<template>
-  <div />
-</template>
-
 <script lang="ts" setup>
+import { onBeforeRouteLeave } from 'vue-router'
+import { useRedirectStore } from '/@/store/modules/redirect'
+
 const { currentRoute, replace } = useRouter()
+const redirectStore = useRedirectStore()
 
-const { params, query } = unref(currentRoute)
-const { path, _redirect_type = 'path' } = params
-
-Reflect.deleteProperty(params, '_redirect_type')
-Reflect.deleteProperty(params, 'path')
+const { query } = unref(currentRoute)
+const path = redirectStore.getPath
 
 const _path = Array.isArray(path) ? path.join('/') : path
 
-if (_redirect_type === 'name') {
+if (redirectStore.getRedirentType === 'name') {
   replace({
     name: _path,
     query,
-    params,
+    params: redirectStore.getParams,
   })
 }
 else {
@@ -26,4 +23,12 @@ else {
     query,
   })
 }
+
+onBeforeRouteLeave(() => {
+  redirectStore.$reset()
+})
 </script>
+
+<template>
+  <div />
+</template>
