@@ -1,38 +1,46 @@
-import type { ModalProps } from 'naive-ui'
+import type { ComputedRef } from 'vue'
+import type { ButtonProps, ModalProps } from 'naive-ui'
+
 /**
  * @description: 弹窗对外暴露的方法
  */
 export interface BasicModalMethods {
-  setProps: (props: BasicModalProps) => void
-  openModal: () => void
-  closeModal: () => void
-  setSubLoading: (status?: boolean) => void
+  setModalProps: (props: Partial<BasicModalProps>) => void
+  emitVisible?: (visible: boolean, uid: number) => void
+  redoModalHeight?: () => void
 }
+
+export type RegisterFn = (modalMethods: BasicModalMethods, uuid?: string) => void
+
+export interface ReturnMethods extends BasicModalMethods {
+  openModal: <T = any>(props?: boolean, data?: T, openOnSet?: boolean) => void
+  closeModal: () => void
+  getVisible?: ComputedRef<boolean>
+}
+
+export type UseModalReturnType = [RegisterFn, ReturnMethods]
+
+export interface ReturnInnerMethods extends BasicModalMethods {
+  closeModal: () => void
+  setLoading: (loading: boolean) => void
+  setConfirmLoading: (loading: boolean) => void
+  getVisible?: ComputedRef<boolean>
+  redoModalHeight: () => void
+}
+
+export type UseModalInnerReturnType = [RegisterFn, ReturnInnerMethods]
 
 export interface BasicModalProps extends ModalProps {
-  draggable?: string
-  subBtuText?: string
+  canFullscreen?: boolean
+  defaultFullscreen?: boolean
+  visible?: boolean
+  draggable?: string | false | null
+  showConfirmBtn: boolean
+  confirmBtnProps?: ButtonProps
+  showCancelBtn: boolean
+  cancelBtnProps?: ButtonProps
+  loadingTip?: string
   destroyOnClose?: boolean
-  onOk?: () => void
+
+  onDrag: (x: number, y: number) => void
 }
-
-export type RegisterFn = (ModalInstance: BasicModalMethods) => void
-
-export type UseModalReturnType = [RegisterFn, BasicModalMethods]
-
-/* interface ModalProps = {
-     to?: string | HTMLElement;
-     show?: boolean;
-     title?: string;
-     preset?: 'dialog' | 'card' | 'confirm';
-     showIcon?: boolean;
-     maskClosable?: boolean;
-     transformOrigin?: 'mouse' | 'center';
-     displayDirective?: 'show' | 'if';
-     onClose: () => Promise<boolean> | boolean | any;
-     onUpdateShow: MaybeArray<(value: boolean) => void>;
-     onAfterEnter: () => void;
-     onBeforeLeave: () => void;
-     onNegativeClick: () => Promise<boolean> | boolean | any;
-     onPositiveClick: () => Promise<boolean> | boolean | any;
-} */

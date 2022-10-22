@@ -1,6 +1,6 @@
 import type { FormSchema } from '/@/components/Form/index'
 
-export const schemas: FormSchema[] = [
+export const filterSchemas: FormSchema[] = [
   {
     field: 'name',
     labelMessage: '这是一个提示',
@@ -70,7 +70,7 @@ export const schemas: FormSchema[] = [
   },
 ]
 
-export const modelSchemas: FormSchema[] = [
+export const modalSchemas: FormSchema[] = [
   {
     field: 'name',
     component: 'NInput',
@@ -86,6 +86,12 @@ export const modelSchemas: FormSchema[] = [
   {
     field: 'date',
     component: 'NDatePicker',
+    bindVal: 'formatted-value',
+    bindUpdateVal: 'update:formatted-value',
+    componentProps: {
+      type: 'date',
+      valueFormat: 'yyyy-MM-dd',
+    },
     label: '日期',
     required: true,
   },

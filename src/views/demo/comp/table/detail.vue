@@ -2,27 +2,17 @@
   <PageWrapper
     :title="`表单详情(${isEdit ? '编辑' : '创建'})`"
     content="该页面一般创建或编辑的复杂表单页面，需要在路由中额外添加此页面，唯一不同的是需要配置一些路由meta属性使其菜单激活状态依然在上级页面。"
+    is-title-bottom-back
   >
     <NCard>
       <div class="mx-auto max-w-600px my-4">
-        <BasicForm submit-button-text="提交" @register="register" />
+        <BasicForm ref="formRef" submit-button-text="提交" :model="formDataRef" @register="register" />
       </div>
     </NCard>
 
-    <template #leftFooter>
-      <div class="flex-ac">
-        <n-button strong quaternary @click="router.go(-1)">
-          <template #icon>
-            <n-icon :size="14" class="mb-2px">
-              <i-material-symbols:arrow-back-ios-rounded />
-            </n-icon>
-          </template>
-          返回
-        </n-button>
-      </div>
-    </template>
     <template #rightFooter>
       <div class="flex-ac space-x-2 py-2">
+        <DataPopover :data="getFormData" />
         <n-button @click="resetFields">
           <template #icon>
             <n-icon :size="16" class="mb-4px">
@@ -48,11 +38,17 @@ const router = useRouter()
 const route = useRoute()
 const { message } = useDiscreteApi()
 
+const formRef = ref()
+const formDataRef = ref({})
 const id = computed(() => route.params.id)
 const isEdit = computed(() => !!id.value)
 
 const actionName = computed(() => {
   return isEdit.value ? '编辑' : '创建'
+})
+
+const getFormData = computed(() => {
+  return formRef.value?.formModel
 })
 
 const schemas: FormSchema[] = [
@@ -216,6 +212,7 @@ onMounted(async () => {
     title3: '78979',
   }
   setFieldsValue(isEdit.value ? data : {})
+  // formDataRef.value = isEdit.value ? data : {}
 })
 
 async function handleSubmit() {

@@ -1,6 +1,6 @@
 <template>
   <n-card :bordered="false">
-    <BasicForm @register="register" @submit="handleSubmit" @reset="handleReset" />
+    <BasicForm @register="registerFilterForm" @submit="handleSubmit" @reset="handleReset" />
 
     <BasicTable
       ref="actionRef"
@@ -14,7 +14,7 @@
       @update:checked-row-keys="onCheckedRow"
     >
       <template #tableTitle>
-        <n-button type="primary" class="mr-2" @click="addTable">
+        <n-button type="primary" class="mr-2" @click="handleOpenModal()">
           <template #icon>
             <n-icon>
               <i-ant-design-plus-outlined />
@@ -39,38 +39,24 @@
       </template>
     </BasicTable>
 
-    <n-modal v-model:show="showModal" :show-icon="false" preset="dialog" title="新建">
-      <BasicForm :schemas="modelSchemas" @submit="handleSubmit" @reset="handleReset" />
-
-      <template #action>
-        <n-space>
-          <n-button @click="() => (showModal = false)">
-            取消
-          </n-button>
-          <n-button type="info" :loading="formBtnLoading" @click="confirmForm">
-            确定
-          </n-button>
-        </n-space>
-      </template>
-    </n-modal>
+    <TheModal @register="modalRegister" @refresh-list="loadDataTable" />
   </n-card>
 </template>
 
 <script lang="ts" setup>
 import useDiscreteApi from '/@/composables/web/useDiscreteApi'
 import type { BasicColumn } from '/@/components/Table'
+import { useForm } from '/@/components/Form'
 import { BasicTable, TableAction } from '/@/components/Table'
-import { BasicForm, useForm } from '/@/components/Form/index'
+import { useModal } from '/@/components/Modal'
 import { demoListApi } from '/@/api/demo/table'
 import { columns } from './columns'
-import { modelSchemas, schemas } from './data'
+import { filterSchemas } from './schemas'
+import TheModal from './modal.vue'
 
-const formRef: any = ref(null)
 const router = useRouter()
 const { message } = useDiscreteApi()
 const actionRef = ref()
-const showModal = ref(false)
-const formBtnLoading = ref(false)
 const formParams = reactive({
   name: '',
   address: '',
@@ -81,11 +67,10 @@ const params = ref({
   name: 'xiaoMa',
 })
 const actionColumn: BasicColumn = {
-  width: 220,
+  width: 300,
   title: '操作',
   key: 'action',
   fixed: 'right',
-  // @ts-expect-error
   render(record) {
     return h(TableAction, {
       style: 'button',
@@ -106,6 +91,12 @@ const actionColumn: BasicColumn = {
           },
           // 根据权限控制是否显示: 有权限，会显示，支持多个
           auth: ['super'],
+        },
+        {
+          label: '弹窗编辑',
+          quaternary: true,
+          type: 'info',
+          onClick: handleDialogEdit.bind(null, record),
         },
         {
           label: '编辑',
@@ -142,13 +133,19 @@ const actionColumn: BasicColumn = {
   },
 }
 
-const [register] = useForm({
+const [modalRegister, { openModal, setModalProps }] = useModal()
+
+const [registerFilterForm] = useForm({
   gridProps: { cols: '1 sm:2 xl:3', xGap: 24 },
   inline: true,
-  schemas,
+  schemas: filterSchemas,
 })
-function addTable() {
-  showModal.value = true
+
+function handleOpenModal(rowData?: any) {
+  openModal(true, rowData)
+  setModalProps({
+    title: `${rowData ? '编辑' : '创建'}数据`,
+  })
 }
 
 const loadDataTable = async (res) => {
@@ -163,27 +160,13 @@ function reloadTable() {
   actionRef.value.reload()
 }
 
-function confirmForm(e) {
-  e.preventDefault()
-  formBtnLoading.value = true
-  formRef.value.validate((errors) => {
-    if (!errors) {
-      message.success('新建成功')
-      setTimeout(() => {
-        showModal.value = false
-        reloadTable()
-      })
-    }
-    else {
-      message.error('请填写完整信息')
-    }
-    formBtnLoading.value = false
-  })
+function handleDialogEdit(record: Recordable) {
+  console.log(record, 'record')
+  handleOpenModal(record)
 }
 function handleEdit(record: Recordable) {
   console.log('点击了编辑', record)
   // message.info('点击了编辑');
-  console.log('router')
   router.push(`/comp/table/basic-table-detail/${record.id}`)
 }
 function handleDelete(record: Recordable) {

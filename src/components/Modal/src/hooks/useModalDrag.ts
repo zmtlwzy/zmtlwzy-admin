@@ -1,8 +1,9 @@
 import type { Ref } from 'vue'
 import { useTimeoutFn } from '@vueuse/core'
+import type { BasicModalProps } from '../types'
 
 export interface UseModalDragMoveContext {
-  draggable: Ref<string>
+  draggable: Ref<BasicModalProps['draggable']>
   destroyOnClose: Ref<boolean | undefined> | undefined
   visible: Ref<boolean>
   callback?: Ref<Fn | undefined>
@@ -22,7 +23,10 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
   const drag = <T extends Element>(wrap: T) => {
     if (!wrap)
       return
-    wrap.setAttribute('data-drag', unref(context.draggable))
+    const draggable = unref(context.draggable)
+    if (!draggable)
+      return
+    wrap.setAttribute('data-drag', draggable)
     const bar = wrap.querySelector('.n-card-header,.n-dialog__title') as HTMLDivElement
     const target = wrap.querySelector('.n-modal') as HTMLDivElement
 

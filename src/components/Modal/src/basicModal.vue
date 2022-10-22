@@ -1,23 +1,27 @@
 <template>
-  <n-modal v-model:show="visible" v-bind="getBindValue">
+  <n-modal v-model:show="visibleRef" v-bind="getBindValue">
     <template #header>
-      <div class="w-full cursor-move">
+      <div class="w-full" :class="{ 'cursor-move': !!draggable }">
         {{ getBindValue.title }}
       </div>
     </template>
     <template #default>
       <slot name="default" />
     </template>
-    <template #action>
-      <slot name="action">
+
+    <template v-for="item in ['action', 'footer']" #[item]="data">
+      <slot :name="item" v-bind="data || {}">
         <n-space>
-          <n-button @click="closeModal">
-            取消
+          <n-button v-if="getBindValue.showCancelBtn" v-bind="getBindValue.cancelBtnProps" @click="handleCancel">
+            {{ attrs.negativeText || '取消' }}
           </n-button>
-          <n-button type="primary" :loading="subLoading" @click="handleSubmit">
-            {{
-              subBtuText
-            }}
+          <n-button
+            v-if="getBindValue.showConfirmBtn"
+            type="primary"
+            v-bind="getBindValue.confirmBtnProps"
+            @click="handleConfirm"
+          >
+            {{ attrs.positiveText ?? '确认' }}
           </n-button>
         </n-space>
       </slot>
@@ -26,88 +30,119 @@
 </template>
 
 <script lang="ts" setup>
-import { omit } from 'lodash-es'
+import { omit, pick } from 'lodash-es'
 import { deepMerge } from '/@/utils'
 import { useModalDragMove } from './hooks/useModalDrag'
 import type { BasicModalMethods, BasicModalProps } from './types'
 
-const props = withDefaults(
-  defineProps<{
-    draggable?: string
-    subBtuText?: string
-    destroyOnClose?: boolean
-    onOk?: () => void
-    onDrag?: (x: number, y: number) => void
-  }>(),
-  {
-    draggable: 'on',
-    subBtuText: '确认',
-  },
-)
+const props = withDefaults(defineProps<Props>(), {
+  draggable: 'on',
+  showConfirmBtn: true,
+  showCancelBtn: true,
+})
 
-const emit = defineEmits(['register'])
+const emit = defineEmits(['visibleChange', 'cancel', 'ok', 'register', 'update:visible'])
 
 defineOptions({
   name: 'BasicModal',
+  inheritAttrs: false,
 })
 
-const attrs = useAttrs() as BasicModalProps
+interface Props {
+  canFullscreen?: boolean
+  defaultFullscreen?: boolean
+  visible?: boolean
+  draggable?: string | false | null
+  showConfirmBtn?: boolean
+  confirmBtnProps?: Record<string, any>
+  showCancelBtn?: boolean
+  cancelBtnProps?: Record<string, any>
+  loadingTip?: string
+  destroyOnClose?: boolean
+
+  onDrag?: (x: number, y: number) => void
+}
+
+const attrs = useAttrs() as unknown as BasicModalProps
 const propsRef = ref<Partial<BasicModalProps> | null>(null)
-const visible = ref(false)
-const subLoading = ref(false)
+const visibleRef = ref(false)
+
 const { destroyOnClose, draggable, onDrag: callback } = toRefs(props)
+
+const modalMethods: BasicModalMethods = {
+  setModalProps,
+}
+
+const instance = getCurrentInstance()
+if (instance)
+  emit('register', modalMethods, instance.uid)
+
 useModalDragMove({
-  visible,
+  visible: visibleRef,
   destroyOnClose,
   draggable,
   callback,
 })
 
-const getProps = computed(() => {
-  return { ...props, ...unref(propsRef) } as BasicModalProps
+const getMergeProps = computed((): Recordable => {
+  return {
+    ...props,
+    ...(unref(propsRef) as any),
+  }
 })
 
-const subBtuText = computed(() => unref(propsRef)?.subBtuText || props.subBtuText)
-
-async function setProps(modalProps: Partial<BasicModalProps>): Promise<void> {
+function setModalProps(modalProps: Partial<BasicModalProps>): void {
   propsRef.value = deepMerge(unref(propsRef) || {}, modalProps)
+  if (Reflect.has(modalProps, 'visible'))
+    visibleRef.value = !!modalProps.visible
 }
+
 const getBindValue = computed(() => {
   return omit(
     {
-      title: '',
       preset: 'dialog',
       maskClosable: false,
+      showIcon: false,
       ...attrs,
-      ...unref(getProps),
+      ...unref(getMergeProps),
     },
     ['show'],
   ) as BasicModalProps
 })
 
-function setSubLoading(status?: boolean) {
-  subLoading.value = status ?? false
+watchEffect(() => {
+  visibleRef.value = !!props.visible
+  // fullScreenRef.value = !!props.defaultFullscreen;
+})
+
+watch(
+  () => unref(visibleRef),
+  (v) => {
+    emit('visibleChange', v)
+    emit('update:visible', v)
+    instance && modalMethods.emitVisible?.(v, instance.uid)
+  },
+  {
+    immediate: false,
+  },
+)
+
+function handleConfirm(e: Event) {
+  emit('ok', e)
 }
 
-function openModal() {
-  visible.value = true
-}
-function closeModal() {
-  visible.value = false
-  subLoading.value = false
-  attrs?.onClose?.()
+function handleCancel(e: Event) {
+  visibleRef.value = false
+  const closeFunList = pick(unref(getBindValue), ['onClose', 'onAfterLeave'])
+  Object.values(closeFunList).forEach((fun: Fn) => {
+    fun?.(e)
+  })
+  emit('cancel', e)
 }
 
-function handleSubmit() {
-  unref(getProps)?.onOk?.()
-}
-const modalMethods: BasicModalMethods = {
-  setProps,
-  openModal,
-  closeModal,
-  setSubLoading,
-}
-const instance = getCurrentInstance()
-if (instance)
-  emit('register', modalMethods)
+// function handleTitleDbClick(e) {
+//   if (!props.canFullscreen) return;
+//   e.stopPropagation();
+//   handleFullScreen(e);
+// }
 </script>
