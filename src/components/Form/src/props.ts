@@ -4,6 +4,10 @@ import type { ButtonProps, FormItemProps, GridItemProps, GridProps } from 'naive
 import { propTypes } from '/@/utils/propTypes'
 
 export const basicProps = {
+  model: {
+    type: Object as PropType<Recordable>,
+    default: {},
+  },
   disabled: propTypes.bool.def(false),
   // 简化 rules 配置，为 true 则转化成 [{required:true}]
   require: propTypes.bool.def(false),

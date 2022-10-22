@@ -104,9 +104,9 @@
               v-bind="getComponentProps(schema)"
               :is="getComp(schema)"
               v-else
-              :value="get(formModel, schema.field)"
+              :[schema.bindVal!]="get(formModel, schema.field)"
               :class="{ isFull: schema.isFull != false && getProps.isFull }"
-              @update:value="set(formModel, schema.field, $event)"
+              @[schema.bindUpdateVal!]="set(formModel, schema.field, $event)"
             />
 
             <!-- 组件后面的内容 -->
@@ -384,9 +384,11 @@ export default defineComponent({
     const getSchema = computed((): FormSchema[] => {
       const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any)
       for (const schema of schemas) {
-        const { defaultValue } = schema
+        const { defaultValue, bindVal = 'value', bindUpdateVal = 'update:value' } = schema
         // handle date type
         // dateItemType.includes(component as string)
+        schema.bindVal = bindVal
+        schema.bindUpdateVal = bindUpdateVal
         if (defaultValue)
           schema.defaultValue = defaultValue
       }
@@ -521,6 +523,18 @@ export default defineComponent({
           initDefault()
           isUpdateDefaultRef.value = true
         }
+      },
+    )
+
+    watch(
+      () => unref(getProps).model,
+      (val) => {
+        if (!val)
+          return
+        setFieldsValue(val)
+      },
+      {
+        immediate: true,
       },
     )
 

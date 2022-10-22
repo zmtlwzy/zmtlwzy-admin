@@ -86,7 +86,7 @@ export function useFormEvents({
   }
 
   // 设置表单字段值
-  async function setFieldsValue(values: Recordable): Promise<void> {
+  async function setFieldsValue<T extends Recordable>(values: T): Promise<void> {
     const fields = unref(getSchema)
       .map((item) => {
         return isArray(item.field) ? item.field[0] : item.field

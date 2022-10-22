@@ -31,6 +31,8 @@ export interface FormSchema {
   show?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean)
   disabled?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean)
   childrens?: FormSchema[]
+  bindVal?: string
+  bindUpdateVal?: string
 }
 
 export interface FormProps {
@@ -63,7 +65,7 @@ export interface FormProps {
 export interface FormActionType {
   submit: () => Promise<any>
   setProps: (formProps: Partial<FormProps>) => Promise<void>
-  setFieldsValue: <T>(values: T) => Promise<void>
+  setFieldsValue: <T extends Recordable>(values: T) => Promise<void>
   clearValidate: (name?: string | string[]) => Promise<void>
   getFieldsValue: () => Recordable
   resetFields: () => Promise<void>
