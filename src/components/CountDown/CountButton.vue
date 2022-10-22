@@ -1,5 +1,5 @@
 <template>
-  <NButton block :disabled="isStart" :loading="loading" @click="handleStart">
+  <NButton :disabled="isStart" :loading="loading" @click="handleStart">
     {{ getButtonText }}
   </NButton>
 </template>

@@ -1,16 +1,19 @@
 <template>
-  <NGrid cols="12" :x-gap="12">
-    <NGi span="8">
-      <NInput v-bind="$attrs" :class="prefixCls" :size="size" :value="state">
-        <template v-for="item in Object.keys($slots)" #[item]="data">
-          <slot :name="item" v-bind="data || {}" />
-        </template>
-      </NInput>
-    </NGi>
-    <NGi span="4">
-      <CountButton :size="size" :count="count" :value="state" :before-start-func="sendCodeApi" />
-    </NGi>
-  </NGrid>
+  <n-input-group>
+    <n-input v-bind="$attrs" :class="prefixCls" :style="{ width: `${inputWidth} !important` }" :size="size" :value="state">
+      <template v-for="item in Object.keys($slots)" #[item]="data">
+        <slot :name="item" v-bind="data || {}" />
+      </template>
+    </n-input>
+    <CountButton
+      class="flex-grow-1"
+      :size="size"
+      type="primary"
+      :count="count"
+      :value="state"
+      :before-start-func="sendCodeApi"
+    />
+  </n-input-group>
 </template>
 
 <script setup lang="ts">
@@ -23,6 +26,7 @@ import { useRuleFormItem } from '/@/composables/component/useFormItem'
 const props = defineProps({
   value: String,
   size: String as PropType<InputProps['size']>,
+  inputWidth: { type: [String, Number], default: '65%' },
   count: { type: Number, default: 60 },
   sendCodeApi: {
     type: Function as PropType<() => Promise<boolean>>,
