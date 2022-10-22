@@ -3,6 +3,16 @@
     <transition name="page-footer-fade" appear>
       <div v-show="getShow" :class="[prefixCls]">
         <div :class="`${prefixCls}__left`">
+          <div v-if="isTitleBottomBack" class="flex-ac py-2">
+            <n-button strong quaternary @click="router.go(-1)">
+              <template #icon>
+                <n-icon :size="14" class="mb-2px">
+                  <i-material-symbols:arrow-back-ios-rounded />
+                </n-icon>
+              </template>
+              返回
+            </n-button>
+          </div>
           <slot name="left" />
         </div>
         <slot />
@@ -23,9 +33,16 @@ import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal'
 import { useDesign } from '/@/composables/web/useDesign'
 import { usePageTransitionInject } from '/@/composables/web/useAppInject'
 
+interface Props {
+  isTitleBottomBack?: boolean
+}
+
+defineProps<Props>()
+
 const { prefixCls } = useDesign('page-footer')
 const { getIsDarkMode } = useRootSetting()
 const { getEnableTransition } = useTransitionSetting()
+const router = useRouter()
 
 const { headerColor: fc, footerBorderColor: fbc } = getNaiveCssVars('Layout')
 const { footerColor: dark_fc, footerBorderColor: dark_fbc } = getNaiveCssVars('Layout', true)

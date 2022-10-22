@@ -12,7 +12,16 @@
         <slot v-else name="headerContent" />
       </template>
       <template #title>
-        <span v-if="title" class="font-bold text-xl">{{ title }}</span>
+        <template v-if="title">
+          <n-button v-if="isTitleBack" text @click="router.go(-1)">
+            <template #icon>
+              <n-icon :size="19" class="mr-6">
+                <i-ic:sharp-arrow-back-ios />
+              </n-icon>
+            </template>
+          </n-button>
+          <span class="font-bold text-xl">{{ title }}</span>
+        </template>
         <slot v-else name="title" />
       </template>
 
@@ -25,7 +34,7 @@
       <slot />
     </div>
 
-    <PageFooter v-if="getShowFooter">
+    <PageFooter v-if="getShowFooter" :is-title-bottom-back="isTitleBottomBack">
       <template #left>
         <slot name="leftFooter" />
       </template>
@@ -37,27 +46,28 @@
 </template>
 
 <script setup lang="ts">
-import type { CSSProperties, PropType, StyleValue } from 'vue'
+import type { CSSProperties, StyleValue } from 'vue'
 import { omit } from 'lodash-es'
 import PageFooter from './PageFooter.vue'
 import { useDesign } from '/@/composables/web/useDesign'
 import { useRootSetting } from '/@/composables/setting/useRootSetting'
 import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal'
-import { propTypes } from '/@/utils/propTypes'
 
-const props = defineProps({
-  title: propTypes.string,
-  ghost: propTypes.bool.def(false),
-  content: propTypes.string,
-  contentStyle: {
-    type: Object as PropType<CSSProperties>,
-  },
-  contentBackground: propTypes.bool,
-  contentClass: propTypes.string,
-})
+interface Props {
+  title?: string
+  isTitleBack?: boolean
+  isTitleBottomBack?: boolean
+  ghost?: boolean
+  content?: string
+  contentStyle?: CSSProperties
+  contentBackground?: boolean
+  contentClass?: string
+}
+
+const props = defineProps<Props>()
 
 const slots = useSlots()
-
+const router = useRouter()
 const { prefixCls } = useDesign('page-wrapper')
 const { getIsDarkMode } = useRootSetting()
 
