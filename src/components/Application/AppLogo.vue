@@ -1,7 +1,7 @@
 <template>
   <div
     ref="wrapperEl"
-    class="flex-ac ease-in-out-300 cursor-pointer"
+    class="flex-ac ease-in-out-300"
     :style="getWrapperStyle"
     @click="goHome"
   >
@@ -48,6 +48,7 @@ const props = defineProps({
   collapsedShowTitle: propTypes.bool.def(false),
   isStatic: propTypes.bool.def(false),
   width: propTypes.stringNumber,
+  canGoHome: propTypes.bool.def(true),
 })
 
 const { prefixCls } = useDesign('app-logo')
@@ -101,20 +102,18 @@ function clacClipPath(...els: HTMLDivElement[]) {
 const go = useGo()
 
 const getWrapperStyle = computed((): StyleValue => {
-  const { collapsed, collapsedShowTitle, isStatic, width } = props
-  return {
-    ...(!isStatic
-      ? {
+  const { collapsed, collapsedShowTitle, isStatic, width, canGoHome } = props
+  return Object.assign({ cursor: canGoHome ? 'pointer' : 'unset' },
+    isStatic
+      ? {}
+      : {
           paddingLeft: collapsed ? '7px' : `${getMenuRootIndent.value - 4}px`,
-          width:
-              (collapsed ?? getCollapsed.value) && !collapsedShowTitle
-                ? formatLength(layoutSiderCollapsedWidth)
-                : formatLength(
-                  width ?? getIsMobile.value ? getMobileWidth.value : getMenuWidth.value,
-                ),
-        }
-      : {}),
-  }
+          width: (collapsed ?? getCollapsed.value) && !collapsedShowTitle
+            ? formatLength(layoutSiderCollapsedWidth)
+            : formatLength(
+              width ?? getIsMobile.value ? getMobileWidth.value : getMenuWidth.value,
+            ),
+        })
 })
 
 const getLogoStyle = computed((): StyleValue => {
@@ -141,6 +140,8 @@ const getTitleWidth = computed(() => (props.collapsed ? 0 : '100%'))
 const getTitle = computed(() => title)
 
 function goHome() {
+  if (!props.canGoHome)
+    return
   go(userStore.getUserInfo.homePath || PageEnum.BASE_HOME)
 }
 </script>
