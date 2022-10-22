@@ -21,10 +21,8 @@
 
 <script lang="ts">
 import FrameLayout from '/@/layouts/iframe/index.vue'
-
 import { useRootSetting } from '/@/composables/setting/useRootSetting'
 import { useTransition } from './useTransition'
-
 import type { PageTranstionState } from './useTransitonContext'
 import { createPageTransitionContext } from './useTransitonContext'
 

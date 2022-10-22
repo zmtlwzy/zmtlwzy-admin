@@ -31,20 +31,13 @@
 
 <script lang="ts">
 import useDiscreteApi from '/@/composables/web/useDiscreteApi'
-
 import { useAppStore } from '/@/store/modules/app'
 import { usePermissionStore } from '/@/store/modules/permission'
 import { useMultipleTabStore } from '/@/store/modules/multipleTab'
 import { useUserStore } from '/@/store/modules/user'
 import useChangeTheme from '/@/composables/web/useChaneTheme'
-// import { themeState } from '/@/settings/designSetting';
-
-// import { useDesign } from '/@/composables/web/useDesign';
 import { useI18n } from '/@/composables/web/useI18n'
 import { useClipboard } from '@vueuse/core'
-
-// import { updateColorWeak } from '/@/logics/theme/updateColorWeak';
-// import { updateGrayMode } from '/@/logics/theme/updateGrayMode';
 import defaultSetting from '/@/settings/projectSetting'
 
 export default defineComponent({

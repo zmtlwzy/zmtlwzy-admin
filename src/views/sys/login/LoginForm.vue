@@ -100,7 +100,6 @@
 <script lang="ts" setup>
 import { useI18n } from '/@/composables/web/useI18n'
 import useDiscreteApi from '/@/composables/web/useDiscreteApi'
-
 import { useUserStore } from '/@/store/modules/user'
 import { LoginStateEnum, useFormRules, useFormValid, useLoginState } from './useLogin'
 import { useDesign } from '/@/composables/web/useDesign'

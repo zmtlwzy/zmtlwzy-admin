@@ -1,10 +1,8 @@
 import type { LocaleSetting } from '/#/config'
-
 import { defineStore } from 'pinia'
 import { store } from '/@/store'
 import type { NDateLocale, NLocale } from 'naive-ui'
 import { dateZhCN, zhCN } from 'naive-ui'
-
 import { LOCALE_KEY } from '/@/enums/cacheEnum'
 import { createLocalStorage } from '/@/utils/cache'
 import { localeSetting } from '/@/settings/localeSetting'

@@ -1,7 +1,6 @@
-import type { FormActionType, FormProps, UseFormReturnType } from '../types/form'
-
-import { isProdMode } from '/@/utils/env'
 import { getDynamicProps } from '/@/utils'
+import type { FormActionType, FormProps, UseFormReturnType } from '../types/form'
+import { isProdMode } from '/@/utils/env'
 
 type Props = Partial<FormProps>
 

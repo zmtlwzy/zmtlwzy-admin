@@ -1,10 +1,8 @@
 import type { Ref } from 'vue'
-
 import { useRootSetting } from '/@/composables/setting/useRootSetting'
 import { useTransitionSetting } from '/@/composables/setting/useTransitionSetting'
 import { useMultipleTabSetting } from '/@/composables/setting/useMultipleTabSetting'
 import { useMultipleTabStore } from '/@/store/modules/multipleTab'
-
 import { RouterTransitionEnum } from '/@/enums/appEnum'
 
 export function useTransition(nameRef: Ref<string | undefined>) {

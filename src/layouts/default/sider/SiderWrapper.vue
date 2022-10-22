@@ -28,12 +28,10 @@ import { useElementSize } from '@vueuse/core'
 import { isBoolean } from 'lodash-es'
 import { formatLength } from '/@/utils/css'
 import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal'
-
 import { useDesign } from '/@/composables/web/useDesign'
 import { useAppInject } from '/@/composables/web/useAppInject'
 import { useRootSetting } from '/@/composables/setting/useRootSetting'
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
-
 import { TriggerEnum } from '/@/enums/menuEnum'
 import Trigger from '../trigger/index.vue'
 

@@ -16,9 +16,8 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { useDebounceFn } from '@vueuse/core'
 import { NInputNumber } from 'naive-ui'
-
+import { useDebounceFn } from '@vueuse/core'
 import { useDesign } from '/@/composables/web/useDesign'
 import { toWritableRef } from '/@/composables/utilities/toWritableRef'
 import { propTypes } from '/@/utils/propTypes'

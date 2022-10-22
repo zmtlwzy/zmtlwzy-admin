@@ -1,7 +1,6 @@
 import type { ComputedRef } from 'vue'
 import type { PaginationProps } from '../types/pagination'
 import type { BasicTableProps } from '../types/table'
-
 import { isBoolean } from '/@/utils/is'
 import { APISETTING, DEFAULTPAGESIZE, PAGESIZES } from '../const'
 

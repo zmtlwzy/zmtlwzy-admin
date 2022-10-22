@@ -1,5 +1,4 @@
 import type { AppRouteModule } from '/@/router/types'
-
 import { LAYOUT } from '/@/router/constant'
 import { ExceptionEnum } from '/@/enums/exceptionEnum'
 import { t } from '/@/composables/web/useI18n'

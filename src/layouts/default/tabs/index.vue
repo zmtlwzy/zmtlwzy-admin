@@ -37,12 +37,9 @@
 import type { CSSProperties, StyleValue } from 'vue'
 import type { MaybeElementRef } from '@vueuse/core'
 import { unrefElement, whenever } from '@vueuse/core'
-
 import type { RouteLocationNormalized, RouteMeta } from 'vue-router'
-
 import TabRedo from './components/TabRedo.vue'
 import TabContent from './components/TabContent.vue'
-
 import { useGo } from '/@/composables/web/usePage'
 import { useDesign } from '/@/composables/web/useDesign'
 // import { useMenuSetting } from '/@/composables/setting/useMenuSetting';
@@ -50,7 +47,6 @@ import { useMultipleTabSetting } from '/@/composables/setting/useMultipleTabSett
 import { multipleTabsHeight } from '/@/settings/designSetting'
 import { initAffixTabs } from './useMultipleTabs'
 import { getNaiveCssVarsRef } from '/@/composables/core/useNaiveInternal'
-
 import { REDIRECT_NAME } from '/@/router/constant'
 import { useMultipleTabStore } from '/@/store/modules/multipleTab'
 import { listenerRouteChange } from '/@/logics/mitt/routeChange'

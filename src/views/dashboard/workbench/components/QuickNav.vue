@@ -24,7 +24,6 @@
 
 <script setup lang="ts">
 import type { StyleValue } from 'vue'
-
 import { navItems } from './data.json'
 import { useLoading } from './useLoading'
 

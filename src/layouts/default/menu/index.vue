@@ -1,23 +1,18 @@
 <script lang="ts">
 import type { PropType, VNodeChild } from 'vue'
 import type { MenuInst } from 'naive-ui'
-
 import { useSplitMenu } from './useLayoutMenu'
-
 import type { Menu } from '/@/router/types'
 import { MenuModeEnum, MenuSplitTypeEnum } from '/@/enums/menuEnum'
-
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 import { useAppInject } from '/@/composables/web/useAppInject'
 import { useI18n } from '/@/composables/web/useI18n'
-
 import { getAllParentPath } from '/@/router/helper/menuHelper'
 import { getCurrentParentPath } from '/@/router/menus'
 import { REDIRECT_NAME } from '/@/router/constant'
 import { propTypes } from '/@/utils/propTypes'
 import PrefetchLink from '/@/components/Prefetch/PrefetchLink.vue'
 import { useGo } from '/@/composables/web/usePage'
-
 import Icon from '/@/components/Icon/Icon.vue'
 
 export default defineComponent({

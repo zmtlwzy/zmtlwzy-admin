@@ -13,11 +13,9 @@
 
 <script lang="ts" setup>
 import type { PropType } from 'vue'
-
 import { useDesign } from '/@/composables/web/useDesign'
 import { useI18n } from '/@/composables/web/useI18n'
 import { toWritableRef } from '/@/composables/utilities/toWritableRef'
-
 import { baseHandler } from '../handler'
 import type { HandlerEnum } from '../enum'
 import Wrapper from './Wrapper.vue'

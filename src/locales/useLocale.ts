@@ -2,12 +2,8 @@
  * Multi-language related operations
  */
 import type { LocaleType } from '/#/config'
-
-// import moment from 'moment';
-
 import { i18n } from './setupI18n'
 import { useLocaleStoreWithOut } from '/@/store/modules/locale'
-
 import { loadLocalePool, setHtmlPageLang } from './helper'
 
 interface LangModule {

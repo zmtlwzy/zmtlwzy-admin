@@ -1,6 +1,5 @@
 import type { FunctionalComponent, defineComponent } from 'vue'
 import { componentMap } from '/@/components/Table/src/componentMap'
-
 import { NPopover } from 'naive-ui'
 import type { ComponentType } from '../../types/componentType'
 

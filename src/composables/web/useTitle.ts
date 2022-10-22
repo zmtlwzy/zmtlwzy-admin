@@ -1,9 +1,7 @@
 import { useI18n } from '/@/composables/web/useI18n'
 import { useTitle as usePageTitle } from '@vueuse/core'
 import { useGlobSetting } from '/@/composables/setting'
-
 import { useLocaleStore } from '/@/store/modules/locale'
-
 import { REDIRECT_NAME } from '/@/router/constant'
 
 /**

@@ -2,11 +2,9 @@
 import { useBreakpoints, useCssVar } from '@vueuse/core'
 import { kebabCase } from 'lodash-es'
 import { useThemeVars } from 'naive-ui'
-
 import { createAppProviderContext } from './useAppContext'
 import { prefixCls as _prefixCls } from '/@/settings/designSetting'
 import { useAppStore } from '/@/store/modules/app'
-
 import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal'
 import useChangeTheme from '/@/composables/web/useChaneTheme'
 import { useTitle } from '/@/composables/web/useTitle'

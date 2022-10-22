@@ -27,8 +27,8 @@
 
 <script lang="ts" setup>
 import { omit } from 'lodash-es'
-import { useModalDragMove } from './hooks/useModalDrag'
 import { deepMerge } from '/@/utils'
+import { useModalDragMove } from './hooks/useModalDrag'
 import type { BasicModalMethods, BasicModalProps } from './types'
 
 const props = withDefaults(

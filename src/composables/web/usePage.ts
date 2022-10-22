@@ -1,8 +1,6 @@
 import type { RouteLocationRaw, Router } from 'vue-router'
-
 import { PageEnum } from '/@/enums/pageEnum'
 import { isString } from '/@/utils/is'
-
 import { REDIRECT_NAME } from '/@/router/constant'
 
 export type RouteLocationRawEx = Omit<RouteLocationRaw, 'path'> & { path: PageEnum }

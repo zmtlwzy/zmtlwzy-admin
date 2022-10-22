@@ -1,10 +1,6 @@
 // Legacy
 
 import { useDialog, useMessage, useNotification } from 'naive-ui'
-import { omit } from 'lodash-es'
-import { useI18n } from '/@/composables/web/useI18n'
-// import { noop } from '/@/utils';
-
 import type {
   DialogApi,
   DialogOptions,
@@ -13,6 +9,9 @@ import type {
   NotificationOptions,
   // NotificationReactive,
 } from 'naive-ui'
+import { omit } from 'lodash-es'
+import { useI18n } from '/@/composables/web/useI18n'
+// import { noop } from '/@/utils';
 
 // interface NotificationApi extends _NotificationApi {
 //   destroyAll: () => void;

@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { omit } from 'lodash-es'
 import type { CardProps } from 'naive-ui'
+import { omit } from 'lodash-es'
 
 withDefaults(
   defineProps<{

@@ -48,16 +48,13 @@ import { FullScreen, LayoutBreadcrumb, Notify, UserDropDown } from './components
 import AppSearch from '/@/components/Application/Search/index.vue'
 import Trigger from '../trigger/index.vue'
 import LayoutMenu from '../menu/index.vue'
-
 import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting'
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 import { useDesign } from '/@/composables/web/useDesign'
 import { useAppInject } from '/@/composables/web/useAppInject'
 import { useBreakpoint } from '/@/composables/event/useBreakpoint'
-
 import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent'
 import { useLocale } from '/@/locales/useLocale'
-
 import { MenuModeEnum, MenuSplitTypeEnum, TriggerEnum } from '/@/enums/menuEnum'
 
 export default defineComponent({

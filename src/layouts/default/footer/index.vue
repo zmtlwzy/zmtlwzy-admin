@@ -10,9 +10,7 @@
 <script lang="ts">
 import { GITHUB_URL } from '/@/settings/siteSetting'
 import { openWindow } from '/@/utils'
-
 import { useRootSetting } from '/@/composables/setting/useRootSetting'
-
 import { useDesign } from '/@/composables/web/useDesign'
 
 export default defineComponent({

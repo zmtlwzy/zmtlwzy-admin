@@ -30,7 +30,6 @@ import { set } from 'lodash-es'
 import { useUserStore } from '/@/store/modules/user'
 import { accountInfoApi } from '/@/api/demo/account'
 import { useForm } from '/@/components/Form/index'
-
 import { schemas } from './data'
 
 const userStore = useUserStore()

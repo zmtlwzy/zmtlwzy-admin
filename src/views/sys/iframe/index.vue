@@ -13,7 +13,6 @@
 
 <script lang="ts">
 import type { StyleValue } from 'vue'
-
 import { propTypes } from '/@/utils/propTypes'
 import { useDesign } from '/@/composables/web/useDesign'
 import { useLayoutContentResize } from '/@/logics/mitt/layoutContentResize'

@@ -1,6 +1,5 @@
 import type { BasicColumn } from '/@/components/Table/src/types/table'
 import type { Ref } from 'vue'
-
 import EditableCell from './EditableCell.vue'
 
 export function renderEditCell(column: BasicColumn) {

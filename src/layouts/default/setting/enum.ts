@@ -6,7 +6,6 @@ import {
   TopMenuAlignEnum,
   TriggerEnum,
 } from '/@/enums/menuEnum'
-
 import { t } from '/@/composables/web/useI18n'
 
 export enum HandlerEnum {

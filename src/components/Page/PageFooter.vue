@@ -17,7 +17,6 @@
 <script setup lang="ts">
 import Tiny from 'tinycolor2'
 import { asyncComputed, promiseTimeout } from '@vueuse/core'
-
 import { useRootSetting } from '/@/composables/setting/useRootSetting'
 import { useTransitionSetting } from '/@/composables/setting/useTransitionSetting'
 import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal'

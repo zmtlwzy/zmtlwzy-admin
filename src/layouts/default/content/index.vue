@@ -16,9 +16,9 @@
 </template>
 
 <script setup lang="ts">
+import type { ScrollbarInst } from 'naive-ui'
 import type { MaybeElementRef } from '@vueuse/core'
 import { promiseTimeout, useElementSize, useResizeObserver } from '@vueuse/core'
-import type { ScrollbarInst } from 'naive-ui'
 import PageLayout from '/@/layouts/page/index.vue'
 import { useDesign } from '/@/composables/web/useDesign'
 import { useRootSetting } from '/@/composables/setting/useRootSetting'

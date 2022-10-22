@@ -6,10 +6,8 @@
 
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core'
-
 import { useDesign } from '/@/composables/web/useDesign'
 import { toWritableRef } from '/@/composables/utilities/toWritableRef'
-
 import { baseHandler } from '../handler'
 import type { HandlerEnum } from '../enum'
 import Wrapper from './Wrapper.vue'

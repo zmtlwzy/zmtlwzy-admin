@@ -11,10 +11,8 @@
 
 <script lang="ts">
 import { LayoutClsEnum, MenuTypeEnum } from '/@/enums/menuEnum'
-
 import { useDesign } from '/@/composables/web/useDesign'
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
-
 import LayoutHeader from './header/index.vue'
 import LayoutSider from './sider/index.vue'
 import LayoutContent from './content/index.vue'

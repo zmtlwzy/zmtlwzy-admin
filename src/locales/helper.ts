@@ -1,5 +1,4 @@
 import type { LocaleType } from '/#/config'
-
 import { set } from 'lodash-es'
 
 export const loadLocalePool: LocaleType[] = []

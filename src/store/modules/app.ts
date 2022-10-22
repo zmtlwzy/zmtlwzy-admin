@@ -1,7 +1,5 @@
 import type { ProjectConfig } from '/#/config'
-
 import type { BeforeMiniState } from '/#/store'
-
 import { ThemeEnum } from '/@/enums/appEnum'
 import { APP_DARK_MODE_KEY_, PROJ_CFG_KEY } from '/@/enums/cacheEnum'
 import { Persistent } from '/@/utils/cache/persistent'

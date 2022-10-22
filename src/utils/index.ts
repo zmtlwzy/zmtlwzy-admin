@@ -1,6 +1,5 @@
 import type { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router'
 import type { App, Plugin } from 'vue'
-
 import { isObject } from '/@/utils/is'
 
 export const noop = () => {}

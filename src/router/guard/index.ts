@@ -5,7 +5,6 @@ import { useTransitionSetting } from '/@/composables/setting/useTransitionSettin
 import { AxiosCanceler } from '/@/utils/http/axios/axiosCancel'
 import useDiscreteApi from '/@/composables/web/useDiscreteApi'
 import { warn } from '/@/utils/log'
-
 import { setAfterRouteChange, setRouteChange } from '/@/logics/mitt/routeChange'
 import { createPermissionGuard } from './permissionGuard'
 import { createStateGuard } from './stateGuard'

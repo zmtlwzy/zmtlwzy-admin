@@ -1,5 +1,4 @@
 import type { RouteLocationNormalized, Router } from 'vue-router'
-
 import { useMultipleTabStore } from '/@/store/modules/multipleTab'
 import { useAppStore } from '/@/store/modules/app'
 

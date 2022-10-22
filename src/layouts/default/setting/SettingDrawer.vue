@@ -9,16 +9,13 @@ import {
   ThemeColorPicker,
   ThemeModePicker,
 } from './components'
-
 import { darkTheme } from 'naive-ui'
 import { useAppStore } from '/@/store/modules/app'
-
 import { useRootSetting } from '/@/composables/setting/useRootSetting'
 import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting'
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 import { useMultipleTabSetting } from '/@/composables/setting/useMultipleTabSetting'
 import { useTransitionSetting } from '/@/composables/setting/useTransitionSetting'
-
 import { MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum'
 import {
   HandlerEnum,
@@ -26,10 +23,8 @@ import {
   getMixSidebarTriggerOptions,
   routerTransitionOptions,
 } from './enum'
-
 import { useI18n } from '/@/composables/web/useI18n'
 import { useDrawer, useDrawerEnum } from '/@/composables/component/useDrawer'
-
 import { APP_PRESET_COLOR_LIST } from '/@/settings/designSetting'
 
 const { t } = useI18n()

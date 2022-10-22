@@ -7,7 +7,6 @@
 
 <script setup lang="ts">
 import { logicAnd, logicNot } from '@vueuse/math'
-
 import { useDesign } from '/@/composables/web/useDesign'
 import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting'
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'

@@ -1,7 +1,6 @@
 import type { VNode } from 'vue'
 import { createVNode, render } from 'vue'
 import type { LoadingProps } from './type'
-
 import Loading from './Loading.vue'
 
 export function createLoading(props?: Partial<LoadingProps>, target?: HTMLElement, wait = false) {

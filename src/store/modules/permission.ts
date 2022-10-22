@@ -1,27 +1,19 @@
 import type { AppRouteRecordRaw, Menu } from '/@/router/types'
-
 import { defineStore } from 'pinia'
 import { store } from '/@/store'
 import { useI18n } from '/@/composables/web/useI18n'
 import useDiscreteApi from '/@/composables/web/useDiscreteApi'
 import { useUserStore } from './user'
 import { useAppStoreWithOut } from './app'
-
 import { flatMultiLevelRoutes, transformObjToRoute } from '/@/router/helper/routeHelper'
 import { transformRouteToMenu } from '/@/router/helper/menuHelper'
-
 import projectSetting from '/@/settings/projectSetting'
-
 import { PermissionModeEnum } from '/@/enums/appEnum'
-
 import { asyncRoutes } from '/@/router/routes'
 import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic'
-
 import { filter } from '/@/utils/helper/treeHelper'
-
 import { getMenuList } from '/@/api/sys/menu'
 import { getPermCode } from '/@/api/sys/user'
-
 import { PageEnum } from '/@/enums/pageEnum'
 
 interface PermissionState {
@@ -154,7 +146,7 @@ export const usePermissionStore = defineStore('app-permission', () => {
       case PermissionModeEnum.ROUTE_MAPPING:
         routes = filter(asyncRoutes, routeFilter)
         routes = routes.filter(routeFilter)
-        // eslint-disable-next-line no-case-declarations
+
         const menuList = transformRouteToMenu(routes, true)
         routes = filter(routes, routeRemoveIgnoreFilter)
         routes = routes.filter(routeRemoveIgnoreFilter)

@@ -1,6 +1,6 @@
 import type { StyleValue } from 'vue'
-import type { GridItemProps, GridProps } from 'naive-ui/lib/grid'
 import type { FormItemRule } from 'naive-ui'
+import type { GridItemProps, GridProps } from 'naive-ui/lib/grid'
 import type { FormItemProps } from 'naive-ui/lib/form'
 import type { ButtonProps } from 'naive-ui/lib/button'
 import type { ComponentType } from './index'

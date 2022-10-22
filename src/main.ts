@@ -4,7 +4,6 @@ import '/@/design/index.less'
 import { createApp } from 'vue'
 import { createWorker } from 'root/mock/_createMswWorker'
 import App from './App.vue'
-
 import { initAppConfigStore } from '/@/logics/initAppConfig'
 import router, { setupRouter } from '/@/router'
 import { setupRouterGuard } from '/@/router/guard'

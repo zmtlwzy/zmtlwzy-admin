@@ -1,4 +1,6 @@
 <script lang="ts">
+import type { RouteLocation } from 'vue-router'
+import { RouterLink, useLink } from 'vue-router'
 import type {
   MaybeElement,
   MaybeElementRef,
@@ -10,8 +12,6 @@ import {
   whenever,
 } from '@vueuse/core'
 import { isSymbol } from '/@/utils/is'
-import type { RouteLocation } from 'vue-router'
-import { RouterLink, useLink } from 'vue-router'
 import { omit } from 'lodash-es'
 import prefetch from './prefetch'
 import { canPrefetch } from './utils'

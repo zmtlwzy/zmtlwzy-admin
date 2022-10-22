@@ -8,7 +8,6 @@ import {
   useEventListener,
   whenever,
 } from '@vueuse/core'
-
 import { warn } from '/@/utils/log'
 import echarts from '/@/utils/lib/echarts'
 import { useRootSetting } from '/@/composables/setting/useRootSetting'

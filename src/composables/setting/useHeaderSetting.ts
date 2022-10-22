@@ -1,7 +1,5 @@
 import type { HeaderSetting } from '/#/config'
-
 import { useAppStore } from '/@/store/modules/app'
-
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 import { useRootSetting } from '/@/composables/setting/useRootSetting'
 import { MenuModeEnum } from '/@/enums/menuEnum'

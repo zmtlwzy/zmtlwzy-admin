@@ -1,6 +1,5 @@
 import type { ComputedRef } from 'vue'
 import { type MaybeElementRef } from '@vueuse/core'
-
 import type { BasicTableProps, TableActionType } from '../types/table'
 const key = Symbol('s-table')
 

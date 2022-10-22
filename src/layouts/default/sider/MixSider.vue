@@ -63,24 +63,19 @@
 import type { CSSProperties, StyleValue } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import type { Menu } from '/@/router/types'
-
 import type { MaybeElementRef } from '@vueuse/core'
 import { unrefElement } from '@vueuse/core'
-
 import { useRootSetting } from '/@/composables/setting/useRootSetting'
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 import { useGlobSetting } from '/@/composables/setting'
 import { useDesign } from '/@/composables/web/useDesign'
 import { useI18n } from '/@/composables/web/useI18n'
 import { useGo } from '/@/composables/web/usePage'
-
 import { usePermissionStore } from '/@/store/modules/permission'
-
 import clickOutside from '/@/directives/clickOutside'
 import { MenuSplitTypeEnum, MixSidebarEnum } from '/@/enums/menuEnum'
 import { getChildrenMenus, getCurrentParentPath, getShallowMenus } from '/@/router/menus'
 import { listenerRouteChange } from '/@/logics/mitt/routeChange'
-
 import Icon from '/@/components/Icon/Icon.vue'
 import SecMenu from '../menu/index.vue'
 import SiderWrapper from './SiderWrapper.vue'

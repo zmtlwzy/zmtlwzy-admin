@@ -1,6 +1,5 @@
 import { createDiscreteApi } from 'naive-ui'
 import { useI18n } from '/@/composables/web/useI18n'
-
 import type {
   ConfigProviderProps,
   DialogApi,

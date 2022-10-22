@@ -1,8 +1,6 @@
 import type { MenuSetting } from '/#/config'
-
 import { clamp } from 'lodash-es'
 import { useAppStore } from '/@/store/modules/app'
-
 import {
   MenuModeEnum,
   MenuTypeEnum,

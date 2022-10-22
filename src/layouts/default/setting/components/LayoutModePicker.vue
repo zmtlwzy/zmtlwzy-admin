@@ -15,13 +15,10 @@
 
 <script lang="ts">
 import { baseHandler } from '../handler'
-
 import { useDesign } from '/@/composables/web/useDesign'
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 import { useI18n } from '/@/composables/web/useI18n'
-
 import Picker from './Picker.vue'
-
 import { HandlerEnum, menuTypeList } from '../enum'
 import { MenuTypeEnum } from '/@/enums/menuEnum'
 

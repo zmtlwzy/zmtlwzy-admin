@@ -16,9 +16,7 @@
 import useChangeTheme from '/@/composables/web/useChaneTheme'
 import { useDesign } from '/@/composables/web/useDesign'
 import { useI18n } from '/@/composables/web/useI18n'
-
 import Picker from './Picker.vue'
-
 import { themeModeList } from '../enum'
 
 export default defineComponent({

@@ -1,5 +1,4 @@
 import type { AppRouteModule, AppRouteRecordRaw, Menu, MenuModule } from '/@/router/types'
-
 import { findPath, treeMap } from '/@/utils/helper/treeHelper'
 import { cloneDeep, omit } from 'lodash-es'
 import { isUrl } from '/@/utils/is'

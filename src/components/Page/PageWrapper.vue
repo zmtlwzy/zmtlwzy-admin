@@ -38,10 +38,8 @@
 
 <script setup lang="ts">
 import type { CSSProperties, PropType, StyleValue } from 'vue'
-
 import { omit } from 'lodash-es'
 import PageFooter from './PageFooter.vue'
-
 import { useDesign } from '/@/composables/web/useDesign'
 import { useRootSetting } from '/@/composables/setting/useRootSetting'
 import { getNaiveCssVars } from '/@/composables/core/useNaiveInternal'

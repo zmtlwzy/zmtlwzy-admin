@@ -9,7 +9,6 @@ import {
   unref,
   watchEffect,
 } from 'vue'
-
 import { isEqual } from 'lodash-es'
 
 export function useRuleFormItem<T extends Recordable>(

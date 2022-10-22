@@ -1,14 +1,10 @@
 <script lang="tsx">
 import type { PropType } from 'vue'
-
 import { NButton, NResult } from 'naive-ui'
-
 import { ExceptionEnum } from '/@/enums/exceptionEnum'
-
 import { useDesign } from '/@/composables/web/useDesign'
 import { useI18n } from '/@/composables/web/useI18n'
 import { useGo, useRedo } from '/@/composables/web/usePage'
-
 import { PageEnum } from '/@/enums/pageEnum'
 
 interface MapValue {

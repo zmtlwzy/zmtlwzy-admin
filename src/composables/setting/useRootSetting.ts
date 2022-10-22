@@ -1,5 +1,4 @@
 import type { ProjectConfig } from '/#/config'
-
 import { useAppStore } from '/@/store/modules/app'
 import { ContentEnum, ThemeEnum } from '/@/enums/appEnum'
 

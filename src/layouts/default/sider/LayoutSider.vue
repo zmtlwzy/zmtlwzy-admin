@@ -22,10 +22,8 @@
 
 <script setup lang="ts">
 import { MenuModeEnum, MenuSplitTypeEnum } from '/@/enums/menuEnum'
-
 import SiderWrapper from './SiderWrapper.vue'
 import LayoutMenu from '../menu/index.vue'
-
 import { useDesign } from '/@/composables/web/useDesign'
 import { useAppInject } from '/@/composables/web/useAppInject'
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'

@@ -1,12 +1,10 @@
 <script lang="tsx">
 import { type DropdownOption, NAvatar, NDropdown } from 'naive-ui'
-
 import { useUserStore } from '/@/store/modules/user'
 // import { useHeaderSetting } from '/@/composables/setting/useHeaderSetting';
 import { useI18n } from '/@/composables/web/useI18n'
 // import { useDesign } from '/@/composables/web/useDesign';
 import { useGo } from '/@/composables/web/usePage'
-
 import headerImg from '/@/assets/images/header.jpg'
 
 enum MenuEvents {

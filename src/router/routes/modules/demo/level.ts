@@ -1,5 +1,4 @@
 import type { AppRouteModule } from '/@/router/types'
-
 import { LAYOUT, getParentLayout } from '/@/router/constant'
 import { t } from '/@/composables/web/useI18n'
 

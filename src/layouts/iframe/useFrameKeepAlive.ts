@@ -1,9 +1,6 @@
 import type { AppRouteRecordRaw } from '/@/router/types'
-
 import { useMultipleTabStore } from '/@/store/modules/multipleTab'
-
 import { uniqBy } from 'lodash-es'
-
 import { useMultipleTabSetting } from '/@/composables/setting/useMultipleTabSetting'
 
 export function useFrameKeepAlive() {

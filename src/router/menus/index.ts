@@ -1,6 +1,5 @@
 import type { Menu, MenuModule } from '/@/router/types'
 import type { RouteRecordNormalized } from 'vue-router'
-
 import { useAppStoreWithOut } from '/@/store/modules/app'
 import { usePermissionStore } from '/@/store/modules/permission'
 import { getAllParentPath, transformMenuModule } from '/@/router/helper/menuHelper'

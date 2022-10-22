@@ -7,7 +7,6 @@
 
 <script lang="ts">
 import SettingDrawer from './SettingDrawer.vue'
-
 import { useDrawer, useDrawerEnum } from '/@/composables/component/useDrawer'
 
 export default defineComponent({

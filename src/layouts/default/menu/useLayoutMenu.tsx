@@ -1,6 +1,5 @@
 import type { Menu } from '/@/router/types'
 import type { Ref } from 'vue'
-
 import { isBoolean } from 'lodash-es'
 import { MenuSplitTypeEnum } from '/@/enums/menuEnum'
 import { useThrottleFn } from '@vueuse/core'

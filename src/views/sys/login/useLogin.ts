@@ -1,7 +1,6 @@
 import type { Ref } from 'vue'
 import type { FormRules } from 'naive-ui'
 import type { FormItemRuleValidator } from 'naive-ui/lib/form/src/interface'
-
 import { createEventHook } from '@vueuse/core'
 import { useI18n } from '/@/composables/web/useI18n'
 

@@ -31,7 +31,6 @@
 
 <script setup lang="ts">
 import type { StyleValue } from 'vue'
-
 import { groupItems } from './data.json'
 import { useLoading } from './useLoading'
 

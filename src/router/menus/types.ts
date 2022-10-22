@@ -1,6 +1,5 @@
 import type { MenuOption } from 'naive-ui'
 import type { RouteMeta } from 'vue-router'
-
 import type { RoleEnum } from '/@/enums/roleEnum'
 
 export interface MenuTag {

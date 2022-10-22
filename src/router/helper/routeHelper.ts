@@ -1,6 +1,5 @@
 import type { AppRouteModule, AppRouteRecordRaw } from '/@/router/types'
 import type { RouteRecordNormalized, Router } from 'vue-router'
-
 import { EXCEPTION_COMPONENT, LAYOUT, getParentLayout } from '/@/router/constant'
 import { cloneDeep, omit, set } from 'lodash-es'
 import { warn } from '/@/utils/log'

@@ -2,11 +2,8 @@
 import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import type { DropdownOption, PopoverTrigger } from 'naive-ui'
-
 import { NDropdown } from 'naive-ui'
-
 import type { MenuEventEnum, TabContentProps } from '../types'
-
 import { useDesign } from '/@/composables/web/useDesign'
 import { useI18n } from '/@/composables/web/useI18n'
 import { useTabDropdown } from '../useTabDropdown'

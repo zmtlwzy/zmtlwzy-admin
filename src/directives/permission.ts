@@ -4,7 +4,6 @@
  * @Example v-auth="RoleEnum.TEST"
  */
 import type { App, Directive, DirectiveBinding } from 'vue'
-
 import { usePermission } from '/@/composables/web/usePermission'
 
 function isAuth(el: Element, binding: any) {

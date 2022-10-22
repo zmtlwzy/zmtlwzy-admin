@@ -1,0 +1,98 @@
+#app .loading-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 140px;
+  background-color: #f5f4f5;
+}
+
+#app .loading-wrapper .app-logo {
+  width: 1em;
+  height: 1em;
+}
+
+#app .loading-wrapper .app-title {
+  display: flex;
+  font-family: 'Segoe UI';
+  font-weight: 600;
+  line-height: 1;
+  font-size: 32px;
+  margin-top: 16px;
+  color: #617eef;
+}
+
+.letter {
+  letter-spacing: 1px;
+  animation-name: opacity;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+}
+
+.l-1 {
+  animation-delay: 0.28s;
+}
+
+.l-2 {
+  animation-delay: 0.4s;
+}
+
+.l-3 {
+  animation-delay: 0.52s;
+}
+
+.l-4 {
+  animation-delay: 0.64s;
+}
+
+.l-5 {
+  animation-delay: 0.76s;
+}
+
+.l-6 {
+  animation-delay: 0.88s;
+  width: 2px;
+  height: 2px;
+}
+
+.l-7 {
+  animation-delay: 1s;
+}
+
+.l-8 {
+  animation-delay: 1.12s;
+}
+
+.l-9 {
+  animation-delay: 1.24s;
+}
+
+.l-10 {
+  animation-delay: 1.36s;
+}
+
+.l-11 {
+  animation-delay: 1.48s;
+}
+
+.l-12 {
+  animation-delay: 1.6s;
+}
+
+@keyframes opacity {
+  30% {
+    transform: translateX(1px);
+    opacity: 0;
+  }
+
+  55% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

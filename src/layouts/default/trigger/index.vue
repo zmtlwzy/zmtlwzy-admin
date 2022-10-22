@@ -7,7 +7,6 @@ import type { Component } from 'vue'
 import { TriggerEnum } from '/@/enums/menuEnum'
 import { useMenuSetting } from '/@/composables/setting/useMenuSetting'
 import { isFunction } from 'lodash-es'
-
 import BarTrigger from './BarTrigger.vue'
 import ButtonTrigger from './ButtonTrigger.vue'
 import HeaderTrigger from './HeaderTrigger.vue'

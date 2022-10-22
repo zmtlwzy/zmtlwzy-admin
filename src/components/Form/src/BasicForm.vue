@@ -174,17 +174,17 @@
 </template>
 
 <script lang="ts">
-import { asyncComputed } from '@vueuse/core'
 import type { Ref } from 'vue'
 import type { FormItemRule, GridItemProps, GridProps } from 'naive-ui'
+import { asyncComputed } from '@vueuse/core'
 import { cloneDeep, get, set } from 'lodash-es'
+import { deepMerge } from '/@/utils'
 import { createPlaceholderMessage, setComponentRuleType } from './helper'
 import { useFormEvents } from './hooks/useFormEvents'
 import { useFormValues } from './hooks/useFormValues'
 import { basicProps } from './props'
 import type { FormActionType, FormProps, FormSchema } from './types/form'
 import { isArray, isBoolean, isFunction, isNull, isString } from '/@/utils/is'
-import { deepMerge } from '/@/utils'
 import { useI18n } from '/@/composables/web/useI18n'
 import { useBreakpoint } from '/@/composables/event/useBreakpoint'
 import type { ComponentType } from './types'
