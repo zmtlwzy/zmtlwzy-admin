@@ -1,100 +1,113 @@
 <template>
-  <NForm
-    v-show="getShow"
-    ref="formRef"
-    class="p-4"
-    :model="formData"
-    :rules="getFormRules"
-    :show-label="false"
-    @keypress.enter="handleLogin"
-  >
-    <NFormItem label="account" path="account">
-      <NInput
-        v-model:value="formData.account"
-        size="large"
-        :placeholder="t('sys.login.userName')"
-      />
-    </NFormItem>
-    <NFormItem label="password" path="password">
-      <NInput
-        v-model:value="formData.password"
-        size="large"
-        type="password"
-        show-password-on="mousedown"
-        :placeholder="t('sys.login.password')"
-      />
-    </NFormItem>
+  <div v-show="getShow">
+    <AppLogo
+      class="justify-center pl-0 mb-6"
+      is-static
+      :can-go-home="false"
+      logo-size="38"
+      title-size="24"
+    />
+    <n-form
+      ref="formRef"
+      class="p-4"
+      :model="formData"
+      :rules="getFormRules"
+      :show-label="false"
+      label-placement="left"
+      :show-require-mark="true"
+      @keypress.enter="handleLogin"
+    >
+      <n-form-item path="username">
+        <n-input
+          v-model:value="formData.account"
+          size="large"
+          :placeholder="t('sys.login.accountPlaceholder')"
+          :disabled="loading"
+        />
+      </n-form-item>
+      <n-form-item path="password">
+        <n-input
+          v-model:value="formData.password"
+          size="large"
+          type="password"
+          show-password-on="mousedown"
+          :placeholder="t('sys.login.passwordPlaceholder')"
+          :disabled="loading"
+        />
+      </n-form-item>
 
-    <NSpace justify="space-between">
-      <NFormItem path="rememberMe">
-        <NCheckbox v-model:checked="rememberMe" size="small">
-          {{ t('sys.login.rememberMe') }}
-        </NCheckbox>
-      </NFormItem>
-      <NFormItem class="text-right">
-        <NButton
-          tag="a"
-          text
-          type="primary"
-          size="small"
-          @click="setLoginState(LoginStateEnum.RESET_PASSWORD)"
-        >
-          {{ t('sys.login.forgetPassword') }}
-        </NButton>
-      </NFormItem>
-    </NSpace>
+      <n-space justify="space-between">
+        <n-form-item path="rememberMe">
+          <n-checkbox v-model:checked="rememberMe" size="small" :disabled="loading">
+            {{ t('sys.login.rememberMe') }}
+          </n-checkbox>
+        </n-form-item>
+        <n-form-item class="text-right">
+          <n-button
+            tag="a"
+            text
+            type="primary"
+            size="small"
+            :disabled="loading"
+            @click="setLoginState(LoginStateEnum.RESET_PASSWORD)"
+          >
+            {{ t('sys.login.forgetPassword') }}
+          </n-button>
+        </n-form-item>
+      </n-space>
 
-    <NFormItem>
-      <NButton type="primary" size="large" block :loading="loading" @click="handleLogin">
-        {{ t('sys.login.loginButton') }}
-      </NButton>
-    </NFormItem>
+      <n-form-item>
+        <n-button type="primary" size="large" block :loading="loading" :disabled="loading" @click="handleLogin">
+          {{ t('sys.login.loginButton') }}
+        </n-button>
+      </n-form-item>
 
-    <NGrid cols="1 sm:3" responsive="screen" :x-gap="8" :y-gap="8">
-      <NGi>
-        <NButton block @click="setLoginState(LoginStateEnum.MOBILE)">
-          {{ t('sys.login.mobileSignInFormTitle') }}
-          <template #icon>
-            <i-akar-icons-mobile-device />
-          </template>
-        </NButton>
-      </NGi>
-      <NGi>
-        <NButton block>
-          {{ t('sys.login.qrSignInFormTitle') }}
-          <template #icon>
-            <i-ci-qr-code />
-          </template>
-        </NButton>
-      </NGi>
-      <NGi>
-        <NButton block>
-          {{ t('sys.login.registerButton') }}
-        </NButton>
-      </NGi>
-    </NGrid>
+      <n-grid cols="1" responsive="screen" :x-gap="8" :y-gap="8">
+        <n-gi>
+          <n-button block :disabled="loading" @click="setLoginState(LoginStateEnum.MOBILE)">
+            {{ t('sys.login.mobileSignInFormTitle') }}
+            <template #icon>
+              <i-akar-icons-mobile-device />
+            </template>
+          </n-button>
+        </n-gi>
+        <n-gi>
+          <n-button block>
+            {{ t('sys.login.qrSignInFormTitle') }}
+            <template #icon>
+              <i-ci-qr-code />
+            </template>
+          </n-button>
+        </n-gi>
+        <n-gi>
+          <n-button block :disabled="loading" @click="setLoginState(LoginStateEnum.REGISTER)">
+            {{ t('sys.login.registerButton') }}
+          </n-button>
+        </n-gi>
+      </n-grid>
 
-    <NDivider>
-      <NText class="text-12px text-gray-500">
-        {{ t('sys.login.otherSignIn') }}
-      </NText>
-    </NDivider>
+      <n-divider>
+        <n-text class="text-12px text-gray-500">
+          {{ t('sys.login.otherSignIn') }}
+        </n-text>
+      </n-divider>
 
-    <div class="flex justify-evenly" :class="`${prefixCls}-sign-in-way`">
-      <NButton text class="text-25px text-gray-500 dark:text-gray-400">
-        <i-ant-design-github-filled />
-      </NButton>
-      <NButton text class="text-25px text-gray-500 dark:text-gray-400">
-        <i-ant-design-wechat-filled />
-      </NButton>
-      <NButton text class="text-25px text-gray-500 dark:text-gray-400">
-        <i-ant-design-alipay-circle-filled />
-      </NButton>
-      <NButton text class="text-23px text-gray-500 dark:text-gray-400">
-        <i-simple-icons-gitee />
-      </NButton>
-    </div>
-  </NForm>
+      <div class="flex justify-evenly" :class="`${prefixCls}-sign-in-way`">
+        <n-button text class="text-25px text-gray-500 dark:text-gray-400">
+          <i-ant-design-github-filled />
+        </n-button>
+        <n-button text class="text-25px text-gray-500 dark:text-gray-400">
+          <i-ant-design-wechat-filled />
+        </n-button>
+        <n-button text class="text-25px text-gray-500 dark:text-gray-400">
+          <i-ant-design-alipay-circle-filled />
+        </n-button>
+        <n-button text class="text-23px text-gray-500 dark:text-gray-400">
+          <i-simple-icons-gitee />
+        </n-button>
+      </div>
+    </n-form>
+  </div>
 </template>
 
 <script lang="ts" setup>
