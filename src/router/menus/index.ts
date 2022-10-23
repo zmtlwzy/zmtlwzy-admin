@@ -48,9 +48,11 @@ const getVisibleMenus = (items: Menu[], backMode?: boolean) => {
   return items
     .filter((item: Menu) => (!backMode || !item.meta?.hideMenu) && !item.hideMenu)
     .map((item: Menu) => {
-      if (item.children)
+      if (item.children) {
         item.children = getVisibleMenus(item.children, backMode)
-
+        if (!item.children.length)
+          Reflect.deleteProperty(item, 'children')
+      }
       return item
     })
 }
